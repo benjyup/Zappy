@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "mendatory/client.h"
+#include "mendatory/argument.h"
 
 int help_function(char **av)
 {
@@ -54,7 +54,7 @@ int name_function(char **av, t_arg *arg)
         {
             if (!av[i + 1] || av[i + 1][0] == '\0')
                 return (usage(), 1);
-            arg->name = strdup(av[i + 1]);
+            arg->team = strdup(av[i + 1]);
             return (0);
         }
         i += 1;
@@ -73,11 +73,11 @@ int machine_function(char **av, t_arg *arg)
         {
             if (!av[i + 1] || av[i + 1][0] == '\0')
                 return (usage(), 1);
-            arg->machine = strdup(av[i + 1]);
+            arg->host = strdup(av[i + 1]);
             return (0);
         }
         i += 1;
     }
-    arg->machine = strdup("localhost");
+    arg->host = strdup("localhost");
     return (0);
 }

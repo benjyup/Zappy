@@ -86,13 +86,22 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/mendatory/argument.h">
+			<Option target="zappy_client"/>
+		</Unit>
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/mendatory/client.h">
+			<Option target="zappy_client"/>
+		</Unit>
+		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/mendatory/cookie.h">
 			<Option target="zappy_client"/>
 		</Unit>
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/main.cpp">
 			<Option target="zappy_client"/>
 		</Unit>
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/mendatory/argument.c">
+			<Option target="zappy_client"/>
+		</Unit>
+		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/mendatory/cookie.c">
 			<Option target="zappy_client"/>
 		</Unit>
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/mendatory/functionParse.c">

@@ -4,13 +4,13 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "mendatory/client.h"
+#include "mendatory/argument.h"
 
 char *name;
 
 void usage(void)
 {
-    printf("USAGE: %s -port -n name -h machine\n", name);
+    printf("USAGE: %s -p port -n name -h machine\n", name);
     printf("       port     is the port number\n");
     printf("       name     is the name of the team\n");
     printf("       machine  is the name of the machine; localhost by default\n");
@@ -34,10 +34,10 @@ int    arg_entry(int ac, char **av, t_arg *arg)
 
 void    arg_free(t_arg *arg)
 {
-    if (arg->name)
-        free(arg->name);
-    if (arg->machine)
-        free(arg->machine);
-    arg->machine = NULL;
-    arg->name = NULL;
+    if (arg->team)
+        free(arg->team);
+    if (arg->host)
+        free(arg->host);
+    arg->host = NULL;
+    arg->host = NULL;
 }

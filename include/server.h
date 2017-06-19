@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Mon Jun 19 22:46:30 2017 vincent.mesquita@epitech.eu
+** Last update Mon Jun 19 23:05:53 2017 vincent.mesquita@epitech.eu
 */
 
 #ifndef SERVER_H_
@@ -16,11 +16,14 @@
 # include <sys/socket.h>
 # include <netinet/in.h>
 
+# define VALUE		i + h + 1
 # define MALLOC		"malloc"
 # define NBR_OF_ARGS	6
 # define SOCKET_PROTOCOL "TCP"
 # define BUFFLENGTH	513
 # define END_OF_CMD	'\n'
+
+# define KO		"ko\n"
 
 typedef enum		e_bool
   {
@@ -85,6 +88,14 @@ void			my_init_select(t_env *env);
 void			my_close(t_client *client,
 				 t_env *env);
 int                     my_quit(t_env *env,
+				t_client *client,
+				t_list **current);
+char			*my_strcat_char(char *str1,
+					char c);
+char			**my_str_to_wordtab(char *str,
+					    char separator);
+void			my_free_wordtab(char **wordtab);
+void			my_exec(t_env *env,
 				t_client *client,
 				t_list **current);
 

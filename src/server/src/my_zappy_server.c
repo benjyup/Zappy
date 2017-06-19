@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 19 19:07:10 2017 vincent.mesquita@epitech.eu
-** Last update Mon Jun 19 22:35:19 2017 vincent.mesquita@epitech.eu
+** Last update Mon Jun 19 23:04:37 2017 vincent.mesquita@epitech.eu
 */
 
 #include <stdlib.h>
@@ -72,7 +72,7 @@ static void             my_check_each_client(t_env *env)
 	  client = current->data;
 	  client->this = current;
 	  my_get_client_cmd(env, &current, client);
-	  //my_exec(env, client, &current, 0);
+	  my_exec(env, client, &current);
 	}
       current = current->next;
     }

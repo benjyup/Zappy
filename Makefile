@@ -5,7 +5,7 @@
 ## Login   <renard_e@epitech.net>
 ## 
 ## Started on  Mon May 22 08:49:41 2017 Gregoire Renard
-## Last update Mon Jun 12 09:15:14 2017 Gregoire Renard
+## Last update Mon Jun 19 18:09:41 2017 vincent.mesquita@epitech.eu
 ##
 
 CC		=	gcc -Iinclude/ -g3
@@ -16,13 +16,9 @@ SRCS_AI		=	src/ai/main.c
 
 OBJS_AI		=	$(SRCS_AI:.c=.o)
 
-SRCS_SERVER	=	src/server/main.c
-
-OBJS_SERVER	=	$(SRCS_SERVER:.c=.o)
-
-SERVER_NAME	=	zappy_server
-
 AI_NAME		=	zappy_ai
+
+SERVER_PATH	=	./src/server/
 
 CFLAGS		=	-W -Wall -Werror -Wextra
 
@@ -30,18 +26,18 @@ all		:	zappy_server zappy_ai
 
 re		:	fclean all
 
-zappy_server	:	$(OBJS_SERVER)
-			$(CC) -o $(SERVER_NAME) $(SRCS_SERVER)
+zappy_server	:
+			make  -C $(SERVER_PATH)
 
 zappy_ai	:	$(OBJS_AI)
 			$(CC) -o $(AI_NAME) $(SRCS_AI)
 
 clean		:
 			$(RM) $(OBJS_AI)
-			$(RM) $(OBJS_SERVER)
+			make  clean -C $(SERVER_PATH)
 
 fclean		:	clean
-			$(RM) $(SERVER_NAME)
+			make  fclean -C $(SERVER_PATH)
 			$(RM) $(AI_NAME)
 
 .PHONY		: all re clean fclean

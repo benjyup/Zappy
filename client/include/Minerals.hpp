@@ -10,7 +10,7 @@
 class Minerals
 {
  public:
-  enum class TYPE : uint8_t
+  enum class TYPE : unsigned int
   {
     LINEMATE = 1,
     DERAUMERE,
@@ -30,7 +30,7 @@ class Minerals
   void 			set_pos(const Vector3d &_pos);
   void 			set_type(TYPE _type);
 
-  uint8_t 		genRandNbr(uint8_t min, uint8_t max);
+  TYPE 			genRandType(TYPE min, TYPE max);
 
  private:
   Vector3d		_pos;

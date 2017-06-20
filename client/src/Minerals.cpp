@@ -9,13 +9,15 @@
 
 Minerals::Minerals(Vector3d const &pos, TYPE type) : _pos(pos), _type(type)
 {
+  //Create node
   //Assign his texture
 }
 
 Minerals::Minerals(Vector3d const &pos) : _pos(pos) // Without type which will generate it's own type
 {
   srand(static_cast <unsigned> (time(0)));
-  (uint8_t)_type = genRandNbr(1, 6);
+  _type = genRandType(Minerals::TYPE::LINEMATE, Minerals::TYPE::THYSTAME);
+  //Create node
   //Assign his texture
 }
 
@@ -44,8 +46,8 @@ void		Minerals::set_type(Minerals::TYPE _type)
   Minerals::_type = _type;
 }
 
-uint8_t		Minerals::genRandNbr(uint8_t min, uint8_t max)
+Minerals::TYPE	Minerals::genRandType(TYPE min, TYPE max)
 {
-  uint8_t randNbr = min + static_cast <uint8_t > (rand()) / ( static_cast <uint8_t >(RAND_MAX / max));
-  return (randNbr);
+  TYPE randType = TYPE((int)min + rand() / (RAND_MAX / (int)max));
+  return (randType);
 }

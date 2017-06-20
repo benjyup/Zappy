@@ -14,13 +14,15 @@ set(SOURCE_FILES
         src/Vector3d.cpp
         src/Eggs.cpp
         src/Food.cpp
+        src/Drone.cpp
         include/Block.hpp
         include/Character.hpp
         include/Client.hpp
         include/Minerals.hpp
         include/Vector3d.hpp
         include/Eggs.hpp
-        include/Food.hpp)
+        include/Food.hpp
+        include/Drone.hpp)
 
 include_directories(include)
 

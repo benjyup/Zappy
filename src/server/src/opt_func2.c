@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 14:31:23 2017 Gregoire Renard
-** Last update Tue Jun 20 17:14:44 2017 Gregoire Renard
+** Last update Tue Jun 20 18:35:39 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -56,6 +56,8 @@ int		opt_c(t_env *env,
   if ((check_alpha(argv[(*cpt) + 1])) == ERROR)
     return (ERROR);
   env->arg.clients_lim = atoi(argv[(*cpt) + 1]);
+  if (env->arg.clients_lim <= 0)
+    return (ERROR);
   *cpt = *cpt + 2;
   return (SUCCESS);
 }
@@ -69,6 +71,8 @@ int		opt_f(t_env *env,
   if ((check_alpha(argv[(*cpt) + 1])) == ERROR)
     return (ERROR);
   env->arg.freq = atoi(argv[(*cpt) + 1]);
+  if (env->arg.freq <= 0)
+    return (ERROR);
   *cpt = *cpt + 2;
   return (SUCCESS);
 }

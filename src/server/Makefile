@@ -5,7 +5,7 @@
 ## Login   <renard_e@epitech.net>
 ## 
 ## Started on  Tue Jun 20 10:56:10 2017 Gregoire Renard
-## Last update Tue Jun 20 16:33:11 2017 Gregoire Renard
+## Last update Tue Jun 20 19:12:58 2017 Gregoire Renard
 ##
 
 CC	=	gcc -I../../include -g3
@@ -31,6 +31,8 @@ SRCS	=	src/main.c \
 		src/opt_func2.c \
 		src/check_opt.c \
 		src/check_alpha.c \
+		src/init_map.c \
+		src/print_map.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

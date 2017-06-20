@@ -48,7 +48,7 @@ int             main(int ac, char **av) {
   ssize_t 	ret;
   std::stringstream	ssin;
   std::vector<std::string> tab;
-  Client		c;
+  Client::Client		c;
 
   memset(buf, 0, 4096);
   c.initTab();

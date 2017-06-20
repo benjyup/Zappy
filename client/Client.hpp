@@ -9,28 +9,37 @@
 #include <iostream>
 #include <vector>
 #include <functional>
-#include <unordered_map>
-#include <bits/unordered_map.h>
+#include <map>
+#include <list>
 #include "Vector3d.hpp"
 #include "Block.hpp"
-#include <map>
+#include "Character.hpp"
 
-class Client
+namespace 		Client
 {
- public:
-  Client();
-  ~Client();
-  void 			initTab();
-  void			call(std::vector<std::string> const&);
 
- private:
-  Vector3d									_size;
-  std::map<std::string, std::function<void(std::vector<std::string> const &)>>	_tab;
-  std::map<Vector3d, Block>							_map;
+  class Client
+  {
+   public:
+    Client();
+    virtual ~Client();
 
-  void		_msz(std::vector<std::string> const &t);
-  void		_bct(std::vector<std::string> const &t);
+    void initTab();
+    void call(std::vector<std::string> const &);
+
+   private:
+    Vector3d 										_size;
+    std::map<std::string, std::function<void(std::vector<std::string> const &)>>	_tab;
+    std::map<Vector3d, Block> 								_map;
+    std::vector<Character> 								_player;
+    std::vector<std::string>								_team;
+
+    void _msz(std::vector<std::string> const &t);
+    void _bct(std::vector<std::string> const &t);
+    void _tna(std::vector<std::string> const &t);
+    void _pnw(std::vector<std::string> const &t);
+  };
+  int operator~(const std::string &t);
 };
-
 
 #endif //ZAPPY_CLIENT_HPP

@@ -9,10 +9,6 @@ set(SOURCE_FILES
         client/Vector3d.cpp
         client/Vector3d.hpp
         client/main.cpp
-        include/ai.h
-        include/commun.h
-        include/server.h
-        src/ai/main.c
-        src/server/main.c client/Block.cpp client/Block.hpp)
+client/Block.cpp client/Block.hpp client/Character.cpp client/Character.hpp)
 
 add_executable(PSU_2016_zappy ${SOURCE_FILES})

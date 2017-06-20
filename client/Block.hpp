@@ -11,17 +11,21 @@
 
 # define NBR_OF_RES	7
 
-class Block
+namespace 	Client
 {
- public:
-  Block();
-  virtual ~Block();
+  class Block
+  {
+   public:
+    Block();
+    virtual ~Block();
 
-  void set_res(const std::vector<std::string> &_res);
-  const std::array<int, NBR_OF_RES> &getRes() const;
+    const std::array<int, NBR_OF_RES> &getRes() const;
 
- private:
-  std::array<int, NBR_OF_RES>	_res;
+    void set_res(const std::vector<std::string> &_res);
+
+   private:
+    std::array<int, NBR_OF_RES> _res;
+  };
 };
 
 

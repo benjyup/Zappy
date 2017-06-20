@@ -58,7 +58,7 @@ bool Vector3d::operator>(Vector3d const &other) const
 Vector3d Vector3d::operator+(Vector3d const &other) const
 {
   return (Vector3d(this->getX() + other.getX(), this->getY() + other.getY()));
-};
+}
 
 std::ostream		&operator<<(std::ostream &os, const Vector3d &vector)
 {

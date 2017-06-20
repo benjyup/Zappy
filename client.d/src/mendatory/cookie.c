@@ -46,8 +46,9 @@ int cookie_connect(t_cookie *cook, t_arg *arg)
 
 int cookie_disconnect(t_cookie *cook)
 {
-    if (close(cook->fd) == -1)
-        return (perror("close()"), 1);
+    if (cook->fd != -1)
+        if (close(cook->fd) == -1)
+            return (perror("close()"), 1);
     return(0);
 }
 

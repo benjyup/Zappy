@@ -3,6 +3,8 @@
 //
 
 #ifndef CONNECTION_MANAGER_H
-#define CONNECTION_MANAGER_H
+# define CONNECTION_MANAGER_H
+
+
 
 #endif /* !CONNECTION_MANAGER_H */

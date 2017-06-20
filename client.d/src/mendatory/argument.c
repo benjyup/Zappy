@@ -34,9 +34,9 @@ int    arg_entry(int ac, char **av, t_arg *arg)
 
 void    arg_free(t_arg *arg)
 {
-    if (arg->team)
+    if (arg->team != NULL)
         free(arg->team);
-    if (arg->host)
+    if (arg->host != NULL)
         free(arg->host);
     arg->host = NULL;
     arg->host = NULL;

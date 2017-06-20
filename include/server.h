@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Mon Jun 19 23:05:53 2017 vincent.mesquita@epitech.eu
+** Last update Tue Jun 20 16:32:47 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -22,6 +22,7 @@
 # define SOCKET_PROTOCOL "TCP"
 # define BUFFLENGTH	513
 # define END_OF_CMD	'\n'
+# define MAX_CMD	6
 
 # define KO		"ko\n"
 
@@ -44,9 +45,19 @@ typedef struct		s_list
   struct s_list	*next;
 }			t_list;
 
-typedef struct		s_env
+typedef	struct		s_arg
 {
   int			port;
+  int			width;
+  int			height;
+  char			**name_team;
+  int			clients_lim;
+  int			freq;
+}			t_arg;
+  
+typedef struct		s_env
+{
+  t_arg			arg;
   int			socket;
   int                   highest_fd;
   unsigned long		current_client_id;
@@ -57,6 +68,14 @@ typedef struct		s_env
   struct protoent	*pe;
   t_list		*clients;
 }			t_env;
+
+typedef	struct		s_pointer
+{
+  char			*opt;
+  int			(*func)(t_env *env,
+				char **argv,
+				int *cpt);
+}			t_pointer;
 
 typedef struct                  s_client
 {
@@ -98,5 +117,31 @@ void			my_free_wordtab(char **wordtab);
 void			my_exec(t_env *env,
 				t_client *client,
 				t_list **current);
+int			print_help(int ret);
+int			init_arg(t_env *env, char **argv);
+int			printf_error(char *str);
+int			check_opt(char **argv,
+				  int *cpt,
+				  t_env *env,
+				  t_pointer *pointer);
+int			opt_p(t_env *env,
+			      char **argv,
+			      int *cpt);
+int			opt_x(t_env *env,
+			      char **argv,
+			      int *cpt);
+int			opt_y(t_env *env,
+			      char **argv,
+			      int *cpt);
+int			opt_n(t_env *env,
+			      char **argv,
+			      int *cpt);
+int			opt_c(t_env *env,
+			      char **argv,
+			      int *cpt);
+int			opt_f(t_env *env,
+			      char **argv,
+			      int *cpt);
+int			check_alpha(char *str);
 
 #endif /* !SERVER_H_ */

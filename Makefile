@@ -5,7 +5,7 @@
 ## Login   <renard_e@epitech.net>
 ## 
 ## Started on  Mon May 22 08:49:41 2017 Gregoire Renard
-## Last update Mon Jun 19 18:09:41 2017 vincent.mesquita@epitech.eu
+## Last update Tue Jun 20 10:41:37 2017 Gregoire Renard
 ##
 
 CC		=	gcc -Iinclude/ -g3
@@ -27,7 +27,7 @@ all		:	zappy_server zappy_ai
 re		:	fclean all
 
 zappy_server	:
-			make  -C $(SERVER_PATH)
+			make -C $(SERVER_PATH)
 
 zappy_ai	:	$(OBJS_AI)
 			$(CC) -o $(AI_NAME) $(SRCS_AI)

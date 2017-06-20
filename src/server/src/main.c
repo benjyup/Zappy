@@ -5,21 +5,41 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:23:46 2017 Gregoire Renard
-** Last update Mon Jun 19 19:10:04 2017 vincent.mesquita@epitech.eu
+** Last update Tue Jun 20 17:14:14 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
 #include "server.h"
+
+static void	free_arg(t_env *env)
+{
+  int		cpt;
+
+  cpt = 0;
+  if (env->arg.name_team != NULL)
+    {
+      while (env->arg.name_team[cpt] != NULL)
+	{
+	  free(env->arg.name_team[cpt]);
+	  cpt++;
+	}
+    }
+  free(env->arg.name_team);
+}
 
 int		main(int argc, char **argv)
 {
   t_env		env;
 
   (void)argc;
-  env.port = atoi(argv[1]);
+  if ((init_arg(&env, argv)) == ERROR)
+    {
+      free_arg(&env);
+      return (print_help(ERROR));
+    }
   if (!my_init_server(&env) ||
       my_zappy_server(&env))
     return (ERROR);
-  printf("SERVER\n");
+  free_arg(&env);
   return (SUCCESS);
 }

@@ -12,11 +12,13 @@ set(SOURCE_FILES
         src/Client.cpp
         src/Minerals.cpp
         src/Vector3d.cpp
+        src/Eggs.cpp
         include/Block.hpp
         include/Character.hpp
         include/Client.hpp
         include/Minerals.hpp
-        include/Vector3d.hpp)
+        include/Vector3d.hpp
+        include/Eggs.hpp)
 
 include_directories(include)
 

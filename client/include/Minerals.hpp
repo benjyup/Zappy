@@ -37,5 +37,4 @@ class Minerals
   TYPE 			_type;
 };
 
-
 #endif //PSU_2016_ZAPPY_MINERALS_HPP

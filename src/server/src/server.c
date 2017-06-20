@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon May 29 17:40:11 2017 vincent.mesquita@epitech.eu
-** Last update Mon Jun 19 19:36:45 2017 vincent.mesquita@epitech.eu
+** Last update Tue Jun 20 14:34:47 2017 Gregoire Renard
 */
 
 #include <netdb.h>
@@ -16,7 +16,7 @@ static t_bool		my_init_server2(t_env *env)
   memset(&(env->info), 0, env->struct_length);
   env->info.sin_family = AF_INET;
   env->info.sin_addr.s_addr = INADDR_ANY;
-  env->info.sin_port = htons(env->port);
+  env->info.sin_port = htons(env->arg.port);
   env->current_client_id = 0;
   if (!(env->clients = my_init_list()))
     return (false);
@@ -25,7 +25,7 @@ static t_bool		my_init_server2(t_env *env)
 
 t_bool			my_init_server(t_env *env)
 {
-  if (env->port <= 0)
+  if (env->arg.port <= 0)
     {
       fprintf(stderr, "Port must be superior to 0\n");
       return (false);

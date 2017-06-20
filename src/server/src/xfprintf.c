@@ -5,7 +5,7 @@
 ** Login   <florian.vincent@epitech.eu>
 ** 
 ** Started on  Sat Jun 10 17:30:14 2017 Vincent
-** Last update Mon Jun 19 22:15:00 2017 vincent.mesquita@epitech.eu
+** Last update Tue Jun 20 11:16:13 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -24,14 +24,14 @@ void		build_string(char *str, va_list *ap, char *f, int i)
       if (f[i] == '%' && f[i + 1] == 's')
 	{
 	  str[j] = 0;
-	  strcat(str, va_arg(ap, char *));
+	  strcat(str, va_arg(*ap, char *));
 	  j = strlen(str);
 	  i += 2;
 	}
       else if (f[i] == '%' && f[i + 1] == 'l' && f[i + 2] == 'u')
 	{
 	  str[j] = 0;
-	  sprintf(nbr, "%lu", va_arg(ap, unsigned long));
+	  sprintf(nbr, "%lu", va_arg(*ap, unsigned long));
 	  strcat(str, nbr);
 	  j = strlen(str);
 	  i += 3;

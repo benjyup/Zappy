@@ -9,3 +9,4 @@ set(SOURCE_FILES main.cpp include/mendatory/client.h src/mendatory/argument.c sr
 
 include_directories(include)
 add_executable(zappy_client ${SOURCE_FILES})
+target_link_libraries(zappy_client -pthread)

@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:43:04 2017 vincent.mesquita@epitech.eu
-** Last update Wed Jun 21 17:13:26 2017 vincent.mesquita@epitech.eu
+** Last update Wed Jun 21 17:20:45 2017 vincent.mesquita@epitech.eu
 */
 
 #include <unistd.h>
@@ -40,10 +40,9 @@ void		my_send_to_client(t_client *client)
   if ((current = client->to_write->next) == client->to_write)
     return ;
   msg = current->data;
-  if ((msg->current_index = write(client->socket, msg->msg, msg->length))
+  if ((msg->current_index = write(client->socket, &msg->msg[msg->current_index], msg->length))
       == (ssize_t)msg->length)
     {
-      printf("RM DU MSG\n");
       free(msg->msg);
       free(current->data);
       my_del_elem(client->to_write, current, NULL);

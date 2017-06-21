@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 14:49:26 2017 Gregoire Renard
-** Last update Tue Jun 20 16:32:25 2017 Gregoire Renard
+** Last update Tue Jun 20 18:33:08 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -18,6 +18,8 @@ int		check_alpha(char *str)
   while (str[cpt] != '\0')
     {
       if (str[cpt] < '0' || str[cpt] > '9')
+	return (ERROR);
+      if (cpt >= 9)
 	return (ERROR);
       cpt++;
     }

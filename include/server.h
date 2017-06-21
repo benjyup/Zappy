@@ -5,16 +5,17 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Tue Jun 20 16:32:47 2017 Gregoire Renard
+** Last update Wed Jun 21 17:05:03 2017 vincent.mesquita@epitech.eu
 */
 
 #ifndef SERVER_H_
 #define SERVER_H_
 
-# include "commun.h"
 # include <sys/types.h>
 # include <sys/socket.h>
 # include <netinet/in.h>
+# include <stdarg.h>
+# include "commun.h"
 
 # define VALUE		i + h + 1
 # define MALLOC		"malloc"
@@ -23,8 +24,15 @@
 # define BUFFLENGTH	513
 # define END_OF_CMD	'\n'
 # define MAX_CMD	6
+# define MAX_RESOURCE	7
 
 # define KO		"ko\n"
+
+typedef struct		s_pos
+{
+  int			x;
+  int			y;
+}			t_pos;
 
 typedef enum		e_bool
   {
@@ -32,11 +40,22 @@ typedef enum		e_bool
     true
   }			t_bool;
 
-typedef enum e_client_type
+typedef enum		e_resource
+  {
+    LINEMATE = 0,
+    DERAUMERE,
+    SIBUR,
+    MENDIANE,
+    PHIRAS,
+    THYSTAME,
+    FOOD
+  }			t_resource;
+
+typedef enum		e_client_type
   {
     player = 0,
     monitor
-  }	     t_client_type;
+  }			t_client_type;
 
 typedef struct		s_list
 {
@@ -54,7 +73,14 @@ typedef	struct		s_arg
   int			clients_lim;
   int			freq;
 }			t_arg;
-  
+
+typedef	struct		s_map
+{
+  char			*name_player;
+  int			resource[MAX_RESOURCE];
+  int			border;
+}			t_map;
+
 typedef struct		s_env
 {
   t_arg			arg;
@@ -67,6 +93,7 @@ typedef struct		s_env
   struct sockaddr_in	info;
   struct protoent	*pe;
   t_list		*clients;
+  t_map			**map;
 }			t_env;
 
 typedef	struct		s_pointer
@@ -77,20 +104,31 @@ typedef	struct		s_pointer
 				int *cpt);
 }			t_pointer;
 
-typedef struct                  s_client
+typedef struct		s_client
 {
   int                   socket;
   char                  cmd[BUFFLENGTH + 1];
   char                  **split_cmd;
   unsigned long		id;
   t_list		*this;
-  FILE			*stream;
-}                               t_client;
+  int			inventory[MAX_RESOURCE];
+  t_pos			pos;
+  t_list		*to_write;
+}			t_client;
+
+typedef struct		s_msg
+{
+  char			*msg;
+  unsigned int		length;
+  ssize_t		current_index;
+}			t_msg;
+
 
 typedef void(free_callback)(void *data);
 
 int			xdprintf(int fd,
-				 char *format, ...);
+				 t_msg *msg,
+				 va_list *ap);
 t_bool			my_init_server(t_env *env);
 t_bool			my_zappy_server(t_env *env);
 t_list			*my_init_list(void);
@@ -143,5 +181,10 @@ int			opt_f(t_env *env,
 			      char **argv,
 			      int *cpt);
 int			check_alpha(char *str);
+int			init_map(t_env *env);
+void			print_map(t_env *env);
+void			my_send_to_client(t_client *client);
+void			my_send(t_client *client,
+				char *message);
 
 #endif /* !SERVER_H_ */

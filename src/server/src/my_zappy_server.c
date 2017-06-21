@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 19 19:07:10 2017 vincent.mesquita@epitech.eu
-** Last update Mon Jun 19 23:04:37 2017 vincent.mesquita@epitech.eu
+** Last update Wed Jun 21 15:32:04 2017 vincent.mesquita@epitech.eu
 */
 
 #include <stdlib.h>
@@ -18,7 +18,8 @@ static t_bool           my_new_client(int client_socket,
 {
   t_client              *client;
 
-  if (!(client = malloc(sizeof(*client))))
+  if (!(client = malloc(sizeof(*client))) ||
+      !(client->to_write = my_init_list()))
     {
       perror(MALLOC);
       exit(ERROR);
@@ -26,8 +27,6 @@ static t_bool           my_new_client(int client_socket,
   if (client_socket > env->highest_fd)
     env->highest_fd = client_socket;
   client->socket = client_socket;
-  if (!(client->stream = fdopen(client->socket, "r+")))
-    exit(ERROR);
   memset(client->cmd, 0, BUFFLENGTH);
   client->split_cmd = NULL;
   client->id = env->current_client_id++;
@@ -74,6 +73,8 @@ static void             my_check_each_client(t_env *env)
 	  my_get_client_cmd(env, &current, client);
 	  my_exec(env, client, &current);
 	}
+      if (FD_ISSET(client->socket, &(env->writef)))
+	my_send_to_client(client);
       current = current->next;
     }
 }

@@ -19,6 +19,7 @@ namespace zappy {
 
         void run();
         void stop();
+        void console();
     private:
         t_arg           _arg;
         t_cookie        _cook;

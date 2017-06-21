@@ -44,3 +44,16 @@ void zappy::Zappy::stop() {
     if (relay_manager_stop(&_relay_manager))
         throw zappy::Exception("Can not stop the relay_manager Thread.");
 }
+
+void zappy::Zappy::console() {
+    std::cout << std::endl << "Wellcome to Zappy - console v0.1" << std::endl;
+    std::cout << "Type help for more information" << std::endl;
+    std::string input;
+    input.clear();
+    while (input.find("quit"))
+    {
+        std::cout << _arg.team << " &>";
+        input.clear();
+        std::getline(std::cin, input);
+    }
+}

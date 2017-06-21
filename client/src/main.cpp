@@ -48,10 +48,8 @@ int             main(int ac, char **av) {
   ssize_t 	ret;
   std::stringstream	ssin;
   std::vector<std::string> tab;
-  Client::Client		c;
 
   memset(buf, 0, 4096);
-  c.initTab();
   if (ac == 2 && !strcasecmp("-help", av[1]))
     {
       std::cerr << "USAGE: " << av[0] << " -p port -n name -h machine" << std::endl;
@@ -65,6 +63,8 @@ int             main(int ac, char **av) {
 //      std::cerr << "USAGE: " << av[0] << " -p port -n name -h machine" << std::endl;
 //      return 0;
 //    }
+  Client::Client		c;
+  c.initTab();
   while ((ret = read(0, buf, 4096)) > 0) // appel de la fonction read de ja
     {
       ssin.clear();
@@ -75,7 +75,8 @@ int             main(int ac, char **av) {
 	{
 	  std::string word;
 	  ssin >> word;
-	  tab.push_back(word);
+	  if (!word.empty())
+	    tab.push_back(word);
 	}
       for (auto &i : tab)
 	std::cerr << i << std::endl;

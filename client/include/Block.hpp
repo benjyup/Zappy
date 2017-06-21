@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include <array>
+#include <forward_list>
 
 # define NBR_OF_RES	7
 
@@ -20,11 +21,13 @@ namespace 	Client
     virtual ~Block();
 
     const std::array<int, NBR_OF_RES> &getRes() const;
-
     void set_res(const std::vector<std::string> &_res);
+    void add_player(int);
+    void del_player(int);
 
    private:
     std::array<int, NBR_OF_RES> _res;
+    std::forward_list<int>		_play;
   };
 };
 

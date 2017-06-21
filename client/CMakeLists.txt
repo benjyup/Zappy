@@ -10,18 +10,16 @@ set(SOURCE_FILES
         src/Block.cpp
         src/Character.cpp
         src/Client.cpp
-        src/Minerals.cpp
+        src/Ressource.cpp
         src/Vector3d.cpp
         src/Eggs.cpp
-        src/Food.cpp
         src/Drone.cpp
         include/Block.hpp
         include/Character.hpp
         include/Client.hpp
-        include/Minerals.hpp
+        include/Ressource.hpp
         include/Vector3d.hpp
         include/Eggs.hpp
-        include/Food.hpp
         include/Drone.hpp)
 
 include_directories(include)

@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 19 22:55:30 2017 vincent.mesquita@epitech.eu
-** Last update Mon Jun 19 23:06:52 2017 vincent.mesquita@epitech.eu
+** Last update Wed Jun 21 17:05:31 2017 vincent.mesquita@epitech.eu
 */
 
 #include <string.h>
@@ -36,6 +36,6 @@ void             my_exec(t_env *env,
 	}
       i += 1;
     }
-  xdprintf(client->socket, KO);
+  my_send(client, KO);
   my_free_wordtab(client->split_cmd);
 }

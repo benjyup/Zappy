@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 19 19:07:10 2017 vincent.mesquita@epitech.eu
-** Last update Wed Jun 21 17:15:20 2017 Gregoire Renard
+** Last update Wed Jun 21 17:17:32 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -18,7 +18,8 @@ static t_bool           my_new_client(int client_socket,
 {
   t_client              *client;
 
-  if (!(client = malloc(sizeof(*client))))
+  if (!(client = malloc(sizeof(*client))) ||
+      !(client->to_write = my_init_list()))
     {
       perror(MALLOC);
       exit(ERROR);
@@ -26,8 +27,6 @@ static t_bool           my_new_client(int client_socket,
   if (client_socket > env->highest_fd)
     env->highest_fd = client_socket;
   client->socket = client_socket;
-  if (!(client->stream = fdopen(client->socket, "r+")))
-    exit(ERROR);
   memset(client->cmd, 0, BUFFLENGTH);
   client->split_cmd = NULL;
   client->id = env->current_client_id++;
@@ -78,6 +77,8 @@ static void             my_check_each_client(t_env *env)
 	  else
 	    my_exec(env, client, &current);
 	}
+      if (FD_ISSET(client->socket, &(env->writef)))
+	my_send_to_client(client);
       current = current->next;
     }
 }
@@ -92,7 +93,6 @@ t_bool			my_zappy_server(t_env *env)
   while (42)
     {
       my_init_select(env);
-      //fprintf(stderr, "env->highest = %d\n", env->highest_fd);
       if (my_select(env->highest_fd + 1, &(env->readf), &(env->writef)) == -1)
 	return (false);
       if (FD_ISSET(env->socket, &(env->readf)))

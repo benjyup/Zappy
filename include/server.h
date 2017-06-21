@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Wed Jun 21 14:47:26 2017 Gregoire Renard
+** Last update Wed Jun 21 17:18:55 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -14,6 +14,7 @@
 # include <sys/types.h>
 # include <sys/socket.h>
 # include <netinet/in.h>
+# include <stdarg.h>
 # include "commun.h"
 
 # define VALUE		i + h + 1
@@ -119,16 +120,25 @@ typedef struct		s_client
   char                  **split_cmd;
   unsigned long		id;
   t_list		*this;
-  FILE			*stream;
   int			inventory[MAX_RESOURCE];
   t_pos			pos;
   char			*name_team;
+  t_list		*to_write;
 }			t_client;
+
+typedef struct		s_msg
+{
+  char			*msg;
+  unsigned int		length;
+  ssize_t		current_index;
+}			t_msg;
+
 
 typedef void(free_callback)(void *data);
 
 int			xdprintf(int fd,
-				 char *format, ...);
+				 t_msg *msg,
+				 va_list *ap);
 t_bool			my_init_server(t_env *env);
 t_bool			my_zappy_server(t_env *env);
 t_list			*my_init_list(void);
@@ -184,5 +194,8 @@ int			check_alpha(char *str);
 int			init_map(t_env *env);
 void			print_map(t_env *env);
 void			add_to_the_team(t_env *env, t_client *client);
+void			my_send_to_client(t_client *client);
+void			my_send(t_client *client,
+				char *message);
 
 #endif /* !SERVER_H_ */

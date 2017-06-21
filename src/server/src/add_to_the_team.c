@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:55:57 2017 Gregoire Renard
-** Last update Wed Jun 21 16:44:12 2017 Gregoire Renard
+** Last update Wed Jun 21 17:19:33 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -43,12 +43,12 @@ void		add_to_the_team(t_env *env, t_client *client)
 	    }
 	  else
 	    {
-	      my_send(client->socket, KO);
+	      my_send(client, KO);
 	      cpt = -2;
 	    }
 	}
       cpt++;
     }
   if (client->name_team == NULL && cpt != -1)
-    my_send(client->socket, KO);
+    my_send(client, KO);
 }

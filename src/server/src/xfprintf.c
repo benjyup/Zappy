@@ -5,13 +5,13 @@
 ** Login   <florian.vincent@epitech.eu>
 ** 
 ** Started on  Sat Jun 10 17:30:14 2017 Vincent
-** Last update Tue Jun 20 11:16:13 2017 Gregoire Renard
+** Last update Wed Jun 21 16:51:42 2017 vincent.mesquita@epitech.eu
 */
 
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include <stdarg.h>
+#include "server.h"
 
 void		build_string(char *str, va_list *ap, char *f, int i)
 {
@@ -42,22 +42,20 @@ void		build_string(char *str, va_list *ap, char *f, int i)
   str[j] = 0;
 }
 
-int		xdprintf(int fd, char *format, ...)
+int		xdprintf(int fd, t_msg *msg, va_list *ap)
 {
-  va_list	ap;
   char		*str;
-  int		i;
-  int		j;
+  int		wrote;
 
-  j = 0;
-  va_start(ap, format);
-  if (!format || (str = malloc(512)) == NULL)
+  printf("xdprintf %s\n", msg->msg);
+  if (!msg->msg || (str = malloc(512)) == NULL)
     return (0);
-  build_string(str, &ap, format, 0);
-  va_end(ap);
-  i = strlen(str);
-  while (j >= 0 && j != i && (j = dprintf(fd, "%s", &str[j])))
-    i -= j;
+  str[0] = 0;
+  build_string(str, ap, msg->msg, 0);
+  //va_end(*ap);
+  msg->length = strlen(str);
+  wrote = dprintf(fd, "%s", str);
+  printf("j'ai écrit %d\n", wrote);
   free(str);
-  return (0);
+  return (wrote);
 }

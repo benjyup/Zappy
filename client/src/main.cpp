@@ -39,6 +39,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <sstream>
+#include <Ressource.hpp>
 #include "Client.hpp"
 
 int             main(int ac, char **av) {

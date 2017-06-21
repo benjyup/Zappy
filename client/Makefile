@@ -258,59 +258,32 @@ src/Eggs.cpp.s:
 	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/Eggs.cpp.s
 .PHONY : src/Eggs.cpp.s
 
-src/Food.o: src/Food.cpp.o
+src/Ressource.o: src/Ressource.cpp.o
 
-.PHONY : src/Food.o
-
-# target to build an object file
-src/Food.cpp.o:
-	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/Food.cpp.o
-.PHONY : src/Food.cpp.o
-
-src/Food.i: src/Food.cpp.i
-
-.PHONY : src/Food.i
-
-# target to preprocess a source file
-src/Food.cpp.i:
-	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/Food.cpp.i
-.PHONY : src/Food.cpp.i
-
-src/Food.s: src/Food.cpp.s
-
-.PHONY : src/Food.s
-
-# target to generate assembly for a file
-src/Food.cpp.s:
-	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/Food.cpp.s
-.PHONY : src/Food.cpp.s
-
-src/Minerals.o: src/Minerals.cpp.o
-
-.PHONY : src/Minerals.o
+.PHONY : src/Ressource.o
 
 # target to build an object file
-src/Minerals.cpp.o:
-	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/Minerals.cpp.o
-.PHONY : src/Minerals.cpp.o
+src/Ressource.cpp.o:
+	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/Ressource.cpp.o
+.PHONY : src/Ressource.cpp.o
 
-src/Minerals.i: src/Minerals.cpp.i
+src/Ressource.i: src/Ressource.cpp.i
 
-.PHONY : src/Minerals.i
+.PHONY : src/Ressource.i
 
 # target to preprocess a source file
-src/Minerals.cpp.i:
-	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/Minerals.cpp.i
-.PHONY : src/Minerals.cpp.i
+src/Ressource.cpp.i:
+	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/Ressource.cpp.i
+.PHONY : src/Ressource.cpp.i
 
-src/Minerals.s: src/Minerals.cpp.s
+src/Ressource.s: src/Ressource.cpp.s
 
-.PHONY : src/Minerals.s
+.PHONY : src/Ressource.s
 
 # target to generate assembly for a file
-src/Minerals.cpp.s:
-	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/Minerals.cpp.s
-.PHONY : src/Minerals.cpp.s
+src/Ressource.cpp.s:
+	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/Ressource.cpp.s
+.PHONY : src/Ressource.cpp.s
 
 src/Vector3d.o: src/Vector3d.cpp.o
 
@@ -390,12 +363,9 @@ help:
 	@echo "... src/Eggs.o"
 	@echo "... src/Eggs.i"
 	@echo "... src/Eggs.s"
-	@echo "... src/Food.o"
-	@echo "... src/Food.i"
-	@echo "... src/Food.s"
-	@echo "... src/Minerals.o"
-	@echo "... src/Minerals.i"
-	@echo "... src/Minerals.s"
+	@echo "... src/Ressource.o"
+	@echo "... src/Ressource.i"
+	@echo "... src/Ressource.s"
 	@echo "... src/Vector3d.o"
 	@echo "... src/Vector3d.i"
 	@echo "... src/Vector3d.s"

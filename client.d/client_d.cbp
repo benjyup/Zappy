@@ -104,6 +104,9 @@
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/mendatory/my_stack.h">
 			<Option target="zappy_client"/>
 		</Unit>
+		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/parser.hpp">
+			<Option target="zappy_client"/>
+		</Unit>
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/server.hpp">
 			<Option target="zappy_client"/>
 		</Unit>
@@ -128,6 +131,9 @@
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/mendatory/functionParse.c">
 			<Option target="zappy_client"/>
 		</Unit>
+		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/mendatory/function_parser.cpp">
+			<Option target="zappy_client"/>
+		</Unit>
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/mendatory/my_stack.c">
 			<Option target="zappy_client"/>
 		</Unit>
@@ -135,6 +141,9 @@
 			<Option target="zappy_client"/>
 		</Unit>
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/mendatory/srv_write.c">
+			<Option target="zappy_client"/>
+		</Unit>
+		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/parser.cpp">
 			<Option target="zappy_client"/>
 		</Unit>
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/zappy.cpp">

@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:23:46 2017 Gregoire Renard
-** Last update Tue Jun 20 19:32:41 2017 Gregoire Renard
+** Last update Wed Jun 21 16:41:48 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -13,15 +13,21 @@
 
 static void	free_map(t_env *env)
 {
-  int		cpt;
+  t_pos		pos;
 
-  cpt = 0;
   if (env->map != NULL)
     {
-      while (env->map[cpt] != NULL)
+      pos.y = 0;
+      while (env->map[pos.y] != NULL)
 	{
-	  free(env->map[cpt]);
-	  cpt++;
+	  pos.x = 0;
+	  while (env->map[pos.y][pos.x].border != 1)
+	    {
+	      free(env->map[pos.y][pos.x].fd_player);
+	      pos.x++;
+	    }
+	  free(env->map[pos.y]);
+	  pos.y++;
 	}
       free(env->map);
     }
@@ -32,14 +38,14 @@ static void	free_env(t_env *env)
   int		cpt;
 
   cpt = 0;
-  if (env->arg.name_team != NULL)
+  if (env->arg.team != NULL)
     {
-      while (env->arg.name_team[cpt] != NULL)
+      while (cpt != env->arg.nb_team)
 	{
-	  free(env->arg.name_team[cpt]);
+	  free(env->arg.team[cpt].team_name);
 	  cpt++;
 	}
-      free(env->arg.name_team);
+      free(env->arg.team);
     }
   free_map(env);
 }

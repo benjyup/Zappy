@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Tue Jun 20 19:38:35 2017 Gregoire Renard
+** Last update Wed Jun 21 17:18:55 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -14,6 +14,7 @@
 # include <sys/types.h>
 # include <sys/socket.h>
 # include <netinet/in.h>
+# include <stdarg.h>
 # include "commun.h"
 
 # define VALUE		i + h + 1
@@ -24,6 +25,7 @@
 # define END_OF_CMD	'\n'
 # define MAX_CMD	6
 # define MAX_RESOURCE	7
+# define MAX_PLAYER	10
 
 # define KO		"ko\n"
 
@@ -63,19 +65,27 @@ typedef struct		s_list
   struct s_list	*next;
 }			t_list;
 
+typedef	struct		s_team
+{
+  char			*team_name;
+  int			nb_player;
+}			t_team;
+
 typedef	struct		s_arg
 {
   int			port;
   int			width;
   int			height;
-  char			**name_team;
+  t_team		*team;
+  int			nb_team;
   int			clients_lim;
   int			freq;
 }			t_arg;
 
 typedef	struct		s_map
 {
-  char			*name_player;
+  char			*name_team;
+  int			*fd_player;
   int			resource[MAX_RESOURCE];
   int			border;
 }			t_map;
@@ -110,15 +120,25 @@ typedef struct		s_client
   char                  **split_cmd;
   unsigned long		id;
   t_list		*this;
-  FILE			*stream;
   int			inventory[MAX_RESOURCE];
   t_pos			pos;
+  char			*name_team;
+  t_list		*to_write;
 }			t_client;
+
+typedef struct		s_msg
+{
+  char			*msg;
+  unsigned int		length;
+  ssize_t		current_index;
+}			t_msg;
+
 
 typedef void(free_callback)(void *data);
 
 int			xdprintf(int fd,
-				 char *format, ...);
+				 t_msg *msg,
+				 va_list *ap);
 t_bool			my_init_server(t_env *env);
 t_bool			my_zappy_server(t_env *env);
 t_list			*my_init_list(void);
@@ -173,4 +193,9 @@ int			opt_f(t_env *env,
 int			check_alpha(char *str);
 int			init_map(t_env *env);
 void			print_map(t_env *env);
+void			add_to_the_team(t_env *env, t_client *client);
+void			my_send_to_client(t_client *client);
+void			my_send(t_client *client,
+				char *message);
+
 #endif /* !SERVER_H_ */

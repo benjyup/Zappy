@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 14:31:23 2017 Gregoire Renard
-** Last update Tue Jun 20 18:35:39 2017 Gregoire Renard
+** Last update Wed Jun 21 14:40:08 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -34,16 +34,17 @@ int		opt_n(t_env *env,
   *cpt = *cpt + 1;
   cpt_name = 0;
   len = count_len(argv, *cpt);
-  if ((env->arg.name_team = malloc(sizeof(char *) * (len + 1))) == NULL)
+  env->arg.nb_team = len;
+  if ((env->arg.team = malloc(sizeof(t_team) * (len))) == NULL)
     return (ERROR);
   while (cpt_name != len)
     {
-      if ((env->arg.name_team[cpt_name] = strdup(argv[*cpt])) == NULL)
+      if ((env->arg.team[cpt_name].team_name = strdup(argv[*cpt])) == NULL)
 	return (ERROR);
+      env->arg.team[cpt_name].nb_player = 0;
       cpt_name++;
       *cpt = *cpt + 1;
     }
-  env->arg.name_team[cpt_name] = NULL;
   return (SUCCESS);
 }
 

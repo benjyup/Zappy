@@ -5,12 +5,12 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 19:11:36 2017 Gregoire Renard
-** Last update Tue Jun 20 20:06:08 2017 Gregoire Renard
+** Last update Wed Jun 21 13:33:07 2017 Gregoire Renard
 */
 
 #include "server.h"
 
-void		print_resource(t_env *env, t_pos pos)
+static void		print_resource(t_env *env, t_pos pos)
 {
   printf("linemate = %i, ", env->map[pos.y][pos.x].resource[0]);
   printf("deraumere = %i, ", env->map[pos.y][pos.x].resource[1]);
@@ -21,9 +21,21 @@ void		print_resource(t_env *env, t_pos pos)
   printf("food = %i} ; ", env->map[pos.y][pos.x].resource[6]);
 }
 
-void		print_map(t_env *env)
+static void		print_fd(t_env *env, t_pos pos)
 {
-  t_pos		pos;
+  int			cpt;
+
+  cpt = 0;
+  while (cpt != MAX_PLAYER)
+    {
+      printf("%i, ", env->map[pos.y][pos.x].fd_player[cpt]);
+      cpt++;
+    }
+}
+
+void			print_map(t_env *env)
+{
+  t_pos			pos;
 
   pos.y = 0;
   while (env->map[pos.y] != NULL)
@@ -31,7 +43,8 @@ void		print_map(t_env *env)
       pos.x = 0;
       while (env->map[pos.y][pos.x].border != 1)
 	{
-	  printf("{%s, ", env->map[pos.y][pos.x].name_player);
+	  printf("{%s, ", env->map[pos.y][pos.x].name_team);
+	  print_fd(env, pos);
 	  print_resource(env, pos);
 	  pos.x++;
 	}

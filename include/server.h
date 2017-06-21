@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Tue Jun 20 19:38:35 2017 Gregoire Renard
+** Last update Wed Jun 21 14:47:26 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -24,6 +24,7 @@
 # define END_OF_CMD	'\n'
 # define MAX_CMD	6
 # define MAX_RESOURCE	7
+# define MAX_PLAYER	10
 
 # define KO		"ko\n"
 
@@ -63,19 +64,27 @@ typedef struct		s_list
   struct s_list	*next;
 }			t_list;
 
+typedef	struct		s_team
+{
+  char			*team_name;
+  int			nb_player;
+}			t_team;
+
 typedef	struct		s_arg
 {
   int			port;
   int			width;
   int			height;
-  char			**name_team;
+  t_team		*team;
+  int			nb_team;
   int			clients_lim;
   int			freq;
 }			t_arg;
 
 typedef	struct		s_map
 {
-  char			*name_player;
+  char			*name_team;
+  int			*fd_player;
   int			resource[MAX_RESOURCE];
   int			border;
 }			t_map;
@@ -113,6 +122,7 @@ typedef struct		s_client
   FILE			*stream;
   int			inventory[MAX_RESOURCE];
   t_pos			pos;
+  char			*name_team;
 }			t_client;
 
 typedef void(free_callback)(void *data);
@@ -173,4 +183,6 @@ int			opt_f(t_env *env,
 int			check_alpha(char *str);
 int			init_map(t_env *env);
 void			print_map(t_env *env);
+void			add_to_the_team(t_env *env, t_client *client);
+
 #endif /* !SERVER_H_ */

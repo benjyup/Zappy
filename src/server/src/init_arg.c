@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 11:45:20 2017 Gregoire Renard
-** Last update Tue Jun 20 14:47:19 2017 Gregoire Renard
+** Last update Wed Jun 21 14:35:30 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -38,7 +38,7 @@ static void		set_arg(t_env *env)
   env->arg.port = -1;
   env->arg.width = -1;
   env->arg.height = -1;
-  env->arg.name_team = NULL;
+  env->arg.team = NULL;
   env->arg.clients_lim = -1;
   env->arg.freq = -1;
 }
@@ -74,7 +74,7 @@ int			init_arg(t_env *env, char **argv)
       }
   free_pointer(tmp);
   if (env->arg.port == -1 || env->arg.width == -1
-      || env->arg.height == -1 || env->arg.name_team == NULL
+      || env->arg.height == -1 || env->arg.team == NULL
       || env->arg.clients_lim == -1 || env->arg.freq == -1)
     return (ERROR);
   return (SUCCESS);

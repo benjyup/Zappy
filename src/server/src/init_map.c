@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 18:25:45 2017 Gregoire Renard
-** Last update Tue Jun 20 20:07:35 2017 Gregoire Renard
+** Last update Wed Jun 21 16:42:55 2017 Gregoire Renard
 */
 
 
@@ -28,6 +28,25 @@ static void	init_resource(t_env *env, t_pos pos)
     }
 }
 
+static int	init_fd(t_env *env, t_pos pos)
+{
+  int		cpt;
+
+  cpt = 0;
+  if ((env->map[pos.y][pos.x].fd_player =
+       malloc(sizeof(int) * env->arg.clients_lim)) == NULL)
+    {
+      printf_error("Error : allocation in init_fd");
+      exit(ERROR);
+    }
+  while (cpt != env->arg.clients_lim)
+    {
+      env->map[pos.y][pos.x].fd_player[cpt] = -1;
+      cpt++;
+    }
+  return (SUCCESS);
+}
+
 static void	gen_resource(t_env *env)
 {
   t_pos		pos;
@@ -39,7 +58,8 @@ static void	gen_resource(t_env *env)
       pos.x = 0;
       while (env->map[pos.y][pos.x].border != 1)
 	{
-	  env->map[pos.y][pos.x].name_player = NULL;
+	  env->map[pos.y][pos.x].name_team = NULL;
+	  init_fd(env, pos);
 	  init_resource(env, pos);
 	  pos.x++;
 	}

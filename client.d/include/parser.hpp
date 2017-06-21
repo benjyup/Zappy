@@ -5,18 +5,11 @@
 #ifndef CLIENT_D_PARSER_HPP
 #define CLIENT_D_PARSER_HPP
 
+#include <iostream>
 #include <string>
 #include <vector>
 #include <map>
 #include <functional>
-
-int     help_function(int a);
-int     flush_function(int a);
-
-std::map<std::string, std::function<int(int)>> function_ptr ={
-        {"help", help_function},
-        {"flush", flush_function}
-};
 
 namespace zappy {
     class parser {
@@ -27,6 +20,9 @@ namespace zappy {
         int lexer();
         std::string input;
     private:
+      std::map<std::string, std::function<int(int)>> _function_ptr;
+      int 		help_function(int);
+      int     		flush_function(int);
     };
 }
 

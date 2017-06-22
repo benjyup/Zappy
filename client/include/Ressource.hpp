@@ -35,7 +35,9 @@ class Ressource
 
   int get_nbrRessource() const;
 
-  void set_nbrRessource(int _nbrRessource);
+  void set_nbrRessource(int nbrRessource);
+  void	gatherRessource(int nbrRessource);
+
 
  private:
   Vector3d		_pos;

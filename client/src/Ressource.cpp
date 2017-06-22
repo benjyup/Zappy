@@ -51,13 +51,18 @@ void		Ressource::set_type(Ressource::TYPE _type)
   Ressource::_type = _type;
 }
 
-void Ressource::set_nbrRessource(int _nbrRessource)
+void Ressource::set_nbrRessource(int nbrRessource)
 {
-  Ressource::_nbrRessource = _nbrRessource;
+  Ressource::_nbrRessource = nbrRessource;
 }
 
 Ressource::TYPE	Ressource::genRandType(TYPE min, TYPE max)
 {
   TYPE randType = TYPE((int)min + rand() / (RAND_MAX / (int)max));
   return (randType);
+}
+
+void Ressource::gatherRessource(int nbrRessource)
+{
+  _nbrRessource -= nbrRessource;
 }

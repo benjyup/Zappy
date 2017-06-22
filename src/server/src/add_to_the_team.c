@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:55:57 2017 Gregoire Renard
-** Last update Thu Jun 22 11:52:39 2017 Gregoire Renard
+** Last update Thu Jun 22 16:51:31 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -39,7 +39,7 @@ static void	send_info(t_env *env, t_client *client)
 
   ret = to_string(env->arg.clients_lim);
   len = strlen(ret);
-  if ((ret = realloc(ret, strlen(ret) + 2)) == NULL)
+  if ((ret = realloc(ret, len + 2)) == NULL)
     {
       perror(MALLOC);
       exit(ERROR);

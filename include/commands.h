@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Fri Jun  2 17:01:05 2017 vincent.mesquita@epitech.eu
-** Last update Mon Jun 19 22:46:12 2017 vincent.mesquita@epitech.eu
+** Last update Thu Jun 22 16:59:23 2017 Gregoire Renard
 */
 
 #ifndef COMMANDS_H_
@@ -13,7 +13,7 @@
 
 # include "server.h"
 
-# define NBR_OF_COMMANDS 7
+# define NBR_OF_COMMANDS 11
 
 # define FORWARD	"Forward"
 # define RIGHT		"Right"
@@ -55,13 +55,18 @@ typedef struct		s_cmd
 }			t_cmd;
 
 static t_cmd		exec_array[NBR_OF_COMMANDS] = {
-  {"msz", g_msz, 1},
-  {"bct", g_bct, 1},
-  {"mct", g_mct, 1},
-  {"tna", g_tna, 1},
-  {"ppo", g_ppo, 1},
-  {"plv", g_plv, 1},
-  {"pin", g_pin, 1}
+  {"msz", g_msz, monitor},
+  {"bct", g_bct, monitor},
+  {"mct", g_mct, monitor},
+  {"tna", g_tna, monitor},
+  {"ppo", g_ppo, monitor},
+  {"plv", g_plv, monitor},
+  {"pin", g_pin, monitor},
+  
+  {FORWARD, &forward_func, player},
+  {RIGHT, &right_func, player},
+  {LEFT, &left_func, player},
+  {CONNECT_NBR, &connect_nbr_func, player}
 };
 
 #endif /* !COMMANDS_H_ */

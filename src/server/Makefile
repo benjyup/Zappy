@@ -36,6 +36,7 @@ SRCS	=	src/main.c \
 		src/add_to_the_team.c \
 		src/my_send.c \
 		src/to_string.c \
+		src/g_msz.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

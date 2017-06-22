@@ -125,6 +125,7 @@ typedef struct		s_client
   t_pos			pos;
   char			*name_team;
   t_list		*to_write;
+  int			level;
 }			t_client;
 
 typedef struct		s_msg
@@ -199,4 +200,6 @@ void			my_send_to_client(t_client *client);
 void			my_send(t_client *client,
 				char *message);
 char			*to_string(int nb);
+t_client		*search_client(t_list **current, int n, t_env *env);
+int			def_dir(t_client *client);
 #endif /* !SERVER_H_ */

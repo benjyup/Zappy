@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 19 19:07:10 2017 vincent.mesquita@epitech.eu
-** Last update Wed Jun 21 17:54:03 2017 Gregoire Renard
+** Last update Thu Jun 22 16:24:32 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -31,8 +31,11 @@ static t_bool           my_new_client(int client_socket,
   client->split_cmd = NULL;
   client->id = env->current_client_id++;
   client->name_team = NULL;
+  client->dir.x = 1;
+  client->dir.y = 0;
   my_add_to_end(env->clients, client);
   my_send(client, WELCOME);
+  env->nb_player++;
   return (true);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Fri Jun  2 17:01:05 2017 vincent.mesquita@epitech.eu
-** Last update Mon Jun 19 22:46:12 2017 vincent.mesquita@epitech.eu
+** Last update Thu Jun 22 16:59:23 2017 Gregoire Renard
 */
 
 #ifndef COMMANDS_H_
@@ -13,7 +13,7 @@
 
 # include "server.h"
 
-# define NBR_OF_COMMANDS 0
+# define NBR_OF_COMMANDS 4
 
 # define FORWARD	"Forward"
 # define RIGHT		"Right"
@@ -40,7 +40,10 @@ typedef struct		s_cmd
 }			t_cmd;
 
 static t_cmd		exec_array[NBR_OF_COMMANDS] = {
-  
+  {FORWARD, &forward_func, player},
+  {RIGHT, &right_func, player},
+  {LEFT, &left_func, player},
+  {CONNECT_NBR, &connect_nbr_func, player}
 };
 
 #endif /* !COMMANDS_H_ */

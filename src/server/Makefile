@@ -5,7 +5,7 @@
 ## Login   <renard_e@epitech.net>
 ## 
 ## Started on  Tue Jun 20 10:56:10 2017 Gregoire Renard
-## Last update Wed Jun 21 17:18:02 2017 Gregoire Renard
+## Last update Wed Jun 21 18:23:08 2017 Gregoire Renard
 ##
 
 CC	=	gcc -I../../include -g3
@@ -35,6 +35,7 @@ SRCS	=	src/main.c \
 		src/print_map.c \
 		src/add_to_the_team.c \
 		src/my_send.c \
+		src/to_string.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

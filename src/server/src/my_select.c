@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Tue May 30 16:56:52 2017 vincent.mesquita@epitech.eu
-** Last update Mon Jun 19 19:37:49 2017 vincent.mesquita@epitech.eu
+** Last update Wed Jun 21 17:23:57 2017 Gregoire Renard
 */
 
 #include <sys/select.h>
@@ -37,7 +37,6 @@ void		my_init_select(t_env *env)
   FD_ZERO(&(env->readf));
   FD_ZERO(&(env->writef));
   FD_SET(env->socket, &(env->readf));
-  FD_SET(env->socket, &(env->writef));
   current = env->clients->next;
   while (current != env->clients)
     {

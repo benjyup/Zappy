@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 19:11:36 2017 Gregoire Renard
-** Last update Wed Jun 21 13:33:07 2017 Gregoire Renard
+** Last update Wed Jun 21 17:41:31 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -26,7 +26,7 @@ static void		print_fd(t_env *env, t_pos pos)
   int			cpt;
 
   cpt = 0;
-  while (cpt != MAX_PLAYER)
+  while (cpt != env->arg.clients_lim)
     {
       printf("%i, ", env->map[pos.y][pos.x].fd_player[cpt]);
       cpt++;

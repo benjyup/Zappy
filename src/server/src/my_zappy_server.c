@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 19 19:07:10 2017 vincent.mesquita@epitech.eu
-** Last update Wed Jun 21 17:17:32 2017 Gregoire Renard
+** Last update Wed Jun 21 17:54:03 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -32,6 +32,7 @@ static t_bool           my_new_client(int client_socket,
   client->id = env->current_client_id++;
   client->name_team = NULL;
   my_add_to_end(env->clients, client);
+  my_send(client, WELCOME);
   return (true);
 }
 
@@ -76,6 +77,7 @@ static void             my_check_each_client(t_env *env)
 	    add_to_the_team(env, client);
 	  else
 	    my_exec(env, client, &current);
+	  print_map(env);
 	}
       if (FD_ISSET(client->socket, &(env->writef)))
 	my_send_to_client(client);
@@ -105,7 +107,6 @@ t_bool			my_zappy_server(t_env *env)
 	  my_new_client(client_socket, env);
 	}
       my_check_each_client(env);
-      print_map(env);
     }
   return (true);
 }

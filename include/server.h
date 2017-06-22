@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Wed Jun 21 17:18:55 2017 Gregoire Renard
+** Last update Wed Jun 21 18:40:24 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -28,6 +28,7 @@
 # define MAX_PLAYER	10
 
 # define KO		"ko\n"
+# define WELCOME	"welcome\n"
 
 typedef struct		s_pos
 {
@@ -197,5 +198,5 @@ void			add_to_the_team(t_env *env, t_client *client);
 void			my_send_to_client(t_client *client);
 void			my_send(t_client *client,
 				char *message);
-
+char			*to_string(int nb);
 #endif /* !SERVER_H_ */

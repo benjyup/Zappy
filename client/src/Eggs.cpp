@@ -5,7 +5,7 @@
 #include <Vector3d.hpp>
 #include "Eggs.hpp"
 
-Eggs::Eggs(Vector3d const &pos) : _pos(pos)
+Eggs::Eggs(Vector3d const &pos, int father) : _pos(pos), _state(EGGSSTATE::close), _father(father)
 {
   //Creation of the node
   //Setting of the texture
@@ -31,4 +31,10 @@ void Eggs::eclosion()
 {
   //Generation of the eclosion animation
   // then a new character appear in the map
+  _state = EGGSSTATE::hatch;
+}
+
+void Eggs::die()
+{
+  _state = EGGSSTATE::die;
 }

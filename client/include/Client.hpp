@@ -15,6 +15,7 @@
 #include "Vector3d.hpp"
 #include "Block.hpp"
 #include "Character.hpp"
+#include "Eggs.hpp"
 
 namespace 		Client
 {
@@ -34,6 +35,10 @@ namespace 		Client
     std::map<Vector3d, Block> 								_map;
     std::vector<Character> 								_player;
     std::vector<std::string>								_team;
+    std::vector<Eggs>								_Eggs;
+    bool 									_running;
+    int 									_sgtt;
+    std::string									_winner;
 
     void _msz(std::vector<std::string> const &t);
     void _bct(std::vector<std::string> const &t);
@@ -45,6 +50,17 @@ namespace 		Client
     void _pex(std::vector<std::string> const &t);
     void _pbc(std::vector<std::string> const &t);
     void _pic(std::vector<std::string> const &t);
+    void _pie(std::vector<std::string> const &t);
+    void _pfk(std::vector<std::string> const &t);
+    void _pdr(std::vector<std::string> const &t);
+    void _pgt(std::vector<std::string> const &t);
+    void _pdi(std::vector<std::string> const &t);
+    void _enw(std::vector<std::string> const &t);
+    void _eht(std::vector<std::string> const &t);
+    void _ebo(std::vector<std::string> const &t);
+    void _edi(std::vector<std::string> const &t);
+    void _sgt(std::vector<std::string> const &t);
+    void _seg(std::vector<std::string> const &t);
   };
 };
 

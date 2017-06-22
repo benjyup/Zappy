@@ -11,7 +11,7 @@ namespace 		Client
   Character::Character(int num, Vector3d const &pos,
 		       Character::DIR dir, int level,
 		       std::string const &team) : _num(num), _pos(pos), _dir(dir), _level(level), _team(team), _alive(true),
-						  _inc(false)
+						  _inc(false), _lay(false)
   {
   }
 
@@ -80,6 +80,31 @@ namespace 		Client
   void Character::set_inc(bool _inc)
   {
     Character::_inc = _inc;
+  }
+
+  int Character::get_level() const
+  {
+    return _level;
+  }
+
+  void Character::inc_res(int res)
+  {
+    _res[res]++;
+  }
+
+  void Character::dec_res(int res)
+  {
+    _res[res]--;
+  }
+
+  bool Character::is_lay() const
+  {
+    return _lay;
+  }
+
+  void Character::set_lay(bool _lay)
+  {
+    Character::_lay = _lay;
   }
 
 }

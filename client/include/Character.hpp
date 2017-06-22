@@ -28,11 +28,18 @@ namespace 		Client
     int get_num() const;
     const Vector3d &get_pos() const;
     DIR get_dir() const;
+    int get_level() const;
+    bool is_inc() const;
+    bool is_lay() const;
 
+    void set_inc(bool _inc);
     void set_res(const std::vector<std::string> &_res);
     void set_pos(const Vector3d &_pos);
     void set_dir(DIR _dir);
     void set_level(int level);
+    void dec_res(int res);
+    void inc_res(int res);
+    void set_lay(bool _lay);
 
     void	die();
 
@@ -44,13 +51,8 @@ namespace 		Client
     std::string			_team;
     std::array<int, NBR_OF_RES>	_res;
     bool 			_alive;
-   public:
-    bool is_inc() const;
-
-    void set_inc(bool _inc);
-
-   private:
     bool 			_inc;
+    bool 			_lay;
   };
 };
 

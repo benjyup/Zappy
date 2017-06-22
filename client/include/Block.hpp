@@ -24,6 +24,12 @@ namespace 	Client
     void set_res(const std::vector<std::string> &_res);
     void add_player(int);
     void del_player(int);
+    void inc_res(int res);
+    void dec_res(int res);
+
+   private:
+   public:
+    const std::forward_list<int> &get_play() const;
 
    private:
     std::array<int, NBR_OF_RES> _res;

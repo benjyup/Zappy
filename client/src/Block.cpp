@@ -47,9 +47,24 @@ namespace 		Client
 
   void Block::del_player(int player)
   {
-    for (auto &i : _play)
     _play.remove_if([player](int p) {
       return p == player;
     });
   }
+
+  const std::forward_list<int> &Block::get_play() const
+  {
+    return _play;
+  }
+
+  void Block::inc_res(int res)
+  {
+    _res[res]++;
+  }
+
+  void Block::dec_res(int res)
+  {
+    _res[res]--;
+  }
+
 }

@@ -5,7 +5,7 @@
 ## Login   <renard_e@epitech.net>
 ## 
 ## Started on  Tue Jun 20 10:56:10 2017 Gregoire Renard
-## Last update Thu Jun 22 16:37:29 2017 Gregoire Renard
+## Last update Thu Jun 22 17:45:48 2017 Gregoire Renard
 ##
 
 CC	=	gcc -I../../include -g3
@@ -42,6 +42,8 @@ SRCS	=	src/main.c \
 		src/right_func.c \
 		src/left_func.c \
 		src/connect_nbr_func.c \
+		src/inventory_func.c \
+		src/init_env_resources.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

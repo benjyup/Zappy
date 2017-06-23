@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Thu Jun 22 16:57:43 2017 Gregoire Renard
+** Last update Fri Jun 23 12:48:49 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -45,13 +45,13 @@ typedef enum		e_bool
 
 typedef enum		e_resource
   {
-    LINEMATE = 0,
+    FOOD = 0,
+    LINEMATE,
     DERAUMERE,
     SIBUR,
     MENDIANE,
     PHIRAS,
-    THYSTAME,
-    FOOD
+    THYSTAME
   }			t_resource;
 
 typedef enum		e_client_type
@@ -106,6 +106,7 @@ typedef struct		s_env
   struct protoent	*pe;
   t_list		*clients;
   t_map			**map;
+  char			**resources;
   int			nb_player;
 }			t_env;
 
@@ -213,4 +214,8 @@ int			left_func(t_env *env, t_client *client,
 				  t_list **current);
 int			connect_nbr_func(t_env *env, t_client *client,
 					 t_list **current);
+int			inventory_func(t_env *env, t_client *client,
+				       t_list **current);
+void			init_env_resources(t_env *env);
+
 #endif /* !SERVER_H_ */

@@ -14,16 +14,33 @@ set(SOURCE_FILES
         src/Vector3d.cpp
         src/Eggs.cpp
         src/Drone.cpp
+        src/parser.cpp
+        src/zappy.cpp
+        src/ZappyException.cpp
+        src/mendatory/argument.c
+        src/mendatory/connection_manager.c
+        src/mendatory/cookie.c
+        src/mendatory/function_parser.cpp
+        src/mendatory/functionParse.c
+        src/mendatory/my_stack.c
+        src/mendatory/srv_read.c
+        src/mendatory/srv_write.c
         include/Block.hpp
+        include/parser.hpp
+        include/server.hpp
+        include/zappy.hpp
+        include/ZappyException.hpp
         include/Character.hpp
         include/Client.hpp
         include/Ressource.hpp
         include/Vector3d.hpp
         include/Eggs.hpp
-        include/Drone.hpp)
+        include/Drone.hpp src/GraphicalLib.cpp src/GraphicalLib.hpp)
 
-include_directories(include)
+include_directories(irrlicht-1.8.4/include/ src/ include/ include/mendatory)
+
+link_directories(irrlicht-1.8.4/lib/Linux/deepinx86_64 irrlicht-1.8.4/lib/Linux/useful)
 
 add_executable(client_graph ${SOURCE_FILES})
 
-target_link_libraries(client_graph)
+target_link_libraries(client_graph Irrlicht.a GL.so libXxf86vm.so libXext.so libX11.so libXcursor.so -lpthread)

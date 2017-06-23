@@ -2,21 +2,27 @@
 // Created by kyxo on 6/19/17.
 //
 
-#include <iostream>
 #include "Block.hpp"
+#include "Client.hpp"
 
 namespace 		Client
 {
+  Block::Block(int id, Vector3d const &pos) : _pos(pos), _id(id)
+  {
+    init_res();
+  }
 
-  Block::Block()
-  {}
+  Block::Block() : _pos({0, 0})
+  {
+    std::cerr << "gros fdp" << std::endl;
+  }
 
   Block::~Block()
   {
 
   }
 
-  const std::array<int, NBR_OF_RES> &Block::getRes() const
+  const std::array<int, 7> &Block::getRes() const
   {
     return _res;
   }
@@ -67,4 +73,19 @@ namespace 		Client
     _res[res]--;
   }
 
+  void Block::init_res()
+  {
+    for (int i = 0; i < NBR_OF_RES; i++)
+      _res[i] = 0;
+  }
+
+  int Block::get_id() const
+  {
+    return _id;
+  }
+
+  void Block::set_id(int _id)
+  {
+    Block::_id = _id;
+  }
 }

@@ -17,12 +17,12 @@ namespace zappy {
         parser();
         ~parser();
 
-        int lexer();
+        int lexer(const std::string &cmd);
         std::string input;
     private:
-      std::map<std::string, std::function<int(int)>> _function_ptr;
-      int 		help_function(int);
-      int     		flush_function(int);
+      std::map<std::string, std::function<int(const std::string&)>> _function_ptr;
+      int 		help_function(const std::string &str);
+      int     		flush_function(const std::string &str);
     };
 }
 

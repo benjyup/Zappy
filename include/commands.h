@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Fri Jun  2 17:01:05 2017 vincent.mesquita@epitech.eu
-** Last update Thu Jun 22 17:21:19 2017 Gregoire Renard
+** Last update Fri Jun 23 14:36:42 2017 Gregoire Renard
 */
 
 #ifndef COMMANDS_H_
@@ -13,7 +13,7 @@
 
 # include "server.h"
 
-# define NBR_OF_COMMANDS 5
+# define NBR_OF_COMMANDS 7
 
 # define FORWARD	"Forward"
 # define RIGHT		"Right"
@@ -44,7 +44,9 @@ static t_cmd		exec_array[NBR_OF_COMMANDS] = {
   {RIGHT, &right_func, player},
   {LEFT, &left_func, player},
   {CONNECT_NBR, &connect_nbr_func, player},
-  {INVENTORY, inventory_func, player}
+  {INVENTORY, inventory_func, player},
+  {LOOK, look_func, player},
+  {BROADCAST, broadcast_func, player}
 };
 
 #endif /* !COMMANDS_H_ */

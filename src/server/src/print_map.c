@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 19:11:36 2017 Gregoire Renard
-** Last update Thu Jun 22 17:41:54 2017 Gregoire Renard
+** Last update Fri Jun 23 16:51:15 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -26,11 +26,9 @@ static void		print_fd(t_env *env, t_pos pos)
   int			cpt;
 
   cpt = 0;
-  while (cpt != env->arg.clients_lim)
-    {
-      printf("%i, ", env->map[pos.y][pos.x].fd_player[cpt]);
-      cpt++;
-    }
+  while (env->map[pos.y][pos.x].clients[cpt] != NULL)
+    cpt++;
+  printf("clients = %i, ", cpt);
 }
 
 void			print_map(t_env *env)
@@ -41,12 +39,14 @@ void			print_map(t_env *env)
   while (env->map[pos.y] != NULL)
     {
       pos.x = 0;
+      printf("----->MAP[%i] ==\n", pos.y);
       while (env->map[pos.y][pos.x].border != 1)
 	{
-	  printf("{%s, ", env->map[pos.y][pos.x].name_team);
+	  printf("--->X = %i{%s, ", pos.x, env->map[pos.y][pos.x].name_team);
 	  print_fd(env, pos);
 	  print_resource(env, pos);
 	  pos.x++;
+	  printf("\n");
 	}
       printf("\n");
       pos.y++;

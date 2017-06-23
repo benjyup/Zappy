@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Fri Jun 23 12:48:49 2017 Gregoire Renard
+** Last update Fri Jun 23 16:46:38 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -31,6 +31,7 @@
 # define WELCOME	"welcome\n"
 # define OK		"ok\n"
 
+typedef	struct		s_client t_client;
 typedef struct		s_pos
 {
   int			x;
@@ -87,7 +88,7 @@ typedef	struct		s_arg
 typedef	struct		s_map
 {
   char			*name_team;
-  int			*fd_player;
+  t_client		**clients;
   int			resource[MAX_RESOURCE];
   int			border;
 }			t_map;
@@ -217,5 +218,8 @@ int			connect_nbr_func(t_env *env, t_client *client,
 int			inventory_func(t_env *env, t_client *client,
 				       t_list **current);
 void			init_env_resources(t_env *env);
-
+int			look_func(t_env *env, t_client *client,
+				  t_list **current);
+int			broadcast_func(t_env *env, t_client *client,
+				       t_list **current);
 #endif /* !SERVER_H_ */

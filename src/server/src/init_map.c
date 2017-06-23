@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 18:25:45 2017 Gregoire Renard
-** Last update Wed Jun 21 16:42:55 2017 Gregoire Renard
+** Last update Fri Jun 23 16:28:38 2017 Gregoire Renard
 */
 
 
@@ -30,20 +30,13 @@ static void	init_resource(t_env *env, t_pos pos)
 
 static int	init_fd(t_env *env, t_pos pos)
 {
-  int		cpt;
-
-  cpt = 0;
-  if ((env->map[pos.y][pos.x].fd_player =
-       malloc(sizeof(int) * env->arg.clients_lim)) == NULL)
+  if ((env->map[pos.y][pos.x].clients =
+       malloc(sizeof(t_client *) * env->arg.clients_lim)) == NULL)
     {
       printf_error("Error : allocation in init_fd");
       exit(ERROR);
     }
-  while (cpt != env->arg.clients_lim)
-    {
-      env->map[pos.y][pos.x].fd_player[cpt] = -1;
-      cpt++;
-    }
+  env->map[pos.y][pos.x].clients[0] = NULL;
   return (SUCCESS);
 }
 

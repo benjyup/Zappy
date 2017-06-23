@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Wed Jun 21 18:40:24 2017 Gregoire Renard
+** Last update Fri Jun 23 16:46:38 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -29,7 +29,9 @@
 
 # define KO		"ko\n"
 # define WELCOME	"welcome\n"
+# define OK		"ok\n"
 
+typedef	struct		s_client t_client;
 typedef struct		s_pos
 {
   int			x;
@@ -44,13 +46,13 @@ typedef enum		e_bool
 
 typedef enum		e_resource
   {
-    LINEMATE = 0,
+    FOOD = 0,
+    LINEMATE,
     DERAUMERE,
     SIBUR,
     MENDIANE,
     PHIRAS,
-    THYSTAME,
-    FOOD
+    THYSTAME
   }			t_resource;
 
 typedef enum		e_client_type
@@ -86,7 +88,7 @@ typedef	struct		s_arg
 typedef	struct		s_map
 {
   char			*name_team;
-  int			*fd_player;
+  t_client		**clients;
   int			resource[MAX_RESOURCE];
   int			border;
 }			t_map;
@@ -94,6 +96,7 @@ typedef	struct		s_map
 typedef struct		s_env
 {
   t_arg			arg;
+  int			time;
   int			socket;
   int                   highest_fd;
   unsigned long		current_client_id;
@@ -104,6 +107,8 @@ typedef struct		s_env
   struct protoent	*pe;
   t_list		*clients;
   t_map			**map;
+  char			**resources;
+  int			nb_player;
 }			t_env;
 
 typedef	struct		s_pointer
@@ -123,6 +128,7 @@ typedef struct		s_client
   t_list		*this;
   int			inventory[MAX_RESOURCE];
   t_pos			pos;
+  t_pos			dir;
   char			*name_team;
   t_list		*to_write;
 }			t_client;
@@ -163,7 +169,7 @@ char			*my_strcat_char(char *str1,
 char			**my_str_to_wordtab(char *str,
 					    char separator);
 void			my_free_wordtab(char **wordtab);
-void			my_exec(t_env *env,
+int			my_exec(t_env *env,
 				t_client *client,
 				t_list **current);
 int			print_help(int ret);
@@ -199,4 +205,21 @@ void			my_send_to_client(t_client *client);
 void			my_send(t_client *client,
 				char *message);
 char			*to_string(int nb);
+int			forward_func(t_env *env, t_client *client,
+				     t_list **current);
+void			erase_in_map(t_env *env, t_client *client);
+void			add_in_map(t_env *env, t_client *client);
+int			right_func(t_env *env, t_client *client,
+				   t_list **current);
+int			left_func(t_env *env, t_client *client,
+				  t_list **current);
+int			connect_nbr_func(t_env *env, t_client *client,
+					 t_list **current);
+int			inventory_func(t_env *env, t_client *client,
+				       t_list **current);
+void			init_env_resources(t_env *env);
+int			look_func(t_env *env, t_client *client,
+				  t_list **current);
+int			broadcast_func(t_env *env, t_client *client,
+				       t_list **current);
 #endif /* !SERVER_H_ */

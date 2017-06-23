@@ -5,20 +5,20 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 19:11:36 2017 Gregoire Renard
-** Last update Wed Jun 21 17:41:31 2017 Gregoire Renard
+** Last update Fri Jun 23 16:51:15 2017 Gregoire Renard
 */
 
 #include "server.h"
 
 static void		print_resource(t_env *env, t_pos pos)
 {
-  printf("linemate = %i, ", env->map[pos.y][pos.x].resource[0]);
-  printf("deraumere = %i, ", env->map[pos.y][pos.x].resource[1]);
-  printf("sibur = %i, ", env->map[pos.y][pos.x].resource[2]);
-  printf("mendiane = %i, ", env->map[pos.y][pos.x].resource[3]);
-  printf("phiras = %i, ", env->map[pos.y][pos.x].resource[4]);
-  printf("thystame = %i, ", env->map[pos.y][pos.x].resource[5]);
-  printf("food = %i} ; ", env->map[pos.y][pos.x].resource[6]);
+  printf("food = %i ", env->map[pos.y][pos.x].resource[0]);
+  printf("linemate = %i, ", env->map[pos.y][pos.x].resource[1]);
+  printf("deraumere = %i, ", env->map[pos.y][pos.x].resource[2]);
+  printf("sibur = %i, ", env->map[pos.y][pos.x].resource[3]);
+  printf("mendiane = %i, ", env->map[pos.y][pos.x].resource[4]);
+  printf("phiras = %i, ", env->map[pos.y][pos.x].resource[5]);
+  printf("thystame = %i} ; ", env->map[pos.y][pos.x].resource[6]);
 }
 
 static void		print_fd(t_env *env, t_pos pos)
@@ -26,11 +26,9 @@ static void		print_fd(t_env *env, t_pos pos)
   int			cpt;
 
   cpt = 0;
-  while (cpt != env->arg.clients_lim)
-    {
-      printf("%i, ", env->map[pos.y][pos.x].fd_player[cpt]);
-      cpt++;
-    }
+  while (env->map[pos.y][pos.x].clients[cpt] != NULL)
+    cpt++;
+  printf("clients = %i, ", cpt);
 }
 
 void			print_map(t_env *env)
@@ -41,12 +39,14 @@ void			print_map(t_env *env)
   while (env->map[pos.y] != NULL)
     {
       pos.x = 0;
+      printf("----->MAP[%i] ==\n", pos.y);
       while (env->map[pos.y][pos.x].border != 1)
 	{
-	  printf("{%s, ", env->map[pos.y][pos.x].name_team);
+	  printf("--->X = %i{%s, ", pos.x, env->map[pos.y][pos.x].name_team);
 	  print_fd(env, pos);
 	  print_resource(env, pos);
 	  pos.x++;
+	  printf("\n");
 	}
       printf("\n");
       pos.y++;

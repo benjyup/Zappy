@@ -3,25 +3,47 @@
 // Created by kyxo on 6/19/17.
 //
 
+#include <irrlicht.h>
+#include <Character.hpp>
 #include "Client.hpp"
+#include "server.hpp"
 
 namespace 		Client
 {
-  Client::Client() : _size(0, 0), _running(true)
+  Client::Client() : _size(0, 0), _running(false)
   {
     std::vector<std::string> tab;
-    std::string			s;
-    int 			i = 0;
-
-    std::cout << "Graphic";
-    while (i < 3)
+    char 			*str;
+   // srv_write("GRAPHIC");
+    std::cerr << "Client created" << std::endl;
+//    std::string			s;
+//
+//    while ((str = srv_read()) == NULL);
+//    s.assign(str);
+//    getTab(s, tab);
+//    _msz(tab);
+//    std::cerr << s;
+//    s.clear();
+//    while ((str = srv_read()) == NULL);
+//    s.assign(str);
+//    std::cerr << s;
+//    getTab(s, tab);
+//    _sgt(tab);
+    this->_running = true;
+    for (int x = 0; x < 10; x++)
       {
-	std::cin >> s;
-	tab.push_back(s);
-	i++;
+	for (int y = 0; y < 10; y++)
+	  {
+//	    _map[{x, y}] = Block(, {x, y});
+	    _map.emplace(std::make_pair<Vector3d, Block>({x, y}, Block(_lib.addNode({x, y}, GraphicalLib::MESH::block, GraphicalLib::TEXT::grass), {x, y})));
+//					Block());
+//	    _map[{x, y}].getNode()->setMaterialTexture(0, text);
+
+//	    node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+//	    node->setMaterialTexture(0, text);
+//	    _map.at({x, y}) = Block(_smgr->addOctreeSceneNode(cube->getMesh(0), 0 , 1), {x, y});
+	  }
       }
-    _msz(tab);
-    //init sgt
   }
 
   Client::~Client()
@@ -83,7 +105,7 @@ namespace 		Client
   {
     if (t.size() != 10)
       return;
-    _map[{~t[1], ~t[2]}].set_res(t);
+    _map.at({~t[1], ~t[2]}).set_res(t);
   }
 
   void Client::_tna(const std::vector<std::string> &t)
@@ -99,7 +121,7 @@ namespace 		Client
       return ;
     std::cerr << "Pnw Function" << std::endl;
     _player.push_back(Character(~t[1], Vector3d(~t[2], ~t[3]), (Character::DIR)~t[4], ~t[5], t[6]));
-    _map[{~t[2], ~t[3]}].add_player(~t[1]);
+  _map[{~t[2], ~t[3]}].add_player(~t[1]);
   }
 
   void Client::_plv(std::vector<std::string> const &t)
@@ -232,6 +254,31 @@ namespace 		Client
       return ;
     _running = false;
     _winner = t[1];
+  }
+
+  bool Client::is_running() const
+  {
+    return _running;
+  }
+
+  void	Client::getTab(std::string const &s, std::vector<std::string> &tab)
+  {
+    std::stringstream	ssin;
+
+    ssin << s;
+    tab.clear();
+    while (ssin.good())
+      {
+	std::string word;
+	ssin >> word;
+	if (!word.empty())
+	  tab.push_back(word);
+      }
+  }
+
+  void Client::update()
+  {
+    _lib.update();
   }
 
   int operator~(std::string const &t)

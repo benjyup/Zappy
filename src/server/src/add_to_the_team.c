@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:55:57 2017 Gregoire Renard
-** Last update Thu Jun 22 11:52:39 2017 Gregoire Renard
+** Last update Fri Jun 23 16:47:34 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -39,7 +39,7 @@ static void	send_info(t_env *env, t_client *client)
 
   ret = to_string(env->arg.clients_lim);
   len = strlen(ret);
-  if ((ret = realloc(ret, strlen(ret) + 2)) == NULL)
+  if ((ret = realloc(ret, len + 2)) == NULL)
     {
       perror(MALLOC);
       exit(ERROR);
@@ -54,9 +54,7 @@ static void	send_info(t_env *env, t_client *client)
 static void	init_pos_client(t_env *env, t_client *client)
 {
   t_pos		pos;
-  int		cpt;
-
-  cpt = 0;
+  
   pos.x = rand() % env->arg.width;
   pos.y = rand() % env->arg.height;
   while (env->map[pos.y][pos.x].name_team != NULL ||
@@ -69,12 +67,22 @@ static void	init_pos_client(t_env *env, t_client *client)
     }
   if (env->map[pos.y][pos.x].name_team == NULL)
     env->map[pos.y][pos.x].name_team = client->name_team;
-  while (env->map[pos.y][pos.x].fd_player[cpt] != -1)
-    cpt++;
-  env->map[pos.y][pos.x].fd_player[cpt] = client->socket;
   client->pos.x = pos.x;
   client->pos.y = pos.y;
+  add_in_map(env, client);
   send_info(env, client);
+}
+
+static void	init_inventory(t_client *client)
+{
+  int		cpt;
+
+  cpt = 0;
+  while (cpt != MAX_RESOURCE)
+    {
+      client->inventory[cpt] = 0;
+      cpt++;
+    }
 }
 
 void		add_to_the_team(t_env *env, t_client *client)
@@ -91,6 +99,7 @@ void		add_to_the_team(t_env *env, t_client *client)
 	      env->arg.team[cpt].nb_player++;
 	      client->name_team = env->arg.team[cpt].team_name;
 	      init_pos_client(env, client);
+	      init_inventory(client);
 	    }
 	  else
 	    {

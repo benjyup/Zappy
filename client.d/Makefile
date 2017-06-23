@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named zappy_client
+# Target rules for targets named zappy_ai
 
 # Build rule for target.
-zappy_client: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 zappy_client
-.PHONY : zappy_client
+zappy_ai: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 zappy_ai
+.PHONY : zappy_ai
 
 # fast build rule for target.
-zappy_client/fast:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/build
-.PHONY : zappy_client/fast
+zappy_ai/fast:
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/build
+.PHONY : zappy_ai/fast
 
 main.o: main.cpp.o
 
@@ -129,7 +129,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -138,7 +138,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -147,7 +147,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 src/ZappyException.o: src/ZappyException.cpp.o
@@ -156,7 +156,7 @@ src/ZappyException.o: src/ZappyException.cpp.o
 
 # target to build an object file
 src/ZappyException.cpp.o:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/ZappyException.cpp.o
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/ZappyException.cpp.o
 .PHONY : src/ZappyException.cpp.o
 
 src/ZappyException.i: src/ZappyException.cpp.i
@@ -165,7 +165,7 @@ src/ZappyException.i: src/ZappyException.cpp.i
 
 # target to preprocess a source file
 src/ZappyException.cpp.i:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/ZappyException.cpp.i
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/ZappyException.cpp.i
 .PHONY : src/ZappyException.cpp.i
 
 src/ZappyException.s: src/ZappyException.cpp.s
@@ -174,7 +174,7 @@ src/ZappyException.s: src/ZappyException.cpp.s
 
 # target to generate assembly for a file
 src/ZappyException.cpp.s:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/ZappyException.cpp.s
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/ZappyException.cpp.s
 .PHONY : src/ZappyException.cpp.s
 
 src/mendatory/argument.o: src/mendatory/argument.c.o
@@ -183,7 +183,7 @@ src/mendatory/argument.o: src/mendatory/argument.c.o
 
 # target to build an object file
 src/mendatory/argument.c.o:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/argument.c.o
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/argument.c.o
 .PHONY : src/mendatory/argument.c.o
 
 src/mendatory/argument.i: src/mendatory/argument.c.i
@@ -192,7 +192,7 @@ src/mendatory/argument.i: src/mendatory/argument.c.i
 
 # target to preprocess a source file
 src/mendatory/argument.c.i:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/argument.c.i
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/argument.c.i
 .PHONY : src/mendatory/argument.c.i
 
 src/mendatory/argument.s: src/mendatory/argument.c.s
@@ -201,7 +201,7 @@ src/mendatory/argument.s: src/mendatory/argument.c.s
 
 # target to generate assembly for a file
 src/mendatory/argument.c.s:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/argument.c.s
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/argument.c.s
 .PHONY : src/mendatory/argument.c.s
 
 src/mendatory/connection_manager.o: src/mendatory/connection_manager.c.o
@@ -210,7 +210,7 @@ src/mendatory/connection_manager.o: src/mendatory/connection_manager.c.o
 
 # target to build an object file
 src/mendatory/connection_manager.c.o:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/connection_manager.c.o
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/connection_manager.c.o
 .PHONY : src/mendatory/connection_manager.c.o
 
 src/mendatory/connection_manager.i: src/mendatory/connection_manager.c.i
@@ -219,7 +219,7 @@ src/mendatory/connection_manager.i: src/mendatory/connection_manager.c.i
 
 # target to preprocess a source file
 src/mendatory/connection_manager.c.i:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/connection_manager.c.i
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/connection_manager.c.i
 .PHONY : src/mendatory/connection_manager.c.i
 
 src/mendatory/connection_manager.s: src/mendatory/connection_manager.c.s
@@ -228,7 +228,7 @@ src/mendatory/connection_manager.s: src/mendatory/connection_manager.c.s
 
 # target to generate assembly for a file
 src/mendatory/connection_manager.c.s:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/connection_manager.c.s
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/connection_manager.c.s
 .PHONY : src/mendatory/connection_manager.c.s
 
 src/mendatory/cookie.o: src/mendatory/cookie.c.o
@@ -237,7 +237,7 @@ src/mendatory/cookie.o: src/mendatory/cookie.c.o
 
 # target to build an object file
 src/mendatory/cookie.c.o:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/cookie.c.o
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/cookie.c.o
 .PHONY : src/mendatory/cookie.c.o
 
 src/mendatory/cookie.i: src/mendatory/cookie.c.i
@@ -246,7 +246,7 @@ src/mendatory/cookie.i: src/mendatory/cookie.c.i
 
 # target to preprocess a source file
 src/mendatory/cookie.c.i:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/cookie.c.i
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/cookie.c.i
 .PHONY : src/mendatory/cookie.c.i
 
 src/mendatory/cookie.s: src/mendatory/cookie.c.s
@@ -255,7 +255,7 @@ src/mendatory/cookie.s: src/mendatory/cookie.c.s
 
 # target to generate assembly for a file
 src/mendatory/cookie.c.s:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/cookie.c.s
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/cookie.c.s
 .PHONY : src/mendatory/cookie.c.s
 
 src/mendatory/functionParse.o: src/mendatory/functionParse.c.o
@@ -264,7 +264,7 @@ src/mendatory/functionParse.o: src/mendatory/functionParse.c.o
 
 # target to build an object file
 src/mendatory/functionParse.c.o:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/functionParse.c.o
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/functionParse.c.o
 .PHONY : src/mendatory/functionParse.c.o
 
 src/mendatory/functionParse.i: src/mendatory/functionParse.c.i
@@ -273,7 +273,7 @@ src/mendatory/functionParse.i: src/mendatory/functionParse.c.i
 
 # target to preprocess a source file
 src/mendatory/functionParse.c.i:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/functionParse.c.i
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/functionParse.c.i
 .PHONY : src/mendatory/functionParse.c.i
 
 src/mendatory/functionParse.s: src/mendatory/functionParse.c.s
@@ -282,7 +282,7 @@ src/mendatory/functionParse.s: src/mendatory/functionParse.c.s
 
 # target to generate assembly for a file
 src/mendatory/functionParse.c.s:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/functionParse.c.s
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/functionParse.c.s
 .PHONY : src/mendatory/functionParse.c.s
 
 src/mendatory/function_parser.o: src/mendatory/function_parser.cpp.o
@@ -291,7 +291,7 @@ src/mendatory/function_parser.o: src/mendatory/function_parser.cpp.o
 
 # target to build an object file
 src/mendatory/function_parser.cpp.o:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/function_parser.cpp.o
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/function_parser.cpp.o
 .PHONY : src/mendatory/function_parser.cpp.o
 
 src/mendatory/function_parser.i: src/mendatory/function_parser.cpp.i
@@ -300,7 +300,7 @@ src/mendatory/function_parser.i: src/mendatory/function_parser.cpp.i
 
 # target to preprocess a source file
 src/mendatory/function_parser.cpp.i:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/function_parser.cpp.i
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/function_parser.cpp.i
 .PHONY : src/mendatory/function_parser.cpp.i
 
 src/mendatory/function_parser.s: src/mendatory/function_parser.cpp.s
@@ -309,7 +309,7 @@ src/mendatory/function_parser.s: src/mendatory/function_parser.cpp.s
 
 # target to generate assembly for a file
 src/mendatory/function_parser.cpp.s:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/function_parser.cpp.s
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/function_parser.cpp.s
 .PHONY : src/mendatory/function_parser.cpp.s
 
 src/mendatory/my_stack.o: src/mendatory/my_stack.c.o
@@ -318,7 +318,7 @@ src/mendatory/my_stack.o: src/mendatory/my_stack.c.o
 
 # target to build an object file
 src/mendatory/my_stack.c.o:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/my_stack.c.o
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/my_stack.c.o
 .PHONY : src/mendatory/my_stack.c.o
 
 src/mendatory/my_stack.i: src/mendatory/my_stack.c.i
@@ -327,7 +327,7 @@ src/mendatory/my_stack.i: src/mendatory/my_stack.c.i
 
 # target to preprocess a source file
 src/mendatory/my_stack.c.i:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/my_stack.c.i
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/my_stack.c.i
 .PHONY : src/mendatory/my_stack.c.i
 
 src/mendatory/my_stack.s: src/mendatory/my_stack.c.s
@@ -336,7 +336,7 @@ src/mendatory/my_stack.s: src/mendatory/my_stack.c.s
 
 # target to generate assembly for a file
 src/mendatory/my_stack.c.s:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/my_stack.c.s
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/my_stack.c.s
 .PHONY : src/mendatory/my_stack.c.s
 
 src/mendatory/srv_read.o: src/mendatory/srv_read.c.o
@@ -345,7 +345,7 @@ src/mendatory/srv_read.o: src/mendatory/srv_read.c.o
 
 # target to build an object file
 src/mendatory/srv_read.c.o:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/srv_read.c.o
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/srv_read.c.o
 .PHONY : src/mendatory/srv_read.c.o
 
 src/mendatory/srv_read.i: src/mendatory/srv_read.c.i
@@ -354,7 +354,7 @@ src/mendatory/srv_read.i: src/mendatory/srv_read.c.i
 
 # target to preprocess a source file
 src/mendatory/srv_read.c.i:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/srv_read.c.i
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/srv_read.c.i
 .PHONY : src/mendatory/srv_read.c.i
 
 src/mendatory/srv_read.s: src/mendatory/srv_read.c.s
@@ -363,7 +363,7 @@ src/mendatory/srv_read.s: src/mendatory/srv_read.c.s
 
 # target to generate assembly for a file
 src/mendatory/srv_read.c.s:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/srv_read.c.s
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/srv_read.c.s
 .PHONY : src/mendatory/srv_read.c.s
 
 src/mendatory/srv_write.o: src/mendatory/srv_write.c.o
@@ -372,7 +372,7 @@ src/mendatory/srv_write.o: src/mendatory/srv_write.c.o
 
 # target to build an object file
 src/mendatory/srv_write.c.o:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/srv_write.c.o
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/srv_write.c.o
 .PHONY : src/mendatory/srv_write.c.o
 
 src/mendatory/srv_write.i: src/mendatory/srv_write.c.i
@@ -381,7 +381,7 @@ src/mendatory/srv_write.i: src/mendatory/srv_write.c.i
 
 # target to preprocess a source file
 src/mendatory/srv_write.c.i:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/srv_write.c.i
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/srv_write.c.i
 .PHONY : src/mendatory/srv_write.c.i
 
 src/mendatory/srv_write.s: src/mendatory/srv_write.c.s
@@ -390,7 +390,7 @@ src/mendatory/srv_write.s: src/mendatory/srv_write.c.s
 
 # target to generate assembly for a file
 src/mendatory/srv_write.c.s:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/srv_write.c.s
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/srv_write.c.s
 .PHONY : src/mendatory/srv_write.c.s
 
 src/parser.o: src/parser.cpp.o
@@ -399,7 +399,7 @@ src/parser.o: src/parser.cpp.o
 
 # target to build an object file
 src/parser.cpp.o:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/parser.cpp.o
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/parser.cpp.o
 .PHONY : src/parser.cpp.o
 
 src/parser.i: src/parser.cpp.i
@@ -408,7 +408,7 @@ src/parser.i: src/parser.cpp.i
 
 # target to preprocess a source file
 src/parser.cpp.i:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/parser.cpp.i
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/parser.cpp.i
 .PHONY : src/parser.cpp.i
 
 src/parser.s: src/parser.cpp.s
@@ -417,7 +417,7 @@ src/parser.s: src/parser.cpp.s
 
 # target to generate assembly for a file
 src/parser.cpp.s:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/parser.cpp.s
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/parser.cpp.s
 .PHONY : src/parser.cpp.s
 
 src/zappy.o: src/zappy.cpp.o
@@ -426,7 +426,7 @@ src/zappy.o: src/zappy.cpp.o
 
 # target to build an object file
 src/zappy.cpp.o:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/zappy.cpp.o
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/zappy.cpp.o
 .PHONY : src/zappy.cpp.o
 
 src/zappy.i: src/zappy.cpp.i
@@ -435,7 +435,7 @@ src/zappy.i: src/zappy.cpp.i
 
 # target to preprocess a source file
 src/zappy.cpp.i:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/zappy.cpp.i
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/zappy.cpp.i
 .PHONY : src/zappy.cpp.i
 
 src/zappy.s: src/zappy.cpp.s
@@ -444,7 +444,7 @@ src/zappy.s: src/zappy.cpp.s
 
 # target to generate assembly for a file
 src/zappy.cpp.s:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/zappy.cpp.s
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/zappy.cpp.s
 .PHONY : src/zappy.cpp.s
 
 # Help Target
@@ -455,7 +455,7 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... zappy_client"
+	@echo "... zappy_ai"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

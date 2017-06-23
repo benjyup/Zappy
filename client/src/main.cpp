@@ -37,52 +37,48 @@
 
 #include <vector>
 #include <unistd.h>
+#include <string>
 #include <string.h>
 #include <sstream>
 #include <Ressource.hpp>
+#include "zappy.hpp"
+#include "server.hpp"
 #include "Client.hpp"
 
 int             main(int ac, char **av) {
 
-  std::string	s;
-  char 		buf[4096];
-  ssize_t 	ret;
-  std::stringstream	ssin;
-  std::vector<std::string> tab;
+//try
+//  {
+ //   zappy::Zappy project(ac, av);
+    std::stringstream	ssin;
+    std::vector<std::string> tab;
+  char 			*buf;
+  std::string		s;
 
-  memset(buf, 0, 4096);
-  if (ac == 2 && !strcasecmp("-help", av[1]))
-    {
-      std::cerr << "USAGE: " << av[0] << " -p port -n name -h machine" << std::endl;
-      std::cerr << "        port    is the port number" << std::endl;
-      std::cerr << "        name    is the name of the team" << std::endl;
-      std::cerr << "        machine is the name of the machine; localhost by default" << std::endl;
-      return 0;
-    }
-//  if (ac != 7)
+//    project.run();
+    Client::Client c;
+    c.initTab();
+    while (c.is_running())
+      {
+//	buf = srv_read();
+//	if (buf)
+//	  {
+//	    s.assign(buf);
+//	    c.getTab(s, tab);
+//	    c.call(tab);
+//	    s.clear();
+//	    //c.update;
+//	  }
+	c.update();
+
+      }
+   // project.stop();
+//  }
+//  catch (std::exception &e)
 //    {
-//      std::cerr << "USAGE: " << av[0] << " -p port -n name -h machine" << std::endl;
-//      return 0;
+//      std::cerr << e.what() << std::endl;
+//      return 1;
 //    }
-  Client::Client		c;
-  c.initTab();
-  while ((ret = read(0, buf, 4096)) > 0) // appel de la fonction read de ja
-    {
-      ssin.clear();
-      buf[ret] = 0;
-      ssin.write(buf, strlen(buf));
-      tab.clear();
-      while (ssin.good())
-	{
-	  std::string word;
-	  ssin >> word;
-	  if (!word.empty())
-	    tab.push_back(word);
-	}
-      for (auto &i : tab)
-	std::cerr << i << std::endl;
-      c.call(tab);
-    }
   // cleanup the engine
   return 0;
 }

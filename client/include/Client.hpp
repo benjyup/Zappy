@@ -12,22 +12,29 @@
 #include <sstream>
 #include <map>
 #include <list>
+#include "GraphicalLib.hpp"
+#include "Character.hpp"
+#include "irrlicht.h"
 #include "Vector3d.hpp"
 #include "Block.hpp"
-#include "Character.hpp"
 #include "Eggs.hpp"
 
 namespace 		Client
 {
   int operator~(const std::string &t);
+  class GraphicalLib;
   class Client
   {
    public:
+    static const int SCALE = 15;
     Client();
     virtual ~Client();
 
     void initTab();
     void call(std::vector<std::string> const &);
+    bool is_running() const;
+    void	getTab(std::string const &s, std::vector<std::string> &tab);
+    void	update();
 
    private:
     Vector3d 										_size;
@@ -39,6 +46,7 @@ namespace 		Client
     bool 									_running;
     int 									_sgtt;
     std::string									_winner;
+    GraphicalLib								_lib;
 
     void _msz(std::vector<std::string> const &t);
     void _bct(std::vector<std::string> const &t);

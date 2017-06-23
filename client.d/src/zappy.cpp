@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <server.hpp>
 #include "zappy.hpp"
 #include "ZappyException.hpp"
 
@@ -36,6 +37,14 @@ void zappy::Zappy::run() {
         throw zappy::Exception("Could not run project.");
     if (relay_manager_start(&_cook, &_fd_manager, &_relay_manager) == 1)
         throw  zappy::Exception("Could not run project.");
+
+  char *str;
+  while (!(str = srv_read()));
+  std::cout << "J'ai reçu " << str << std::endl;
+  srv_write(this->_arg.team);
+  while (!(str = srv_read()));
+  std::cout << "J'ai reçu " << str << std::endl;
+
 }
 
 void zappy::Zappy::stop() {
@@ -46,14 +55,25 @@ void zappy::Zappy::stop() {
 }
 
 void zappy::Zappy::console() {
-    std::cout << std::endl << "Wellcome to Zappy - console v0.1" << std::endl;
-    std::cout << "Type help for more information" << std::endl;
-    std::string input;
-    input.clear();
-    while (input.find("quit"))
+  std::cout << std::endl << "Wellcome to Zappy - console v0.1" << std::endl;
+  std::cout << "Type help for more information" << std::endl;
+  std::string input;
+  input.clear();
+  while (input.find("quit") != 0)
     {
-        std::cout << _arg.team << " &>";
-        input.clear();
-        std::getline(std::cin, input);
+      std::cout << _arg.team << " &>";
+      if (!std::getline(std::cin, input))
+	{
+	  std::cout << std::endl;
+	  return ;
+	}
+      try {
+	  if (!input.empty())
+	    _parser.lexer(input);
+	} catch (...) {
+	  std::cerr << "Unknown command" << std::endl;
+	}
+      input.clear();
     }
+
 }

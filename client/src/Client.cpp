@@ -33,7 +33,12 @@ namespace 		Client
     for (int x = 0; x < _size.getX(); x++)
       {
 	for (int y = 0; y < _size.getY(); y++)
-	  _map.emplace(std::make_pair<Vector3d, Block>({x, y}, Block(_lib.addNode({x, y}, GraphicalLib::MESH::block, GraphicalLib::TEXT::grass), {x, y})));
+	  {
+	    Vector3d v(x, y);
+	    _map[y * _size.getX() + x] = Block(_lib.addNode(v, GraphicalLib::MESH::block, GraphicalLib::TEXT::grass, Client::SCALE, 0), v);
+	    std::cerr << v << std::endl;
+	    std::cerr << _map[v.getY() * _size.getX() + v.getX()].get_pos() << std::endl;
+	  }
       }
   }
 
@@ -81,22 +86,38 @@ namespace 		Client
 
   void Client::_ppo(const std::vector<std::string> &t)
   {
-//    std::cerr << "ppo Function" << t.size() << std::endl;
     if (t.size() != 5)
       return;
-//    std::cerr << "Player Num" << t[1] << std::endl;
-//    std::cerr << "X : " << ~t[2] << std::endl;
-//    std::cerr << "Y : " << ~t[3] << std::endl;
-//    std::cerr << "DIR : " << t[4] << std::endl;
-    _player[~t[1] - 1].set_pos({~t[2], ~t[3]});
-    _player[~t[1] - 1].set_dir((Character::DIR )~t[4]);
+    Vector3d v = {~t[2], ~t[3]};
+    int num = ~t[1] - 1;
+
+    if (v != _player[num].get_pos())
+      {
+	_player[num].set_idAnimation(_lib.addFlyStraightAnimator(_player[num].get_id(),
+	_lib.getPos(_player[num].get_id()), _map[v.getX() + v.getY() * _size.getX()].getSpacePos(), 1000));
+	_player[num].set_pos(v);
+	_player[num].set_dir((Character::DIR) ~t[4]);
+      }
   }
 
   void Client::_bct(const std::vector<std::string> &t)
   {
+    int resLvl;
+
     if (t.size() != 10)
       return;
-    _map.at({~t[1], ~t[2]}).set_res(t);
+    Block &b = _map.at(~t[1] + _size.getX() * ~t[2]);
+    resLvl = b.set_res(t);
+    std::cerr << resLvl << std::endl;
+    if (b.get_idRes() == 0 && resLvl > 0)
+      b.set_idRes(_lib.addNode({~t[1], ~t[2]}, GraphicalLib::MESH::minerals, GraphicalLib::TEXT::none, (irr::f32)resLvl, 1));
+    else if (resLvl == 0 && b.get_idRes() != 0)
+	{
+	  _lib.delNode(b.get_idRes());
+	  b.set_idRes(0);
+	}
+      else if (_lib.getScale(b.get_idRes()).X != resLvl)
+	  _lib.set_scale((irr::f32)resLvl, b.get_idRes());
   }
 
   void Client::_tna(const std::vector<std::string> &t)
@@ -110,26 +131,35 @@ namespace 		Client
   {
     if (t.size() != 7)
       return ;
+    Vector3d v(~t[2], ~t[3]);
     std::cerr << "Pnw Function" << std::endl;
-    _player.push_back(Character(~t[1], Vector3d(~t[2], ~t[3]), (Character::DIR)~t[4], ~t[5], t[6]));
-    _map[{~t[2], ~t[3]}].add_player(~t[1]);
+    _player.emplace_back(Character(~t[1], v,  (Character::DIR)~t[4], ~t[5], t[6],
+				   _lib.addCharacterNode(_map[v.getX() + v.getY() * _size.getX()].getSpacePos(), GraphicalLib::TEXT::none, 0.7f)));
+    _map[v.getX() + v.getY() * _size.getX()].add_player(~t[1]);
   }
 
   void Client::_plv(std::vector<std::string> const &t)
   {
     if (t.size() != 3)
       return ;
+    int 	id;
+
     std::cerr << "Plv Function" << std::endl;
     _player[~t[1] - 1].set_level(~t[2]);
+    id = _player[~t[1] - 1].get_id();
+    _lib.set_scale(0.7f + (irr::f32)_player[~t[1] - 1].get_level() / 20, id);
   }
 
   void Client::_pin(std::vector<std::string> const &t)
   {
     if (t.size() != 11)
       return ;
+    Vector3d v(_player[~t[1] - 1].get_pos());
+    Vector3d v2(~t[2], ~t[3]);
+
     std::cerr << "Pin Function" << std::endl;
-    _map[_player[~t[1] - 1].get_pos()].del_player(~t[1]);
-    _map[{~t[2], ~t[3]}].add_player(~t[1]);
+    _map[v.getX() + v.getY() * _size.getX()].del_player(~t[1]);
+    _map[v2.getX() + v2.getY() * _size.getX()].add_player(~t[1]);
     _player[~t[1] - 1].set_pos({~t[2], ~t[3]});
     _player[~t[1] - 1].set_res(t);
   }
@@ -162,7 +192,9 @@ namespace 		Client
   {
     if (t.size() < 4 || !t[3].compare("0"))
       return ;
-    for (auto const &i : _map[{~t[1], ~t[2]}].get_play())
+    Vector3d v(~t[1], ~t[2]);
+    int j =  v.getX() + v.getY() * _size.getX();
+    for (auto const &i : _map[j].get_play())
       {
 	_player[i - 1].set_inc(false);
 	_player[i - 1].set_level(_player[i - 1].get_level() + 1);
@@ -181,17 +213,20 @@ namespace 		Client
     if (t.size() != 3)
       return ;
     //throwing
+    Vector3d v(_player[~t[1] - 1].get_pos());
+
     _player[~t[1] - 1].dec_res(~t[2]);
-    _map[_player[~t[1 - 1]].get_pos()].inc_res(~t[2]);
+    _map[v.getX() + v.getY() * _size.getX()].inc_res(~t[2]);
   }
 
   void Client::_pgt(std::vector<std::string> const &t)
   {
     if (t.size() != 3)
       return ;
+    Vector3d v(_player[~t[1] - 1].get_pos());
     //throwing
     _player[~t[1] - 1].inc_res(~t[2]);
-    _map[_player[~t[1 - 1]].get_pos()].dec_res(~t[2]);
+    _map[v.getX() + v.getY() * _size.getX()].dec_res(~t[2]);
   }
 
   void Client::_pdi(std::vector<std::string> const &t)
@@ -199,8 +234,10 @@ namespace 		Client
     //starving
     if (t.size() != 2)
       return ;
+    Vector3d v(_player[~t[1] - 1].get_pos());
+
     _player[~t[1] - 1].die();
-    _map[_player[~t[1] - 1].get_pos()].del_player(~t[1]);
+    _map[v.getX() + v.getY() * _size.getX()].del_player(~t[1]);
   }
 
   void Client::_enw(std::vector<std::string> const &t)
@@ -269,7 +306,23 @@ namespace 		Client
 
   void Client::update()
   {
+    int j;
+
+    for (auto &i : _player)
+      {
+	if (!i.is_alive() && i.get_id() != 0)
+	  {
+	    _lib.delNode(i.get_id());
+	    i.set_id(0);
+	  }
+	if ((j = i.get_idAnimation()) != 0 && _lib.isAnimationEnd(j))
+	  {
+	    _lib.idle(i.get_id());
+	    i.set_idAnimation(0);
+	  }
+      }
     _lib.update();
+
   }
 
   int operator~(std::string const &t)

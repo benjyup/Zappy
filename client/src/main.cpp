@@ -38,10 +38,9 @@
 #include <vector>
 #include <string>
 #include <sstream>
-#include <server.hpp>
+#include "server.hpp"
 #include "zappy.hpp"
 #include "Client.hpp"
-#include "GraphicalLib.hpp"
 
 int             main(int ac, char **av)
 {
@@ -50,7 +49,6 @@ int             main(int ac, char **av)
       zappy::Zappy project(ac, av);
       char *buf;
       std::string s;
-      Client::GraphicalLib lib;
       std::vector<std::string>	tab;
 
       project.run();

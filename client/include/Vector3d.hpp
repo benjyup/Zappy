@@ -38,6 +38,8 @@
 
     bool operator>(Vector3d const &other) const;
 
+    bool operator!=(Vector3d const &other) const;
+
     Vector3d operator+(Vector3d const &other) const;
   };
  std::ostream		&operator<<(std::ostream &os, const Vector3d &vector);

@@ -17,7 +17,9 @@ namespace  Client
    public:
     enum class MESH : uint8_t
     {
-      block = 0
+      block = 0,
+      minerals,
+      character
     };
 
     enum class TEXT : uint8_t
@@ -29,10 +31,19 @@ namespace  Client
     GraphicalLib();
     virtual ~GraphicalLib();
 
-    int		addNode(Vector3d const &pos, MESH mesh, TEXT);
+    int		addNode(Vector3d const &pos, MESH mesh, TEXT, irr::f32 scale, int alt);
+    int		addCharacterNode(irr::core::vector3df const &pos, TEXT, irr::f32 scale);
     void	delNode(int id);
     void	update();
     bool 	is_running() const;
+    void	set_scale(irr::f32 scale, int id);
+    bool 	isAnimationEnd(int id);
+
+    irr::core::vector3df const &getPos(int id);
+    irr::core::vector3df const	&getScale(int id);
+    void			idle(int id);
+    int addFlyStraightAnimator(int id, irr::core::vector3df const &from,
+							   irr::core::vector3df const &to, int speed);
 
    private:
     irr::IrrlichtDevice				*_device;
@@ -40,12 +51,12 @@ namespace  Client
     irr::video::IVideoDriver			*_driver;
     irr::gui::IGUIEnvironment           	*_guienv;
     irr::scene::IAnimatedMesh 			*_cube;
-    std::unordered_map<int, irr::scene::IMeshSceneNode *>	_node;
+    std::unordered_map<int, irr::scene::IAnimatedMeshSceneNode *>	_node;
     std::map<MESH, irr::scene::IAnimatedMesh *> _mesh;
     std::map<TEXT, irr::video::ITexture *>	_text;
     int 						_id;
-    irr::scene::IAnimatedMesh *mesh2;
-    irr::video::ITexture	*text2;
+    std::unordered_map<int, irr::scene::ISceneNodeAnimator *>		_anims;
+    int 								_idAnims;
   };
 }
 

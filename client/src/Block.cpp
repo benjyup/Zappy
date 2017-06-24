@@ -7,9 +7,24 @@
 
 namespace 		Client
 {
-  Block::Block(int id, Vector3d const &pos) : _pos(pos), _id(id)
+  Block::Block(int id, Vector3d const &pos) : _pos(pos), _id(id), _idRes(0), _resLevel(0)
   {
     init_res();
+    irr::f32 	j = Client::SCALE / 3;
+    irr::f32 	k = Client::SCALE / 3;
+
+    for (auto &i : _posAvailable)
+      {
+	i.first = {_pos.getX() * Client::SCALE - j + Client::SCALE / 3 / 2, Client::SCALE, _pos.getY() * Client::SCALE + k - Client::SCALE / 3 / 2};
+	if (k < Client::SCALE)
+	  k += Client::SCALE / 3;
+	else
+	  {
+	    k = Client::SCALE / 3;
+	    j += Client::SCALE / 3;
+	  }
+	i.second = false;
+      }
   }
 
   Block::Block() : _pos({0, 0})
@@ -27,11 +42,11 @@ namespace 		Client
     return _res;
   }
 
-  void Block::set_res(const std::vector<std::string> &res)
+  int Block::set_res(const std::vector<std::string> &res)
   {
     int j = 0;
     auto k = res.begin();
-    while (k != res.end() && j < 4)
+    while (k != res.end() && j < 3)
       {
 	k++;
 	j++;
@@ -39,11 +54,18 @@ namespace 		Client
     j = 0;
     while (k != res.end())
       {
-	_res[j] = std::atoi(k->c_str());
-	std::cerr << _res[j] << " ";
-	j++;
+	_res[j++] = std::atoi(k->c_str());
 	k++;
       }
+    if ((j = get_sum()) == 0)
+      _resLevel = 0;
+    else if (j < 3)
+	_resLevel = 1;
+      else if (j < 6)
+	  _resLevel = 2;
+	else
+	  _resLevel = 3;
+    return _resLevel;
   }
 
   void Block::add_player(int player)
@@ -84,8 +106,38 @@ namespace 		Client
     return _id;
   }
 
-  void Block::set_id(int _id)
+  int Block::get_sum() const
   {
-    Block::_id = _id;
+    int sum = 0;
+    int j = 0;
+    while (j < NBR_OF_RES)
+      sum += _res[j++];
+    return sum;
+  }
+
+  int Block::get_idRes() const
+  {
+    return _idRes;
+  }
+
+  void Block::set_idRes(int _idRes)
+  {
+    Block::_idRes = _idRes;
+  }
+
+  irr::core::vector3df const &Block::getSpacePos()
+  {
+    for (auto &i : _posAvailable)
+      if (!i.second)
+	{
+	  i.second = true;
+	  return i.first;
+	}
+    return _posAvailable.front().first;
+  }
+
+  const Vector3d &Block::get_pos() const
+  {
+    return _pos;
   }
 }

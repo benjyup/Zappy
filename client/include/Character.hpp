@@ -23,7 +23,7 @@ namespace 		Client
       SOUTH,
       OUEST
     };
-    Character(int num, Vector3d const &pos, DIR, int level, std::string const &team);
+    Character(int num, Vector3d const &pos, DIR, int level, std::string const &team, int id);
     virtual ~Character();
 
     int get_num() const;
@@ -32,7 +32,12 @@ namespace 		Client
     int get_level() const;
     bool is_inc() const;
     bool is_lay() const;
+    int get_id() const;
+    bool is_alive() const;
+    int get_idAnimation() const;
 
+    void set_idAnimation(int _idAnimation);
+    void set_id(int _id);
     void set_inc(bool _inc);
     void set_res(const std::vector<std::string> &_res);
     void set_pos(const Vector3d &_pos);
@@ -54,6 +59,8 @@ namespace 		Client
     bool 			_alive;
     bool 			_inc;
     bool 			_lay;
+    int 			_id;
+    int 			_idAnimation;
   };
 };
 

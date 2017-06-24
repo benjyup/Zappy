@@ -37,14 +37,14 @@ namespace 		Client
    private:
     Vector3d 										_size;
     std::map<std::string, std::function<void(std::vector<std::string> const &)>>	_tab;
-    std::map<Vector3d, Block> 								_map;
+    std::map<int, Block> 								_map;
     std::vector<Character> 								_player;
     std::vector<std::string>								_team;
-    std::vector<Eggs>								_Eggs;
-    bool 									_running;
-    int 									_sgtt;
-    std::string									_winner;
-    GraphicalLib								_lib;
+    std::vector<Eggs>									_Eggs;
+    bool 										_running;
+    int 										_sgtt;
+    std::string										_winner;
+    GraphicalLib									_lib;
 
     void _msz(std::vector<std::string> const &t);
     void _bct(std::vector<std::string> const &t);

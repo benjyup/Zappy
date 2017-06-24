@@ -9,6 +9,7 @@
 #include <vector>
 #include <forward_list>
 #include <array>
+#include <vector3d.h>
 #include "Vector3d.hpp"
 
 namespace 	Client
@@ -22,15 +23,21 @@ namespace 	Client
     virtual ~Block();
 
     const std::array<int, NBR_OF_RES> &getRes() const;
-    void set_res(const std::vector<std::string> &_res);
-    void set_id(int _id);
-    const std::forward_list<int> &get_play() const;
-
-    int get_id() const;
-    void add_player(int);
-    void del_player(int);
+    int set_res(const std::vector<std::string> &_res);
+    void set_idRes(int _idRes);
     void inc_res(int res);
     void dec_res(int res);
+
+    irr::core::vector3df const &getSpacePos();
+    const std::forward_list<int> &get_play() const;
+    int get_idRes() const;
+    int get_id() const;
+    int get_sum() const;
+    void add_player(int);
+    void del_player(int);
+
+    const Vector3d &get_pos() const;
+
     void init_res();
 
    private:
@@ -38,6 +45,9 @@ namespace 	Client
     std::forward_list<int>		_play;
     Vector3d				_pos;
     int 				_id;
+    int 				_idRes;
+    char 				_resLevel;
+    std::array<std::pair<irr::core::vector3df, bool>, 9>	_posAvailable;
   };
 };
 

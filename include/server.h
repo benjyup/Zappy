@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Fri Jun 23 16:46:38 2017 Gregoire Renard
+** Last update Sat Jun 24 15:29:22 2017 vincent.mesquita@epitech.eu
 */
 
 #ifndef SERVER_H_
@@ -43,17 +43,6 @@ typedef enum		e_bool
     false = 0,
     true
   }			t_bool;
-
-typedef enum		e_resource
-  {
-    FOOD = 0,
-    LINEMATE,
-    DERAUMERE,
-    SIBUR,
-    MENDIANE,
-    PHIRAS,
-    THYSTAME
-  }			t_resource;
 
 typedef enum		e_client_type
   {

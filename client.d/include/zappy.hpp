@@ -22,6 +22,9 @@ namespace zappy {
     void run();
     void stop();
     void console();
+
+    const t_arg &getArgs() const;
+
    private:
 
     t_arg           		_arg;
@@ -29,11 +32,6 @@ namespace zappy {
     t_fd_manager    		_fd_manager;
     t_thread_data   		_relay_manager;
     parser			_parser;
-    std::pair<size_t, size_t >	_worldDimension;
-    size_t 			_clietnNum;
-
-    void 			_getWorldInformation(const std::string &informations);
-
   };
 }
 

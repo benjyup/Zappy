@@ -23,11 +23,17 @@ namespace zappy {
     void stop();
     void console();
    private:
-    t_arg           _arg;
-    t_cookie        _cook;
-    t_fd_manager    _fd_manager;
-    t_thread_data   _relay_manager;
-    parser		_parser;
+
+    t_arg           		_arg;
+    t_cookie        		_cook;
+    t_fd_manager    		_fd_manager;
+    t_thread_data   		_relay_manager;
+    parser			_parser;
+    std::pair<size_t, size_t >	_worldDimension;
+    size_t 			_clietnNum;
+
+    void 			_getWorldInformation(const std::string &informations);
+
   };
 }
 

@@ -44,7 +44,7 @@ void zappy::Zappy::run() {
   srv_write(this->_arg.team);
   while (!(str = srv_read()));
   std::cout << "J'ai reçu " << str << std::endl;
-
+  _getWorldInformation(str);
 }
 
 void zappy::Zappy::stop() {
@@ -76,4 +76,21 @@ void zappy::Zappy::console() {
       input.clear();
     }
 
+}
+
+void zappy::Zappy::_getWorldInformation(const std::string &informations)
+{
+  try {
+      _clietnNum = std::stoul(informations.substr(0, informations.find('\n')));
+      _worldDimension.first = std::stoul(informations.substr(informations.find(' ')));
+      _worldDimension.second = std::stoul(informations.substr(informations.find(' '), informations.size() - 1));
+    } catch (std::exception) {
+      throw std::runtime_error("Error while getting world informations.");
+    }
+
+/*
+  std::cout << "clientNum = " << _clietnNum << std::endl;
+  std::cout << "X = " << _worldDimension.first << std::endl;
+  std::cout << "Y = " << _worldDimension.second << std::endl;
+*/
 }

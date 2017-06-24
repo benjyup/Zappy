@@ -14,7 +14,6 @@
 #include <list>
 #include "GraphicalLib.hpp"
 #include "Character.hpp"
-#include "irrlicht.h"
 #include "Vector3d.hpp"
 #include "Block.hpp"
 #include "Eggs.hpp"
@@ -22,7 +21,6 @@
 namespace 		Client
 {
   int operator~(const std::string &t);
-  class GraphicalLib;
   class Client
   {
    public:

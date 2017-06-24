@@ -37,9 +37,9 @@ set(SOURCE_FILES
         include/Eggs.hpp
         include/Drone.hpp src/GraphicalLib.cpp src/GraphicalLib.hpp)
 
-include_directories(irrlicht-1.8.4/include/ src/ include/ include/mendatory)
+include_directories(irrlicht-1.8.4/include src/ include/ include/mendatory)
 
-link_directories(irrlicht-1.8.4/lib/Linux/deepinx86_64 irrlicht-1.8.4/lib/Linux/useful)
+link_directories(./irrlicht-1.8.4/lib/Linux ./irrlicht-1.8.4/lib/Linux/deepinx86_64 ./irrlicht-1.8.4/lib/Linux/useful)
 
 add_executable(client_graph ${SOURCE_FILES})
 

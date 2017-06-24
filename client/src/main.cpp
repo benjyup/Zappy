@@ -36,49 +36,46 @@
 //    }
 
 #include <vector>
-#include <unistd.h>
 #include <string>
-#include <string.h>
 #include <sstream>
-#include <Ressource.hpp>
+#include <server.hpp>
 #include "zappy.hpp"
-#include "server.hpp"
 #include "Client.hpp"
+#include "GraphicalLib.hpp"
 
-int             main(int ac, char **av) {
+int             main(int ac, char **av)
+{
+  try
+    {
+      zappy::Zappy project(ac, av);
+      char *buf;
+      std::string s;
+      Client::GraphicalLib lib;
+      std::vector<std::string>	tab;
 
-//try
-//  {
- //   zappy::Zappy project(ac, av);
-    std::stringstream	ssin;
-    std::vector<std::string> tab;
-  char 			*buf;
-  std::string		s;
+      project.run();
+      Client::Client c;
+      c.initTab();
 
-//    project.run();
-    Client::Client c;
-    c.initTab();
-    while (c.is_running())
-      {
-//	buf = srv_read();
-//	if (buf)
-//	  {
-//	    s.assign(buf);
-//	    c.getTab(s, tab);
-//	    c.call(tab);
-//	    s.clear();
-//	    //c.update;
-//	  }
-	c.update();
-
-      }
-   // project.stop();
-//  }
-//  catch (std::exception &e)
-//    {
-//      std::cerr << e.what() << std::endl;
-//      return 1;
-//    }
-  // cleanup the engine
+      while (c.is_running())
+	{
+	buf = srv_read();
+	if (buf)
+	  {
+	    s.assign(buf);
+	    c.getTab(s, tab);
+	    c.call(tab);
+	    s.clear();
+	  }
+	  c.update();
+	}
+      project.stop();
+    }
+  catch (std::exception &e)
+    {
+      std::cerr << e.what() << std::endl;
+      return 1;
+    }
+  //  cleanup the engine
   return 0;
 }

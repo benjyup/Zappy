@@ -14,35 +14,26 @@ namespace 		Client
   {
     std::vector<std::string> tab;
     char 			*str;
-   // srv_write("GRAPHIC");
+    srv_write("GRAPHIC");
     std::cerr << "Client created" << std::endl;
-//    std::string			s;
-//
-//    while ((str = srv_read()) == NULL);
-//    s.assign(str);
-//    getTab(s, tab);
-//    _msz(tab);
-//    std::cerr << s;
-//    s.clear();
-//    while ((str = srv_read()) == NULL);
-//    s.assign(str);
-//    std::cerr << s;
-//    getTab(s, tab);
-//    _sgt(tab);
-    this->_running = true;
-    for (int x = 0; x < 10; x++)
-      {
-	for (int y = 0; y < 10; y++)
-	  {
-//	    _map[{x, y}] = Block(, {x, y});
-	    _map.emplace(std::make_pair<Vector3d, Block>({x, y}, Block(_lib.addNode({x, y}, GraphicalLib::MESH::block, GraphicalLib::TEXT::grass), {x, y})));
-//					Block());
-//	    _map[{x, y}].getNode()->setMaterialTexture(0, text);
+    std::string			s;
 
-//	    node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-//	    node->setMaterialTexture(0, text);
-//	    _map.at({x, y}) = Block(_smgr->addOctreeSceneNode(cube->getMesh(0), 0 , 1), {x, y});
-	  }
+    while ((str = srv_read()) == NULL);
+    s.assign(str);
+    getTab(s, tab);
+    _msz(tab);
+    std::cerr << s;
+    s.clear();
+    while ((str = srv_read()) == NULL);
+    s.assign(str);
+    std::cerr << s;
+    getTab(s, tab);
+    _sgt(tab);
+    this->_running = true;
+    for (int x = 0; x < _size.getX(); x++)
+      {
+	for (int y = 0; y < _size.getY(); y++)
+	  _map.emplace(std::make_pair<Vector3d, Block>({x, y}, Block(_lib.addNode({x, y}, GraphicalLib::MESH::block, GraphicalLib::TEXT::grass), {x, y})));
       }
   }
 
@@ -121,7 +112,7 @@ namespace 		Client
       return ;
     std::cerr << "Pnw Function" << std::endl;
     _player.push_back(Character(~t[1], Vector3d(~t[2], ~t[3]), (Character::DIR)~t[4], ~t[5], t[6]));
-  _map[{~t[2], ~t[3]}].add_player(~t[1]);
+    _map[{~t[2], ~t[3]}].add_player(~t[1]);
   }
 
   void Client::_plv(std::vector<std::string> const &t)
@@ -258,7 +249,7 @@ namespace 		Client
 
   bool Client::is_running() const
   {
-    return _running;
+    return _running && _lib.is_running();
   }
 
   void	Client::getTab(std::string const &s, std::vector<std::string> &tab)

@@ -7,8 +7,8 @@
 
 #include <unordered_map>
 #include <map>
-#include "irrlicht.h"
 #include "Vector3d.hpp"
+#include "irrlicht.h"
 
 namespace  Client
 {
@@ -32,10 +32,11 @@ namespace  Client
     int		addNode(Vector3d const &pos, MESH mesh, TEXT);
     void	delNode(int id);
     void	update();
+    bool 	is_running() const;
 
-    irr::scene::ISceneManager			*_smgr;
    private:
     irr::IrrlichtDevice				*_device;
+    irr::scene::ISceneManager			*_smgr;
     irr::video::IVideoDriver			*_driver;
     irr::gui::IGUIEnvironment           	*_guienv;
     irr::scene::IAnimatedMesh 			*_cube;

@@ -9,7 +9,6 @@
 #include <vector>
 #include <forward_list>
 #include <array>
-#include "irrlicht.h"
 #include "Vector3d.hpp"
 
 namespace 	Client

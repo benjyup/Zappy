@@ -10,6 +10,7 @@ zappy::parser::parser() :
 			      {"help", [&] (const std::string &str) -> int { return help_function(str);}},
 			      {"flush", [&] (const std::string &str) -> int { return flush_function(str);}},
 			      {"send", [&] (const std::string &str) -> int {srv_write(str.c_str()); return 0;}},
+			      {"Forward", [&] (const std::string &str) -> int {return _forward(str);}},
 		      })
 {
   input.clear();
@@ -39,6 +40,11 @@ int zappy::parser::help_function(const std::string &)
 }
 
 int zappy::parser::flush_function(const std::string &)
+{
+  return 0;
+}
+
+int zappy::parser::_forward(const std::string &)
 {
   return 0;
 }

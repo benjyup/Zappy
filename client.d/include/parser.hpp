@@ -23,6 +23,7 @@ namespace zappy {
       std::map<std::string, std::function<int(const std::string &args)>> _function_ptr;
       int 		help_function(const std::string &);
       int     		flush_function(const std::string &);
+      int 		_forward(const std::string &);
     };
 }
 

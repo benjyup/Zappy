@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:20:07 2017 Gregoire Renard
-** Last update Sat Jun 24 15:29:27 2017 vincent.mesquita@epitech.eu
+** Last update Sat Jun 24 21:14:59 2017 vincent.mesquita@epitech.eu
 */
 
 #ifndef COMMUN_H_
@@ -26,7 +26,8 @@ typedef enum		e_resource
     SIBUR,
     MENDIANE,
     PHIRAS,
-    THYSTAME
+    THYSTAME,
+    NBR_OF_RESOURCES
   }			t_resource;
 
 #endif /* !COMMUN_H_ */

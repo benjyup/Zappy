@@ -14,7 +14,12 @@ namespace 	Client
     this->_smgr = this->_device->getSceneManager();
     this->_guienv = this->_device->getGUIEnvironment();
     _mesh[MESH::block] = _smgr->getMesh("./GFX/Models/cube.obj");
-    _mesh[MESH::minerals] = _smgr->getMesh("./GFX/Models/Minerals.obj");
+    _mesh[MESH::minerals] = _smgr->getMesh("./GFX/Models/mineralshigh.obj");
+    _text[TEXT::minerals1] = _driver->getTexture("./GFX/purpletext.png");
+    _text[TEXT::minerals2] = _driver->getTexture("./GFX/redtext.png");
+    _text[TEXT::minerals3] = _driver->getTexture("./GFX/greentext.png");
+    _mesh[MESH::rock] = _smgr->getMesh("./GFX/Models/socle.obj");
+    _text[TEXT::rock] = _driver->getTexture("./GFX/graytext.png");
     _mesh[MESH::character] = _smgr->getMesh("./GFX/Models/ninja.b3d");
     _mesh[MESH::eggs] = _smgr->getMesh("./GFX/Models/eggs.obj");
     _text[TEXT::grass] = _driver->getTexture("./GFX/groundGrass.png");
@@ -23,6 +28,20 @@ namespace 	Client
     this->_device->setWindowCaption(wStr.c_str());
     this->_device->getCursorControl()->setVisible(true);
     this->_smgr->addCameraSceneNodeFPS();
+    _smgr->addSkyDomeSceneNode(_driver->getTexture("./GFX/sky.jpg"), 16, 16, 1.0f, 1.0f);
+    _smgr->addSkyDomeSceneNode(_driver->getTexture("./GFX/desert.jpg"), 16, 16, 1.0f, 1.0f)->setRotation({0, 0, -180});
+    _smgr->setAmbientLight(irr::video::SColorf(0.7,0.7,0.7,1));
+    irr::scene::IAnimatedMesh* plane = _smgr->addHillPlaneMesh("plane",
+							irr::core::dimension2d<irr::f32>(20,20),
+							irr::core::dimension2d<irr::u32>(200,200), 0, 0,
+							irr::core::dimension2d<irr::f32>(0,0),
+							irr::core::dimension2d<irr::f32>(60,60));
+    irr::scene::ISceneNode* sea = _smgr->addWaterSurfaceSceneNode(plane->getMesh(0), 5.0f, 300.0f, 40.0f);
+    sea->setMaterialTexture(0, _driver->getTexture("./GFX/stones.jpg"));
+    sea->setPosition({0 + (Client::SCALE * 10 / 2), 0, 0 + (Client::SCALE * 10 / 2)});
+    sea->setMaterialTexture(1, _driver->getTexture("./GFX/water.jpg"));
+    sea->setMaterialFlag(irr::video::EMF_LIGHTING, true);
+    sea->setMaterialType(irr::video::EMT_REFLECTION_2_LAYER);
   }
 
   GraphicalLib::~GraphicalLib()
@@ -32,7 +51,7 @@ namespace 	Client
   int GraphicalLib::addNode(const Vector3d &pos, GraphicalLib::MESH mesh, GraphicalLib::TEXT text, irr::f32 Scale, int alt)
   {
     _node[_id] = _smgr->addAnimatedMeshSceneNode(_mesh[mesh]);
-    if (mesh == MESH::minerals)
+    if (mesh == MESH::minerals || mesh == MESH::rock)
       _node[_id]->setPosition({pos.getX() * Client::SCALE - Client::SCALE / 2, alt * Client::SCALE, pos.getY() * Client::SCALE + Client::SCALE / 2});
     else
       _node[_id]->setPosition({pos.getX() * Client::SCALE, alt * Client::SCALE, pos.getY() * Client::SCALE});

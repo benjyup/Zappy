@@ -102,6 +102,12 @@ namespace 		Client
       }
   }
 
+  GraphicalLib::TEXT	Client::genRandType(GraphicalLib::TEXT min, GraphicalLib::TEXT max)
+  {
+    GraphicalLib::TEXT randType = GraphicalLib::TEXT((int)min + rand() / (RAND_MAX / (int)max));
+    return (randType);
+  }
+
   void Client::_bct(const std::vector<std::string> &t)
   {
     int resLvl;
@@ -111,8 +117,11 @@ namespace 		Client
     Block &b = _map.at(~t[1] + _size.getX() * ~t[2]);
     resLvl = b.set_res(t);
     std::cerr << resLvl << std::endl;
+    _lib.addNode({~t[1], ~t[2]}, GraphicalLib::MESH::rock, GraphicalLib::TEXT::rock, (irr::f32)resLvl, 1);
     if (b.get_idRes() == 0 && resLvl > 0)
-      b.set_idRes(_lib.addNode({~t[1], ~t[2]}, GraphicalLib::MESH::minerals, GraphicalLib::TEXT::none, (irr::f32)resLvl, 1));
+      b.set_idRes(_lib.addNode({~t[1], ~t[2]}, GraphicalLib::MESH::minerals,
+			       genRandType(GraphicalLib::TEXT::minerals1, GraphicalLib::TEXT::minerals2),
+			       (irr::f32)resLvl, 1));
     else if (resLvl == 0 && b.get_idRes() != 0)
 	{
 	  _lib.delNode(b.get_idRes());

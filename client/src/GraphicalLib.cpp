@@ -14,7 +14,12 @@ namespace 	Client
     this->_smgr = this->_device->getSceneManager();
     this->_guienv = this->_device->getGUIEnvironment();
     _mesh[MESH::block] = _smgr->getMesh("./GFX/Models/cube.obj");
-    _mesh[MESH::minerals] = _smgr->getMesh("./GFX/Models/Minerals.obj");
+    _mesh[MESH::minerals] = _smgr->getMesh("./GFX/Models/mineralshigh.obj");
+    _text[TEXT::minerals1] = _driver->getTexture("./GFX/purpletext.png");
+    _text[TEXT::minerals2] = _driver->getTexture("./GFX/redtext.png");
+    _text[TEXT::minerals3] = _driver->getTexture("./GFX/greentext.png");
+    _mesh[MESH::rock] = _smgr->getMesh("./GFX/Models/socle.obj");
+    _text[TEXT::rock] = _driver->getTexture("./GFX/graytext.png");
     _mesh[MESH::character] = _smgr->getMesh("./GFX/Models/ninja.b3d");
     _text[TEXT::grass] = _driver->getTexture("./GFX/groundGrass.png");
     irr::core::stringw wStr("fdp");
@@ -30,7 +35,7 @@ namespace 	Client
   int GraphicalLib::addNode(const Vector3d &pos, GraphicalLib::MESH mesh, GraphicalLib::TEXT text, irr::f32 Scale, int alt)
   {
     _node[_id] = _smgr->addAnimatedMeshSceneNode(_mesh[mesh]);
-    if (mesh == MESH::minerals)
+    if (mesh == MESH::minerals || mesh == MESH::rock)
       _node[_id]->setPosition({pos.getX() * Client::SCALE - Client::SCALE / 2, alt * Client::SCALE, pos.getY() * Client::SCALE + Client::SCALE / 2});
     else
       _node[_id]->setPosition({pos.getX() * Client::SCALE, alt * Client::SCALE, pos.getY() * Client::SCALE});

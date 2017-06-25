@@ -33,6 +33,8 @@ namespace 		Client
     bool is_running() const;
     void	getTab(std::string const &s, std::vector<std::string> &tab);
     void	update();
+    GraphicalLib::TEXT	genRandType(GraphicalLib::TEXT min, GraphicalLib::TEXT max);
+
 
    private:
     Vector3d 										_size;

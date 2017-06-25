@@ -19,13 +19,18 @@ namespace  Client
     {
       block = 0,
       minerals,
-      character
+      character,
+      rock
     };
 
     enum class TEXT : uint8_t
     {
       none = 0,
-      grass
+      grass,
+      minerals1,
+      minerals2,
+      minerals3,
+      rock
     };
 
     GraphicalLib();

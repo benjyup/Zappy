@@ -90,11 +90,13 @@ namespace 		Client
       return;
     Vector3d v = {~t[2], ~t[3]};
     int num = ~t[1] - 1;
+    Vector3d playerPos = _player[num].get_pos();
 
-    if (v != _player[num].get_pos())
+    if (v != playerPos)
       {
+	_map[playerPos.getX() + playerPos.getY() * _size.getX()].resetSpacePos(_lib.getPos(_player[num].get_id()));
 	_player[num].set_idAnimation(_lib.addFlyStraightAnimator(_player[num].get_id(),
-	_lib.getPos(_player[num].get_id()), _map[v.getX() + v.getY() * _size.getX()].getSpacePos(), 1000));
+								 _lib.getPos(_player[num].get_id()), _map[v.getX() + v.getY() * _size.getX()].getSpacePos(), 1000, ~t[4]));
 	_player[num].set_pos(v);
 	_player[num].set_dir((Character::DIR) ~t[4]);
       }
@@ -134,7 +136,7 @@ namespace 		Client
     Vector3d v(~t[2], ~t[3]);
     std::cerr << "Pnw Function" << std::endl;
     _player.emplace_back(Character(~t[1], v,  (Character::DIR)~t[4], ~t[5], t[6],
-				   _lib.addCharacterNode(_map[v.getX() + v.getY() * _size.getX()].getSpacePos(), GraphicalLib::TEXT::none, 0.7f)));
+				   _lib.addCharacterNode(_map[v.getX() + v.getY() * _size.getX()].getSpacePos(), GraphicalLib::TEXT::none, 0.7f, ~t[4])));
     _map[v.getX() + v.getY() * _size.getX()].add_player(~t[1]);
   }
 
@@ -182,22 +184,33 @@ namespace 		Client
   {
     if (t.size() < 5)
       return ;
-    int i = 4;
+    Vector3d v(~t[1], ~t[2]);
+    int j = 4;
 
-    while (i + 1 < t.size())
-      _player[~t[i++] - 1].set_inc(true);
+    while (j < t.size())
+      {
+	if (_player[~t[j] - 1].get_level() == ~t[3])
+	  {
+	    _lib.incantating(_player[~t[j] - 1].get_id());
+	    _player[~t[j] - 1].set_inc(true);
+	  }
+	j++;
+      }
   }
 
   void Client::_pie(std::vector<std::string> const &t)
   {
-    if (t.size() < 4 || !t[3].compare("0"))
+    if (t.size() < 4)
       return ;
     Vector3d v(~t[1], ~t[2]);
     int j =  v.getX() + v.getY() * _size.getX();
     for (auto const &i : _map[j].get_play())
       {
-	_player[i - 1].set_inc(false);
-	_player[i - 1].set_level(_player[i - 1].get_level() + 1);
+	if (_player[i - 1].is_inc())
+	  {
+	    _player[i - 1].set_inc(false);
+	    _lib.idle(_player[i - 1].get_id());
+	  }
       }
   }
 

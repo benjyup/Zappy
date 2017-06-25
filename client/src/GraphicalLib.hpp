@@ -32,7 +32,7 @@ namespace  Client
     virtual ~GraphicalLib();
 
     int		addNode(Vector3d const &pos, MESH mesh, TEXT, irr::f32 scale, int alt);
-    int		addCharacterNode(irr::core::vector3df const &pos, TEXT, irr::f32 scale);
+    int		addCharacterNode(irr::core::vector3df const &pos, TEXT, irr::f32 scale, int dir);
     void	delNode(int id);
     void	update();
     bool 	is_running() const;
@@ -42,8 +42,9 @@ namespace  Client
     irr::core::vector3df const &getPos(int id);
     irr::core::vector3df const	&getScale(int id);
     void			idle(int id);
+    void			incantating(int id);
     int addFlyStraightAnimator(int id, irr::core::vector3df const &from,
-							   irr::core::vector3df const &to, int speed);
+							   irr::core::vector3df const &to, int speed, int dir);
 
    private:
     irr::IrrlichtDevice				*_device;

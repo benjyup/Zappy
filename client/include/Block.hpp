@@ -27,15 +27,15 @@ namespace 	Client
     void set_idRes(int _idRes);
     void inc_res(int res);
     void dec_res(int res);
+    void add_player(int);
+    void del_player(int);
+    void resetSpacePos(irr::core::vector3df const &);
 
     irr::core::vector3df const &getSpacePos();
     const std::forward_list<int> &get_play() const;
     int get_idRes() const;
     int get_id() const;
     int get_sum() const;
-    void add_player(int);
-    void del_player(int);
-
     const Vector3d &get_pos() const;
 
     void init_res();

@@ -140,4 +140,16 @@ namespace 		Client
   {
     return _pos;
   }
+
+  void Block::resetSpacePos(irr::core::vector3df const &pos)
+  {
+    for (auto &i : _posAvailable)
+      {
+	if (i.first == pos)
+	  {
+	    i.second = false;
+	    break ;
+	  }
+      }
+  }
 }

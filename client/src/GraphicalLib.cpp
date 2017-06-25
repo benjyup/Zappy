@@ -4,7 +4,6 @@
 
 #include "GraphicalLib.hpp"
 #include "Client.hpp"
-#include "../irrlicht-1.8.4/include/irrlicht.h"
 
 namespace 	Client
 {
@@ -44,7 +43,7 @@ namespace 	Client
     return _id - 1;
   }
 
-  int GraphicalLib::addCharacterNode(const irr::core::vector3df &pos, GraphicalLib::TEXT text, irr::f32 Scale)
+  int GraphicalLib::addCharacterNode(const irr::core::vector3df &pos, GraphicalLib::TEXT text, irr::f32 Scale, int dir)
   {
     _node[_id] = _smgr->addAnimatedMeshSceneNode(_mesh[MESH::character]);
     _node[_id]->setPosition(pos);
@@ -54,6 +53,7 @@ namespace 	Client
     _node[_id]->setScale({Scale, Scale, Scale});
     _node[_id]->setFrameLoop(205, 249);
     _node[_id]->setAnimationSpeed(10);
+    _node[_id]->setRotation({0, dir * 90 - 90, 0});
     _id++;
     std::cerr << "adding Character Node" << std::endl;
     return _id - 1;
@@ -96,10 +96,11 @@ namespace 	Client
   }
 
   int	GraphicalLib::addFlyStraightAnimator(int id, irr::core::vector3df const &from,
-				       	irr::core::vector3df const &to, int speed)
+				       	irr::core::vector3df const &to, int speed, int dir)
   {
     _anims[_idAnims] = _smgr->createFlyStraightAnimator(from, to, speed, false);
     _node[id]->addAnimator(_anims[_idAnims]);
+    _node[id]->setRotation({0, dir * 90 - 90, 0});
     _idAnims++;
     _node[id]->setAnimationSpeed(18);
     _node[id]->setFrameLoop(15, 30);
@@ -120,6 +121,12 @@ namespace 	Client
   void GraphicalLib::idle(int id)
   {
     _node[id]->setFrameLoop(204, 249);
+    _node[id]->setAnimationSpeed(10);
+  }
+
+  void GraphicalLib::incantating(int id)
+  {
+    _node[id]->setFrameLoop(59, 67);
     _node[id]->setAnimationSpeed(10);
   }
 }

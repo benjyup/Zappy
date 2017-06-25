@@ -35,7 +35,6 @@ namespace 		Client
     void	update();
     GraphicalLib::TEXT	genRandType(GraphicalLib::TEXT min, GraphicalLib::TEXT max);
 
-
    private:
     Vector3d 										_size;
     std::map<std::string, std::function<void(std::vector<std::string> const &)>>	_tab;

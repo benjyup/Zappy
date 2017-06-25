@@ -66,6 +66,6 @@ static t_cmd		exec_array[NBR_OF_COMMANDS] = {
   {RIGHT, &right_func, player},
   {LEFT, &left_func, player},
   {CONNECT_NBR, &connect_nbr_func, player}
-}
+};
 
 #endif /* !COMMANDS_H_ */

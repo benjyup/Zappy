@@ -19,6 +19,7 @@ int	g_msz(t_env *env, t_client *client, t_list **current)
   sprintf(str, "%s %d %d\n", MSZ, env->arg.width, env->arg.height);
   my_send(client, str);
   free(str);
+  return (1);
 }
 
 int	bct_f(int x, int y, t_env *env, t_client *client)
@@ -28,7 +29,7 @@ int	bct_f(int x, int y, t_env *env, t_client *client)
   char	buff[13];
 
   (void)client;
-  size += sprintf(buff, " %d", env->map[y][x].resource[FOOD]);
+  size = sprintf(buff, " %d", env->map[y][x].resource[FOOD]);
   size += sprintf(buff, " %d", env->map[y][x].resource[LINEMATE]);
   size += sprintf(buff, " %d", env->map[y][x].resource[DERAUMERE]);
   size += sprintf(buff, " %d", env->map[y][x].resource[SIBUR]);
@@ -48,6 +49,7 @@ int	bct_f(int x, int y, t_env *env, t_client *client)
 	  env->map[y][x].resource[MENDIANE],
 	  env->map[y][x].resource[PHIRAS],
 	  env->map[y][x].resource[THYSTAME]);
+  return (1);
 }
 
 int	g_bct(t_env *env, t_client *client, t_list **current)
@@ -59,6 +61,7 @@ int	g_bct(t_env *env, t_client *client, t_list **current)
   x = atoi(client->split_cmd[1]);
   y = atoi(client->split_cmd[2]);
   bct_f(x, y, env, client);
+  return (1);
 }
 
 int	g_mct(t_env *env, t_client *client, t_list **current)
@@ -163,19 +166,20 @@ t_client	*search_client(t_list **current, int n, t_env *env)
       tmp = tmp->next;
       i++;
     }
-  return (1);
+  return (NULL);
 }
 
 int		g_pin(t_env *env, t_client *client, t_list **current)
 {
-  t_list	*tmp;
   t_client	*cli_temp;
   char		buff[13];
+  char		*str;
   int		size;
   int		n;
 
+  (void)client;
   n = atoi(client->split_cmd[1]);
-  cli_temp = search_client(current, n);
+  cli_temp = search_client(current, n, env);
   size = sprintf(buff, " %d\n", n);
   size += sprintf(buff, " %d", cli_temp->inventory[FOOD]);
   size += sprintf(buff, " %d", cli_temp->inventory[LINEMATE]);
@@ -186,12 +190,12 @@ int		g_pin(t_env *env, t_client *client, t_list **current)
   size += sprintf(buff, " %d", cli_temp->inventory[THYSTAME]);
   size += sprintf(buff, " %d", cli_temp->pos.x);
   size += sprintf(buff, " %d", cli_temp->pos.y);
-  if (str = malloc(size + 4) == NULL)
+  if ((str = malloc(size + 4)) == NULL)
     {
-      perror(malloc);
+      perror(MALLOC);
       exit(-1);
     }
-  sprintf(str, "%s %d %d %d %d %d %d %d %d %d\n", PIN, n, cli_temp->pos.x, cli_temp->pos.y,
+  sprintf(str, "%s %d %d %d %d %d %d %d %d %d %d\n", PIN, n, cli_temp->pos.x, cli_temp->pos.y,
 	  cli_temp->inventory[FOOD],
 	  cli_temp->inventory[LINEMATE],
 	  cli_temp->inventory[DERAUMERE],
@@ -205,5 +209,6 @@ int		g_pin(t_env *env, t_client *client, t_list **current)
 
 int	def_dir(t_client *client)
 {
-
+  (void)client;
+  return (1);
 }

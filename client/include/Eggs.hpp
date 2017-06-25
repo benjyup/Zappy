@@ -17,12 +17,14 @@ class Eggs
     die
   };
 
-  Eggs(Vector3d const &pos, int father);
+  Eggs(Vector3d const &pos, int father, int num, int id);
 
   virtual ~Eggs();
 
   const Vector3d &get_pos() const;
+  int get_id() const;
 
+  void set_id(int _id);
   void 			set_pos(const Vector3d &_pos);
   void			eclosion();
   void			die();
@@ -31,6 +33,8 @@ class Eggs
   Vector3d		_pos;
   EGGSSTATE		_state;
   int 			_father;
+  int 			_num;
+  int 			_id;
 };
 
 #endif //CLIENT_GRAPH_EGGS_HPP

@@ -23,6 +23,14 @@ namespace 		Client
       SOUTH,
       OUEST
     };
+
+    enum class STATE : uint8_t
+    {
+      ALIVE = 0,
+      DYING,
+      DEAD
+    };
+
     Character(int num, Vector3d const &pos, DIR, int level, std::string const &team, int id);
     virtual ~Character();
 
@@ -33,7 +41,7 @@ namespace 		Client
     bool is_inc() const;
     bool is_lay() const;
     int get_id() const;
-    bool is_alive() const;
+    STATE is_alive() const;
     int get_idAnimation() const;
 
     void set_idAnimation(int _idAnimation);
@@ -46,6 +54,7 @@ namespace 		Client
     void dec_res(int res);
     void inc_res(int res);
     void set_lay(bool _lay);
+    void set_alive(STATE _alive);
 
     void	die();
 
@@ -56,7 +65,7 @@ namespace 		Client
     int 			_level;
     std::string			_team;
     std::array<int, Block::NBR_OF_RES>	_res;
-    bool 			_alive;
+    STATE 			_alive;
     bool 			_inc;
     bool 			_lay;
     int 			_id;

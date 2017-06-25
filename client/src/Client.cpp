@@ -146,6 +146,7 @@ namespace 		Client
       return ;
     int 	id;
 
+    //set animation
     std::cerr << "Plv Function" << std::endl;
     _player[~t[1] - 1].set_level(~t[2]);
     id = _player[~t[1] - 1].get_id();
@@ -218,7 +219,9 @@ namespace 		Client
   {
     if (t.size() != 2)
       return ;
-    _player[~t[1] - 1].set_lay(true);
+    int num = ~t[1] - 1;
+    _player[num].set_lay(true);
+    _lib.laying(_player[num].get_id());
   }
 
   void Client::_pdr(std::vector<std::string> const &t)
@@ -226,60 +229,74 @@ namespace 		Client
     if (t.size() != 3)
       return ;
     //throwing
-    Vector3d v(_player[~t[1] - 1].get_pos());
-
-    _player[~t[1] - 1].dec_res(~t[2]);
-    _map[v.getX() + v.getY() * _size.getX()].inc_res(~t[2]);
+//    Vector3d v(_player[~t[1] - 1].get_pos());
+//
+//    _player[~t[1] - 1].dec_res(~t[2]);
+//    _map[v.getX() + v.getY() * _size.getX()].inc_res(~t[2]);
   }
 
   void Client::_pgt(std::vector<std::string> const &t)
   {
     if (t.size() != 3)
       return ;
-    Vector3d v(_player[~t[1] - 1].get_pos());
-    //throwing
-    _player[~t[1] - 1].inc_res(~t[2]);
-    _map[v.getX() + v.getY() * _size.getX()].dec_res(~t[2]);
+    int 	num;
+
+    num = ~t[1] - 1;
+    Vector3d v(_player[num].get_pos());
+//    _player[num].inc_res(~t[2]);
+//    _map[v.getX() + v.getY() * _size.getX()].dec_res(~t[2]);
+    _player[num].set_idAnimation(-1);
+    _lib.taking(_player[num].get_id());
   }
 
   void Client::_pdi(std::vector<std::string> const &t)
   {
-    //starving
     if (t.size() != 2)
       return ;
-    Vector3d v(_player[~t[1] - 1].get_pos());
+    int 	num;
 
-    _player[~t[1] - 1].die();
-    _map[v.getX() + v.getY() * _size.getX()].del_player(~t[1]);
+    num = ~t[1] - 1;
+    Vector3d v(_player[num].get_pos());
+    _player[num].die();
+    _map[v.getX() + v.getY() * _size.getX()].del_player(num + 1);
+    _lib.dying(_player[num].get_id());
   }
 
   void Client::_enw(std::vector<std::string> const &t)
   {
     if (t.size() != 5)
       return ;
-    _Eggs.push_back(Eggs({~t[3], ~t[4]}, ~t[2]));
-    _player[~t[2]].set_lay(false);
+    int num = ~t[2] - 1;
+    int id = _player[num].get_id();
+
+    _lib.idle(id);
+    _player[num].set_lay(false);
+    int idEggs = _lib.addEggsNode(_lib.getPos(id));
+    _Eggs.emplace_back(Eggs({~t[3], ~t[4]}, ~t[2], ~t[1], idEggs));
   }
 
   void Client::_eht(std::vector<std::string> const &t)
   {
     if (t.size() != 2)
       return ;
-    _Eggs[~t[1]].eclosion();
+    int 	num = ~t[1] - 1;
+
+    _Eggs[num].eclosion();
+    _lib.addRotateAnimation(_Eggs[num].get_id());
   }
 
   void Client::_ebo(std::vector<std::string> const &t)
   {
     if (t.size() != 2)
       return ;
-    _Eggs[~t[1]].die();
+    _Eggs[~t[1] - 1].die();
   }
 
   void Client::_edi(std::vector<std::string> const &t)
   {
     if (t.size() != 2)
       return ;
-    _Eggs[~t[1]].die();
+    _Eggs[~t[1] - 1].die();
   }
 
   void Client::_sgt(std::vector<std::string> const &t)
@@ -323,12 +340,14 @@ namespace 		Client
 
     for (auto &i : _player)
       {
-	if (!i.is_alive() && i.get_id() != 0)
+	if (i.is_alive() == Character::STATE::DEAD && i.get_id() != 0)
 	  {
 	    _lib.delNode(i.get_id());
 	    i.set_id(0);
 	  }
-	if ((j = i.get_idAnimation()) != 0 && _lib.isAnimationEnd(j))
+	if (i.is_alive() == Character::STATE::DYING && _lib.isAnimationEnd2(i.get_id()))
+	  i.set_alive(Character::STATE::DEAD);
+	if ((j = i.get_idAnimation()) > 0 && _lib.isAnimationEnd(j) || (j == -1 && _lib.isAnimationEnd2(i.get_id())))
 	  {
 	    _lib.idle(i.get_id());
 	    i.set_idAnimation(0);

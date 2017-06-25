@@ -184,8 +184,8 @@ namespace 	Client
   void GraphicalLib::laying(int id)
   {
     _node[id]->setLoopMode(false);
-    _node[id]->setFrameLoop(83, 88);
-    _node[id]->setAnimationSpeed(8);
+    _node[id]->setFrameLoop(118, 122);
+    _node[id]->setAnimationSpeed(7);
   }
 
   void GraphicalLib::taking(int id)
@@ -200,6 +200,13 @@ namespace 	Client
     _node[id]->setLoopMode(false);
     _node[id]->setFrameLoop(173, 181);
     _node[id]->setAnimationSpeed(3);
+  }
+
+  void GraphicalLib::uping(int id)
+  {
+    _node[id]->setLoopMode(false);
+    _node[id]->setFrameLoop(145, 157);
+    _node[id]->setAnimationSpeed(5);
   }
 
 }

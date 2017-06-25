@@ -116,10 +116,11 @@ namespace 		Client
       return;
     Block &b = _map.at(~t[1] + _size.getX() * ~t[2]);
     resLvl = b.set_res(t);
-    std::cerr << resLvl << std::endl;
-    _lib.addNode({~t[1], ~t[2]}, GraphicalLib::MESH::rock, GraphicalLib::TEXT::rock, (irr::f32)resLvl, 1);
+    Vector3d v(~t[1], ~t[2]);
+
+    _lib.addNode(v, GraphicalLib::MESH::rock, GraphicalLib::TEXT::rock, (irr::f32)resLvl, 1);
     if (b.get_idRes() == 0 && resLvl > 0)
-      b.set_idRes(_lib.addNode({~t[1], ~t[2]}, GraphicalLib::MESH::minerals,
+      b.set_idRes(_lib.addNode(v, GraphicalLib::MESH::minerals,
 			       genRandType(GraphicalLib::TEXT::minerals1, GraphicalLib::TEXT::minerals2),
 			       (irr::f32)resLvl, 1));
     else if (resLvl == 0 && b.get_idRes() != 0)
@@ -153,27 +154,28 @@ namespace 		Client
   {
     if (t.size() != 3)
       return ;
-    int 	id;
+    int 	num = ~t[1] - 1;
+    int 	id = _player[num].get_id();
 
-    //set animation
-    std::cerr << "Plv Function" << std::endl;
-    _player[~t[1] - 1].set_level(~t[2]);
-    id = _player[~t[1] - 1].get_id();
-    _lib.set_scale(0.7f + (irr::f32)_player[~t[1] - 1].get_level() / 20, id);
+    _player[num].set_level(~t[2]);
+    _lib.set_scale(0.7f + (irr::f32)_player[num].get_level() / 20, id);
+    _player[num].set_idAnimation(-1);
+    _lib.uping(id);
   }
 
   void Client::_pin(std::vector<std::string> const &t)
   {
     if (t.size() != 11)
       return ;
-    Vector3d v(_player[~t[1] - 1].get_pos());
+    int 	num = ~t[1] - 1;
+    Vector3d v(_player[num].get_pos());
     Vector3d v2(~t[2], ~t[3]);
 
     std::cerr << "Pin Function" << std::endl;
-    _map[v.getX() + v.getY() * _size.getX()].del_player(~t[1]);
-    _map[v2.getX() + v2.getY() * _size.getX()].add_player(~t[1]);
-    _player[~t[1] - 1].set_pos({~t[2], ~t[3]});
-    _player[~t[1] - 1].set_res(t);
+    _map[v.getX() + v.getY() * _size.getX()].del_player(num + 1);
+    _map[v2.getX() + v2.getY() * _size.getX()].add_player(num + 1);
+    _player[num].set_pos(v2);
+    _player[num].set_res(t);
   }
 
   void Client::_pex(std::vector<std::string> const &t)
@@ -237,11 +239,12 @@ namespace 		Client
   {
     if (t.size() != 3)
       return ;
-    //throwing
-//    Vector3d v(_player[~t[1] - 1].get_pos());
-//
-//    _player[~t[1] - 1].dec_res(~t[2]);
-//    _map[v.getX() + v.getY() * _size.getX()].inc_res(~t[2]);
+    int 	num;
+
+    num = ~t[1] - 1;
+    Vector3d v(_player[num].get_pos());
+    _player[num].set_idAnimation(-1);
+    _lib.taking(_player[num].get_id());
   }
 
   void Client::_pgt(std::vector<std::string> const &t)
@@ -252,8 +255,6 @@ namespace 		Client
 
     num = ~t[1] - 1;
     Vector3d v(_player[num].get_pos());
-//    _player[num].inc_res(~t[2]);
-//    _map[v.getX() + v.getY() * _size.getX()].dec_res(~t[2]);
     _player[num].set_idAnimation(-1);
     _lib.taking(_player[num].get_id());
   }
@@ -298,14 +299,22 @@ namespace 		Client
   {
     if (t.size() != 2)
       return ;
-    _Eggs[~t[1] - 1].die();
+    int 	num = ~t[1] - 1;
+
+    _lib.delNode(_Eggs[num].get_id());
+    _Eggs[num].set_id(0);
+    _Eggs[num].die();
   }
 
   void Client::_edi(std::vector<std::string> const &t)
   {
     if (t.size() != 2)
       return ;
-    _Eggs[~t[1] - 1].die();
+    int 	num = ~t[1] - 1;
+
+    _lib.delNode(_Eggs[num].get_id());
+    _Eggs[num].set_id(0);
+    _Eggs[num].die();
   }
 
   void Client::_sgt(std::vector<std::string> const &t)
@@ -363,7 +372,6 @@ namespace 		Client
 	  }
       }
     _lib.update();
-
   }
 
   int operator~(std::string const &t)

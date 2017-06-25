@@ -60,6 +60,7 @@ namespace  Client
     void			laying(int id);
     void			taking(int id);
     void			dying(int id);
+    void			uping(int id);
 
    private:
     irr::IrrlichtDevice				*_device;

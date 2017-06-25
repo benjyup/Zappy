@@ -22,7 +22,7 @@ namespace 	Client
     _text[TEXT::rock] = _driver->getTexture("./GFX/graytext.png");
     _mesh[MESH::character] = _smgr->getMesh("./GFX/Models/ninja.b3d");
     _mesh[MESH::eggs] = _smgr->getMesh("./GFX/Models/eggs.obj");
-    _text[TEXT::grass] = _driver->getTexture("./GFX/groundGrass.png");
+    _text[TEXT::grass] = _driver->getTexture("./GFX/sandtext.jpg");
     _text[TEXT::eggs1] = _driver->getTexture("./GFX/redtext.png");
     irr::core::stringw wStr("fdp");
     this->_device->setWindowCaption(wStr.c_str());

@@ -21,7 +21,9 @@ namespace 	Client
     _mesh[MESH::rock] = _smgr->getMesh("./GFX/Models/socle.obj");
     _text[TEXT::rock] = _driver->getTexture("./GFX/graytext.png");
     _mesh[MESH::character] = _smgr->getMesh("./GFX/Models/ninja.b3d");
+    _mesh[MESH::eggs] = _smgr->getMesh("./GFX/Models/eggs.obj");
     _text[TEXT::grass] = _driver->getTexture("./GFX/groundGrass.png");
+    _text[TEXT::eggs1] = _driver->getTexture("./GFX/redtext.png");
     irr::core::stringw wStr("fdp");
     this->_device->setWindowCaption(wStr.c_str());
     this->_device->getCursorControl()->setVisible(true);
@@ -94,6 +96,18 @@ namespace 	Client
     return _id - 1;
   }
 
+  int GraphicalLib::addEggsNode(irr::core::vector3df const &pos)
+  {
+    _node[_id] = _smgr->addAnimatedMeshSceneNode(_mesh[MESH::eggs]);
+    _node[_id]->setPosition(pos);
+    _node[_id]->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+    _node[_id]->setScale({1, 1, 1});
+    _node[_id]->setMaterialTexture(0, _text[TEXT::eggs1]);
+    //charger la texure;
+    _id++;
+    return _id - 1;
+  }
+
   void GraphicalLib::delNode(int id)
   {
     if (_node[id] == nullptr)
@@ -148,6 +162,17 @@ namespace 	Client
     return (_idAnims - 1);
   }
 
+  void GraphicalLib::addRotateAnimation(int id)
+  {
+    irr::core::vector3df	v;
+
+    irr::scene::ISceneNodeAnimator *anim = _smgr->createRotationAnimator({0, 1, 0});
+    _node[id]->addAnimator(anim);
+    v = _node[id]->getPosition();
+    _node[id]->setPosition({v.X, v.Y + 0.5f, v.Z});
+    anim->drop();
+  }
+
   bool GraphicalLib::isAnimationEnd(int id)
   {
     if (_anims[id]->hasFinished())
@@ -159,15 +184,51 @@ namespace 	Client
     return false;
   }
 
+  bool GraphicalLib::isAnimationEnd2(int id)
+  {
+    return _node[id]->getFrameNr() >= _node[id]->getEndFrame();
+  }
+
   void GraphicalLib::idle(int id)
   {
+    _node[id]->setLoopMode(true);
     _node[id]->setFrameLoop(204, 249);
     _node[id]->setAnimationSpeed(10);
   }
 
   void GraphicalLib::incantating(int id)
   {
+    _node[id]->setLoopMode(true);
     _node[id]->setFrameLoop(59, 67);
     _node[id]->setAnimationSpeed(10);
   }
+
+  void GraphicalLib::laying(int id)
+  {
+    _node[id]->setLoopMode(false);
+    _node[id]->setFrameLoop(118, 122);
+    _node[id]->setAnimationSpeed(7);
+  }
+
+  void GraphicalLib::taking(int id)
+  {
+    _node[id]->setLoopMode(false);
+    _node[id]->setFrameLoop(83, 92);
+    _node[id]->setAnimationSpeed(6);
+  }
+
+  void GraphicalLib::dying(int id)
+  {
+    _node[id]->setLoopMode(false);
+    _node[id]->setFrameLoop(173, 181);
+    _node[id]->setAnimationSpeed(3);
+  }
+
+  void GraphicalLib::uping(int id)
+  {
+    _node[id]->setLoopMode(false);
+    _node[id]->setFrameLoop(145, 157);
+    _node[id]->setAnimationSpeed(5);
+  }
+
 }

@@ -20,6 +20,7 @@ namespace  Client
       block = 0,
       minerals,
       character,
+      eggs,
       rock
     };
 
@@ -27,6 +28,7 @@ namespace  Client
     {
       none = 0,
       grass,
+      eggs1,
       minerals1,
       minerals2,
       minerals3,
@@ -38,18 +40,27 @@ namespace  Client
 
     int		addNode(Vector3d const &pos, MESH mesh, TEXT, irr::f32 scale, int alt);
     int		addCharacterNode(irr::core::vector3df const &pos, TEXT, irr::f32 scale, int dir);
+    int 	addEggsNode(irr::core::vector3df const &pos);
+
     void	delNode(int id);
     void	update();
-    bool 	is_running() const;
     void	set_scale(irr::f32 scale, int id);
     bool 	isAnimationEnd(int id);
+    bool 	isAnimationEnd2(int id);
 
+    bool 	is_running() const;
     irr::core::vector3df const &getPos(int id);
     irr::core::vector3df const	&getScale(int id);
+    int addFlyStraightAnimator(int id, irr::core::vector3df const &from,
+			       irr::core::vector3df const &to, int speed, int dir);
+    void	 addRotateAnimation(int id);
+
     void			idle(int id);
     void			incantating(int id);
-    int addFlyStraightAnimator(int id, irr::core::vector3df const &from,
-							   irr::core::vector3df const &to, int speed, int dir);
+    void			laying(int id);
+    void			taking(int id);
+    void			dying(int id);
+    void			uping(int id);
 
     void set_text2(const irr::core::stringw &_text2);
 

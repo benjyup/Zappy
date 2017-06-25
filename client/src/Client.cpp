@@ -126,10 +126,11 @@ namespace 		Client
       return;
     Block &b = _map.at(~t[1] + _size.getX() * ~t[2]);
     resLvl = b.set_res(t);
-    std::cerr << resLvl << std::endl;
-    _lib.addNode({~t[1], ~t[2]}, GraphicalLib::MESH::rock, GraphicalLib::TEXT::rock, (irr::f32)resLvl, 1);
+    Vector3d v(~t[1], ~t[2]);
+
+    _lib.addNode(v, GraphicalLib::MESH::rock, GraphicalLib::TEXT::rock, (irr::f32)resLvl, 1);
     if (b.get_idRes() == 0 && resLvl > 0)
-      b.set_idRes(_lib.addNode({~t[1], ~t[2]}, GraphicalLib::MESH::minerals,
+      b.set_idRes(_lib.addNode(v, GraphicalLib::MESH::minerals,
 			       genRandType(GraphicalLib::TEXT::minerals1, GraphicalLib::TEXT::minerals2),
 			       (irr::f32)resLvl, 1));
     else if (resLvl == 0 && b.get_idRes() != 0)
@@ -173,12 +174,13 @@ namespace 		Client
   {
     if (t.size() != 3)
       return ;
-    int 	id;
+    int 	num = ~t[1] - 1;
+    int 	id = _player[num].get_id();
 
-    std::cerr << "Plv Function" << std::endl;
-    _player[~t[1] - 1].set_level(~t[2]);
-    id = _player[~t[1] - 1].get_id();
-    _lib.set_scale(0.7f + (irr::f32)_player[~t[1] - 1].get_level() / 20, id);
+    _player[num].set_level(~t[2]);
+    _lib.set_scale(0.7f + (irr::f32)_player[num].get_level() / 20, id);
+    _player[num].set_idAnimation(-1);
+    _lib.uping(id);
     _lib.set_text2("\nLe joueur : " );
     _lib.set_text2(t[1].c_str());
     _lib.set_text2(" est niveau ");
@@ -189,14 +191,15 @@ namespace 		Client
   {
     if (t.size() != 11)
       return ;
-    Vector3d v(_player[~t[1] - 1].get_pos());
+    int 	num = ~t[1] - 1;
+    Vector3d v(_player[num].get_pos());
     Vector3d v2(~t[2], ~t[3]);
 
     std::cerr << "Pin Function" << std::endl;
-    _map[v.getX() + v.getY() * _size.getX()].del_player(~t[1]);
-    _map[v2.getX() + v2.getY() * _size.getX()].add_player(~t[1]);
-    _player[~t[1] - 1].set_pos({~t[2], ~t[3]});
-    _player[~t[1] - 1].set_res(t);
+    _map[v.getX() + v.getY() * _size.getX()].del_player(num + 1);
+    _map[v2.getX() + v2.getY() * _size.getX()].add_player(num + 1);
+    _player[num].set_pos(v2);
+    _player[num].set_res(t);
   }
 
   void Client::_pex(std::vector<std::string> const &t)
@@ -261,7 +264,9 @@ namespace 		Client
   {
     if (t.size() != 2)
       return ;
-    _player[~t[1] - 1].set_lay(true);
+    int num = ~t[1] - 1;
+    _player[num].set_lay(true);
+    _lib.laying(_player[num].get_id());
     _lib.set_text2("\nLe joueur : " );
     _lib.set_text2(t[1].c_str());
     _lib.set_text2(" pond un oeuf! ");
@@ -271,11 +276,12 @@ namespace 		Client
   {
     if (t.size() != 3)
       return ;
-    //throwing
-    Vector3d v(_player[~t[1] - 1].get_pos());
+    int 	num;
 
-    _player[~t[1] - 1].dec_res(~t[2]);
-    _map[v.getX() + v.getY() * _size.getX()].inc_res(~t[2]);
+    num = ~t[1] - 1;
+    Vector3d v(_player[num].get_pos());
+    _player[num].set_idAnimation(-1);
+    _lib.taking(_player[num].get_id());
     _lib.set_text2("\nLe joueur : " );
     _lib.set_text2(t[1].c_str());
     _lib.set_text2(" jette une ressource ");
@@ -286,10 +292,12 @@ namespace 		Client
   {
     if (t.size() != 3)
       return ;
-    Vector3d v(_player[~t[1] - 1].get_pos());
-    //throwing
-    _player[~t[1] - 1].inc_res(~t[2]);
-    _map[v.getX() + v.getY() * _size.getX()].dec_res(~t[2]);
+    int 	num;
+
+    num = ~t[1] - 1;
+    Vector3d v(_player[num].get_pos());
+    _player[num].set_idAnimation(-1);
+    _lib.taking(_player[num].get_id());
     _lib.set_text2("\nLe joueur : " );
     _lib.set_text2(t[1].c_str());
     _lib.set_text2(" ramasse une ressource ");
@@ -298,13 +306,15 @@ namespace 		Client
 
   void Client::_pdi(std::vector<std::string> const &t)
   {
-    //starving
     if (t.size() != 2)
       return ;
-    Vector3d v(_player[~t[1] - 1].get_pos());
+    int 	num;
 
-    _player[~t[1] - 1].die();
-    _map[v.getX() + v.getY() * _size.getX()].del_player(~t[1]);
+    num = ~t[1] - 1;
+    Vector3d v(_player[num].get_pos());
+    _player[num].die();
+    _map[v.getX() + v.getY() * _size.getX()].del_player(num + 1);
+    _lib.dying(_player[num].get_id());
     _lib.set_text2("\nLe joueur : " );
     _lib.set_text2(t[1].c_str());
     _lib.set_text2(" est mort de faim...");
@@ -314,8 +324,13 @@ namespace 		Client
   {
     if (t.size() != 5)
       return ;
-    _Eggs.push_back(Eggs({~t[3], ~t[4]}, ~t[2]));
-    _player[~t[2]].set_lay(false);
+    int num = ~t[2] - 1;
+    int id = _player[num].get_id();
+
+    _lib.idle(id);
+    _player[num].set_lay(false);
+    int idEggs = _lib.addEggsNode(_lib.getPos(id));
+    _Eggs.emplace_back(Eggs({~t[3], ~t[4]}, ~t[2], ~t[1], idEggs));
     _lib.set_text2("\nL\'oeuf " );
     _lib.set_text2(t[1].c_str());
     _lib.set_text2(" est pondu en position ");
@@ -328,7 +343,10 @@ namespace 		Client
   {
     if (t.size() != 2)
       return ;
-    _Eggs[~t[1]].eclosion();
+    int 	num = ~t[1] - 1;
+
+    _Eggs[num].eclosion();
+    _lib.addRotateAnimation(_Eggs[num].get_id());
     _lib.set_text2("\nL\'oeuf " );
     _lib.set_text2(t[1].c_str());
     _lib.set_text2(" a éclos! ");
@@ -338,7 +356,11 @@ namespace 		Client
   {
     if (t.size() != 2)
       return ;
-    _Eggs[~t[1]].die();
+    int 	num = ~t[1] - 1;
+
+    _lib.delNode(_Eggs[num].get_id());
+    _Eggs[num].set_id(0);
+    _Eggs[num].die();
     _lib.set_text2("\nL\'oeuf " );
     _lib.set_text2(t[1].c_str());
     _lib.set_text2(" donne naissance à un nouveau joueur!");
@@ -348,7 +370,11 @@ namespace 		Client
   {
     if (t.size() != 2)
       return ;
-    _Eggs[~t[1]].die();
+    int 	num = ~t[1] - 1;
+
+    _lib.delNode(_Eggs[num].get_id());
+    _Eggs[num].set_id(0);
+    _Eggs[num].die();
     _lib.set_text2("\nL\'oeuf " );
     _lib.set_text2(t[1].c_str());
     _lib.set_text2(" est mort de faim...");
@@ -399,19 +425,20 @@ namespace 		Client
 
     for (auto &i : _player)
       {
-	if (!i.is_alive() && i.get_id() != 0)
+	if (i.is_alive() == Character::STATE::DEAD && i.get_id() != 0)
 	  {
 	    _lib.delNode(i.get_id());
 	    i.set_id(0);
 	  }
-	if ((j = i.get_idAnimation()) != 0 && _lib.isAnimationEnd(j))
+	if (i.is_alive() == Character::STATE::DYING && _lib.isAnimationEnd2(i.get_id()))
+	  i.set_alive(Character::STATE::DEAD);
+	if ((j = i.get_idAnimation()) > 0 && _lib.isAnimationEnd(j) || (j == -1 && _lib.isAnimationEnd2(i.get_id())))
 	  {
 	    _lib.idle(i.get_id());
 	    i.set_idAnimation(0);
 	  }
       }
     _lib.update();
-
   }
 
   int operator~(std::string const &t)

@@ -28,24 +28,18 @@ namespace 	Client
     this->_smgr->addCameraSceneNodeFPS();
     _smgr->addSkyDomeSceneNode(_driver->getTexture("./GFX/sky.jpg"), 16, 16, 1.0f, 1.0f);
     _smgr->addSkyDomeSceneNode(_driver->getTexture("./GFX/desert.jpg"), 16, 16, 1.0f, 1.0f)->setRotation({0, 0, -180});
-    //Add light so we can see the nice water
     _smgr->setAmbientLight(irr::video::SColorf(0.7,0.7,0.7,1));
-
-    //Create mesh to add water effect to
-    irr::scene::IAnimatedMesh* plane = _smgr->addHillPlaneMesh("plane", // Name of mesh
-							irr::core::dimension2d<irr::f32>(20,20), //	Size of a tile of the mesh. (10.0f, 10.0f) would be a good value to start, for example.
-							irr::core::dimension2d<irr::u32>(200,200), 0, 0, // 	Specifies how much tiles there will be. If you specifiy for example that a tile has the size (10.0f, 10.0f) and the tileCount is (10,10), than you get a field of 100 tiles which has the dimension 100.0fx100.0f.
-							irr::core::dimension2d<irr::f32>(0,0), //material
-							irr::core::dimension2d<irr::f32>(60,60)); //countHills
-
-    //mesh, waveheight = 0.5f, wave speed = 350.0f, wave length = 80.0f
+    irr::scene::IAnimatedMesh* plane = _smgr->addHillPlaneMesh("plane",
+							irr::core::dimension2d<irr::f32>(20,20),
+							irr::core::dimension2d<irr::u32>(200,200), 0, 0,
+							irr::core::dimension2d<irr::f32>(0,0),
+							irr::core::dimension2d<irr::f32>(60,60));
     irr::scene::ISceneNode* sea = _smgr->addWaterSurfaceSceneNode(plane->getMesh(0), 5.0f, 300.0f, 40.0f);
     sea->setMaterialTexture(0, _driver->getTexture("./GFX/stones.jpg"));
     sea->setPosition({0 + (Client::SCALE * 10 / 2), 0, 0 + (Client::SCALE * 10 / 2)});
     sea->setMaterialTexture(1, _driver->getTexture("./GFX/water.jpg"));
     sea->setMaterialFlag(irr::video::EMF_LIGHTING, true);
     sea->setMaterialType(irr::video::EMT_REFLECTION_2_LAYER);
-
   }
 
   GraphicalLib::~GraphicalLib()

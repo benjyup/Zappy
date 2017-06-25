@@ -35,10 +35,10 @@ namespace 	Client
 							irr::core::dimension2d<irr::f32>(20,20),
 							irr::core::dimension2d<irr::u32>(200,200), 0, 0,
 							irr::core::dimension2d<irr::f32>(0,0),
-							irr::core::dimension2d<irr::f32>(60,60));
+							irr::core::dimension2d<irr::f32>(100,100));
     irr::scene::ISceneNode* sea = _smgr->addWaterSurfaceSceneNode(plane->getMesh(0), 5.0f, 300.0f, 40.0f);
     sea->setMaterialTexture(0, _driver->getTexture("./GFX/stones.jpg"));
-    sea->setPosition({0 + (Client::SCALE * 10 / 2), 0, 0 + (Client::SCALE * 10 / 2)});
+    sea->setPosition({0 + (Client::SCALE * 10 / 2), 5, 0 + (Client::SCALE * 10 / 2)});
     sea->setMaterialTexture(1, _driver->getTexture("./GFX/water.jpg"));
     sea->setMaterialFlag(irr::video::EMF_LIGHTING, true);
     sea->setMaterialType(irr::video::EMT_REFLECTION_2_LAYER);
@@ -54,9 +54,10 @@ namespace 	Client
     _driver->makeColorKeyTexture(_images, irr::core::position2d<irr::s32>(0,0));
   }
 
-  void GraphicalLib::set_text2(const irr::core::stringw &_text2)
+  void GraphicalLib::set_text2(const irr::core::stringw &_text2, bool newLine)
   {
-    _y -= _size.Height;
+    if (newLine)
+      _y -= _size.Height;
     GraphicalLib::_text2 += _text2;
   }
 
@@ -122,7 +123,7 @@ namespace 	Client
     this->_driver->beginScene();
     _smgr->drawAll();
     _driver->draw2DImage(_images, irr::core::position2d<irr::s32>(5, 0),
-			irr::core::rect<irr::s32>(0,0,342,165), 0,
+			irr::core::rect<irr::s32>(0,0,342,215), 0,
 			irr::video::SColor(100,255,255,255), false);
     _font->draw(_text2, irr::core::rect<irr::s32>(20, _y, (20 + _size.Width),(668 + _size.Height)),
 		irr::video::SColor(255,255,255,255));

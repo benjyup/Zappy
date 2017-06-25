@@ -62,7 +62,7 @@ namespace  Client
     void			dying(int id);
     void			uping(int id);
 
-    void set_text2(const irr::core::stringw &_text2);
+    void set_text2(const irr::core::stringw &_text2, bool newLine);
 
    private:
     irr::IrrlichtDevice				*_device;

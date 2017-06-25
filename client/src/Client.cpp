@@ -82,6 +82,10 @@ namespace 		Client
       return;
     _size.setX(std::atoi(t[1].c_str()));
     _size.setY(std::atoi(t[2].c_str()));
+    _lib.set_text2("\nMap generee de la taille : " );
+    _lib.set_text2(t[1].c_str());
+    _lib.set_text2("x");
+    _lib.set_text2(t[2].c_str());
   }
 
   void Client::_ppo(const std::vector<std::string> &t)
@@ -100,6 +104,12 @@ namespace 		Client
 	_player[num].set_pos(v);
 	_player[num].set_dir((Character::DIR) ~t[4]);
       }
+    _lib.set_text2("\nLe joueur : " );
+    _lib.set_text2(t[1].c_str());
+    _lib.set_text2(" est à la position : ");
+    _lib.set_text2(t[2].c_str());
+    _lib.set_text2(" ");
+    _lib.set_text2(t[3].c_str());
   }
 
   GraphicalLib::TEXT	Client::genRandType(GraphicalLib::TEXT min, GraphicalLib::TEXT max)
@@ -129,6 +139,10 @@ namespace 		Client
 	}
       else if (_lib.getScale(b.get_idRes()).X != resLvl)
 	  _lib.set_scale((irr::f32)resLvl, b.get_idRes());
+    _lib.set_text2("\nUn Minerai vient d\'apparaitre en : " );
+    _lib.set_text2(t[1].c_str());
+    _lib.set_text2(" ");
+    _lib.set_text2(t[2].c_str());
   }
 
   void Client::_tna(const std::vector<std::string> &t)
@@ -147,6 +161,12 @@ namespace 		Client
     _player.emplace_back(Character(~t[1], v,  (Character::DIR)~t[4], ~t[5], t[6],
 				   _lib.addCharacterNode(_map[v.getX() + v.getY() * _size.getX()].getSpacePos(), GraphicalLib::TEXT::none, 0.7f, ~t[4])));
     _map[v.getX() + v.getY() * _size.getX()].add_player(~t[1]);
+    _lib.set_text2("\nUn nouveau joueur : " );
+    _lib.set_text2(t[1].c_str());
+    _lib.set_text2(" apparait en ");
+    _lib.set_text2(t[2].c_str());
+    _lib.set_text2(" ");
+    _lib.set_text2(t[3].c_str());
   }
 
   void Client::_plv(std::vector<std::string> const &t)
@@ -159,6 +179,10 @@ namespace 		Client
     _player[~t[1] - 1].set_level(~t[2]);
     id = _player[~t[1] - 1].get_id();
     _lib.set_scale(0.7f + (irr::f32)_player[~t[1] - 1].get_level() / 20, id);
+    _lib.set_text2("\nLe joueur : " );
+    _lib.set_text2(t[1].c_str());
+    _lib.set_text2(" est niveau ");
+    _lib.set_text2(t[2].c_str());
   }
 
   void Client::_pin(std::vector<std::string> const &t)
@@ -180,6 +204,9 @@ namespace 		Client
     if (t.size() != 2)
       return ;
     _player[~t[1] - 1].die();
+    _lib.set_text2("\nLe joueur : " );
+    _lib.set_text2(t[1].c_str());
+    _lib.set_text2(" s\'en va");
   }
 
   void Client::_pbc(std::vector<std::string> const &t)
@@ -187,6 +214,10 @@ namespace 		Client
     if (t.size() <= 2)
       return ;
     //broadcasting
+    _lib.set_text2("\nLe joueur : " );
+    _lib.set_text2(t[1].c_str());
+    _lib.set_text2(" dit a tout le monde ");
+    _lib.set_text2(t[2].c_str());
   }
 
   void Client::_pic(std::vector<std::string> const &t)
@@ -205,6 +236,9 @@ namespace 		Client
 	  }
 	j++;
       }
+    _lib.set_text2("\nLe joueur : " );
+    _lib.set_text2(t[4].c_str());
+    _lib.set_text2(" lance une incantation ");
   }
 
   void Client::_pie(std::vector<std::string> const &t)
@@ -228,6 +262,9 @@ namespace 		Client
     if (t.size() != 2)
       return ;
     _player[~t[1] - 1].set_lay(true);
+    _lib.set_text2("\nLe joueur : " );
+    _lib.set_text2(t[1].c_str());
+    _lib.set_text2(" pond un oeuf! ");
   }
 
   void Client::_pdr(std::vector<std::string> const &t)
@@ -239,6 +276,10 @@ namespace 		Client
 
     _player[~t[1] - 1].dec_res(~t[2]);
     _map[v.getX() + v.getY() * _size.getX()].inc_res(~t[2]);
+    _lib.set_text2("\nLe joueur : " );
+    _lib.set_text2(t[1].c_str());
+    _lib.set_text2(" jette une ressource ");
+    _lib.set_text2(t[2].c_str());
   }
 
   void Client::_pgt(std::vector<std::string> const &t)
@@ -249,6 +290,10 @@ namespace 		Client
     //throwing
     _player[~t[1] - 1].inc_res(~t[2]);
     _map[v.getX() + v.getY() * _size.getX()].dec_res(~t[2]);
+    _lib.set_text2("\nLe joueur : " );
+    _lib.set_text2(t[1].c_str());
+    _lib.set_text2(" ramasse une ressource ");
+    _lib.set_text2(t[2].c_str());
   }
 
   void Client::_pdi(std::vector<std::string> const &t)
@@ -260,6 +305,9 @@ namespace 		Client
 
     _player[~t[1] - 1].die();
     _map[v.getX() + v.getY() * _size.getX()].del_player(~t[1]);
+    _lib.set_text2("\nLe joueur : " );
+    _lib.set_text2(t[1].c_str());
+    _lib.set_text2(" est mort de faim...");
   }
 
   void Client::_enw(std::vector<std::string> const &t)
@@ -268,6 +316,12 @@ namespace 		Client
       return ;
     _Eggs.push_back(Eggs({~t[3], ~t[4]}, ~t[2]));
     _player[~t[2]].set_lay(false);
+    _lib.set_text2("\nL\'oeuf " );
+    _lib.set_text2(t[1].c_str());
+    _lib.set_text2(" est pondu en position ");
+    _lib.set_text2(t[3].c_str());
+    _lib.set_text2(" ");
+    _lib.set_text2(t[4].c_str());
   }
 
   void Client::_eht(std::vector<std::string> const &t)
@@ -275,6 +329,9 @@ namespace 		Client
     if (t.size() != 2)
       return ;
     _Eggs[~t[1]].eclosion();
+    _lib.set_text2("\nL\'oeuf " );
+    _lib.set_text2(t[1].c_str());
+    _lib.set_text2(" a éclos! ");
   }
 
   void Client::_ebo(std::vector<std::string> const &t)
@@ -282,6 +339,9 @@ namespace 		Client
     if (t.size() != 2)
       return ;
     _Eggs[~t[1]].die();
+    _lib.set_text2("\nL\'oeuf " );
+    _lib.set_text2(t[1].c_str());
+    _lib.set_text2(" donne naissance à un nouveau joueur!");
   }
 
   void Client::_edi(std::vector<std::string> const &t)
@@ -289,6 +349,9 @@ namespace 		Client
     if (t.size() != 2)
       return ;
     _Eggs[~t[1]].die();
+    _lib.set_text2("\nL\'oeuf " );
+    _lib.set_text2(t[1].c_str());
+    _lib.set_text2(" est mort de faim...");
   }
 
   void Client::_sgt(std::vector<std::string> const &t)
@@ -296,6 +359,8 @@ namespace 		Client
     if (t.size() != 2)
       return ;
     _sgtt = ~t[1];
+    _lib.set_text2("\nL\'unite de temps est de " );
+    _lib.set_text2(t[1].c_str());
   }
 
   void Client::_seg(std::vector<std::string> const &t)
@@ -304,6 +369,8 @@ namespace 		Client
       return ;
     _running = false;
     _winner = t[1];
+    _lib.set_text2("\nPartie terminee ! L'equipe gagnante est " );
+    _lib.set_text2(t[1].c_str());
   }
 
   bool Client::is_running() const

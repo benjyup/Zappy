@@ -51,6 +51,8 @@ namespace  Client
     int addFlyStraightAnimator(int id, irr::core::vector3df const &from,
 							   irr::core::vector3df const &to, int speed, int dir);
 
+    void set_text2(const irr::core::stringw &_text2);
+
    private:
     irr::IrrlichtDevice				*_device;
     irr::scene::ISceneManager			*_smgr;
@@ -63,6 +65,12 @@ namespace  Client
     int 						_id;
     std::unordered_map<int, irr::scene::ISceneNodeAnimator *>		_anims;
     int 								_idAnims;
+    irr::gui::IGUIEnvironment                   *_gui;
+    irr::gui::IGUIFont                          *_font;
+    irr::core::dimension2d<irr::u32>		_size;
+    irr::core::stringw				_text2;
+    irr::s32 					_y;
+    irr::video::ITexture			*_images;
   };
 }
 

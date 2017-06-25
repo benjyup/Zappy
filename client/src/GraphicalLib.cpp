@@ -7,7 +7,7 @@
 
 namespace 	Client
 {
-  GraphicalLib::GraphicalLib() : _id(0), _idAnims(1)
+  GraphicalLib::GraphicalLib() : _id(0), _idAnims(1), _y(200)
   {
     this->_device = irr::createDevice(irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(1900, 1000));
     this->_driver = this->_device->getVideoDriver();
@@ -40,6 +40,22 @@ namespace 	Client
     sea->setMaterialTexture(1, _driver->getTexture("./GFX/water.jpg"));
     sea->setMaterialFlag(irr::video::EMF_LIGHTING, true);
     sea->setMaterialType(irr::video::EMT_REFLECTION_2_LAYER);
+    this->_gui = this->_device->getGUIEnvironment();;
+    if (_gui != NULL)
+      this->_font = _gui->getFont("./GFX/font_space.bmp");
+    _size = _font->getDimension(L"Test Text");
+    _text2 = "Bienvenue sur le mode Spectateur !";
+
+    _driver->getMaterial2D().TextureLayer[0].BilinearFilter=true;
+    _driver->getMaterial2D().AntiAliasing = irr::video::EAAM_FULL_BASIC;
+    _images = _driver->getTexture("./GFX/prompt.png");
+    _driver->makeColorKeyTexture(_images, irr::core::position2d<irr::s32>(0,0));
+  }
+
+  void GraphicalLib::set_text2(const irr::core::stringw &_text2)
+  {
+    _y -= _size.Height;
+    GraphicalLib::_text2 += _text2;
   }
 
   GraphicalLib::~GraphicalLib()
@@ -91,6 +107,12 @@ namespace 	Client
   {
     this->_driver->beginScene();
     _smgr->drawAll();
+    _driver->draw2DImage(_images, irr::core::position2d<irr::s32>(5, 0),
+			irr::core::rect<irr::s32>(0,0,342,165), 0,
+			irr::video::SColor(100,255,255,255), false);
+    _font->draw(_text2, irr::core::rect<irr::s32>(20, _y, (20 + _size.Width),(668 + _size.Height)),
+		irr::video::SColor(255,255,255,255));
+
     this->_driver->endScene();
   }
 

@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 19:11:36 2017 Gregoire Renard
-** Last update Fri Jun 23 16:51:15 2017 Gregoire Renard
+** Last update Mon Jun 26 12:22:22 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -31,6 +31,44 @@ static void		print_fd(t_env *env, t_pos pos)
   printf("clients = %i, ", cpt);
 }
 
+static void		choose_print(t_env *env, t_pos pos)
+{
+  if (env->map[pos.y][pos.x + 1].border == 1)
+    {
+      if (env->map[pos.y][pos.x].name_team != NULL)
+	printf("%i", env->map[pos.y][pos.x].clients[0]->socket);
+      else
+	printf("-");
+    }
+  else
+    {
+      if (env->map[pos.y][pos.x].name_team != NULL)
+	printf("%i, ", env->map[pos.y][pos.x].clients[0]->socket);
+      else
+	printf("-, ");
+    }
+}
+
+static void		print_simple_map(t_env *env)
+{
+  t_pos			pos;
+
+  pos.y = 0;
+  while (env->map[pos.y] != NULL)
+    {
+      pos.x = 0;
+      printf("[%i] =\t{", pos.y);
+      while (env->map[pos.y][pos.x].border != 1)
+	{
+	  choose_print(env, pos);
+	  pos.x++;
+	}
+      printf(" }\n");
+      pos.y++;
+    }
+  printf("\n");
+}
+
 void			print_map(t_env *env)
 {
   t_pos			pos;
@@ -52,4 +90,5 @@ void			print_map(t_env *env)
       pos.y++;
     }
   printf("\n");
+  print_simple_map(env);
 }

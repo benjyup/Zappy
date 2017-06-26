@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:55:57 2017 Gregoire Renard
-** Last update Fri Jun 23 16:47:34 2017 Gregoire Renard
+** Last update Mon Jun 26 09:40:24 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -32,12 +32,12 @@ static void	send_pos(t_env *env, t_client *client)
   free(tmp);
 }
 
-static void	send_info(t_env *env, t_client *client)
+static void	send_info(t_env *env, t_client *client, int cpt)
 {
   char		*ret;
   int		len;
 
-  ret = to_string(env->arg.clients_lim);
+  ret = to_string(env->arg.clients_lim - env->arg.team[cpt].nb_player);
   len = strlen(ret);
   if ((ret = realloc(ret, len + 2)) == NULL)
     {
@@ -51,7 +51,7 @@ static void	send_info(t_env *env, t_client *client)
   free(ret);
 }
 
-static void	init_pos_client(t_env *env, t_client *client)
+static void	init_pos_client(t_env *env, t_client *client, int cpt)
 {
   t_pos		pos;
   
@@ -70,7 +70,7 @@ static void	init_pos_client(t_env *env, t_client *client)
   client->pos.x = pos.x;
   client->pos.y = pos.y;
   add_in_map(env, client);
-  send_info(env, client);
+  send_info(env, client, cpt);
 }
 
 static void	init_inventory(t_client *client)
@@ -98,7 +98,7 @@ void		add_to_the_team(t_env *env, t_client *client)
 	    {
 	      env->arg.team[cpt].nb_player++;
 	      client->name_team = env->arg.team[cpt].team_name;
-	      init_pos_client(env, client);
+	      init_pos_client(env, client, cpt);
 	      init_inventory(client);
 	    }
 	  else

@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Sat Jun 24 15:29:22 2017 vincent.mesquita@epitech.eu
+** Last update Mon Jun 26 12:06:01 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -211,4 +211,9 @@ int			look_func(t_env *env, t_client *client,
 				  t_list **current);
 int			broadcast_func(t_env *env, t_client *client,
 				       t_list **current);
+t_pos			set_broadcast_pos(t_env *env,
+					  t_client *client,
+					  t_pos *pos,
+					  int decale);
+
 #endif /* !SERVER_H_ */

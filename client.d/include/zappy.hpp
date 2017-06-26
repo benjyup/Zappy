@@ -19,15 +19,13 @@ namespace zappy {
     Zappy(int, char **);
     ~Zappy();
 
-    void run();
-    void stop();
+    int update();
     void console();
    private:
     parser		_parser;
     t_arg           	_arg;
     t_cookie        	_cook;
     t_fd_manager    	_fd_manager;
-    t_thread_data   	_relay_manager;
   };
 }
 

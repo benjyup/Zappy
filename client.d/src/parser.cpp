@@ -8,8 +8,9 @@
 zappy::parser::parser() :
 	_function_ptr({
 			      {"help", [&] (const std::string &str) -> int {return help_function(str);}},
+                  {"quit", [&] (const std::string &str) -> int {exit(0);}},
 			      {"flush", [&] (const std::string &str) -> int {return flush_function(str);}},
-			      {"send", [&] (const std::string &str) -> int {srv_write(str.c_str()); return 0;}},
+			      {"send", [&] (const std::string &str) -> int {srv_write(str.c_str()); return 0;}}
 		      })
 {
   input.clear();
@@ -26,7 +27,7 @@ int 			zappy::parser::lexer(const std::string &cmd) {
 
   if (first_ws != std::string::npos)
     cmd_args = cmd.substr(first_ws + 1);
-  std::cerr << "cmd_name = " << cmd_name << ",  cmd_args = " << cmd_args << std::endl;
+  //std::cerr << "cmd_name = " << cmd_name << ",  cmd_args = " << cmd_args << std::endl;
   return _function_ptr[cmd_name](cmd_args);
 }
 
@@ -40,5 +41,11 @@ int 			zappy::parser::help_function(const std::string &)
 
 int 			zappy::parser::flush_function(const std::string &)
 {
-  return 0;
+    std::string msg = srv_read();
+
+    while (!msg.empty()) {
+        std::cout << msg << std::endl;
+        msg = srv_read();
+    }
+    return 0;
 }

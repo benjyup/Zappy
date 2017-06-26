@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/vincent/Clion/clion-2017.1/bin/cmake/bin/cmake
+CMAKE_COMMAND = /home/alice/Application/clion-2017.1.3/bin/cmake/bin/cmake
 
 # The command to remove a file.
-RM = /home/vincent/Clion/clion-2017.1/bin/cmake/bin/cmake -E remove -f
+RM = /home/alice/Application/clion-2017.1.3/bin/cmake/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/vincent/rendu/Zappy/PSU_2016_zappy/client.d
+CMAKE_SOURCE_DIR = /home/alice/rendu/PSU_2016_zappy/client.d
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/vincent/rendu/Zappy/PSU_2016_zappy/client.d
+CMAKE_BINARY_DIR = /home/alice/rendu/PSU_2016_zappy/client.d
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/vincent/rendu/Zappy/PSU_2016_zappy/client.d
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/vincent/Clion/clion-2017.1/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/home/alice/Application/clion-2017.1.3/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/vincent/Clion/clion-2017.1/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/home/alice/Application/clion-2017.1.3/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/CMakeFiles /home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alice/rendu/PSU_2016_zappy/client.d/CMakeFiles /home/alice/rendu/PSU_2016_zappy/client.d/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alice/rendu/PSU_2016_zappy/client.d/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -285,33 +285,6 @@ src/mendatory/functionParse.c.s:
 	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/functionParse.c.s
 .PHONY : src/mendatory/functionParse.c.s
 
-src/mendatory/function_parser.o: src/mendatory/function_parser.cpp.o
-
-.PHONY : src/mendatory/function_parser.o
-
-# target to build an object file
-src/mendatory/function_parser.cpp.o:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/function_parser.cpp.o
-.PHONY : src/mendatory/function_parser.cpp.o
-
-src/mendatory/function_parser.i: src/mendatory/function_parser.cpp.i
-
-.PHONY : src/mendatory/function_parser.i
-
-# target to preprocess a source file
-src/mendatory/function_parser.cpp.i:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/function_parser.cpp.i
-.PHONY : src/mendatory/function_parser.cpp.i
-
-src/mendatory/function_parser.s: src/mendatory/function_parser.cpp.s
-
-.PHONY : src/mendatory/function_parser.s
-
-# target to generate assembly for a file
-src/mendatory/function_parser.cpp.s:
-	$(MAKE) -f CMakeFiles/zappy_client.dir/build.make CMakeFiles/zappy_client.dir/src/mendatory/function_parser.cpp.s
-.PHONY : src/mendatory/function_parser.cpp.s
-
 src/mendatory/my_stack.o: src/mendatory/my_stack.c.o
 
 .PHONY : src/mendatory/my_stack.o
@@ -474,9 +447,6 @@ help:
 	@echo "... src/mendatory/functionParse.o"
 	@echo "... src/mendatory/functionParse.i"
 	@echo "... src/mendatory/functionParse.s"
-	@echo "... src/mendatory/function_parser.o"
-	@echo "... src/mendatory/function_parser.i"
-	@echo "... src/mendatory/function_parser.s"
 	@echo "... src/mendatory/my_stack.o"
 	@echo "... src/mendatory/my_stack.i"
 	@echo "... src/mendatory/my_stack.s"

@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:55:57 2017 Gregoire Renard
-** Last update Mon Jun 26 12:59:57 2017 Gregoire Renard
+** Last update Mon Jun 26 17:58:17 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -73,7 +73,7 @@ static void	init_pos_client(t_env *env, t_client *client, int cpt)
   send_info(env, client, cpt);
 }
 
-static void	init_inventory(t_client *client)
+static void	init_variable(t_client *client)
 {
   int		cpt;
 
@@ -84,6 +84,7 @@ static void	init_inventory(t_client *client)
       cpt++;
     }
   client->type = player;
+  client->level = 0;
 }
 
 void		add_to_the_team(t_env *env, t_client *client)
@@ -99,8 +100,8 @@ void		add_to_the_team(t_env *env, t_client *client)
 	    {
 	      env->arg.team[cpt].nb_player++;
 	      client->name_team = env->arg.team[cpt].team_name;
+	      init_variable(client);
 	      init_pos_client(env, client, cpt);
-	      init_inventory(client);
 	    }
 	  else
 	    {

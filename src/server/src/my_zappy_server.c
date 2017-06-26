@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 19 19:07:10 2017 vincent.mesquita@epitech.eu
-** Last update Mon Jun 26 14:20:31 2017 vincent.mesquita@epitech.eu
+** Last update Mon Jun 26 14:32:36 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -66,25 +66,23 @@ static void             my_check_each_client(t_env *env)
 {
   t_list                *current;
   t_client              *client;
-  t_bool		connected;
 
   current = env->clients->next;
   while (current != env->clients)
     {
-      connected = true;
       client = current->data;
       if (FD_ISSET(client->socket, &(env->readf)))
 	{
 	  client = current->data;
 	  client->this = current;
-	  connected = my_get_client_cmd(env, &current, client);
+	  my_get_client_cmd(env, &current, client);
 	  if (client->name_team == NULL)
 	    know_team(env, client);
 	  else
 	    my_exec(env, client, &current);
 	  print_map(env);
 	}
-      if (FD_ISSET(client->socket, &(env->writef)) && connected)
+      if (FD_ISSET(client->socket, &(env->writef)))
 	my_send_to_client(client);
       current = current->next;
     }

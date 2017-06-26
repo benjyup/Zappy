@@ -10,9 +10,10 @@ namespace 		Client
 
   Character::Character(int num, Vector3d const &pos,
 		       Character::DIR dir, int level,
-		       std::string const &team) : _num(num), _pos(pos), _dir(dir), _level(level), _team(team), _alive(true),
-						  _inc(false), _lay(false)
+		       std::string const &team, int id) : _num(num), _pos(pos), _dir(dir), _level(level), _team(team), _alive(STATE::ALIVE),
+						  _inc(false), _lay(false), _id(id), _idAnimation(0)
   {
+    std::cerr << "character created, x = " << _pos.getX() << "  y = " << _pos.getY() << std::endl;
   }
 
   Character::~Character()
@@ -69,7 +70,7 @@ namespace 		Client
 
   void Character::die()
   {
-	_alive = false;
+  	_alive = STATE::DYING;
   }
 
   bool Character::is_inc() const
@@ -105,6 +106,36 @@ namespace 		Client
   void Character::set_lay(bool _lay)
   {
     Character::_lay = _lay;
+  }
+
+  int Character::get_id() const
+  {
+    return _id;
+  }
+
+  void Character::set_id(int _id)
+  {
+    Character::_id = _id;
+  }
+
+  int Character::get_idAnimation() const
+  {
+    return _idAnimation;
+  }
+
+  void Character::set_idAnimation(int _idAnimation)
+  {
+    Character::_idAnimation = _idAnimation;
+  }
+
+  Character::STATE Character::is_alive() const
+  {
+    return _alive;
+  }
+
+  void Character::set_alive(Character::STATE _alive)
+  {
+    Character::_alive = _alive;
   }
 
 }

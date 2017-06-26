@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Fri Jun  2 17:01:05 2017 vincent.mesquita@epitech.eu
-** Last update Thu Jun 22 16:59:23 2017 Gregoire Renard
+** Last update Fri Jun 23 14:36:42 2017 Gregoire Renard
 */
 
 #ifndef COMMANDS_H_
@@ -13,7 +13,7 @@
 
 # include "server.h"
 
-# define NBR_OF_COMMANDS 11
+# define NBR_OF_COMMANDS 14
 
 # define FORWARD	"Forward"
 # define RIGHT		"Right"
@@ -33,14 +33,6 @@
 # define PPO		"ppo"
 # define PLV		"plv"
 # define PIN		"pin"
-
-int     g_msz(t_env *env, t_client *client, t_list **current);
-int     g_bct(t_env *env, t_client *client, t_list **current);
-int     g_mct(t_env *env, t_client *client, t_list **current);
-int     g_tna(t_env *env, t_client *client, t_list **current);
-int     g_ppo(t_env *env, t_client *client, t_list **current);
-int     g_plv(t_env *env, t_client *client, t_list **current);
-int     g_pin(t_env *env, t_client *client, t_list **current);
 
 
 typedef int		(*t_exec_cmd)(t_env *env,
@@ -62,10 +54,15 @@ static t_cmd		exec_array[NBR_OF_COMMANDS] = {
   {"ppo", g_ppo, monitor},
   {"plv", g_plv, monitor},
   {"pin", g_pin, monitor},
+  //sgt
+  //sst
   {FORWARD, &forward_func, player},
   {RIGHT, &right_func, player},
   {LEFT, &left_func, player},
-  {CONNECT_NBR, &connect_nbr_func, player}
-}
+  {CONNECT_NBR, &connect_nbr_func, player},
+  {INVENTORY, inventory_func, player},
+  {LOOK, look_func, player},
+  {BROADCAST, broadcast_func, player}
+};
 
 #endif /* !COMMANDS_H_ */

@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 11:45:20 2017 Gregoire Renard
-** Last update Thu Jun 22 16:24:04 2017 Gregoire Renard
+** Last update Fri Jun 23 12:48:55 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -42,6 +42,7 @@ static void		set_arg(t_env *env)
   env->arg.clients_lim = -1;
   env->arg.freq = 100;
   env->nb_player = 0;
+  init_env_resources(env);
 }
 
 static void		free_pointer(t_pointer *pointer)

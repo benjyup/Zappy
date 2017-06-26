@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:20:07 2017 Gregoire Renard
-** Last update Mon Jun 19 18:13:26 2017 vincent.mesquita@epitech.eu
+** Last update Sat Jun 24 21:14:59 2017 vincent.mesquita@epitech.eu
 */
 
 #ifndef COMMUN_H_
@@ -17,5 +17,17 @@
 
 # define SUCCESS	1
 # define ERROR		-1
+
+typedef enum		e_resource
+  {
+    FOOD = 0,
+    LINEMATE,
+    DERAUMERE,
+    SIBUR,
+    MENDIANE,
+    PHIRAS,
+    THYSTAME,
+    NBR_OF_RESOURCES
+  }			t_resource;
 
 #endif /* !COMMUN_H_ */

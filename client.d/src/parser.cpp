@@ -2,12 +2,15 @@
 // Created by alice on 20/06/17.
 //
 
+#include <server.hpp>
 #include "parser.hpp"
 
 zappy::parser::parser() :
 	_function_ptr({
-			      {"help", [&] (int i) -> int {help_function(i); return 0;}},
-			      {"flush", [&] (int i) -> int {flush_function(i); return 0;}},
+			      {"help", [&] (const std::string &str) -> int { return help_function(str);}},
+			      {"flush", [&] (const std::string &str) -> int { return flush_function(str);}},
+			      {"send", [&] (const std::string &str) -> int {srv_write(str.c_str()); return 0;}},
+			      {"Forward", [&] (const std::string &str) -> int {return _forward(str);}},
 		      })
 {
   input.clear();
@@ -17,11 +20,18 @@ zappy::parser::~parser() {
 
 }
 
-int zappy::parser::lexer() {
-  return 0;
+int zappy::parser::lexer(const std::string &cmd) {
+  unsigned long         first_ws = cmd.find(" ");
+  std::string           cmd_name = cmd.substr(0,  first_ws);
+  std::string           cmd_args;
+
+  if (first_ws != std::string::npos)
+    cmd_args = cmd.substr(first_ws + 1);
+  std::cerr << "cmd_name = " << cmd_name << ",  cmd_args = " << cmd_args << std::endl;
+  return _function_ptr[cmd_name](cmd_args);
 }
 
-int zappy::parser::help_function(int)
+int zappy::parser::help_function(const std::string &)
 {
   std::cout << "  help  - Display this help" << std::endl;
   std::cout << "  flush - Flush the entry stack of the client" << std::endl;
@@ -29,7 +39,12 @@ int zappy::parser::help_function(int)
   return 0;
 }
 
-int zappy::parser::flush_function(int)
+int zappy::parser::flush_function(const std::string &)
+{
+  return 0;
+}
+
+int zappy::parser::_forward(const std::string &)
 {
   return 0;
 }

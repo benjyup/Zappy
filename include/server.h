@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Thu Jun 22 16:57:43 2017 Gregoire Renard
+** Last update Sat Jun 24 15:29:22 2017 vincent.mesquita@epitech.eu
 */
 
 #ifndef SERVER_H_
@@ -31,6 +31,7 @@
 # define WELCOME	"welcome\n"
 # define OK		"ok\n"
 
+typedef	struct		s_client t_client;
 typedef struct		s_pos
 {
   int			x;
@@ -42,17 +43,6 @@ typedef enum		e_bool
     false = 0,
     true
   }			t_bool;
-
-typedef enum		e_resource
-  {
-    LINEMATE = 0,
-    DERAUMERE,
-    SIBUR,
-    MENDIANE,
-    PHIRAS,
-    THYSTAME,
-    FOOD
-  }			t_resource;
 
 typedef enum		e_client_type
   {
@@ -87,7 +77,7 @@ typedef	struct		s_arg
 typedef	struct		s_map
 {
   char			*name_team;
-  int			*fd_player;
+  t_client		**clients;
   int			resource[MAX_RESOURCE];
   int			border;
 }			t_map;
@@ -106,6 +96,7 @@ typedef struct		s_env
   struct protoent	*pe;
   t_list		*clients;
   t_map			**map;
+  char			**resources;
   int			nb_player;
 }			t_env;
 
@@ -218,5 +209,21 @@ int			left_func(t_env *env, t_client *client,
 				  t_list **current);
 int			connect_nbr_func(t_env *env, t_client *client,
 					 t_list **current);
+int			inventory_func(t_env *env, t_client *client,
+				       t_list **current);
+void			init_env_resources(t_env *env);
+int			look_func(t_env *env, t_client *client,
+				  t_list **current);
+int			broadcast_func(t_env *env, t_client *client,
+				       t_list **current);
+int			g_msz(t_env *env, t_client *client, t_list **current);
+int			g_bct(t_env *env, t_client *client, t_list **current);
+int			g_mct(t_env *env, t_client *client, t_list **current);
+int			g_tna(t_env *env, t_client *client, t_list **current);
+int			g_ppo(t_env *env, t_client *client, t_list **current);
+int			g_plv(t_env *env, t_client *client, t_list **current);
+int			g_pin(t_env *env, t_client *client, t_list **current);
+int			get_size_map(int x, int y, t_env *env);
+int			get_size(t_client *cli_temp, int n);
 
 #endif /* !SERVER_H_ */

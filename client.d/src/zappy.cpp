@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <server.hpp>
 #include "zappy.hpp"
 #include "ZappyException.hpp"
 
@@ -46,14 +47,30 @@ void zappy::Zappy::stop() {
 }
 
 void zappy::Zappy::console() {
-    std::cout << std::endl << "Wellcome to Zappy - console v0.1" << std::endl;
-    std::cout << "Type help for more information" << std::endl;
-    std::string input;
-    input.clear();
-    while (input.find("quit"))
+  std::cout << std::endl << "Wellcome to Zappy - console v0.1" << std::endl;
+  std::cout << "Type help for more information" << std::endl;
+  std::string input;
+  input.clear();
+  while (input.find("quit") != 0)
     {
-        std::cout << _arg.team << " &>";
-        input.clear();
-        std::getline(std::cin, input);
+      std::cout << _arg.team << " &>";
+      if (!std::getline(std::cin, input))
+	{
+	  std::cout << std::endl;
+	  return ;
+	}
+      try {
+	  if (!input.empty())
+	    _parser.lexer(input);
+	} catch (...) {
+	  std::cerr << "Unknown command" << std::endl;
+	}
+      input.clear();
     }
+
+}
+
+const t_arg &zappy::Zappy::getArgs() const
+{
+  return _arg;
 }

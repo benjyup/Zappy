@@ -5,7 +5,7 @@
 ## Login   <renard_e@epitech.net>
 ## 
 ## Started on  Tue Jun 20 10:56:10 2017 Gregoire Renard
-## Last update Thu Jun 22 16:37:29 2017 Gregoire Renard
+## Last update Fri Jun 23 16:00:52 2017 Gregoire Renard
 ##
 
 CC	=	gcc -I../../include -g3
@@ -36,13 +36,21 @@ SRCS	=	src/main.c \
 		src/add_to_the_team.c \
 		src/my_send.c \
 		src/to_string.c \
-		src/g_msz.c \
 		src/forward_func.c \
 		src/erase_in_map.c \
 		src/add_in_map.c \
 		src/right_func.c \
 		src/left_func.c \
 		src/connect_nbr_func.c \
+		src/inventory_func.c \
+		src/init_env_resources.c \
+		src/look_func.c \
+		src/broadcast_func.c \
+		src/g_msz.c \
+		src/g_function1.c \
+		src/g_function2.c \
+		src/g_function3.c \
+		src/g_function4.c \
 
 
 OBJS	=	$(SRCS:.c=.o)

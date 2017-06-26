@@ -47,17 +47,22 @@ bool Vector3d::operator==(Vector3d const &other) const
 
 bool Vector3d::operator<(Vector3d const &other) const
 {
-  return this->_x + this->_y < other._x + other._y;
+  return this->_x + this->_y > other._x + other._y;
 }
 
 bool Vector3d::operator>(Vector3d const &other) const
 {
-  return this->_x + this->_y > other._x + other._y;
+  return this->_x + this->_y < other._x + other._y;
 }
 
 Vector3d Vector3d::operator+(Vector3d const &other) const
 {
   return (Vector3d(this->getX() + other.getX(), this->getY() + other.getY()));
+}
+
+bool Vector3d::operator!=(Vector3d const &other) const
+{
+  return !(_x == other._x && _y == other._y);
 }
 
 std::ostream		&operator<<(std::ostream &os, const Vector3d &vector)

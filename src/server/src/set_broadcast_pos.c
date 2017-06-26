@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 26 09:09:52 2017 Gregoire Renard
-** Last update Mon Jun 26 12:14:18 2017 Gregoire Renard
+** Last update Mon Jun 26 17:43:33 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -33,7 +33,8 @@ t_pos		set_broadcast_pos(t_env *env,
 				  int decale)
 {
   t_pos		tmp;
-  
+
+  printf("client->dir.x = %i, client->dir.y = %i\n", client->dir.x, client->dir.y);
   if (decale == 1)
     {
       pos->x += client->dir.x;

@@ -13,7 +13,7 @@
 
 # include "server.h"
 
-# define NBR_OF_COMMANDS 7
+# define NBR_OF_COMMANDS 14
 
 # define FORWARD	"Forward"
 # define RIGHT		"Right"
@@ -27,6 +27,13 @@
 # define TAKE		"Take"
 # define SET		"Set"
 # define INCANTATION	"Incantation"
+# define MSZ		"msz "
+# define BCT		"bct "
+# define TNA		"tna"
+# define PPO		"ppo"
+# define PLV		"plv"
+# define PIN		"pin"
+
 
 typedef int		(*t_exec_cmd)(t_env *env,
 				      t_client *client,
@@ -40,6 +47,15 @@ typedef struct		s_cmd
 }			t_cmd;
 
 static t_cmd		exec_array[NBR_OF_COMMANDS] = {
+  {"msz", g_msz, monitor},
+  {"bct", g_bct, monitor},
+  {"mct", g_mct, monitor},
+  {"tna", g_tna, monitor},
+  {"ppo", g_ppo, monitor},
+  {"plv", g_plv, monitor},
+  {"pin", g_pin, monitor},
+  //sgt
+  //sst
   {FORWARD, &forward_func, player},
   {RIGHT, &right_func, player},
   {LEFT, &left_func, player},

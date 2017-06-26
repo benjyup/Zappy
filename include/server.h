@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Mon Jun 26 12:06:01 2017 Gregoire Renard
+** Last update Mon Jun 26 12:41:11 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -120,6 +120,7 @@ typedef struct		s_client
   t_pos			dir;
   char			*name_team;
   t_list		*to_write;
+  int			level;
 }			t_client;
 
 typedef struct		s_msg
@@ -194,6 +195,10 @@ void			my_send_to_client(t_client *client);
 void			my_send(t_client *client,
 				char *message);
 char			*to_string(int nb);
+
+t_client		*search_client(t_list **current, int n, t_env *env);
+int			def_dir(t_client *client);
+
 int			forward_func(t_env *env, t_client *client,
 				     t_list **current);
 void			erase_in_map(t_env *env, t_client *client);
@@ -215,5 +220,14 @@ t_pos			set_broadcast_pos(t_env *env,
 					  t_client *client,
 					  t_pos *pos,
 					  int decale);
+int			g_msz(t_env *env, t_client *client, t_list **current);
+int			g_bct(t_env *env, t_client *client, t_list **current);
+int			g_mct(t_env *env, t_client *client, t_list **current);
+int			g_tna(t_env *env, t_client *client, t_list **current);
+int			g_ppo(t_env *env, t_client *client, t_list **current);
+int			g_plv(t_env *env, t_client *client, t_list **current);
+int			g_pin(t_env *env, t_client *client, t_list **current);
+int			get_size_map(int x, int y, t_env *env);
+int			get_size(t_client *cli_temp, int n);
 
 #endif /* !SERVER_H_ */

@@ -1,0 +1,24 @@
+premiere connexion-----------------------------> [SIZEMAP;X,Y]
+
+chaque tour envoi seulement les cases NON vides
+
+creation team --------------------------------->[NEWTEAM;team name]
+creation player ------------------------------->[NEWPLAYER;team name,X,Y]
+creation oeuf --------------------------------->[NEWEGG;team name,X,Y]
+eclosion oeuf---------------------------------->[ECLOSION;X,Y]
+CASE ------------------------------------------>[CASE;X,Y,F,L,D,S,M,P,T,E,{PLAYERX}{PLAYER2}...]
+
+X = coordonées y de la case
+Y = coordonées y de la case
+F = NB de Food
+L = NB de LINEMATE 
+D = NB de DERAUMERE
+S = NB de SIBUR
+M = NB de MENDIANE
+P = NB de PHIRAS
+T = NB de THYSTAME
+E = NB d'oeufs
+PLAYER = {name;Tn;L;F;L;D;S;M;P;T}
+
+name = name du player
+Tn = team number

@@ -1,0 +1,104 @@
+#include <stdio.h>
+#include "server.h"
+
+int	g_msz(t_env *env, t_client *client, t_list **current)
+{
+  char	*str;
+  char	buff[25];
+  int	size;
+  
+  (void)current;
+  size = sprintf(buff, "%d%d", env->arg.width, env->arg.height);
+  size += strlen("msz ");
+  size += 3;
+  if ((str = malloc(size)) == NULL)
+    {
+      perror(MALLOC);
+      exit(-1);
+    }
+  sprintf(str, "%s %d %d\n", "msz ", env->arg.width, env->arg.height);
+  my_send(client, str);
+  free(str);
+  return (1);
+}
+
+int	bct_f(int x, int y, t_env *env, t_client *client)
+{
+  int	size;
+  char	*str;
+
+  size = get_size_map(x, y, env);
+  size += 1;
+  size += strlen("bct ");
+  if ((str = malloc(size + 1)) == NULL)
+    {
+      perror(MALLOC);
+      exit(-1);
+    }
+  sprintf(str, "%s %d %d %d %d %d %d %d %d %d\n", "bct ", x, y,
+	  env->map[y][x].resource[FOOD],
+	  env->map[y][x].resource[LINEMATE],
+	  env->map[y][x].resource[DERAUMERE],
+	  env->map[y][x].resource[SIBUR],
+	  env->map[y][x].resource[MENDIANE],
+	  env->map[y][x].resource[PHIRAS],
+	  env->map[y][x].resource[THYSTAME]);
+  my_send(client, str);
+  free(str);
+  return (1);
+}
+
+int	g_bct(t_env *env, t_client *client, t_list **current)
+{
+  int	x;
+  int	y;
+
+  (void)current;
+  x = atoi(client->split_cmd[1]);
+  y = atoi(client->split_cmd[2]);
+  bct_f(x, y, env, client);
+  return (1);
+}
+
+int	g_mct(t_env *env, t_client *client, t_list **current)
+{
+  int	x;
+  int	y;
+
+  x = 0;
+  y = 0;
+  (void)current;
+  while (x < env->arg.width)
+    {
+      while (y < env->arg.height)
+	{
+	  bct_f(x, y, env, client);
+	  ++y;
+	}
+      y = 0;
+      ++x;
+    }
+  return (1);
+}
+
+int	g_tna(t_env *env, t_client *client, t_list **current)
+{
+  int	i;
+  char	*str;
+
+  i = 0;
+  (void)current;
+  (void)client;
+  while (i < env->arg.nb_team)
+    {
+      if ((str = malloc(strlen(env->arg.team[i].team_name) + 6)) == NULL)
+	{
+	  perror(MALLOC);
+	  exit(-1);
+	}
+      sprintf(str, "%s %s\n", "tna ", env->arg.team[i].team_name);
+      my_send(client, str);
+      free(str);
+    }
+  return (1);
+}

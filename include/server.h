@@ -225,5 +225,6 @@ int			g_plv(t_env *env, t_client *client, t_list **current);
 int			g_pin(t_env *env, t_client *client, t_list **current);
 int			get_size_map(int x, int y, t_env *env);
 int			get_size(t_client *cli_temp, int n);
-
+int			g_sbp(t_client *client);
+void			send_graphical(t_list **current, t_env *env, char *str);
 #endif /* !SERVER_H_ */

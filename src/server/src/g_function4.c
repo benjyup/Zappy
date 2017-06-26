@@ -28,6 +28,11 @@ int		g_ppo(t_env *env, t_client *client, t_list **current)
   int		n;
 
   (void)env;
+  if (client->split_cmd[1] == NULL)
+    {
+      g_sbp(client);
+      return (1);
+    }
   n = atoi(client->split_cmd[1]);
   cli_temp = search_client(current, n, env);
   size = sprintf(buff, "%d%d%d\n", n, cli_temp->pos.x, cli_temp->pos.y);

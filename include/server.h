@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Mon Jun 26 13:13:56 2017 Gregoire Renard
+** Last update Mon Jun 26 15:25:27 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -30,6 +30,7 @@
 # define KO		"ko\n"
 # define WELCOME	"welcome\n"
 # define OK		"ok\n"
+# define SUC		"suc\n"
 
 typedef	struct		s_client t_client;
 typedef struct		s_pos
@@ -235,4 +236,8 @@ int			g_sbp(t_client *client);
 void			send_graphical(t_list **current, t_env *env, char *str);
 void			know_team(t_env *env, t_client *client);
 int			g_pnw(t_env *env, t_client *client, t_list **current);
+int			set_func(t_env *env, t_client *client, t_list **current);
+int			take_func(t_env *env, t_client *client, t_list **current);
+
+
 #endif /* !SERVER_H_ */

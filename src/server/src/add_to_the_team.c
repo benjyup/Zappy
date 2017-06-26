@@ -29,7 +29,7 @@ static void	send_pos(t_env *env, t_client *client)
   strcat(tmp, y);
   strcat(tmp, "\n\0");
   my_send(client, tmp);
-  g_pnw(env, client, &env->clients);
+  g_pnw(env, client, &env->clients->next);
   free(tmp);
 }
 
@@ -100,8 +100,8 @@ void		add_to_the_team(t_env *env, t_client *client)
 	    {
 	      env->arg.team[cpt].nb_player++;
 	      client->name_team = env->arg.team[cpt].team_name;
-	      init_pos_client(env, client, cpt);
 	      init_inventory(client);
+	      init_pos_client(env, client, cpt);
 	    }
 	  else
 	    {

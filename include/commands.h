@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Fri Jun  2 17:01:05 2017 vincent.mesquita@epitech.eu
-** Last update Fri Jun 23 14:36:42 2017 Gregoire Renard
+** Last update Mon Jun 26 15:59:39 2017 Gregoire Renard
 */
 
 #ifndef COMMANDS_H_
@@ -13,7 +13,7 @@
 
 # include "server.h"
 
-# define NBR_OF_COMMANDS 14
+# define NBR_OF_COMMANDS 16
 
 # define FORWARD	"Forward"
 # define RIGHT		"Right"
@@ -33,7 +33,6 @@
 # define PPO		"ppo"
 # define PLV		"plv"
 # define PIN		"pin"
-
 
 typedef int		(*t_exec_cmd)(t_env *env,
 				      t_client *client,
@@ -62,7 +61,9 @@ static t_cmd		exec_array[NBR_OF_COMMANDS] = {
   {CONNECT_NBR, &connect_nbr_func, player},
   {INVENTORY, inventory_func, player},
   {LOOK, look_func, player},
-  {BROADCAST, broadcast_func, player}
+  {BROADCAST, broadcast_func, player},
+  {TAKE, take_func, player},
+  {SET, set_func, player}
 };
 
 #endif /* !COMMANDS_H_ */

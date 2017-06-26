@@ -13,8 +13,8 @@ int	get_size_map(int x, int y, t_env *env)
   size += sprintf(buff, " %d", env->map[y][x].resource[MENDIANE]);
   size += sprintf(buff, " %d", env->map[y][x].resource[PHIRAS]);
   size += sprintf(buff, " %d", env->map[y][x].resource[THYSTAME]);
-  size += sprintf(buff, "%d", x);
-  size += sprintf(buff, "%d", y);
+  size += sprintf(buff, " %d", x);
+  size += sprintf(buff, " %d", y);
   return (size);
 }
 

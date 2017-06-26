@@ -5,6 +5,8 @@
 #ifndef PSU_2016_ZAPPY_CHARACTER_HPP
 #define PSU_2016_ZAPPY_CHARACTER_HPP
 
+#include <vector>
+#include <array>
 #include <iostream>
 #include "Vector3d.hpp"
 #include "Block.hpp"
@@ -21,7 +23,6 @@ namespace 		Client
       SOUTH,
       OUEST
     };
-
     Character(int num, Vector3d const &pos, DIR, int level, std::string const &team);
     virtual ~Character();
 
@@ -49,7 +50,7 @@ namespace 		Client
     DIR 			_dir;
     int 			_level;
     std::string			_team;
-    std::array<int, NBR_OF_RES>	_res;
+    std::array<int, Block::NBR_OF_RES>	_res;
     bool 			_alive;
     bool 			_inc;
     bool 			_lay;

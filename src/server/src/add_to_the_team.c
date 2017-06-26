@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:55:57 2017 Gregoire Renard
-** Last update Fri Jun 23 13:06:55 2017 Gregoire Renard
+** Last update Fri Jun 23 16:47:34 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -54,9 +54,7 @@ static void	send_info(t_env *env, t_client *client)
 static void	init_pos_client(t_env *env, t_client *client)
 {
   t_pos		pos;
-  int		cpt;
-
-  cpt = 0;
+  
   pos.x = rand() % env->arg.width;
   pos.y = rand() % env->arg.height;
   while (env->map[pos.y][pos.x].name_team != NULL ||
@@ -69,11 +67,9 @@ static void	init_pos_client(t_env *env, t_client *client)
     }
   if (env->map[pos.y][pos.x].name_team == NULL)
     env->map[pos.y][pos.x].name_team = client->name_team;
-  while (env->map[pos.y][pos.x].fd_player[cpt] != -1)
-    cpt++;
-  env->map[pos.y][pos.x].fd_player[cpt] = client->socket;
   client->pos.x = pos.x;
   client->pos.y = pos.y;
+  add_in_map(env, client);
   send_info(env, client);
 }
 

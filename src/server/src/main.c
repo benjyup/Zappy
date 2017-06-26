@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:23:46 2017 Gregoire Renard
-** Last update Thu Jun 22 17:29:23 2017 Gregoire Renard
+** Last update Fri Jun 23 16:44:39 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -23,7 +23,7 @@ static void	free_map(t_env *env)
 	  pos.x = 0;
 	  while (env->map[pos.y][pos.x].border != 1)
 	    {
-	      free(env->map[pos.y][pos.x].fd_player);
+	      free(env->map[pos.y][pos.x].clients);
 	      pos.x++;
 	    }
 	  free(env->map[pos.y]);

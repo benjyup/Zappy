@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Mon Jun 26 15:25:27 2017 Gregoire Renard
+** Last update Mon Jun 26 20:06:03 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -219,10 +219,10 @@ int			look_func(t_env *env, t_client *client,
 				  t_list **current);
 int			broadcast_func(t_env *env, t_client *client,
 				       t_list **current);
-t_pos			set_broadcast_pos(t_env *env,
+void			set_broadcast_pos(t_env *env,
 					  t_client *client,
 					  t_pos *pos,
-					  int decale);
+					  char *message);
 int			g_msz(t_env *env, t_client *client, t_list **current);
 int			g_bct(t_env *env, t_client *client, t_list **current);
 int			g_mct(t_env *env, t_client *client, t_list **current);
@@ -238,6 +238,11 @@ void			know_team(t_env *env, t_client *client);
 int			g_pnw(t_env *env, t_client *client, t_list **current);
 int			set_func(t_env *env, t_client *client, t_list **current);
 int			take_func(t_env *env, t_client *client, t_list **current);
-
+void			line_detection(t_env *env, t_client *client,
+				       t_pos *pos, char *message);
+void			square_detection(t_env *env, t_client *client,
+					 t_pos *pos, char *message);
+void			send_to_all_user(t_env *env, t_pos pos,
+					 t_client *client, char *message);
 
 #endif /* !SERVER_H_ */

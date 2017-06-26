@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Fri Jun 23 14:39:30 2017 Gregoire Renard
-** Last update Mon Jun 26 12:33:54 2017 Gregoire Renard
+** Last update Mon Jun 26 13:15:49 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -62,16 +62,21 @@ int		broadcast_func(t_env *env, t_client *client,
   char		*message;
 
   (void)current;
-  decale = 0;
-  init_message(&message, client, &pos, &tmp);
-  while (decale <= 8)
+  if (client->split_cmd[1] != NULL)
     {
-      send_to_all_user(env, tmp, client, message);
-      decale++;
-      set_message(&message, decale);
-      tmp = set_broadcast_pos(env, client, &pos, decale);
+      decale = 0;
+      init_message(&message, client, &pos, &tmp);
+      while (decale <= 8)
+	{
+	  send_to_all_user(env, tmp, client, message);
+	  decale++;
+	  set_message(&message, decale);
+	  tmp = set_broadcast_pos(env, client, &pos, decale);
+	}
+      free(message);
+      my_send(client, OK);
     }
-  free(message);
-  my_send(client, OK);
+  else
+    my_send(client, KO);
   return (SUCCESS);
 }

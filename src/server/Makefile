@@ -5,7 +5,7 @@
 ## Login   <renard_e@epitech.net>
 ## 
 ## Started on  Tue Jun 20 10:56:10 2017 Gregoire Renard
-## Last update Mon Jun 26 12:41:28 2017 Gregoire Renard
+## Last update Mon Jun 26 13:07:25 2017 Gregoire Renard
 ##
 
 CC	=	gcc -I../../include -g3
@@ -52,6 +52,7 @@ SRCS	=	src/main.c \
 		src/g_function2.c \
 		src/g_function3.c \
 		src/g_function4.c \
+		src/know_team.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

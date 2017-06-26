@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:55:57 2017 Gregoire Renard
-** Last update Mon Jun 26 09:40:24 2017 Gregoire Renard
+** Last update Mon Jun 26 12:59:57 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -17,8 +17,8 @@ static void	send_pos(t_env *env, t_client *client)
   char		*tmp;
 
   (void)env;
-  x = to_string(client->pos.x);
-  y = to_string(client->pos.y);
+  x = to_string(env->arg.width);
+  y = to_string(env->arg.height);
   if ((tmp = malloc(strlen(x) + strlen(y) + 3)) == NULL)
     {
       perror(MALLOC);
@@ -83,6 +83,7 @@ static void	init_inventory(t_client *client)
       client->inventory[cpt] = 0;
       cpt++;
     }
+  client->type = player;
 }
 
 void		add_to_the_team(t_env *env, t_client *client)

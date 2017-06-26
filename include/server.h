@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Mon Jun 26 13:13:56 2017 Gregoire Renard
+** Last update Mon Jun 26 15:25:27 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -30,6 +30,7 @@
 # define KO		"ko\n"
 # define WELCOME	"welcome\n"
 # define OK		"ok\n"
+# define SUC		"suc\n"
 
 typedef	struct		s_client t_client;
 typedef struct		s_pos
@@ -232,5 +233,7 @@ int			g_pin(t_env *env, t_client *client, t_list **current);
 int			get_size_map(int x, int y, t_env *env);
 int			get_size(t_client *cli_temp, int n);
 void			know_team(t_env *env, t_client *client);
+int			set_func(t_env *env, t_client *client, t_list **current);
+int			take_func(t_env *env, t_client *client, t_list **current);
 
 #endif /* !SERVER_H_ */

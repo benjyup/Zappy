@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 19 22:55:30 2017 vincent.mesquita@epitech.eu
-** Last update Thu Jun 22 14:57:40 2017 Gregoire Renard
+** Last update Mon Jun 26 14:41:06 2017 Gregoire Renard
 */
 
 #include <string.h>
@@ -25,8 +25,12 @@ int             my_exec(t_env *env,
     {
       if (strcasecmp(exec_array[i].flag, client->split_cmd[0]) == 0)
 	{
-	  exec_array[i].exec(env, client, current);
-	  return (SUCCESS);
+	  if (exec_array[i].client_type == client->type)
+	    {
+	      exec_array[i].exec(env, client, current);
+	      return (SUCCESS);
+	    }
+	  i = NBR_OF_COMMANDS;
 	}
       i += 1;
     }

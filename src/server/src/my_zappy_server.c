@@ -1,11 +1,11 @@
 /*
-** my_zaapy_server.c for  in /home/vincent/rendu/Zappy/PSU_2016_zappy/src/server
+** my_zappy_server.c for  in /home/vincent/rendu/Zappy/PSU_2016_zappy
 ** 
 ** Made by vincent.mesquita@epitech.eu
 ** Login   <vincent@epitech.net>
 ** 
-** Started on  Mon Jun 19 19:07:10 2017 vincent.mesquita@epitech.eu
-** Last update Mon Jun 26 14:55:24 2017 vincent.mesquita@epitech.eu
+** Started on  Mon Jun 26 14:57:15 2017 vincent.mesquita@epitech.eu
+** Last update Mon Jun 26 15:00:02 2017 vincent.mesquita@epitech.eu
 */
 
 #include <stdlib.h>
@@ -75,17 +75,16 @@ static void             my_check_each_client(t_env *env)
 	{
 	  client = current->data;
 	  client->this = current;
-	  if (my_get_client_cmd(env, &current, client))
-	    {
-	      if (client->name_team == NULL)
-		know_team(env, client);
-	      else
-		my_exec(env, client, &current);
-	      print_map(env);
-	    }
-	  if (FD_ISSET(client->socket, &(env->writef)))
-	    my_send_to_client(client);
+	  if (!my_get_client_cmd(env, &current, client))
+	    continue ;
+	  if (client->name_team == NULL)
+	    know_team(env, client);
+	  else
+	    my_exec(env, client, &current);
+	  print_map(env);
 	}
+      if (FD_ISSET(client->socket, &(env->writef)))
+	my_send_to_client(client);
       current = current->next;
     }
 }

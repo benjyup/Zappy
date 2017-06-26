@@ -107,7 +107,7 @@ namespace 		Client
       }
     _lib.set_text2("\nLe joueur : ", true);
     _lib.set_text2(t[1].c_str(), false);
-    _lib.set_text2(" est à la position : ", false);
+    _lib.set_text2(" est a la position : ", false);
     _lib.set_text2(t[2].c_str(), false);
     _lib.set_text2(" ", false);
     _lib.set_text2(t[3].c_str(), false);
@@ -115,11 +115,9 @@ namespace 		Client
 
   GraphicalLib::TEXT	Client::genRandType(GraphicalLib::TEXT min, GraphicalLib::TEXT max)
   {
-    //GraphicalLib::TEXT randType = GraphicalLib::TEXT((int)min + rand() / (RAND_MAX / (int)max));
-    //GraphicalLib::TEXT randType = GraphicalLib::TEXT(rand() % (int)max + (int)min);  //(int)min + rand() / (RAND_MAX / (int)max));
-    std::random_device rd;  //Will be used to obtain a seed for the random number engine
-    std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
-    std::uniform_int_distribution<> dist6((int)min,(int)max); // distribution in range [1, 6]
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dist6((int)min,(int)max);
 
     GraphicalLib::TEXT randType = static_cast<GraphicalLib::TEXT>(dist6(gen));
 
@@ -373,7 +371,7 @@ namespace 		Client
     _Eggs[num].die();
     _lib.set_text2("\nL\'oeuf ", true);
     _lib.set_text2(t[1].c_str(), false);
-    _lib.set_text2(" donne naissance à un nouveau joueur!", false);
+    _lib.set_text2(" donne naissance a un nouveau joueur!", false);
   }
 
   void Client::_edi(std::vector<std::string> const &t)

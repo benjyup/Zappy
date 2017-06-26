@@ -13,6 +13,17 @@ namespace 	Client
     this->_driver = this->_device->getVideoDriver();
     this->_smgr = this->_device->getSceneManager();
     this->_guienv = this->_device->getGUIEnvironment();
+    initMesh();
+    irr::core::stringw wStr("ZapPyramide");
+    this->_device->setWindowCaption(wStr.c_str());
+    this->_device->getCursorControl()->setVisible(true);
+    this->_smgr->addCameraSceneNodeFPS();
+    initDeco();
+    initText();
+  }
+
+  void GraphicalLib::initMesh()
+  {
     _mesh[MESH::block] = _smgr->getMesh("./GFX/Models/cube.obj");
     _mesh[MESH::minerals] = _smgr->getMesh("./GFX/Models/mineralshigh.obj");
     _text[TEXT::minerals1] = _driver->getTexture("./GFX/purpletext.png");
@@ -24,30 +35,37 @@ namespace 	Client
     _mesh[MESH::eggs] = _smgr->getMesh("./GFX/Models/eggs.obj");
     _text[TEXT::grass] = _driver->getTexture("./GFX/sandtext.jpg");
     _text[TEXT::eggs1] = _driver->getTexture("./GFX/redtext.png");
-    irr::core::stringw wStr("fdp");
-    this->_device->setWindowCaption(wStr.c_str());
-    this->_device->getCursorControl()->setVisible(true);
-    this->_smgr->addCameraSceneNodeFPS();
-    _smgr->addSkyDomeSceneNode(_driver->getTexture("./GFX/sky.jpg"), 16, 16, 1.0f, 1.0f);
-    _smgr->addSkyDomeSceneNode(_driver->getTexture("./GFX/desert.jpg"), 16, 16, 1.0f, 1.0f)->setRotation({0, 0, -180});
+    _text[TEXT::sky] = _driver->getTexture("./GFX/sky.jpg");
+    _text[TEXT::desert] = _driver->getTexture("./GFX/desert.jpg");
+    _text[TEXT::stone] = _driver->getTexture("./GFX/stones.jpg");
+    _text[TEXT::water] = _driver->getTexture("./GFX/water.jpg");
+  }
+
+  void GraphicalLib::initDeco()
+  {
+    _smgr->addSkyDomeSceneNode(_text[TEXT::sky], 16, 16, 1.0f, 1.0f);
+    _smgr->addSkyDomeSceneNode(_text[TEXT::desert], 16, 16, 1.0f, 1.0f)->setRotation({0, 0, -180});
     _smgr->setAmbientLight(irr::video::SColorf(0.7,0.7,0.7,1));
     irr::scene::IAnimatedMesh* plane = _smgr->addHillPlaneMesh("plane",
-							irr::core::dimension2d<irr::f32>(20,20),
-							irr::core::dimension2d<irr::u32>(200,200), 0, 0,
-							irr::core::dimension2d<irr::f32>(0,0),
-							irr::core::dimension2d<irr::f32>(100,100));
+							       irr::core::dimension2d<irr::f32>(20,20),
+							       irr::core::dimension2d<irr::u32>(200,200), 0, 0,
+							       irr::core::dimension2d<irr::f32>(0,0),
+							       irr::core::dimension2d<irr::f32>(100,100));
     irr::scene::ISceneNode* sea = _smgr->addWaterSurfaceSceneNode(plane->getMesh(0), 5.0f, 300.0f, 40.0f);
-    sea->setMaterialTexture(0, _driver->getTexture("./GFX/stones.jpg"));
+    sea->setMaterialTexture(0, _text[TEXT::stone]);
     sea->setPosition({0 + (Client::SCALE * 10 / 2), 5, 0 + (Client::SCALE * 10 / 2)});
-    sea->setMaterialTexture(1, _driver->getTexture("./GFX/water.jpg"));
+    sea->setMaterialTexture(1, _text[TEXT::water]);
     sea->setMaterialFlag(irr::video::EMF_LIGHTING, true);
     sea->setMaterialType(irr::video::EMT_REFLECTION_2_LAYER);
+  }
+
+  void GraphicalLib::initText()
+  {
     this->_gui = this->_device->getGUIEnvironment();;
     if (_gui != NULL)
       this->_font = _gui->getFont("./GFX/font_space.bmp");
     _size = _font->getDimension(L"Test Text");
     _text2 = "Bienvenue sur le mode Spectateur !";
-
     _driver->getMaterial2D().TextureLayer[0].BilinearFilter=true;
     _driver->getMaterial2D().AntiAliasing = irr::video::EAAM_FULL_BASIC;
     _images = _driver->getTexture("./GFX/prompt.png");
@@ -65,13 +83,16 @@ namespace 	Client
   {
   }
 
-  int GraphicalLib::addNode(const Vector3d &pos, GraphicalLib::MESH mesh, GraphicalLib::TEXT text, irr::f32 Scale, int alt)
+  int GraphicalLib::addNode(const Vector3d &pos, GraphicalLib::MESH mesh,
+			    GraphicalLib::TEXT text, irr::f32 Scale, int alt)
   {
     _node[_id] = _smgr->addAnimatedMeshSceneNode(_mesh[mesh]);
     if (mesh == MESH::minerals || mesh == MESH::rock)
-      _node[_id]->setPosition({pos.getX() * Client::SCALE - Client::SCALE / 2, alt * Client::SCALE, pos.getY() * Client::SCALE + Client::SCALE / 2});
+      _node[_id]->setPosition({pos.getX() * Client::SCALE - Client::SCALE / 2,
+			       alt * Client::SCALE, pos.getY() * Client::SCALE + Client::SCALE / 2});
     else
-      _node[_id]->setPosition({pos.getX() * Client::SCALE, alt * Client::SCALE, pos.getY() * Client::SCALE});
+      _node[_id]->setPosition({pos.getX() * Client::SCALE, alt * Client::SCALE,
+			       pos.getY() * Client::SCALE});
     if (text != TEXT::none)
       _node[_id]->setMaterialTexture(0, _text[text]);
     _node[_id]->setMaterialFlag(irr::video::EMF_LIGHTING, false);
@@ -81,7 +102,8 @@ namespace 	Client
     return _id - 1;
   }
 
-  int GraphicalLib::addCharacterNode(const irr::core::vector3df &pos, GraphicalLib::TEXT text, irr::f32 Scale, int dir)
+  int GraphicalLib::addCharacterNode(const irr::core::vector3df &pos, GraphicalLib::TEXT text,
+				     irr::f32 Scale, int dir)
   {
     _node[_id] = _smgr->addAnimatedMeshSceneNode(_mesh[MESH::character]);
     _node[_id]->setPosition(pos);
@@ -154,7 +176,7 @@ namespace 	Client
   int	GraphicalLib::addFlyStraightAnimator(int id, irr::core::vector3df const &from,
 				       	irr::core::vector3df const &to, int speed, int dir)
   {
-    _anims[_idAnims] = _smgr->createFlyStraightAnimator(from, to, speed, false);
+    _anims[_idAnims] = _smgr->createFlyStraightAnimator(from, to, (irr::u32)speed, false);
     _node[id]->addAnimator(_anims[_idAnims]);
     _node[id]->setRotation({0, dir * 90 - 90, 0});
     _idAnims++;

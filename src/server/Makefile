@@ -53,6 +53,7 @@ SRCS	=	src/main.c \
 		src/g_function3.c \
 		src/g_function4.c \
 		src/know_team.c \
+		src/g_pnw.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

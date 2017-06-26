@@ -234,5 +234,5 @@ int			get_size(t_client *cli_temp, int n);
 int			g_sbp(t_client *client);
 void			send_graphical(t_list **current, t_env *env, char *str);
 void			know_team(t_env *env, t_client *client);
-
+int			g_pnw(t_env *env, t_client *client, t_list **current);
 #endif /* !SERVER_H_ */

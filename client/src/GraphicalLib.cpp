@@ -20,7 +20,7 @@ namespace 	Client
     _text[TEXT::minerals3] = _driver->getTexture("./GFX/greentext.png");
     _mesh[MESH::rock] = _smgr->getMesh("./GFX/Models/socle.obj");
     _text[TEXT::rock] = _driver->getTexture("./GFX/graytext.png");
-    _mesh[MESH::character] = _smgr->getMesh("./GFX/Models/ninja.b3d");
+    _mesh[MESH::character] = _smgr->getMesh("./GFX/ninja.b3d");
     _mesh[MESH::eggs] = _smgr->getMesh("./GFX/Models/eggs.obj");
     _text[TEXT::grass] = _driver->getTexture("./GFX/sandtext.jpg");
     _text[TEXT::eggs1] = _driver->getTexture("./GFX/redtext.png");

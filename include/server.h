@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Sat Jun 24 15:29:22 2017 vincent.mesquita@epitech.eu
+** Last update Mon Jun 26 13:13:56 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -98,6 +98,7 @@ typedef struct		s_env
   t_map			**map;
   char			**resources;
   int			nb_player;
+  
 }			t_env;
 
 typedef	struct		s_pointer
@@ -121,6 +122,7 @@ typedef struct		s_client
   char			*name_team;
   t_list		*to_write;
   int			level;
+  t_client_type		type;
 }			t_client;
 
 typedef struct		s_msg
@@ -216,6 +218,10 @@ int			look_func(t_env *env, t_client *client,
 				  t_list **current);
 int			broadcast_func(t_env *env, t_client *client,
 				       t_list **current);
+t_pos			set_broadcast_pos(t_env *env,
+					  t_client *client,
+					  t_pos *pos,
+					  int decale);
 int			g_msz(t_env *env, t_client *client, t_list **current);
 int			g_bct(t_env *env, t_client *client, t_list **current);
 int			g_mct(t_env *env, t_client *client, t_list **current);
@@ -227,4 +233,6 @@ int			get_size_map(int x, int y, t_env *env);
 int			get_size(t_client *cli_temp, int n);
 int			g_sbp(t_client *client);
 void			send_graphical(t_list **current, t_env *env, char *str);
+void			know_team(t_env *env, t_client *client);
+
 #endif /* !SERVER_H_ */

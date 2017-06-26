@@ -5,12 +5,13 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Fri Jun 23 14:39:30 2017 Gregoire Renard
-** Last update Fri Jun 23 16:24:59 2017 Gregoire Renard
+** Last update Mon Jun 26 12:33:54 2017 Gregoire Renard
 */
 
 #include "server.h"
 
-static void	init_message(char **message, t_client *client)
+static void	init_message(char **message, t_client *client,
+			     t_pos *pos, t_pos *tmp)
 {
   if ((*message = strdup("message ")) == NULL
       ||!(*message = realloc(*message, strlen(*message)
@@ -21,7 +22,11 @@ static void	init_message(char **message, t_client *client)
     }
   strcat(*message, "0, ");
   strcat(*message, client->split_cmd[1]);
-  strcat(*message, "\0");
+  strcat(*message, "\n\0");
+  pos->x = client->pos.x;
+  pos->y = client->pos.y;
+  tmp->x = pos->x;
+  tmp->y = pos->y;
 }
 
 static void	set_message(char **message, int decale)
@@ -34,25 +39,39 @@ static void	set_message(char **message, int decale)
   (*message)[cpt] = decale + 48;
 }
 
+static void	send_to_all_user(t_env *env, t_pos pos,
+				 t_client *client, char *message)
+{
+  int		cpt;
+
+  cpt = 0;
+  while (env->map[pos.y][pos.x].clients[cpt] != NULL)
+    {
+      if (env->map[pos.y][pos.x].clients[cpt] != client)
+	my_send(env->map[pos.y][pos.x].clients[cpt], message);
+      cpt++;
+    }
+}
+
 int		broadcast_func(t_env *env, t_client *client,
 			       t_list **current)
 {
   int		decale;
-  /* t_pos		pos; */
+  t_pos		pos;
+  t_pos		tmp;
   char		*message;
 
-  (void)env;
   (void)current;
   decale = 0;
-  /* pos.x = client->pos.x; */
-  /* pos.y = client->pos.y; */
-  init_message(&message, client);
+  init_message(&message, client, &pos, &tmp);
   while (decale <= 8)
     {
-      if (decale != 0)
-  	set_message(&message, decale);
+      send_to_all_user(env, tmp, client, message);
       decale++;
+      set_message(&message, decale);
+      tmp = set_broadcast_pos(env, client, &pos, decale);
     }
   free(message);
+  my_send(client, OK);
   return (SUCCESS);
 }

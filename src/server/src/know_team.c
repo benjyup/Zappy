@@ -1,0 +1,19 @@
+/*
+** know_team.c for  in /home/renard_e/2/systeme_unix_reseaux/PSU_2016_zappy/src/server/src
+** 
+** Made by Gregoire Renard
+** Login   <renard_e@epitech.net>
+** 
+** Started on  Mon Jun 26 13:06:07 2017 Gregoire Renard
+** Last update Mon Jun 26 13:13:28 2017 Gregoire Renard
+*/
+
+#include "server.h"
+
+void		know_team(t_env *env, t_client *client)
+{
+  if ((strcmp("GRAPHIC", client->split_cmd[0])) == 0)
+    client->type = monitor;
+  else
+    add_to_the_team(env, client);
+}

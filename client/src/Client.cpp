@@ -5,6 +5,7 @@
 
 #include <irrlicht.h>
 #include <Character.hpp>
+#include <random>
 #include "Client.hpp"
 #include "server.hpp"
 
@@ -114,7 +115,15 @@ namespace 		Client
 
   GraphicalLib::TEXT	Client::genRandType(GraphicalLib::TEXT min, GraphicalLib::TEXT max)
   {
-    GraphicalLib::TEXT randType = GraphicalLib::TEXT((int)min + rand() / (RAND_MAX / (int)max));
+    //GraphicalLib::TEXT randType = GraphicalLib::TEXT((int)min + rand() / (RAND_MAX / (int)max));
+    //GraphicalLib::TEXT randType = GraphicalLib::TEXT(rand() % (int)max + (int)min);  //(int)min + rand() / (RAND_MAX / (int)max));
+    std::random_device rd;  //Will be used to obtain a seed for the random number engine
+    std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+    std::uniform_int_distribution<> dist6((int)min,(int)max); // distribution in range [1, 6]
+
+    GraphicalLib::TEXT randType = static_cast<GraphicalLib::TEXT>(dist6(gen));
+
+    std::cout << (int)randType << std::endl;
     return (randType);
   }
 
@@ -128,10 +137,11 @@ namespace 		Client
     resLvl = b.set_res(t);
     Vector3d v(~t[1], ~t[2]);
 
+    GraphicalLib::TEXT i = genRandType(GraphicalLib::TEXT::minerals1, GraphicalLib::TEXT::minerals3);
     _lib.addNode(v, GraphicalLib::MESH::rock, GraphicalLib::TEXT::rock, (irr::f32)resLvl, 1);
     if (b.get_idRes() == 0 && resLvl > 0)
       b.set_idRes(_lib.addNode(v, GraphicalLib::MESH::minerals,
-			       genRandType(GraphicalLib::TEXT::minerals1, GraphicalLib::TEXT::minerals2),
+			       i,
 			       (irr::f32)resLvl, 1));
     else if (resLvl == 0 && b.get_idRes() != 0)
 	{

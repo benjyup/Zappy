@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 19:11:36 2017 Gregoire Renard
-** Last update Mon Jun 26 12:22:22 2017 Gregoire Renard
+** Last update Mon Jun 26 15:04:10 2017 vincent.mesquita@epitech.eu
 */
 
 #include "server.h"
@@ -79,13 +79,13 @@ void			print_map(t_env *env)
       pos.x = 0;
       printf("----->MAP[%i] ==\n", pos.y);
       while (env->map[pos.y][pos.x].border != 1)
-	{
-	  printf("--->X = %i{%s, ", pos.x, env->map[pos.y][pos.x].name_team);
-	  print_fd(env, pos);
-	  print_resource(env, pos);
-	  pos.x++;
-	  printf("\n");
-	}
+  	{
+  	  printf("--->X = %i{%s, ", pos.x, env->map[pos.y][pos.x].name_team);
+  	  print_fd(env, pos);
+  	  print_resource(env, pos);
+  	  pos.x++;
+  	  printf("\n");
+  	}
       printf("\n");
       pos.y++;
     }

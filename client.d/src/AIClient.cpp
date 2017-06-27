@@ -47,7 +47,8 @@ void zappy::AIClient::ProxyRegister(Proxy *prox) {
 
 zappy::AIClient::AIClient(const t_arg &args) :
 	_args(args),
-	_incantationLevel(0)
+	_incantationLevel(0),
+    _prox(NULL)
 {
  /* char *str;
 
@@ -155,4 +156,10 @@ void 			zappy::AIClient::_getInventory()
     {
       std::cout << "- "<< it.first << " " << RESOURCES_TO_STR.at(it.first) << ": " << it.second << std::endl;
     }
+}
+
+void zappy::AIClient::upade() {
+    if (_prox == NULL)
+        return;
+    //untile the proxy hasn't been regisered to the IA -> Do nothing
 }

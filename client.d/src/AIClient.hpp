@@ -33,7 +33,7 @@ namespace zappy
     ~AIClient();
 
       void  ProxyRegister(Proxy *prox);
-
+        void upade();
    private:
 
     static const 	std::vector<SIncantation>		INCANTATIONS;

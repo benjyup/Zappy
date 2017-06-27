@@ -16,6 +16,7 @@ int main(int ac, char **av) {
         while (err != 1) {
             err = project.update();
             prx.update();
+            ia.upade();
             //srv_write("coucou\r\n");
             //project.console();
         }

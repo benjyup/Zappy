@@ -5,7 +5,7 @@
 ## Login   <renard_e@epitech.net>
 ## 
 ## Started on  Tue Jun 20 10:56:10 2017 Gregoire Renard
-## Last update Tue Jun 27 13:31:53 2017 Gregoire Renard
+## Last update Tue Jun 27 17:32:03 2017 Gregoire Renard
 ##
 
 CC	=	gcc -I../../include -g3
@@ -60,6 +60,7 @@ SRCS	=	src/main.c \
 		src/square_detection.c \
 		src/send_to_all_user.c \
 		src/write_component.c \
+		src/set_pos_start.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

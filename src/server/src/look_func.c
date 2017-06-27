@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Fri Jun 23 13:26:16 2017 Gregoire Renard
-** Last update Tue Jun 27 17:10:33 2017 Gregoire Renard
+** Last update Tue Jun 27 18:27:17 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -48,44 +48,6 @@ static void	end_look(t_client *client, t_look *look)
   free(look->message);
 }
 
-static void	set_pos_start(t_env *env, t_client *client,
-			      t_look *look)
-{
-  look->tmp.x = client->pos.x + client->dir.x * look->cpt;
-  look->tmp.y = client->pos.y + client->dir.y * look->cpt;
-  look->target.x = client->pos.x + client->dir.x * look->cpt;
-  look->target.y = client->pos.y + client->dir.y * look->cpt;
-  
-  if (client->dir.x == 1)
-    {
-      look->tmp.y -= look->cpt;
-      look->target.y += look->cpt + 1;
-    }
-  else if (client->dir.x == -1)
-    {
-      look->tmp.y += look->cpt;
-      look->target.y -= look->cpt + 1;
-    }
-  else if (client->dir.y == 1)
-    {
-      look->tmp.x += look->cpt;
-      look->target.x -= look->cpt + 1;
-    }
-  else if (client->dir.y == -1)
-    {
-      look->tmp.x -= look->cpt;
-      look->target.x += look->cpt + 1;
-    }
-  if (look->tmp.x < 0)
-    look->tmp.x = env->arg.width - look->tmp.x;
-  else
-    look->tmp.x = look->tmp.x % env->arg.width;
-  if (look->tmp.y < 0)
-    look->tmp.y = env->arg.height - look->tmp.x;
-  else
-    look->tmp.y = look->tmp.y % env->arg.height;
-}
-
 static void	adjust_pos(t_look *look, t_client *client,
 			   t_env *env)
 {
@@ -98,11 +60,11 @@ static void	adjust_pos(t_look *look, t_client *client,
   else if (client->dir.y == -1)
     look->tmp.x++;
   if (look->tmp.x < 0)
-    look->tmp.x = env->arg.width - look->tmp.x;
+    look->tmp.x = env->arg.width + look->tmp.x;
   else
     look->tmp.x = look->tmp.x % env->arg.width;
   if (look->tmp.y < 0)
-    look->tmp.y = env->arg.height - look->tmp.x;
+    look->tmp.y = env->arg.height + look->tmp.y;
   else
     look->tmp.y = look->tmp.y % env->arg.height;
 }

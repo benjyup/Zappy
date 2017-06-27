@@ -5,7 +5,11 @@
 #include <iostream>
 #include "zappy.hpp"
 #include "server.hpp"
+<<<<<<< HEAD
 #include "mendatory/AIClient.hpp"
+=======
+#include "AIClient.hpp"
+>>>>>>> e27613c074bb0bb43264a0288010b14fbd5d8952
 
 int main(int ac, char **av) {
     try {

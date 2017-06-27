@@ -45,7 +45,6 @@ void zappy::AIClient::ProxyRegister(Proxy *prox, int x, int y) {
   _prox = prox;
   _worldDimension.first = x;
   _worldDimension.second = y;
-
 }
 
 zappy::AIClient::AIClient(const t_arg &args) :

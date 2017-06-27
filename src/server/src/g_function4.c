@@ -1,3 +1,13 @@
+/*
+** g_function4.c for zappy in /home/rene_r/Cours/Semestre_4/System_Unix/RESEAU/PSU_2016_zappy/src/server/src
+** 
+** Made by rodrigue rene
+** Login   <rene_r@epitech.net>
+** 
+** Started on  Tue Jun 27 17:17:32 2017 rodrigue rene
+** Last update Tue Jun 27 19:28:30 2017 Gregoire Renard
+*/
+
 #include <stdio.h>
 #include "server.h"
 
@@ -5,7 +15,7 @@ int	get_size_map(int x, int y, t_env *env)
 {
   char	buff[13];
   int	size;
-  
+
   size = sprintf(buff, " %d", env->map[y][x].resource[FOOD]);
   size += sprintf(buff, " %d", env->map[y][x].resource[LINEMATE]);
   size += sprintf(buff, " %d", env->map[y][x].resource[DERAUMERE]);
@@ -38,8 +48,9 @@ int		g_ppo(t_env *env, t_client *client, t_list **current)
   size = sprintf(buff, "%d%d%d\n", n, cli_temp->pos.x, cli_temp->pos.y);
   size += 5;
   dir = def_dir(cli_temp);
-  str = malloc(size+1);
-  sprintf(str, "%s %d %d %d %d\n", "ppo ", n, cli_temp->pos.x, cli_temp->pos.y, dir);
+  str = malloc(size + 1);
+  sprintf(str, "%s %d %d %d %d\n", "ppo ", n,
+	  cli_temp->pos.x, cli_temp->pos.y, dir);
   my_send(client, str);
   free(str);
   return (1);
@@ -66,7 +77,7 @@ int		g_plv(t_env *env, t_client *client, t_list **current)
   my_send(client, str);
   free(str);
   return (1);
-} 
+}
 
 int		g_pin(t_env *env, t_client *client, t_list **current)
 {
@@ -83,7 +94,8 @@ int		g_pin(t_env *env, t_client *client, t_list **current)
       perror(MALLOC);
       exit(-1);
     }
-  sprintf(str, "%s %d %d %d %d %d %d %d %d %d %d\n", "pin ", n, cli_temp->pos.x, cli_temp->pos.y,
+  sprintf(str, "%s %d %d %d %d %d %d %d %d %d %d\n", "pin ", n,
+	  cli_temp->pos.x, cli_temp->pos.y,
 	  cli_temp->inventory[FOOD],
 	  cli_temp->inventory[LINEMATE],
 	  cli_temp->inventory[DERAUMERE],

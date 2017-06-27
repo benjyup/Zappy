@@ -1,3 +1,13 @@
+/*
+** g_msz.c for zappy in /home/rene_r/Cours/Semestre_4/System_Unix/RESEAU/PSU_2016_zappy/src/server/src
+** 
+** Made by rodrigue rene
+** Login   <rene_r@epitech.net>
+** 
+** Started on  Tue Jun 27 17:20:57 2017 rodrigue rene
+** Last update Tue Jun 27 19:28:44 2017 Gregoire Renard
+*/
+
 #include <stdio.h>
 #include "server.h"
 
@@ -6,7 +16,7 @@ int	g_msz(t_env *env, t_client *client, t_list **current)
   char	*str;
   char	buff[25];
   int	size;
-  
+
   (void)current;
   size = sprintf(buff, "%d%d", env->arg.width, env->arg.height);
   size += strlen("msz ");

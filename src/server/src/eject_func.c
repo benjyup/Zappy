@@ -1,6 +1,15 @@
+/*
+** eject_func.c for zappy in /home/rene_r/Cours/Semestre_4/System_Unix/RESEAU/PSU_2016_zappy/src/server/src
+** 
+** Made by rodrigue rene
+** Login   <rene_r@epitech.net>
+** 
+** Started on  Tue Jun 27 17:15:03 2017 rodrigue rene
+** Last update Tue Jun 27 19:28:08 2017 Gregoire Renard
+*/
+
 #include <stdio.h>
 #include "server.h"
-
 
 static int	invert_dir(int dir)
 {
@@ -15,23 +24,26 @@ static int	invert_dir(int dir)
   return (1);
 }
 
-static void	eject_a_client(t_client *client, t_pos *dir_p, t_env *env, int dir)
+static void	eject_a_client(t_client *client, t_pos *dir_p,
+			       t_env *env, int dir)
 {
   char	buff[10];
-  
+
   sprintf(buff, "eject: %d", invert_dir(dir));
   forward_eject(env, client, dir_p);
   my_send(client, buff);
 }
 
-static int	eject_each_client(t_env *env, int dir, t_pos *pos_temp, t_pos *dir_p)
+static int	eject_each_client(t_env *env, int dir,
+				  t_pos *pos_temp, t_pos *dir_p)
 {
   int	i;
 
   i = 0;
   while (env->map[pos_temp->y][pos_temp->x].clients[i] != NULL)
     {
-      eject_a_client(env->map[pos_temp->y][pos_temp->x].clients[i], dir_p, env, dir);
+      eject_a_client(env->map[pos_temp->y][pos_temp->x].clients[i],
+		     dir_p, env, dir);
       i++;
     }
   return (SUCCESS);

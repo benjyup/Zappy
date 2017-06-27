@@ -6,8 +6,6 @@
 #include <iostream>
 #include <sstream>
 #include <algorithm>
-#include <cctype>
-#include <string>
 #include "mendatory/AIClient.hpp"
 
 
@@ -180,16 +178,15 @@ void 			zappy::AIClient::_go(unsigned int tile_number)
       inc += 2;
       i += 1;
     }
-  while (i > 0)
-    {
-      _todo.push_back(FORWARD);
-      i -= 1;
-    }
+  while (i-- > 0)
+    _todo.push_back(FORWARD);
   move = middle - tile_number;
   if (move > 0)
     _todo.push_back(LEFT);
   else if (move < 0)
       _todo.push_back(RIGHT);
+  while (move-- > 0)
+    _todo.push_back(FORWARD);
 }
 
 void 			zappy::AIClient::_makeInventory(const std::string &resources)
@@ -214,7 +211,7 @@ zappy::RequestType 	zappy::AIClient::updade() {
   RequestType		request = NOOP;
 
   if (_prox == NULL)
-    return zappy::NOOP;
+    return request;
   if (!(_todo.empty()))
     {
       request = _todo.front();

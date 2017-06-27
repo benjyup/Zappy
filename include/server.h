@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Mon Jun 26 20:06:03 2017 Gregoire Renard
+** Last update Tue Jun 27 15:21:14 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -126,6 +126,15 @@ typedef struct		s_client
   t_client_type		type;
 }			t_client;
 
+typedef	struct		s_look
+{
+  int			range;
+  char			*message;
+  int			cpt;
+  t_pos			tmp;
+  t_pos			target;
+}			t_look;
+  
 typedef struct		s_msg
 {
   char			*msg;
@@ -244,5 +253,6 @@ void			square_detection(t_env *env, t_client *client,
 					 t_pos *pos, char *message);
 void			send_to_all_user(t_env *env, t_pos pos,
 					 t_client *client, char *message);
+int			write_component(t_look *look, t_env *env);
 
 #endif /* !SERVER_H_ */

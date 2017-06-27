@@ -139,9 +139,6 @@
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/mendatory/functionParse.c">
 			<Option target="zappy_ai"/>
 		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/mendatory/function_parser.cpp">
-			<Option target="zappy_ai"/>
-		</Unit>
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/mendatory/my_stack.c">
 			<Option target="zappy_ai"/>
 		</Unit>

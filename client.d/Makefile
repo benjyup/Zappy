@@ -312,33 +312,6 @@ src/mendatory/functionParse.c.s:
 	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/functionParse.c.s
 .PHONY : src/mendatory/functionParse.c.s
 
-src/mendatory/function_parser.o: src/mendatory/function_parser.cpp.o
-
-.PHONY : src/mendatory/function_parser.o
-
-# target to build an object file
-src/mendatory/function_parser.cpp.o:
-	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/function_parser.cpp.o
-.PHONY : src/mendatory/function_parser.cpp.o
-
-src/mendatory/function_parser.i: src/mendatory/function_parser.cpp.i
-
-.PHONY : src/mendatory/function_parser.i
-
-# target to preprocess a source file
-src/mendatory/function_parser.cpp.i:
-	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/function_parser.cpp.i
-.PHONY : src/mendatory/function_parser.cpp.i
-
-src/mendatory/function_parser.s: src/mendatory/function_parser.cpp.s
-
-.PHONY : src/mendatory/function_parser.s
-
-# target to generate assembly for a file
-src/mendatory/function_parser.cpp.s:
-	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/function_parser.cpp.s
-.PHONY : src/mendatory/function_parser.cpp.s
-
 src/mendatory/my_stack.o: src/mendatory/my_stack.c.o
 
 .PHONY : src/mendatory/my_stack.o
@@ -504,9 +477,6 @@ help:
 	@echo "... src/mendatory/functionParse.o"
 	@echo "... src/mendatory/functionParse.i"
 	@echo "... src/mendatory/functionParse.s"
-	@echo "... src/mendatory/function_parser.o"
-	@echo "... src/mendatory/function_parser.i"
-	@echo "... src/mendatory/function_parser.s"
 	@echo "... src/mendatory/my_stack.o"
 	@echo "... src/mendatory/my_stack.i"
 	@echo "... src/mendatory/my_stack.s"

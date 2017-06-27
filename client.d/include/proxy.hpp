@@ -11,6 +11,28 @@
 namespace zappy
 {
     class AIClient;
+
+    typedef enum  {
+        FORWARD,
+        RIGHT,
+        LEFT,
+        LOOK,
+        BROADCAST
+    } RequestType;
+
+    template <typename T>
+    class Request
+    {
+    public:
+        Request(RequestType);
+
+        ~Request();
+
+    protected:
+        RequestType _type;
+        T           _data;
+    };
+
     class Proxy
     {
     public:
@@ -19,6 +41,7 @@ namespace zappy
 
         void update();
     private:
+        std::map<zappy::RequestType, std::function<int()>> _function_ptr;
         bool            _ready;
         AIClient        &_ia;
         zappy::Zappy    &_zap;

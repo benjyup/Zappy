@@ -56,6 +56,7 @@ SRCS	=	src/main.c \
 		src/g_pnw.c \
 		src/set_func.c \
 		src/take_func.c \
+		src/eject_func.c \
 		src/line_detection.c \
 		src/square_detection.c \
 		src/send_to_all_user.c \

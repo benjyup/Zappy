@@ -19,24 +19,6 @@ int		g_pdi(t_client *client)
   return (1);
 }
 
-int		g_pgt(t_client *client, int ress)
-{
-  char		buff[64];
-
-  sprintf(buff, "pgt %d %d\n", client->socket, ress);
-  my_send(client, buff);
-  return (1);
-}
-
-int		g_pdr(t_client *client, int ress)
-{
-  char		buff[64];
-
-  sprintf(buff, "pdr %d %d\n", client->socket, ress);
-  my_send(client, buff);
-  return (1);
-}
-
 int		g_pfk(t_client *client)
 {
   char		buff[32];

@@ -18,6 +18,7 @@ static void	put_object(t_env *env, t_client *client,
       client->inventory[cpt]--;
       env->map[client->pos.y][client->pos.x].resource[cpt]++;
       my_send(client, OK);
+      g_pdr(env, client, &env->clients->next, cpt);
     }
   else
     my_send(client, KO);
@@ -44,4 +45,22 @@ int		set_func(t_env *env, t_client *client,
   else
     my_send(client, KO);
   return (SUCCESS);
+}
+
+void		send_graphical(t_list **current, t_env *env, char *str)
+{
+  t_list	*tmp;
+  t_client	*client_temp;
+  int		i;
+
+  i = 0;
+  tmp = *current;
+  while (i < env->nb_player)
+    {
+      client_temp = tmp->data;
+      if (client_temp->type == monitor)
+	my_send(client_temp, str);
+      tmp = tmp->next;
+      i++;
+    }
 }

@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Thu Jun 22 12:14:34 2017 Gregoire Renard
-** Last update Thu Jun 22 15:31:35 2017 Gregoire Renard
+** Last update Tue Jun 27 18:55:17 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -39,7 +39,6 @@ static void	set_new_pos_eject(t_env *env, t_client *client,
   if (new_pos->x >= env->arg.width)
     new_pos->x = 0;
 }
-
 
 int		forward_func(t_env *env, t_client *client,
 			     t_list **current)

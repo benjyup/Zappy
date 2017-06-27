@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 27 13:32:11 2017 Gregoire Renard
-** Last update Tue Jun 27 18:26:56 2017 Gregoire Renard
+** Last update Tue Jun 27 19:01:14 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -40,7 +40,7 @@ int		write_component(t_look *look,
 				t_env *env)
 {
   int		cpt;
-  
+
   cpt = 0;
   while (env->map[look->tmp.y][look->tmp.x].clients[cpt] != NULL)
     {

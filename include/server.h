@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Tue Jun 27 17:31:43 2017 Gregoire Renard
+** Last update Tue Jun 27 19:00:31 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_

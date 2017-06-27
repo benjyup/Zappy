@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:55:57 2017 Gregoire Renard
-** Last update Tue Jun 27 11:10:47 2017 Gregoire Renard
+** Last update Tue Jun 27 18:53:56 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -55,7 +55,7 @@ static void	send_info(t_env *env, t_client *client, int cpt)
 static void	init_pos_client(t_env *env, t_client *client, int cpt)
 {
   t_pos		pos;
-  
+
   pos.x = rand() % env->arg.width;
   pos.y = rand() % env->arg.height;
   while (env->map[pos.y][pos.x].name_team != NULL ||

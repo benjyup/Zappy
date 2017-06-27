@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Thu Jun 22 17:22:44 2017 Gregoire Renard
-** Last update Fri Jun 23 13:15:43 2017 Gregoire Renard
+** Last update Tue Jun 27 18:58:04 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -27,7 +27,7 @@ static int	remp_tmp(t_env *env, t_client *client,
 {
   int		len_tmp;
   char		*nb;
-  
+
   len_tmp = strlen(*tmp);
   nb = to_string(client->inventory[cpt]);
   if ((*tmp = realloc(*tmp, len_tmp

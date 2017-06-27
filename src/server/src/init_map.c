@@ -5,9 +5,8 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 18:25:45 2017 Gregoire Renard
-** Last update Fri Jun 23 16:28:38 2017 Gregoire Renard
+** Last update Tue Jun 27 18:57:30 2017 Gregoire Renard
 */
-
 
 #include <sys/types.h>
 #include <unistd.h>
@@ -18,7 +17,7 @@ static void	init_resource(t_env *env, t_pos pos)
 {
   int		cpt;
   int		nb;
-  
+
   cpt = 0;
   while (cpt != MAX_RESOURCE)
     {
@@ -63,7 +62,7 @@ static void	gen_resource(t_env *env)
 int		init_map(t_env *env)
 {
   t_pos		pos;
-  
+
   pos.y = 0;
   if ((env->map = malloc(sizeof(t_map *)
 			 * (env->arg.height + 1))) == NULL)

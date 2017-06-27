@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Fri Jun 23 13:26:16 2017 Gregoire Renard
-** Last update Tue Jun 27 18:27:17 2017 Gregoire Renard
+** Last update Tue Jun 27 18:51:21 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -29,7 +29,7 @@ static void	init_variable(t_env *env,
     {
       perror(MALLOC);
       exit(ERROR);
-    }    
+    }
   look->tmp.x += client->dir.x;
   look->tmp.y += client->dir.y;
 }

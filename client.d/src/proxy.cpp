@@ -76,12 +76,4 @@ void zappy::Proxy::update(zappy::RequestType order) {
 
 
 
-template<typename T>
-zappy::Request<T>::Request(RequestType type): _type(type) {
 
-}
-
-template<typename T>
-zappy::Request<T>::~Request() {
-
-}

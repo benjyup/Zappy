@@ -109,6 +109,9 @@
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/parser.hpp">
 			<Option target="zappy_ai"/>
 		</Unit>
+		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/proxy.hpp">
+			<Option target="zappy_ai"/>
+		</Unit>
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/server.hpp">
 			<Option target="zappy_ai"/>
 		</Unit>
@@ -149,6 +152,9 @@
 			<Option target="zappy_ai"/>
 		</Unit>
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/parser.cpp">
+			<Option target="zappy_ai"/>
+		</Unit>
+		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/proxy.cpp">
 			<Option target="zappy_ai"/>
 		</Unit>
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/zappy.cpp">

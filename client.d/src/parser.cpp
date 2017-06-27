@@ -11,6 +11,8 @@ zappy::parser::parser() :
 			      {"flush", [&] (const std::string &str) -> int { return flush_function(str);}},
 			      {"send", [&] (const std::string &str) -> int {srv_write(str.c_str()); return 0;}},
                   {"quit", [&] (const std::string &str) -> int {exit(0);}},
+                  {"read", [&] (const std::string &str) -> int {char *s =  srv_read();if (s != NULL) std::cout << s << std::endl; return 0;}},
+                  {"noop", [&] (const std::string &str) -> int {return 0;}},
 		      })
 {
   input.clear();

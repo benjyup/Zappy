@@ -60,3 +60,11 @@ void zappy::Zappy::console() {
       input.clear();
 
 }
+
+char *zappy::Zappy::getTeam() const {
+    return _arg.team;
+}
+const t_arg &zappy::Zappy::getArg(void) const
+{
+    return _arg;
+}

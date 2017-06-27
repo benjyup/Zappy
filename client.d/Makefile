@@ -420,6 +420,33 @@ src/parser.cpp.s:
 	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/parser.cpp.s
 .PHONY : src/parser.cpp.s
 
+src/proxy.o: src/proxy.cpp.o
+
+.PHONY : src/proxy.o
+
+# target to build an object file
+src/proxy.cpp.o:
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/proxy.cpp.o
+.PHONY : src/proxy.cpp.o
+
+src/proxy.i: src/proxy.cpp.i
+
+.PHONY : src/proxy.i
+
+# target to preprocess a source file
+src/proxy.cpp.i:
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/proxy.cpp.i
+.PHONY : src/proxy.cpp.i
+
+src/proxy.s: src/proxy.cpp.s
+
+.PHONY : src/proxy.s
+
+# target to generate assembly for a file
+src/proxy.cpp.s:
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/proxy.cpp.s
+.PHONY : src/proxy.cpp.s
+
 src/zappy.o: src/zappy.cpp.o
 
 .PHONY : src/zappy.o
@@ -489,6 +516,9 @@ help:
 	@echo "... src/parser.o"
 	@echo "... src/parser.i"
 	@echo "... src/parser.s"
+	@echo "... src/proxy.o"
+	@echo "... src/proxy.i"
+	@echo "... src/proxy.s"
 	@echo "... src/zappy.o"
 	@echo "... src/zappy.i"
 	@echo "... src/zappy.s"

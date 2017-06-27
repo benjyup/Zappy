@@ -21,8 +21,10 @@ namespace zappy {
 
     int update();
     void console();
+      char *getTeam(void) const;
+      const t_arg &getArg(void) const;
    private:
-    parser		_parser;
+    parser		        _parser;
     t_arg           	_arg;
     t_cookie        	_cook;
     t_fd_manager    	_fd_manager;

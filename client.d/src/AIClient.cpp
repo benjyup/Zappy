@@ -59,28 +59,12 @@ zappy::AIClient::~AIClient()
   std::cerr << "~AIClient" << std::endl;
 }
 
-void zappy::AIClient::_getWorldInformation(const std::string &informations)
-{
-  try {
-      _clietnNum = std::stoul(informations.substr(0, informations.find('\n')));
-      _worldDimension.first = std::stoul(informations.substr(informations.find(' ')));
-      _worldDimension.second = std::stoul(informations.substr(informations.find(' '), informations.size() - 1));
-    } catch (std::exception) {
-      throw std::runtime_error("Error while getting world informations.");
-    }
-
-  std::cout << "clientNum = " << _clietnNum << std::endl;
-  std::cout << "X = " << _worldDimension.first << std::endl;
-  std::cout << "Y = " << _worldDimension.second << std::endl;
-}
-
 void 			zappy::AIClient::_play()
 {
   std::string		response;
   char			*str;
 
   std::cout << "_play" << std::endl;
-  //_whatdoINeed();
   _getInventory();
   _look();
   std::cout << "_play" << std::endl;
@@ -93,11 +77,6 @@ void 			zappy::AIClient::_play()
 	}
     }
   std::cout << "fin" << std::endl;
-}
-
-void 			zappy::AIClient::_eat()
-{
-
 }
 
 void 			zappy::AIClient::_getInventory()
@@ -189,22 +168,11 @@ void 			zappy::AIClient::_go(unsigned int tile_number)
     _todo.push_back(FORWARD);
 }
 
-void 			zappy::AIClient::_makeInventory(const std::string &resources)
-{
-  std::stringstream 	ss(resources);
-  std::string		str;
-
-  std::cout << "_makeInventory" << std::endl;
-  while (ss)
-    {
-      ss >> str;
-      std::cout << str << std::endl;
-    }
-}
-
 bool			zappy::AIClient::_isNeeded(t_resource resource)
 {
-  return   INCANTATIONS[_level].resources.find(resource)->second > 0;
+  size_t 		nbr_of_resources = INCANTATIONS[_level].resources.find(resource)->second;
+
+  return  nbr_of_resources > 0 && _inventory.find(resource)->second < resource;
 }
 
 zappy::RequestType 	zappy::AIClient::updade() {

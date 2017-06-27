@@ -49,12 +49,9 @@ namespace zappy
     std::vector<std::unordered_map<t_resource, size_t,
 	    std::hash<int>>>					_currentLook;
 
-    void 							_getWorldInformation(const std::string &informations);
     void							_play();
-    void							_eat();
     void 							_look();
     void							_getInventory();
-    void 							_makeInventory(const std::string &resources);
     bool 							_isNeeded(t_resource);
     void 							_go(unsigned int tile_number);
     std::list<RequestType>					_todo;

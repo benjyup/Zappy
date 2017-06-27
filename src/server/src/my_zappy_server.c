@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 26 14:57:15 2017 vincent.mesquita@epitech.eu
-** Last update Mon Jun 26 15:00:02 2017 vincent.mesquita@epitech.eu
+** Last update Tue Jun 27 18:58:39 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -45,7 +45,7 @@ static t_bool            my_get_client_cmd(t_env *env,
 {
   ssize_t		n;
   int			i;
-  
+
   i = 0;
   while ((n = read(client->socket, &client->cmd[i], 1)) == 1 &&
 	 client->cmd[i] != END_OF_CMD &&

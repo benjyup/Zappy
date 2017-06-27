@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 26 19:44:46 2017 Gregoire Renard
-** Last update Tue Jun 27 15:16:35 2017 Gregoire Renard
+** Last update Tue Jun 27 18:58:17 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -34,7 +34,7 @@ void		line_detection(t_env *env, t_client *client,
 {
   t_pos		tmp;
   t_pos		dir;
-  
+
   set_all_pos(client, pos, &tmp, &dir);
   while (tmp.y != client->pos.y || tmp.x != client->pos.x)
     {

@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Thu Jun 22 13:44:57 2017 Gregoire Renard
-** Last update Fri Jun 23 16:52:37 2017 Gregoire Renard
+** Last update Tue Jun 27 18:54:51 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -37,7 +37,7 @@ void				erase_in_map(t_env *env,
 					     t_client *client)
 {
   int				cpt;
-  
+
   cpt = 0;
   while (env->map[client->pos.y][client->pos.x].clients[cpt] != NULL
 	 &&env->map[client->pos.y][client->pos.x].clients[cpt] != client)

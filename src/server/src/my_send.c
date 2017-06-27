@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:43:04 2017 vincent.mesquita@epitech.eu
-** Last update Wed Jun 21 17:20:45 2017 vincent.mesquita@epitech.eu
+** Last update Tue Jun 27 19:02:20 2017 Gregoire Renard
 */
 
 #include <unistd.h>
@@ -35,12 +35,13 @@ void		my_send_to_client(t_client *client)
 {
   t_list	*current;
   t_msg		*msg;
-  
 
   if ((current = client->to_write->next) == client->to_write)
     return ;
   msg = current->data;
-  if ((msg->current_index = write(client->socket, &msg->msg[msg->current_index], msg->length))
+  if ((msg->current_index =
+       write(client->socket,
+	     &msg->msg[msg->current_index], msg->length))
       == (ssize_t)msg->length)
     {
       free(msg->msg);

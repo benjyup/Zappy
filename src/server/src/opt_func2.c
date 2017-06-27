@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 14:31:23 2017 Gregoire Renard
-** Last update Mon Jun 26 16:38:25 2017 Gregoire Renard
+** Last update Tue Jun 27 18:59:04 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -28,7 +28,7 @@ static int	check_double(t_env *env)
 {
   int		cpt;
   int		cpt2;
-  
+
   cpt = 0;
   while (cpt != env->arg.nb_team)
     {
@@ -58,7 +58,7 @@ int		opt_n(t_env *env,
 {
   int		len;
   int		cpt_name;
-  
+
   *cpt = *cpt + 1;
   cpt_name = 0;
   len = count_len(argv, *cpt);

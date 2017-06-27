@@ -54,7 +54,10 @@ namespace zappy
     void							_getInventory();
     void 							_makeInventory(const std::string &resources);
     bool 							_isNeeded(t_resource);
-    Proxy                           *_prox;
+    void 							_go(unsigned int tile_number);
+
+    std::list<>							;
+    Proxy                           				*_prox;
   };
 }
 

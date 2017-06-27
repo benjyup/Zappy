@@ -74,8 +74,6 @@ void zappy::Proxy::update() {
 
 }
 
-
-
 template<typename T>
 zappy::Request<T>::Request(RequestType type): _type(type) {
 

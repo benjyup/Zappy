@@ -12,11 +12,12 @@ int main(int ac, char **av) {
         zappy::Zappy project(ac, av);
         zappy::AIClient ia(project.getArg());
         zappy::Proxy    prx(ia, project);
+        zappy::RequestType  rqst = zappy::NOOP;
         int err = 0;
         while (err != 1) {
             err = project.update();
-            prx.update();
-            ia.upade();
+            prx.update(rqst);
+            rqst = ia.updade();
             //srv_write("coucou\r\n");
             //project.console();
         }

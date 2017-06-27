@@ -5,7 +5,7 @@
 ** Login   <florian.vincent@epitech.eu>
 ** 
 ** Started on  Sat Jun 10 17:30:14 2017 Vincent
-** Last update Wed Jun 21 16:51:42 2017 vincent.mesquita@epitech.eu
+** Last update Tue Jun 27 19:03:14 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -52,7 +52,6 @@ int		xdprintf(int fd, t_msg *msg, va_list *ap)
     return (0);
   str[0] = 0;
   build_string(str, ap, msg->msg, 0);
-  //va_end(*ap);
   msg->length = strlen(str);
   wrote = dprintf(fd, "%s", str);
   printf("j'ai écrit %d\n", wrote);

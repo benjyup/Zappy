@@ -5,7 +5,6 @@
 #ifndef CLIENT_D_PROXY_HPP
 #define CLIENT_D_PROXY_HPP
 
-#include "../src/AIClient.hpp"
 #include "zappy.hpp"
 
 namespace zappy
@@ -17,7 +16,8 @@ namespace zappy
         RIGHT,
         LEFT,
         LOOK,
-        BROADCAST
+        BROADCAST,
+        NOOP
     } RequestType;
 
     template <typename T>
@@ -25,7 +25,6 @@ namespace zappy
     {
     public:
         Request(RequestType);
-
         ~Request();
 
     protected:
@@ -39,7 +38,7 @@ namespace zappy
         Proxy(zappy::AIClient &, zappy::Zappy &);
         ~Proxy();
 
-        void update();
+        void update(zappy::RequestType order);
     private:
         std::map<zappy::RequestType, std::function<int()>> _function_ptr;
         bool            _ready;

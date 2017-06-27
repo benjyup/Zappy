@@ -5,7 +5,7 @@
 ** Login   <mesqui_v@epitech.net>
 **
 ** Started on  Fri Jan  8 11:19:59 2016 vincent mesquita
-** Last update Mon Jun 19 22:52:36 2017 vincent.mesquita@epitech.eu
+** Last update Tue Jun 27 19:04:04 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -61,12 +61,6 @@ static int		count_the_words(char *str, char separator)
     i = i + 1;
   while (str[i])
     {
-      /* if (str[i] == '\"' && str[i + 1] != '\"' && str[i + 1] != 0) */
-      /* 	{ */
-      /* 	  i += 1; */
-      /* 	  while (str[i] && str[i++] != '\"'); */
-      /* 	  word_count += 1; */
-      /* 	} */
       if (str[i] != 0 && str[i + 1] != 0 &&
 	  str[i] == separator && (str[i + 1]
 				  != separator))

@@ -33,7 +33,7 @@ namespace zappy
     AIClient(const t_arg &args);
     ~AIClient();
 
-      void  ProxyRegister(Proxy *prox);
+      void  ProxyRegister(Proxy *prox, int x, int y);
         zappy::RequestType updade();
    private:
 

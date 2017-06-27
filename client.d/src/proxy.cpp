@@ -7,8 +7,7 @@
 
 
 
-zappy::Proxy::Proxy(zappy::AIClient &ia, zappy::Zappy &zap): _ia(ia), _ready(false), _zap(zap)
-{
+zappy::Proxy::Proxy(zappy::AIClient &ia, zappy::Zappy &zap): _ia(ia), _ready(false), _zap(zap),
     _function_ptr({
                           {zappy::RequestType::FORWARD, [] () -> int {
                             srv_write("FORWARD\n");
@@ -23,8 +22,8 @@ zappy::Proxy::Proxy(zappy::AIClient &ia, zappy::Zappy &zap): _ia(ia), _ready(fal
                                 return 0;
                           }}
 
-                  });
-}
+                  })
+{ }
 
 zappy::Proxy::~Proxy() {}
 

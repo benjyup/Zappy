@@ -5,8 +5,26 @@
 #include "server.hpp"
 #include "proxy.hpp"
 
+
+
 zappy::Proxy::Proxy(zappy::AIClient &ia, zappy::Zappy &zap): _ia(ia), _ready(false), _zap(zap)
-{}
+{
+    _function_ptr({
+                          {zappy::RequestType::FORWARD, [] () -> int {
+                            srv_write("FORWARD\n");
+                              return 0;
+                          }},
+                          {zappy::RequestType::LEFT, [] () -> int {
+                              srv_write("LEFT\n");
+                                return 0;
+                          }},
+                          {zappy::RequestType::RIGHT, [] () -> int {
+                              srv_write("RIGHT\n");
+                                return 0;
+                          }}
+
+                  });
+}
 
 zappy::Proxy::~Proxy() {}
 
@@ -54,7 +72,10 @@ void zappy::Proxy::update() {
             return;
         }
     }
+
 }
+
+
 
 template<typename T>
 zappy::Request<T>::Request(RequestType type): _type(type) {

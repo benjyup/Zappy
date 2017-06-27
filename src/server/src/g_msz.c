@@ -29,6 +29,7 @@ int	bct_f(int x, int y, t_env *env, t_client *client)
 
   size = get_size_map(x, y, env);
   size += 1;
+  printf("bct_f %d\n", size);
   size += strlen("bct ");
   if ((str = malloc(size + 1)) == NULL)
     {
@@ -54,9 +55,17 @@ int	g_bct(t_env *env, t_client *client, t_list **current)
   int	y;
 
   (void)current;
-  x = atoi(client->split_cmd[1]);
-  y = atoi(client->split_cmd[2]);
-  bct_f(x, y, env, client);
+  if (client->split_cmd[1] == NULL || client->split_cmd[2] == NULL)
+    g_sbp(client);
+  else
+    {
+      x = atoi(client->split_cmd[1]);
+      y = atoi(client->split_cmd[2]);
+      if (x < 0 || y < 0)
+	g_sbp(client);
+      else
+	bct_f(x, y, env, client);
+    }
   return (1);
 }
 
@@ -73,10 +82,10 @@ int	g_mct(t_env *env, t_client *client, t_list **current)
       while (y < env->arg.height)
 	{
 	  bct_f(x, y, env, client);
-	  ++y;
+	  y++;
 	}
       y = 0;
-      ++x;
+      x++;
     }
   return (1);
 }
@@ -88,7 +97,6 @@ int	g_tna(t_env *env, t_client *client, t_list **current)
 
   i = 0;
   (void)current;
-  (void)client;
   while (i < env->arg.nb_team)
     {
       if ((str = malloc(strlen(env->arg.team[i].team_name) + 6)) == NULL)
@@ -99,6 +107,7 @@ int	g_tna(t_env *env, t_client *client, t_list **current)
       sprintf(str, "%s %s\n", "tna ", env->arg.team[i].team_name);
       my_send(client, str);
       free(str);
+      i++;
     }
   return (1);
 }

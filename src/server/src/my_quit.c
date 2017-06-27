@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 19 22:28:44 2017 vincent.mesquita@epitech.eu
-** Last update Thu Jun 22 17:03:38 2017 Gregoire Renard
+** Last update Mon Jun 26 14:47:48 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -30,7 +30,7 @@ int                             my_quit(t_env *env,
   t_list                        *prev;
 
   (void)current;
-  if (client->name_team != NULL)
+  if (client->name_team != NULL && client->type != monitor)
     {
       erase_in_map(env, client);
       find_team(env, client);

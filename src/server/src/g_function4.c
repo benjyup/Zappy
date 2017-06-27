@@ -13,8 +13,8 @@ int	get_size_map(int x, int y, t_env *env)
   size += sprintf(buff, " %d", env->map[y][x].resource[MENDIANE]);
   size += sprintf(buff, " %d", env->map[y][x].resource[PHIRAS]);
   size += sprintf(buff, " %d", env->map[y][x].resource[THYSTAME]);
-  size += sprintf(buff, "%d", x);
-  size += sprintf(buff, "%d", y);
+  size += sprintf(buff, " %d", x);
+  size += sprintf(buff, " %d", y);
   return (size);
 }
 
@@ -28,6 +28,11 @@ int		g_ppo(t_env *env, t_client *client, t_list **current)
   int		n;
 
   (void)env;
+  if (client->split_cmd[1] == NULL)
+    {
+      g_sbp(client);
+      return (1);
+    }
   n = atoi(client->split_cmd[1]);
   cli_temp = search_client(current, n, env);
   size = sprintf(buff, "%d%d%d\n", n, cli_temp->pos.x, cli_temp->pos.y);

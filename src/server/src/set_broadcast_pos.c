@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 26 09:09:52 2017 Gregoire Renard
-** Last update Mon Jun 26 12:14:18 2017 Gregoire Renard
+** Last update Mon Jun 26 20:20:12 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -27,28 +27,23 @@ static void	right_turn(t_client *client,
     pos->x++;
 }
 
-t_pos		set_broadcast_pos(t_env *env,
+void		set_broadcast_pos(t_env *env,
 				  t_client *client,
 				  t_pos *pos,
-				  int decale)
+				  char *message)
 {
-  t_pos		tmp;
-  
-  if (decale == 1)
+  if (pos->x == client->pos.x && pos->y == client->pos.y)
     {
       pos->x += client->dir.x;
       pos->y += client->dir.y;
     }
-  right_turn(client, pos);
-  tmp.x = pos->x;
-  tmp.y = pos->y;  
-  if (tmp.x < 0)
-    tmp.x = env->arg.width - 1;
   else
-    tmp.x = tmp.x % env->arg.width;
-  if (tmp.y < 0)
-    tmp.y = env->arg.height - 1;
+    right_turn(client, pos);
+  if ((pos->x == client->pos.x + 1 && pos->y == client->pos.y)
+      || (pos->x == client->pos.x - 1 && pos->y == client->pos.y)
+      || (pos->x == client->pos.x && pos->y == client->pos.y - 1)
+      || (pos->x == client->pos.x && pos->y == client->pos.y + 1))
+    line_detection(env, client, pos, message);
   else
-    tmp.y = tmp.y % env->arg.height;
-  return (tmp);
+    square_detection(env, client, pos, message);
 }

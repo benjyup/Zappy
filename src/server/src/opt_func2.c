@@ -5,12 +5,12 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 14:31:23 2017 Gregoire Renard
-** Last update Wed Jun 21 14:40:08 2017 Gregoire Renard
+** Last update Mon Jun 26 16:38:25 2017 Gregoire Renard
 */
 
 #include "server.h"
 
-int		count_len(char **argv, int cpt)
+static int	count_len(char **argv, int cpt)
 {
   int		save;
 
@@ -22,6 +22,34 @@ int		count_len(char **argv, int cpt)
       cpt++;
     }
   return (cpt - save);
+}
+
+static int	check_double(t_env *env)
+{
+  int		cpt;
+  int		cpt2;
+  
+  cpt = 0;
+  while (cpt != env->arg.nb_team)
+    {
+      if ((strcmp("GRAPHIC", env->arg.team[cpt].team_name)) == 0)
+	return (ERROR);
+      cpt++;
+    }
+  cpt = 0;
+  while (cpt != env->arg.nb_team)
+    {
+      cpt2 = cpt + 1;
+      while (cpt2 != env->arg.nb_team)
+	{
+	  if ((strcmp(env->arg.team[cpt].team_name,
+		      env->arg.team[cpt2].team_name)) == 0)
+	    return (ERROR);
+	  cpt2++;
+	}
+      cpt++;
+    }
+  return (SUCCESS);
 }
 
 int		opt_n(t_env *env,
@@ -45,6 +73,8 @@ int		opt_n(t_env *env,
       cpt_name++;
       *cpt = *cpt + 1;
     }
+  if ((check_double(env)) == ERROR)
+    return (printf_error("Error : team name invalid"));
   return (SUCCESS);
 }
 

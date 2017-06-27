@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 19 22:55:30 2017 vincent.mesquita@epitech.eu
-** Last update Mon Jun 26 14:41:06 2017 Gregoire Renard
+** Last update Mon Jun 26 14:46:41 2017 Gregoire Renard
 */
 
 #include <string.h>
@@ -34,7 +34,10 @@ int             my_exec(t_env *env,
 	}
       i += 1;
     }
-  my_send(client, KO);
+  if (client->type == monitor)
+    my_send(client, SUC);
+  else
+    my_send(client, KO);
   my_free_wordtab(client->split_cmd);
   return (ERROR);
 }

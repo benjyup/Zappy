@@ -32,7 +32,11 @@ namespace  Client
       minerals1,
       minerals2,
       minerals3,
-      rock
+      rock,
+      sky,
+      desert,
+      stone,
+      water
     };
 
     GraphicalLib();
@@ -62,7 +66,10 @@ namespace  Client
     void			dying(int id);
     void			uping(int id);
 
-    void set_text2(const irr::core::stringw &_text2, bool newLine);
+    void			initDeco();
+    void 			initText();
+    void 			initMesh();
+    void			set_text2(const irr::core::stringw &_text2, bool newLine);
 
    private:
     irr::IrrlichtDevice				*_device;

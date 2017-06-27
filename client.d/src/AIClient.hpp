@@ -56,7 +56,6 @@ namespace zappy
     bool 							_isNeeded(t_resource);
     void 							_go(unsigned int tile_number);
 
-    std::list<>							;
     Proxy                           				*_prox;
   };
 }

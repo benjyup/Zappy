@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Tue Jun 27 15:21:14 2017 Gregoire Renard
+** Last update Tue Jun 27 17:31:43 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -264,5 +264,6 @@ void			square_detection(t_env *env, t_client *client,
 void			send_to_all_user(t_env *env, t_pos pos,
 					 t_client *client, char *message);
 int			write_component(t_look *look, t_env *env);
-
+void			set_pos_start(t_env *env, t_client *client,
+				      t_look *look);
 #endif /* !SERVER_H_ */

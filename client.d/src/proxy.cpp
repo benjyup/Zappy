@@ -36,6 +36,7 @@ void zappy::Proxy::update() {
     {
         if (!input.empty())
         {
+            std::cout << input << std::endl;
             _team = std::stoul(input);
             std::cout << "team : " << _team<< std::endl;
             step += 1;
@@ -53,4 +54,14 @@ void zappy::Proxy::update() {
             return;
         }
     }
+}
+
+template<typename T>
+zappy::Request<T>::Request(RequestType type): _type(type) {
+
+}
+
+template<typename T>
+zappy::Request<T>::~Request() {
+
 }

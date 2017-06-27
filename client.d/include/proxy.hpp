@@ -11,6 +11,28 @@
 namespace zappy
 {
     class AIClient;
+
+    typedef enum  {
+        FORWARD,
+        RIGHT,
+        LEFT,
+        LOOK,
+        BROADCAST
+    } RequestType;
+
+    template <typename T>
+    class Request
+    {
+    public:
+        Request(RequestType);
+
+        ~Request();
+
+    protected:
+        RequestType _type;
+        T           _data;
+    };
+
     class Proxy
     {
     public:

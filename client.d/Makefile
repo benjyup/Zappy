@@ -312,33 +312,6 @@ src/mendatory/functionParse.c.s:
 	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/functionParse.c.s
 .PHONY : src/mendatory/functionParse.c.s
 
-src/mendatory/function_parser.o: src/mendatory/function_parser.cpp.o
-
-.PHONY : src/mendatory/function_parser.o
-
-# target to build an object file
-src/mendatory/function_parser.cpp.o:
-	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/function_parser.cpp.o
-.PHONY : src/mendatory/function_parser.cpp.o
-
-src/mendatory/function_parser.i: src/mendatory/function_parser.cpp.i
-
-.PHONY : src/mendatory/function_parser.i
-
-# target to preprocess a source file
-src/mendatory/function_parser.cpp.i:
-	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/function_parser.cpp.i
-.PHONY : src/mendatory/function_parser.cpp.i
-
-src/mendatory/function_parser.s: src/mendatory/function_parser.cpp.s
-
-.PHONY : src/mendatory/function_parser.s
-
-# target to generate assembly for a file
-src/mendatory/function_parser.cpp.s:
-	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/mendatory/function_parser.cpp.s
-.PHONY : src/mendatory/function_parser.cpp.s
-
 src/mendatory/my_stack.o: src/mendatory/my_stack.c.o
 
 .PHONY : src/mendatory/my_stack.o
@@ -447,6 +420,33 @@ src/parser.cpp.s:
 	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/parser.cpp.s
 .PHONY : src/parser.cpp.s
 
+src/proxy.o: src/proxy.cpp.o
+
+.PHONY : src/proxy.o
+
+# target to build an object file
+src/proxy.cpp.o:
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/proxy.cpp.o
+.PHONY : src/proxy.cpp.o
+
+src/proxy.i: src/proxy.cpp.i
+
+.PHONY : src/proxy.i
+
+# target to preprocess a source file
+src/proxy.cpp.i:
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/proxy.cpp.i
+.PHONY : src/proxy.cpp.i
+
+src/proxy.s: src/proxy.cpp.s
+
+.PHONY : src/proxy.s
+
+# target to generate assembly for a file
+src/proxy.cpp.s:
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/proxy.cpp.s
+.PHONY : src/proxy.cpp.s
+
 src/zappy.o: src/zappy.cpp.o
 
 .PHONY : src/zappy.o
@@ -504,9 +504,6 @@ help:
 	@echo "... src/mendatory/functionParse.o"
 	@echo "... src/mendatory/functionParse.i"
 	@echo "... src/mendatory/functionParse.s"
-	@echo "... src/mendatory/function_parser.o"
-	@echo "... src/mendatory/function_parser.i"
-	@echo "... src/mendatory/function_parser.s"
 	@echo "... src/mendatory/my_stack.o"
 	@echo "... src/mendatory/my_stack.i"
 	@echo "... src/mendatory/my_stack.s"
@@ -519,6 +516,9 @@ help:
 	@echo "... src/parser.o"
 	@echo "... src/parser.i"
 	@echo "... src/parser.s"
+	@echo "... src/proxy.o"
+	@echo "... src/proxy.i"
+	@echo "... src/proxy.s"
 	@echo "... src/zappy.o"
 	@echo "... src/zappy.i"
 	@echo "... src/zappy.s"

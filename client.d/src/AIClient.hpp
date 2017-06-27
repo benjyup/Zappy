@@ -10,11 +10,13 @@
 #include <unordered_map>
 #include <mendatory/client.h>
 #include <vector>
+#include "proxy.hpp"
 #include "commun.h"
 
 namespace zappy
 {
 
+    class Proxy;
   class AIClient
   {
    public:
@@ -30,6 +32,8 @@ namespace zappy
     AIClient(const t_arg &args);
     ~AIClient();
 
+      void  ProxyRegister(Proxy *prox);
+        void upade();
    private:
 
     static const 	std::vector<SIncantation>		INCANTATIONS;
@@ -46,6 +50,7 @@ namespace zappy
     void							_whatdoINeed();
     void							_eat();
     void							_getInventory();
+    Proxy                           *_prox;
   };
 }
 

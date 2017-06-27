@@ -10,16 +10,17 @@
 int main(int ac, char **av) {
     try {
         zappy::Zappy project(ac, av);
-        project.run();
-	zappy::AIClient(project.getArgs());
-/*        srv_write("coucou\r\n");
-        srv_write("this is a test\r\n");
-        srv_write("jean-Adrien\r\n");
-        char *s;
-        while(!(s = srv_read()));
-        printf("%s\n", s);  */
-        //project.console();
-        project.stop();
+        zappy::AIClient ia(project.getArg());
+        zappy::Proxy    prx(ia, project);
+        int err = 0;
+        while (err != 1) {
+            err = project.update();
+            prx.update();
+            ia.upade();
+            //srv_write("coucou\r\n");
+            //project.console();
+        }
+        std::cout << "Connection with the remote Host has been loose." << std::endl;
     }
     catch (std::exception &e)
     {

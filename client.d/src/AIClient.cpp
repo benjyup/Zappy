@@ -162,10 +162,39 @@ void 		zappy::AIClient::_look()
     {
       for (const auto &resource : _currentLook[i])
 	{
-	  if (resource.second > 0 && _isNeeded(resource.first));
+	  if (resource.second > 0 && _isNeeded(resource.first))
+	    {
+	      _go(i);
+	      return ;
+	    }
 	}
       i += 1;
     }
+}
+
+void zappy::AIClient::_go(unsigned int tile_number)
+{
+  int           i = 0;
+  int           first = 0;
+  int           middle = 0;
+  int           length = 1;
+  int           inc = 2;
+
+  while (i < 3 && tile_number >= first + length)
+    {
+      first += length;
+      length += 2;
+      middle += inc;
+      inc += 2;
+      i += 1;
+    }
+  printf("\n %d Forward, first = %d, middle = %d\n", i, first, middle);
+  int move = middle - tile_number;
+  printf("move = %d\n", move);
+  if (move > 0)
+    printf("%d left\n", (move));
+  else if (move < 0)
+      printf("%d right\n", (move * -1));
 }
 
 void 			zappy::AIClient::_makeInventory(const std::string &resources)

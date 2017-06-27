@@ -12,9 +12,12 @@
 #include <vector>
 #include "proxy.hpp"
 #include "commun.h"
+#include "Request.hpp"
 
 namespace zappy
 {
+    
+  class Proxy;
   class AIClient
   {
    public:
@@ -30,8 +33,8 @@ namespace zappy
     AIClient(const t_arg &args);
     ~AIClient();
 
-      void  ProxyRegister(Proxy *prox, int x, int y);
-        zappy::RequestType updade();
+    void  ProxyRegister(Proxy *prox, int x, int y);
+    zappy::RequestType updade();
    private:
 
     static const 	std::vector<SIncantation>		INCANTATIONS;
@@ -52,7 +55,9 @@ namespace zappy
     void							_getInventory();
     void 							_makeInventory(const std::string &resources);
     bool 							_isNeeded(t_resource);
-    Proxy                           *_prox;
+    void 							_go(unsigned int tile_number);
+
+    Proxy                           				*_prox;
   };
 }
 

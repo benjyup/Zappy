@@ -63,7 +63,7 @@ void zappy::Proxy::update(zappy::RequestType order) {
             std::cout << "team : " << _team<< std::endl;
             std::cout << "x : " << _x << std::endl << "y : " << _y << std::endl;
             step += 1;
-            _ia.ProxyRegister(this, _x, _y);
+            //_ia.ProxyRegister(this, _x, _y);
             return;
         }
     }
@@ -73,7 +73,3 @@ void zappy::Proxy::update(zappy::RequestType order) {
         _function_ptr[order]();
     }
 }
-
-
-
-

@@ -11,7 +11,8 @@
 
 namespace zappy
 {
-    class AIClient;
+class AIClient;
+
     class Proxy
     {
     public:

@@ -13,7 +13,7 @@
 
 # include "server.h"
 
-# define NBR_OF_COMMANDS 17
+# define NBR_OF_COMMANDS 18
 
 # define FORWARD	"Forward"
 # define RIGHT		"Right"
@@ -34,6 +34,7 @@
 # define PLV		"plv"
 # define PIN		"pin"
 # define EJECT		"Eject"
+# define FORK		"Fork"
 
 typedef int		(*t_exec_cmd)(t_env *env,
 				      t_client *client,
@@ -66,6 +67,7 @@ static t_cmd		exec_array[NBR_OF_COMMANDS] = {
   {TAKE, take_func, player},
   {SET, set_func, player},
   {EJECT, eject_func, player}
+  {FORK, fork_func, player}
 };
 
 #endif /* !COMMANDS_H_ */

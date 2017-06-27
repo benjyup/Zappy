@@ -1,3 +1,13 @@
+/*
+** g_function3.c for zappy in /home/rene_r/Cours/Semestre_4/System_Unix/RESEAU/PSU_2016_zappy/src/server/src
+** 
+** Made by rodrigue rene
+** Login   <rene_r@epitech.net>
+** 
+** Started on  Tue Jun 27 17:16:59 2017 rodrigue rene
+** Last update Tue Jun 27 17:17:25 2017 rodrigue rene
+*/
+
 #include <stdio.h>
 #include "server.h"
 
@@ -36,7 +46,7 @@ int	get_size(t_client *cli_temp, int n)
 {
   char	buff[13];
   int	size;
-  
+
   size = sprintf(buff, " %d\n", n);
   size += sprintf(buff, " %d", cli_temp->inventory[FOOD]);
   size += sprintf(buff, " %d", cli_temp->inventory[LINEMATE]);

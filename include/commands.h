@@ -13,7 +13,7 @@
 
 # include "server.h"
 
-# define NBR_OF_COMMANDS 16
+# define NBR_OF_COMMANDS 17
 
 # define FORWARD	"Forward"
 # define RIGHT		"Right"
@@ -33,6 +33,7 @@
 # define PPO		"ppo"
 # define PLV		"plv"
 # define PIN		"pin"
+# define EJECT		"Eject"
 
 typedef int		(*t_exec_cmd)(t_env *env,
 				      t_client *client,
@@ -59,11 +60,12 @@ static t_cmd		exec_array[NBR_OF_COMMANDS] = {
   {RIGHT, &right_func, player},
   {LEFT, &left_func, player},
   {CONNECT_NBR, &connect_nbr_func, player},
-  {INVENTORY, &inventory_func, player},
-  {LOOK, &look_func, player},
-  {BROADCAST, &broadcast_func, player},
-  {TAKE, &take_func, player},
-  {SET, &set_func, player}
+  {INVENTORY, inventory_func, player},
+  {LOOK, look_func, player},
+  {BROADCAST, broadcast_func, player},
+  {TAKE, take_func, player},
+  {SET, set_func, player},
+  {EJECT, eject_func, player}
 };
 
 #endif /* !COMMANDS_H_ */

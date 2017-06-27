@@ -25,3 +25,41 @@ int             g_pnw(t_env *env, t_client *client, t_list **current)
   free(str);
   return (1);
 }
+
+int             g_pdr(t_env *env, t_client *client, t_list **current, int ress)
+{
+  char          *str;
+  char          buff[13];
+  int           size; 
+
+  size = sprintf(buff, " %d", client->socket);
+  size += 7;
+  if ((str = malloc(size)) == NULL)
+    {
+      perror(MALLOC);
+      exit(-1);
+    }
+  sprintf(str, "%s %d %d\n", "pdr ", client->socket, ress);
+  send_graphical(current, env, str);
+  free(str);
+  return (1);
+}
+
+int             g_pgt(t_env *env, t_client *client, t_list **current, int ress)
+{
+  char          *str;
+  char          buff[13];
+  int           size; 
+
+  size = sprintf(buff, " %d", client->socket);
+  size += 7;
+  if ((str = malloc(size)) == NULL)
+    {
+      perror(MALLOC);
+      exit(-1);
+    }
+  sprintf(str, "%s %d %d\n", "pgt ", client->socket, ress);
+  send_graphical(current, env, str);
+  free(str);
+  return (1);
+}

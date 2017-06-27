@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Mon Jun 26 20:06:03 2017 Gregoire Renard
+** Last update Tue Jun 27 15:21:14 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -126,6 +126,15 @@ typedef struct		s_client
   t_client_type		type;
 }			t_client;
 
+typedef	struct		s_look
+{
+  int			range;
+  char			*message;
+  int			cpt;
+  t_pos			tmp;
+  t_pos			target;
+}			t_look;
+  
 typedef struct		s_msg
 {
   char			*msg;
@@ -238,11 +247,22 @@ void			know_team(t_env *env, t_client *client);
 int			g_pnw(t_env *env, t_client *client, t_list **current);
 int			set_func(t_env *env, t_client *client, t_list **current);
 int			take_func(t_env *env, t_client *client, t_list **current);
+int			g_pdr(t_env *env, t_client *client, t_list **current, int ress);
+int			g_pgt(t_env *env, t_client *client, t_list **current, int ress);
+void			set_new_pos_f(t_env *env, t_client *client,
+				      t_pos *new_pos);
+void			set_new_pos_l(t_env *env, t_client *client,
+				      t_pos *new_pos);
+void			set_new_pos_r(t_env *env, t_client *client,
+				      t_pos *new_pos);
+int			eject_func(t_env *env, t_client *client, t_list **current);
+int			forward_eject(t_env *env, t_client *client, t_pos *dir);
 void			line_detection(t_env *env, t_client *client,
 				       t_pos *pos, char *message);
 void			square_detection(t_env *env, t_client *client,
 					 t_pos *pos, char *message);
 void			send_to_all_user(t_env *env, t_pos pos,
 					 t_client *client, char *message);
+int			write_component(t_look *look, t_env *env);
 
 #endif /* !SERVER_H_ */

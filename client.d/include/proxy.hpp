@@ -17,7 +17,8 @@ namespace zappy
         RIGHT,
         LEFT,
         LOOK,
-        BROADCAST
+        BROADCAST,
+        NOOP
     } RequestType;
 
     template <typename T>
@@ -39,7 +40,7 @@ namespace zappy
         Proxy(zappy::AIClient &, zappy::Zappy &);
         ~Proxy();
 
-        void update();
+        void update(zappy::RequestType order);
     private:
         std::map<zappy::RequestType, std::function<int()>> _function_ptr;
         bool            _ready;

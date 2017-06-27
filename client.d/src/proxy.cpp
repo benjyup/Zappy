@@ -20,6 +20,9 @@ zappy::Proxy::Proxy(zappy::AIClient &ia, zappy::Zappy &zap): _ia(ia), _ready(fal
                           {zappy::RequestType::RIGHT, [] () -> int {
                               srv_write("RIGHT\n");
                                 return 0;
+                          }},
+                          {zappy::RequestType::NOOP, [] () -> int {
+                              return 0;
                           }}
 
                   })
@@ -27,7 +30,7 @@ zappy::Proxy::Proxy(zappy::AIClient &ia, zappy::Zappy &zap): _ia(ia), _ready(fal
 
 zappy::Proxy::~Proxy() {}
 
-void zappy::Proxy::update() {
+void zappy::Proxy::update(zappy::RequestType order) {
     static int step = 0;
     char *s =   srv_read();
     std::string     input;
@@ -71,7 +74,10 @@ void zappy::Proxy::update() {
             return;
         }
     }
-
+    if (step == 4)
+    {
+        _function_ptr[order]();
+    }
 }
 
 

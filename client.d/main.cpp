@@ -5,7 +5,7 @@
 #include <iostream>
 #include "zappy.hpp"
 #include "server.hpp"
-#include "src/AIClient.hpp"
+#include "AIClient.hpp"
 
 int main(int ac, char **av) {
     try {

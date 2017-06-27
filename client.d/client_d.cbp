@@ -88,6 +88,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/AIClient.hpp">
+			<Option target="zappy_ai"/>
+		</Unit>
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/Request.hpp">
 			<Option target="zappy_ai"/>
 		</Unit>
@@ -125,9 +128,6 @@
 			<Option target="zappy_ai"/>
 		</Unit>
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/AIClient.cpp">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/AIClient.hpp">
 			<Option target="zappy_ai"/>
 		</Unit>
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/Request.cpp">

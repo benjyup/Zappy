@@ -6,11 +6,12 @@
 #define CLIENT_D_PROXY_HPP
 
 #include "zappy.hpp"
-#include "../src/AIClient.hpp"
+#include "AIClient.hpp"
 #include "Request.hpp"
 
 namespace zappy
 {
+    class AIClient;
     class Proxy
     {
     public:

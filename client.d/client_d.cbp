@@ -94,6 +94,9 @@
 		<Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/include/ZappyException.hpp">
 			<Option target="zappy_ai"/>
 		</Unit>
+		<Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/include/mendatory/AIClient.hpp">
+			<Option target="zappy_ai"/>
+		</Unit>
 		<Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/include/mendatory/argument.h">
 			<Option target="zappy_ai"/>
 		</Unit>
@@ -125,9 +128,6 @@
 			<Option target="zappy_ai"/>
 		</Unit>
 		<Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/src/AIClient.cpp">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/src/AIClient.hpp">
 			<Option target="zappy_ai"/>
 		</Unit>
 		<Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/src/Request.cpp">

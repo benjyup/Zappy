@@ -6,7 +6,7 @@
 #define CLIENT_D_PROXY_HPP
 
 #include "zappy.hpp"
-#include "../src/AIClient.hpp"
+#include "mendatory/AIClient.hpp"
 #include "Request.hpp"
 
 namespace zappy

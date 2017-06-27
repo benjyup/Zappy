@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <cctype>
 #include <string>
-#include "AIClient.hpp"
+#include "mendatory/AIClient.hpp"
 
 
 const std::vector<zappy::AIClient::SIncantation>	zappy::AIClient::INCANTATIONS = {

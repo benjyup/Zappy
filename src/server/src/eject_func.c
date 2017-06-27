@@ -5,7 +5,7 @@
 ** Login   <rene_r@epitech.net>
 ** 
 ** Started on  Tue Jun 27 17:15:03 2017 rodrigue rene
-** Last update Tue Jun 27 17:15:53 2017 rodrigue rene
+** Last update Tue Jun 27 19:28:08 2017 Gregoire Renard
 */
 
 #include <stdio.h>
@@ -25,17 +25,17 @@ static int	invert_dir(int dir)
 }
 
 static void	eject_a_client(t_client *client, t_pos *dir_p,
-				 t_env *env, int dir)
+			       t_env *env, int dir)
 {
-char	buff[10];
-  
-sprintf(buff, "eject: %d", invert_dir(dir));
-forward_eject(env, client, dir_p);
-my_send(client, buff);
+  char	buff[10];
+
+  sprintf(buff, "eject: %d", invert_dir(dir));
+  forward_eject(env, client, dir_p);
+  my_send(client, buff);
 }
 
 static int	eject_each_client(t_env *env, int dir,
-				    t_pos *pos_temp, t_pos *dir_p)
+				  t_pos *pos_temp, t_pos *dir_p)
 {
   int	i;
 
@@ -43,7 +43,7 @@ static int	eject_each_client(t_env *env, int dir,
   while (env->map[pos_temp->y][pos_temp->x].clients[i] != NULL)
     {
       eject_a_client(env->map[pos_temp->y][pos_temp->x].clients[i],
-		       dir_p, env, dir);
+		     dir_p, env, dir);
       i++;
     }
   return (SUCCESS);

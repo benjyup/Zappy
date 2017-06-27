@@ -10,6 +10,7 @@
 #include <unordered_map>
 #include <mendatory/client.h>
 #include <vector>
+#include <list>
 #include "proxy.hpp"
 #include "commun.h"
 #include "Request.hpp"
@@ -56,6 +57,7 @@ namespace zappy
     void 							_makeInventory(const std::string &resources);
     bool 							_isNeeded(t_resource);
     void 							_go(unsigned int tile_number);
+    std::list<RequestType>					_todo;
 
     Proxy                           				*_prox;
   };

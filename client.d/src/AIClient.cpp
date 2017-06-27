@@ -53,16 +53,7 @@ zappy::AIClient::AIClient(const t_arg &args) :
 	_incantationLevel(0),
 	_prox(NULL)
 {
-  /* char *str;
-
-   while (!(str = srv_read()));
-   std::cout << "J'ai reçu " << str << std::endl;
-   srv_write(this->_args.team);
-   while (!(str = srv_read()));
-   std::cout << "J'ai reçu " << str << std::endl;
-   _getWorldInformation(str);
-   _play();*/
-
+  _todo.push_back(LOOK);
 }
 
 zappy::AIClient::~AIClient()
@@ -172,13 +163,14 @@ void 		zappy::AIClient::_look()
     }
 }
 
-void zappy::AIClient::_go(unsigned int tile_number)
+void 			zappy::AIClient::_go(unsigned int tile_number)
 {
-  int           i = 0;
-  int           first = 0;
-  int           middle = 0;
-  int           length = 1;
-  int           inc = 2;
+  int           	i = 0;
+  int           	first = 0;
+  int           	middle = 0;
+  int           	length = 1;
+  int           	inc = 2;
+  int 			move;
 
   while (i < 3 && tile_number >= first + length)
     {
@@ -188,13 +180,16 @@ void zappy::AIClient::_go(unsigned int tile_number)
       inc += 2;
       i += 1;
     }
-  printf("\n %d Forward, first = %d, middle = %d\n", i, first, middle);
-  int move = middle - tile_number;
-  printf("move = %d\n", move);
+  while (i > 0)
+    {
+      _todo.push_back(FORWARD);
+      i -= 1;
+    }
+  move = middle - tile_number;
   if (move > 0)
-    printf("%d left\n", (move));
+    _todo.push_back(LEFT);
   else if (move < 0)
-      printf("%d right\n", (move * -1));
+      _todo.push_back(RIGHT);
 }
 
 void 			zappy::AIClient::_makeInventory(const std::string &resources)
@@ -210,13 +205,20 @@ void 			zappy::AIClient::_makeInventory(const std::string &resources)
     }
 }
 
-bool zappy::AIClient::_isNeeded(t_resource resource)
+bool			zappy::AIClient::_isNeeded(t_resource resource)
 {
   return   INCANTATIONS[_level].resources.find(resource)->second > 0;
 }
 
-zappy::RequestType zappy::AIClient::updade() {
+zappy::RequestType 	zappy::AIClient::updade() {
+  RequestType		request = NOOP;
+
   if (_prox == NULL)
     return zappy::NOOP;
-  return zappy::FORWARD;
+  if (!(_todo.empty()))
+    {
+      request = _todo.front();
+      _todo.pop_front();
+    }
+  return request;
 }

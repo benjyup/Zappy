@@ -25,6 +25,22 @@ static void	set_new_pos(t_env *env, t_client *client,
     new_pos->x = 0;
 }
 
+static void	set_new_pos_eject(t_env *env, t_client *client,
+				  t_pos *new_pos, t_pos *dir)
+{
+  new_pos->x = client->pos.x + dir->x;
+  new_pos->y = client->pos.y + dir->y;
+  if (new_pos->x < 0)
+    new_pos->x = env->arg.width - 1;
+  if (new_pos->y < 0)
+    new_pos->y = env->arg.height - 1;
+  if (new_pos->y >= env->arg.height)
+    new_pos->y = 0;
+  if (new_pos->x >= env->arg.width)
+    new_pos->x = 0;
+}
+
+
 int		forward_func(t_env *env, t_client *client,
 			     t_list **current)
 {
@@ -45,5 +61,23 @@ int		forward_func(t_env *env, t_client *client,
     }
   else
     my_send(client, KO);
+  return (SUCCESS);
+}
+
+int		forward_eject(t_env *env, t_client *client, t_pos *dir)
+{
+  t_pos		new_pos;
+
+  set_new_pos_eject(env, client, &new_pos, dir);
+  if (env->map[new_pos.y][new_pos.x].name_team == NULL
+      || (env->map[new_pos.y][new_pos.x].name_team != NULL
+	  && (strcmp(env->map[new_pos.y][new_pos.x].name_team,
+		     client->name_team)) == 0))
+    {
+      erase_in_map(env, client);
+      client->pos.y = new_pos.y;
+      client->pos.x = new_pos.x;
+      add_in_map(env, client);
+    }
   return (SUCCESS);
 }

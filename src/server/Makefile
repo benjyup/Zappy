@@ -56,6 +56,7 @@ SRCS	=	src/main.c \
 		src/g_pnw.c \
 		src/set_func.c \
 		src/take_func.c \
+		src/eject_func.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

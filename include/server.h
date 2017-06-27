@@ -238,6 +238,14 @@ void			know_team(t_env *env, t_client *client);
 int			g_pnw(t_env *env, t_client *client, t_list **current);
 int			set_func(t_env *env, t_client *client, t_list **current);
 int			take_func(t_env *env, t_client *client, t_list **current);
-
-
+int			g_pdr(t_env *env, t_client *client, t_list **current, int ress);
+int			g_pgt(t_env *env, t_client *client, t_list **current, int ress);
+void			set_new_pos_f(t_env *env, t_client *client,
+				      t_pos *new_pos);
+void			set_new_pos_l(t_env *env, t_client *client,
+				      t_pos *new_pos);
+void			set_new_pos_r(t_env *env, t_client *client,
+				      t_pos *new_pos);
+int			eject_func(t_env *env, t_client *client, t_list **current);
+int			forward_eject(t_env *env, t_client *client, t_pos *dir);
 #endif /* !SERVER_H_ */

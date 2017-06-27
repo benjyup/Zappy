@@ -73,12 +73,3 @@ void zappy::Proxy::update(zappy::RequestType order) {
         _function_ptr[order]();
     }
 }
-
-<<<<<<< HEAD
-template<typename T>
-zappy::Request<T>::Request(RequestType type): _type(type) {
-=======
-
-
->>>>>>> faee52fc203a81122426f7f86dff25c59bf09f6c
-

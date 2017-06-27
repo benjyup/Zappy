@@ -12,10 +12,10 @@
 #include <vector>
 #include "proxy.hpp"
 #include "commun.h"
+#include "Request.hpp"
 
 namespace zappy
 {
-
   class Proxy;
 
   class AIClient

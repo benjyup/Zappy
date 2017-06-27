@@ -41,24 +41,28 @@ const 	std::unordered_map<std::string, t_resource>	zappy::AIClient::STR_TO_RESOU
 	{"thystame", THYSTAME}
 };
 
-void zappy::AIClient::ProxyRegister(Proxy *prox) {
-    _prox = prox;
+void zappy::AIClient::ProxyRegister(Proxy *prox, int x, int y) {
+  _prox = prox;
+  _worldDimension.first = x;
+  _worldDimension.second = y;
+
 }
 
 zappy::AIClient::AIClient(const t_arg &args) :
+	_level(0),
 	_args(args),
 	_incantationLevel(0),
-    _prox(NULL)
+	_prox(NULL)
 {
- /* char *str;
+  /* char *str;
 
-  while (!(str = srv_read()));
-  std::cout << "J'ai reçu " << str << std::endl;
-  srv_write(this->_args.team);
-  while (!(str = srv_read()));
-  std::cout << "J'ai reçu " << str << std::endl;
-  _getWorldInformation(str);
-  _play();*/
+   while (!(str = srv_read()));
+   std::cout << "J'ai reçu " << str << std::endl;
+   srv_write(this->_args.team);
+   while (!(str = srv_read()));
+   std::cout << "J'ai reçu " << str << std::endl;
+   _getWorldInformation(str);
+   _play();*/
 
 }
 
@@ -87,8 +91,11 @@ void 			zappy::AIClient::_play()
   std::string		response;
   char			*str;
 
+  std::cout << "_play" << std::endl;
   //_whatdoINeed();
   _getInventory();
+  _look();
+  std::cout << "_play" << std::endl;
   while (response != "dead\n")
     {
       if ((str = srv_read()) != nullptr)
@@ -98,11 +105,6 @@ void 			zappy::AIClient::_play()
 	}
     }
   std::cout << "fin" << std::endl;
-}
-
-void zappy::AIClient::_whatdoINeed()
-{
-
 }
 
 void 			zappy::AIClient::_eat()
@@ -115,7 +117,11 @@ void 			zappy::AIClient::_getInventory()
   char			*str;
 
   srv_write("Inventory");
-  while (!(str = srv_read()));
+  if (!(str = srv_read()))
+    {
+      std::cout << "JE QUITTE" << std::endl;
+      return ;
+    }
 
   std::string tmp(str);
 
@@ -130,18 +136,9 @@ void 			zappy::AIClient::_getInventory()
 
   std::string t(tmp);
   std::transform(tmp.begin(), tmp.end(), tmp.begin(),
-  [](auto c) { return std::tolower(c);});
+		 [](auto c) { return std::tolower(c);});
 
   std::stringstream	ss(tmp);
-/*
-  try {
-
-  //ss >> s;;// >> _inventory[STR_TO_RESOURCES.at(s)];// >> tmp >> _inventory[STR_TO_RESOURCES.at(tmp)] >> tmp >> _inventory[STR_TO_RESOURCES.at(tmp)] >> tmp >>
-     //_inventory[STR_TO_RESOURCES.at(tmp)] >> tmp >> _inventory[STR_TO_RESOURCES.at(tmp)] >>  tmp >> _inventory[STR_TO_RESOURCES.at(tmp)] >>  tmp >> _inventory[STR_TO_RESOURCES.at(tmp)];
-    } catch (...) {
-      std::cout << "s = " << s << std::endl;
-    }
-*/
   for (int i = 0 ; i  < NBR_OF_RESOURCES ; ++i)
     {
       ss >> tmp;
@@ -158,8 +155,40 @@ void 			zappy::AIClient::_getInventory()
     }
 }
 
-void zappy::AIClient::upade() {
-    if (_prox == NULL)
-        return;
-    //untile the proxy hasn't been regisered to the IA -> Do nothing
+void 		zappy::AIClient::_look()
+{
+  int 		i = 0;
+
+  while (i < _currentLook.size())
+    {
+      for (const auto &resource : _currentLook[i])
+	{
+	  if (resource.second > 0 && _isNeeded(resource.first));
+	}
+      i += 1;
+    }
+}
+
+void 			zappy::AIClient::_makeInventory(const std::string &resources)
+{
+  std::stringstream 	ss(resources);
+  std::string		str;
+
+  std::cout << "_makeInventory" << std::endl;
+  while (ss)
+    {
+      ss >> str;
+      std::cout << str << std::endl;
+    }
+}
+
+bool zappy::AIClient::_isNeeded(t_resource resource)
+{
+  return   INCANTATIONS[_level].resources.find(resource)->second > 0;
+}
+
+zappy::RequestType zappy::AIClient::updade() {
+  if (_prox == NULL)
+    return zappy::NOOP;
+  return zappy::FORWARD;
 }

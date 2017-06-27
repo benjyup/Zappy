@@ -9,19 +9,19 @@
 
 zappy::Proxy::Proxy(zappy::AIClient &ia, zappy::Zappy &zap): _ia(ia), _ready(false), _zap(zap),
     _function_ptr({
-                          {zappy::RequestType::FORWARD, [] () -> int {
+                          {zappy::FORWARD, [] () -> int {
                             srv_write("FORWARD\n");
                               return 0;
                           }},
-                          {zappy::RequestType::LEFT, [] () -> int {
+                          {zappy::LEFT, [] () -> int {
                               srv_write("LEFT\n");
                                 return 0;
                           }},
-                          {zappy::RequestType::RIGHT, [] () -> int {
+                          {zappy::RIGHT, [] () -> int {
                               srv_write("RIGHT\n");
                                 return 0;
                           }},
-                          {zappy::RequestType::NOOP, [] () -> int {
+                          {zappy::NOOP, [] () -> int {
                               return 0;
                           }}
 
@@ -57,23 +57,17 @@ void zappy::Proxy::update(zappy::RequestType order) {
         if (!input.empty())
         {
             std::cout << input << std::endl;
-            _team = std::stoul(input);
-            std::cout << "team : " << _team<< std::endl;
-            step += 1;
-            return;
-        }
-    }
-    if (step == 3)
-    {
-        if (!input.empty())
-        {
-            _x = std::stoul(input);
+            _team = std::stoul(input.substr(0, input.find('\n')));
+            _x = std::stoul(input.substr(input.find(' ')));
             _y = std::stoul(input.substr(input.find(' '), input.size() - 1));
+            std::cout << "team : " << _team<< std::endl;
             std::cout << "x : " << _x << std::endl << "y : " << _y << std::endl;
             step += 1;
+            _ia.ProxyRegister(this, _x, _y);
             return;
         }
     }
+
     if (step == 4)
     {
         _function_ptr[order]();

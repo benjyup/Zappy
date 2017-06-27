@@ -5,7 +5,6 @@
 #ifndef CLIENT_D_PROXY_HPP
 #define CLIENT_D_PROXY_HPP
 
-#include "../src/AIClient.hpp"
 #include "zappy.hpp"
 
 namespace zappy
@@ -26,7 +25,6 @@ namespace zappy
     {
     public:
         Request(RequestType);
-
         ~Request();
 
     protected:

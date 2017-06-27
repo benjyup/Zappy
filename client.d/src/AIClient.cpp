@@ -41,8 +41,11 @@ const 	std::unordered_map<std::string, t_resource>	zappy::AIClient::STR_TO_RESOU
 	{"thystame", THYSTAME}
 };
 
-void zappy::AIClient::ProxyRegister(Proxy *prox) {
+void zappy::AIClient::ProxyRegister(Proxy *prox, int x, int y) {
   _prox = prox;
+  _worldDimension.first = x;
+  _worldDimension.second = y;
+
 }
 
 zappy::AIClient::AIClient(const t_arg &args) :
@@ -213,8 +216,8 @@ bool zappy::AIClient::_isNeeded(t_resource resource)
   return   INCANTATIONS[_level].resources.find(resource)->second > 0;
 }
 
-void zappy::AIClient::upade() {
+zappy::RequestType zappy::AIClient::updade() {
   if (_prox == NULL)
-    return;
-  //untile the proxy hasn't been regisered to the IA -> Do nothing
+    return zappy::NOOP;
+  return zappy::FORWARD;
 }

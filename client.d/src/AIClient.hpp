@@ -17,6 +17,7 @@ namespace zappy
 {
 
     class Proxy;
+
   class AIClient
   {
    public:
@@ -33,7 +34,7 @@ namespace zappy
     ~AIClient();
 
       void  ProxyRegister(Proxy *prox);
-        void upade();
+        zappy::RequestType updade();
    private:
 
     static const 	std::vector<SIncantation>		INCANTATIONS;

@@ -69,6 +69,7 @@ int		opt_n(t_env *env,
     {
       if ((env->arg.team[cpt_name].team_name = strdup(argv[*cpt])) == NULL)
 	return (ERROR);
+      env->arg.team[cpt_name].eggs = my_init_list();
       env->arg.team[cpt_name].nb_player = 0;
       cpt_name++;
       *cpt = *cpt + 1;

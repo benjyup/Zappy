@@ -45,7 +45,6 @@ namespace zappy
 
     unsigned int						_level;
     std::pair<size_t, size_t >					_worldDimension;
-    size_t 							_clietnNum;
     t_arg							_args;
     size_t 							_incantationLevel;
     std::unordered_map<t_resource, size_t, std::hash<int>>	_currentInventory;

@@ -219,32 +219,27 @@ zappy::RequestType 	zappy::AIClient::update(std::string input) {
 }
 
 std::vector<std::unordered_map<t_resource, size_t,
-	std::hash<int>>> zappy::AIClient::_lookParse(const std::string &str)
+	std::hash<int>>> 						zappy::AIClient::_lookParse(const std::string &str)
 {
   std::vector<std::unordered_map<t_resource, size_t, std::hash<int>>>   look;
-  std::size_t                                                           pos = 0;
-  std::size_t                                                           begin = 0;
-  int                                                                   nbr = 0;
+  std::size_t                                                           pos = 0, begin = 0;
   std::unordered_map<t_resource, size_t,
-	  std::hash<int>>                                    inventory;
+	  std::hash<int>>                                    		inventory;
+  std::string 								tmp(str.substr(begin, pos - begin));
+
 
   while ((pos = str.find_first_of(",", pos + 1)) != std::string::npos)
     {
-      std::string tmp(str.substr(begin, pos - begin));
+      tmp = str.substr(begin, pos - begin);
       std::stringstream ss(tmp);
-      //std::cout << "tmp = " << tmp << std::endl;
-      //std::cout << "begin = " << begin << std::endl;
-      //std::cout << "pos = " << pos << std::endl;
 
       _extractResources(tmp, inventory);
       look.push_back(inventory);
-      nbr += 1;
       begin = pos + 1;
     }
-  std::string tmp(str.substr(begin, pos));
+  tmp = str.substr(begin, pos);
   _extractResources(tmp, inventory);
   look.push_back(inventory);
-  //std::cout << "tmp = " << tmp << std::endl;
   return look;
 }
 
@@ -256,15 +251,7 @@ void                                            zappy::AIClient::_extractResourc
 
   _initInventory(inventory);
   while (ss >> tmp)
-    {
-      //std::cout << tmp << std::endl;
-      try {
-	  inventory[STR_TO_RESOURCES.at(tmp)] +=  1;
-	  //std::cout << tmp << " ========== " << inventory[STR_TO_RESOURCES.at(tmp)] << std::endl;;
-	} catch (...) {
-	  //std::cout << "Pas ajouter" << std::endl;
-	}
-    }
+    try { inventory[STR_TO_RESOURCES.at(tmp)] +=  1; } catch (...) {	}
 }
 
 void                                           zappy::AIClient::_initInventory(std::unordered_map<t_resource, size_t,

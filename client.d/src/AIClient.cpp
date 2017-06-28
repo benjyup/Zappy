@@ -195,22 +195,23 @@ zappy::RequestType 	zappy::AIClient::update(std::string input) {
   if (_prox == NULL)
     return request;
 
-    if (!input.empty())
-        std::cout << "J'ai recu :" << input << std::endl;
   if (_mode)
     {
-    //  std::cout << "MODE ECRITURE" << std::endl;
       if (!(_todo.empty()))
 	{
 	  std::cout << "Je pop" << std::endl;
 	  request = _todo.front();
 	  _todo.pop_front();
 	}
+      _mode = !_mode;
     }
   else
     {
-    //  std::cout << "MODE LECTURE" << std::endl;
+      if (!input.empty())
+	{
+	  std::cout << "J'ai recu :" << input << std::endl;
+	  _mode = !_mode;
+	}
     }
-  _mode = !_mode;
   return request;
 }

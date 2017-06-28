@@ -6,25 +6,25 @@
 #define CLIENT_D_REQUEST_HPP
 
 namespace zappy {
-    typedef enum {
-        FORWARD = 0,
-        RIGHT,
-        LEFT,
-        LOOK,
-        BROADCAST,
-        NOOP
-    } RequestType;
+  typedef enum {
+    FORWARD = 0,
+    RIGHT,
+    LEFT,
+    LOOK,
+    BROADCAST,
+    NOOP
+  } RequestType;
 
-    template<class T>
-    class Request {
-    public:
-        Request();
+  template<class T>
+  class Request {
+   public:
+    Request<T>();
 
-        ~Request();
+    ~Request<T>();
 
-    protected:
-        RequestType _type;
-    };
+   protected:
+    RequestType _type;
+  };
 }
 
 #endif //CLIENT_D_REQUEST_HPP

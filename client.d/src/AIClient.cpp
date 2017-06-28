@@ -191,12 +191,6 @@ bool			zappy::AIClient::_isNeeded(t_resource resource)
 zappy::RequestType 	zappy::AIClient::updade() {
   RequestType		request = NOOP;
 
-<<<<<<< HEAD
-zappy::RequestType zappy::AIClient::updade() {
-    if (_prox == NULL)
-      return zappy::NOOP;
-    return zappy::FORWARD;
-=======
   if (_prox == NULL)
     return request;
   if (!(_todo.empty()))
@@ -206,5 +200,4 @@ zappy::RequestType zappy::AIClient::updade() {
       _todo.pop_front();
     }
   return request;
->>>>>>> c3b9a2d2dae7d58d97f708bcdb508bd90d11fbd7
 }

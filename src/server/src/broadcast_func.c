@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Fri Jun 23 14:39:30 2017 Gregoire Renard
-** Last update Mon Jun 26 20:19:10 2017 Gregoire Renard
+** Last update Wed Jun 28 15:30:41 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -50,7 +50,7 @@ int		broadcast_func(t_env *env, t_client *client,
       decale = 0;
       init_message(&message, client, &pos);
       send_to_all_user(env, pos, client, message);
-      while (decale <= 8)
+      while (decale < 8)
 	{
 	  decale++;
 	  set_message(&message, decale);

@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 26 19:44:46 2017 Gregoire Renard
-** Last update Wed Jun 28 14:57:16 2017 Gregoire Renard
+** Last update Wed Jun 28 18:02:06 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -36,10 +36,9 @@ void		line_detection(t_env *env, t_client *client,
   t_pos		dir;
 
   set_all_pos(client, pos, &tmp, &dir);
-  while ((tmp.y < env->arg.height - 1 && tmp.y >= 0) &&
-	 (tmp.x < env->arg.width - 1 && tmp.x >= 0))
+  while ((tmp.y < env->arg.height && tmp.y >= 0) &&
+	 (tmp.x < env->arg.width && tmp.x >= 0))
     {
-      printf("tmp.x = %i\ntmp.y =%i\n", tmp.x, tmp.y);
       send_to_all_user(env, tmp, client, message);
       tmp.y += dir.y;
       tmp.x += dir.x;

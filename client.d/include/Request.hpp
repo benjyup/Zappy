@@ -7,7 +7,7 @@
 
 namespace zappy {
     typedef enum {
-        FORWARD,
+        FORWARD = 0,
         RIGHT,
         LEFT,
         LOOK,

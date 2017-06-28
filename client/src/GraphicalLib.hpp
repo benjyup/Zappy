@@ -36,14 +36,19 @@ namespace  Client
       sky,
       desert,
       stone,
-      water
+      water,
+      ninja1,
+      ninja2,
+      ninja3,
+      ninja4,
+      ninja5
     };
 
     GraphicalLib();
     virtual ~GraphicalLib();
 
     int		addNode(Vector3d const &pos, MESH mesh, TEXT, irr::f32 scale, int alt);
-    int		addCharacterNode(irr::core::vector3df const &pos, TEXT, irr::f32 scale, int dir);
+    int		addCharacterNode(irr::core::vector3df const &pos, int team, irr::f32 scale, int dir);
     int 	addEggsNode(irr::core::vector3df const &pos);
 
     void	delNode(int id);
@@ -65,6 +70,7 @@ namespace  Client
     void			taking(int id);
     void			dying(int id);
     void			uping(int id);
+    void			pushing(int id);
 
     void			initDeco();
     void 			initText();

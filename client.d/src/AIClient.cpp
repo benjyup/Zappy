@@ -6,9 +6,7 @@
 #include <iostream>
 #include <sstream>
 #include <algorithm>
-#include <cctype>
-#include <string>
-#include "AIClient.hpp"
+#include "mendatory/AIClient.hpp"
 
 
 const std::vector<zappy::AIClient::SIncantation>	zappy::AIClient::INCANTATIONS = {
@@ -53,36 +51,25 @@ zappy::AIClient::AIClient(const t_arg &args) :
 	_incantationLevel(0),
 	_prox(NULL)
 {
-  /* char *str;
+  //_todo.push_back(LOOK);
+  _todo.push_back(FORWARD);
+  _todo.push_back(FORWARD);
+  _todo.push_back(FORWARD);
+}
 
-   while (!(str = srv_read()));
-   std::cout << "J'ai reçu " << str << std::endl;
-   srv_write(this->_args.team);
-   while (!(str = srv_read()));
-   std::cout << "J'ai reçu " << str << std::endl;
-   _getWorldInformation(str);
-   _play();*/
+void zappy::AIClient::setInventory(const std::unordered_map<t_resource, size_t, std::hash<int>> &newInventory)
+{
+  _currentInventory = newInventory;
+}
 
+void zappy::AIClient::setLook(const std::vector<std::unordered_map<t_resource, size_t, std::hash<int>>> &currentLook)
+{
+  _currentLook = currentLook;
 }
 
 zappy::AIClient::~AIClient()
 {
   std::cerr << "~AIClient" << std::endl;
-}
-
-void zappy::AIClient::_getWorldInformation(const std::string &informations)
-{
-  try {
-      _clietnNum = std::stoul(informations.substr(0, informations.find('\n')));
-      _worldDimension.first = std::stoul(informations.substr(informations.find(' ')));
-      _worldDimension.second = std::stoul(informations.substr(informations.find(' '), informations.size() - 1));
-    } catch (std::exception) {
-      throw std::runtime_error("Error while getting world informations.");
-    }
-
-  std::cout << "clientNum = " << _clietnNum << std::endl;
-  std::cout << "X = " << _worldDimension.first << std::endl;
-  std::cout << "Y = " << _worldDimension.second << std::endl;
 }
 
 void 			zappy::AIClient::_play()
@@ -91,7 +78,6 @@ void 			zappy::AIClient::_play()
   char			*str;
 
   std::cout << "_play" << std::endl;
-  //_whatdoINeed();
   _getInventory();
   _look();
   std::cout << "_play" << std::endl;
@@ -104,11 +90,6 @@ void 			zappy::AIClient::_play()
 	}
     }
   std::cout << "fin" << std::endl;
-}
-
-void 			zappy::AIClient::_eat()
-{
-
 }
 
 void 			zappy::AIClient::_getInventory()
@@ -141,14 +122,14 @@ void 			zappy::AIClient::_getInventory()
   for (int i = 0 ; i  < NBR_OF_RESOURCES ; ++i)
     {
       ss >> tmp;
-      ss >> _inventory[STR_TO_RESOURCES.at(tmp)];
+      ss >> _currentInventory[STR_TO_RESOURCES.at(tmp)];
     }
 
   std::cout << str << std::endl;
   std::cout << t << std::endl;
   std::cout << tmp << std::endl;
   std::cout << "Inventaire: " << std::endl;
-  for (const auto &it : _inventory)
+  for (const auto &it : _currentInventory)
     {
       std::cout << "- "<< it.first << " " << RESOURCES_TO_STR.at(it.first) << ": " << it.second << std::endl;
     }
@@ -172,13 +153,14 @@ void 		zappy::AIClient::_look()
     }
 }
 
-void zappy::AIClient::_go(unsigned int tile_number)
+void 			zappy::AIClient::_go(unsigned int tile_number)
 {
-  int           i = 0;
-  int           first = 0;
-  int           middle = 0;
-  int           length = 1;
-  int           inc = 2;
+  int           	i = 0;
+  int           	first = 0;
+  int           	middle = 0;
+  int           	length = 1;
+  int           	inc = 2;
+  int 			move;
 
   while (i < 3 && tile_number >= first + length)
     {
@@ -188,35 +170,41 @@ void zappy::AIClient::_go(unsigned int tile_number)
       inc += 2;
       i += 1;
     }
-  printf("\n %d Forward, first = %d, middle = %d\n", i, first, middle);
-  int move = middle - tile_number;
-  printf("move = %d\n", move);
+  while (i-- > 0)
+    _todo.push_back(FORWARD);
+  move = middle - tile_number;
   if (move > 0)
-    printf("%d left\n", (move));
+    _todo.push_back(LEFT);
   else if (move < 0)
-      printf("%d right\n", (move * -1));
+      _todo.push_back(RIGHT);
+  while (move-- > 0)
+    _todo.push_back(FORWARD);
 }
 
-void 			zappy::AIClient::_makeInventory(const std::string &resources)
+bool			zappy::AIClient::_isNeeded(t_resource resource)
 {
-  std::stringstream 	ss(resources);
-  std::string		str;
+  size_t 		nbr_of_resources = INCANTATIONS[_level].resources.find(resource)->second;
 
-  std::cout << "_makeInventory" << std::endl;
-  while (ss)
-    {
-      ss >> str;
-      std::cout << str << std::endl;
-    }
+  return  nbr_of_resources > 0 && _currentInventory.find(resource)->second < resource;
 }
 
-bool zappy::AIClient::_isNeeded(t_resource resource)
-{
-  return   INCANTATIONS[_level].resources.find(resource)->second > 0;
-}
+zappy::RequestType 	zappy::AIClient::updade() {
+  RequestType		request = NOOP;
 
+<<<<<<< HEAD
 zappy::RequestType zappy::AIClient::updade() {
     if (_prox == NULL)
       return zappy::NOOP;
     return zappy::FORWARD;
+=======
+  if (_prox == NULL)
+    return request;
+  if (!(_todo.empty()))
+    {
+      std::cout << "Je pop" << std::endl;
+      request = _todo.front();
+      _todo.pop_front();
+    }
+  return request;
+>>>>>>> c3b9a2d2dae7d58d97f708bcdb508bd90d11fbd7
 }

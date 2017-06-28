@@ -7,18 +7,18 @@
 
 #include <list>
 #include "zappy.hpp"
-#include "AIClient.hpp"
+#include "mendatory/AIClient.hpp"
 #include "Request.hpp"
 
 namespace zappy
 {
-class AIClient;
+  class AIClient;
 
-    class Proxy
-    {
-    public:
-        Proxy(zappy::AIClient &, zappy::Zappy &);
-        ~Proxy();
+  class Proxy
+  {
+   public:
+    Proxy(zappy::AIClient &, zappy::Zappy &);
+    ~Proxy();
 
         void update(zappy::RequestType order);
     private:

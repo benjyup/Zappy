@@ -70,8 +70,10 @@ void zappy::Proxy::update(zappy::RequestType order) {
             return;
         }
     }
+
     if (step == 3)
     {
         _function_ptr[order]();
     }
 }
+

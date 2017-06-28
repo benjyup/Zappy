@@ -1,173 +1,173 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_project_file>
-	<FileVersion major="1" minor="6"/>
-	<Project>
-		<Option title="client_d"/>
-		<Option makefile_is_custom="1"/>
-		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;"/>
-		<Build>
-			<Target title="all">
-				<Option working_dir="/home/alice/rendu/PSU_2016_zappy/client.d"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="rebuild_cache">
-				<Option working_dir="/home/alice/rendu/PSU_2016_zappy/client.d"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="/home/alice/rendu/PSU_2016_zappy/client.d"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="zappy_ai">
-				<Option output="/home/alice/rendu/PSU_2016_zappy/client.d/zappy_ai" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/alice/rendu/PSU_2016_zappy/client.d"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/home/alice/rendu/PSU_2016_zappy/client.d/include"/>
-					<Add directory="/home/alice/rendu/PSU_2016_zappy/client.d/../include"/>
-					<Add directory="/usr/include/c++/6"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/6"/>
-					<Add directory="/usr/include/c++/6/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 zappy_ai"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="zappy_ai/fast">
-				<Option output="/home/alice/rendu/PSU_2016_zappy/client.d/zappy_ai" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/alice/rendu/PSU_2016_zappy/client.d"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/home/alice/rendu/PSU_2016_zappy/client.d/include"/>
-					<Add directory="/home/alice/rendu/PSU_2016_zappy/client.d/../include"/>
-					<Add directory="/usr/include/c++/6"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/6"/>
-					<Add directory="/usr/include/c++/6/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 zappy_ai/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/alice/rendu/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-		</Build>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/AIClient.hpp">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/Request.hpp">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/ZappyException.hpp">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/mendatory/argument.h">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/mendatory/client.h">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/mendatory/connection_manager.h">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/mendatory/cookie.h">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/mendatory/my_stack.h">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/parser.hpp">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/proxy.hpp">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/server.hpp">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/zappy.hpp">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/main.cpp">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/AIClient.cpp">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/Request.cpp">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/ZappyException.cpp">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/mendatory/argument.c">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/mendatory/connection_manager.c">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/mendatory/cookie.c">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/mendatory/functionParse.c">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/mendatory/my_stack.c">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/mendatory/srv_read.c">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/mendatory/srv_write.c">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/parser.cpp">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/proxy.cpp">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/src/zappy.cpp">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/CMakeLists.txt">
-			<Option virtualFolder="CMake Files\"/>
-		</Unit>
-	</Project>
+   <FileVersion major="1" minor="6" />
+   <Project>
+      <Option title="client_d" />
+      <Option makefile_is_custom="1" />
+      <Option compiler="gcc" />
+      <Option virtualFolders="CMake Files\;" />
+      <Build>
+      <Target title="all">
+         <Option working_dir="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 all" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="edit_cache">
+         <Option working_dir="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 edit_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="rebuild_cache">
+         <Option working_dir="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 rebuild_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="zappy_ai">
+         <Option output="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/zappy_ai" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/../include" />
+            <Add directory="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/include" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/5" />
+            <Add directory="/usr/include/c++/5/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/5" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 zappy_ai" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="zappy_ai/fast">
+         <Option output="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/zappy_ai" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/../include" />
+            <Add directory="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/include" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/5" />
+            <Add directory="/usr/include/c++/5/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/5" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 zappy_ai/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      </Build>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/include/Request.hpp">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/include/ZappyException.hpp">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/include/mendatory/AIClient.hpp">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/include/mendatory/argument.h">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/include/mendatory/client.h">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/include/mendatory/connection_manager.h">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/include/mendatory/cookie.h">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/include/mendatory/my_stack.h">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/include/parser.hpp">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/include/proxy.hpp">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/include/server.hpp">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/include/zappy.hpp">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/main.cpp">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/src/AIClient.cpp">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/src/Request.cpp">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/src/ZappyException.cpp">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/src/mendatory/argument.c">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/src/mendatory/connection_manager.c">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/src/mendatory/cookie.c">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/src/mendatory/functionParse.c">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/src/mendatory/my_stack.c">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/src/mendatory/srv_read.c">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/src/mendatory/srv_write.c">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/src/parser.cpp">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/src/proxy.cpp">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/src/zappy.cpp">
+         <Option target="zappy_ai"/>
+      </Unit>
+      <Unit filename="/home/vincent/rendu/Zappy/PSU_2016_zappy/client.d/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\" />
+      </Unit>
+   </Project>
 </CodeBlocks_project_file>

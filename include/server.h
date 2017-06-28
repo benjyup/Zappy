@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Wed Jun 28 17:05:22 2017 Gregoire Renard
+** Last update Wed Jun 28 19:01:30 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -207,7 +207,8 @@ int			opt_f(t_env *env,
 int			check_alpha(char *str);
 int			init_map(t_env *env);
 void			print_map(t_env *env);
-void			add_to_the_team(t_env *env, t_client *client);
+void			add_to_the_team(t_env *env, t_client *client,
+					t_pos new_pos);
 void			my_send_to_client(t_client *client);
 void			my_send(t_client *client,
 				char *message);

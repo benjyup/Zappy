@@ -5,27 +5,26 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:55:57 2017 Gregoire Renard
-** Last update Wed Jun 28 18:26:06 2017 Gregoire Renard
+** Last update Wed Jun 28 19:01:36 2017 Gregoire Renard
 */
 
 #include "server.h"
 
-static void	send_pos(t_env *env, t_client *client,
-			 char *tmp)
+static void	send_pos(t_env *env, t_client *client)
 {
   char		*x;
   char		*y;
+  char		*tmp;
 
   (void)env;
   x = to_string(env->arg.width);
   y = to_string(env->arg.height);
-  if ((tmp = realloc(tmp, strlen(tmp) + strlen(x)
-		     + strlen(y) + 3)) == NULL)
+  if ((tmp = malloc(strlen(x) + strlen(y) + 3)) == NULL)
     {
       perror(MALLOC);
       exit(ERROR);
     }
-  strcat(tmp, x);
+  strcpy(tmp, x);
   strcat(tmp, " ");
   strcat(tmp, y);
   strcat(tmp, "\n\0");
@@ -48,23 +47,30 @@ static void	send_info(t_env *env, t_client *client, int cpt)
     }
   ret[len] = '\n';
   ret[len + 1] = 0;
-  send_pos(env, client, ret);
+  my_send(client, ret);
+  send_pos(env, client);
   free(ret);
 }
 
-static void	init_pos_client(t_env *env, t_client *client, int cpt)
+static void	init_pos_client(t_env *env, t_client *client, int cpt,
+				t_pos new_pos)
 {
   t_pos		pos;
 
-  pos.x = rand() % env->arg.width;
-  pos.y = rand() % env->arg.height;
-  while (env->map[pos.y][pos.x].name_team != NULL ||
-      	 (env->map[pos.y][pos.x].name_team != NULL &&
-	  (strcmp(env->map[pos.y][pos.x].name_team,
-		  client->name_team)) != 0))
+  pos.x = new_pos.x;
+  pos.y = new_pos.y;
+  if (new_pos.x == -1 && new_pos.y == -1)
     {
       pos.x = rand() % env->arg.width;
-      pos.y = rand() % env->arg.height;
+      pos.y = rand() % env->arg.height;    
+      while (env->map[pos.y][pos.x].name_team != NULL ||
+	     (env->map[pos.y][pos.x].name_team != NULL &&
+	      (strcmp(env->map[pos.y][pos.x].name_team,
+		      client->name_team)) != 0))
+	{
+	  pos.x = rand() % env->arg.width;
+	  pos.y = rand() % env->arg.height;
+	}
     }
   if (env->map[pos.y][pos.x].name_team == NULL)
     env->map[pos.y][pos.x].name_team = client->name_team;
@@ -88,7 +94,8 @@ static void	init_variable(t_client *client)
   client->level = 1;
 }
 
-void		add_to_the_team(t_env *env, t_client *client)
+void		add_to_the_team(t_env *env, t_client *client,
+				t_pos new_pos)
 {
   int		cpt;
 
@@ -102,7 +109,7 @@ void		add_to_the_team(t_env *env, t_client *client)
 	      env->arg.team[cpt].nb_player++;
 	      client->name_team = env->arg.team[cpt].team_name;
 	      init_variable(client);
-	      init_pos_client(env, client, cpt);
+	      init_pos_client(env, client, cpt, new_pos);
 	    }
 	  else
 	    {

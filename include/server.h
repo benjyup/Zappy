@@ -266,4 +266,5 @@ void			send_to_all_user(t_env *env, t_pos pos,
 int			write_component(t_look *look, t_env *env);
 void			set_pos_start(t_env *env, t_client *client,
 				      t_look *look);
+int		        fork_func(t_env *env, t_client *client, t_list **current);
 #endif /* !SERVER_H_ */

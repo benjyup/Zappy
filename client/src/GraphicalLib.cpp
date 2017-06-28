@@ -39,6 +39,11 @@ namespace 	Client
     _text[TEXT::desert] = _driver->getTexture("./GFX/desert.jpg");
     _text[TEXT::stone] = _driver->getTexture("./GFX/stones.jpg");
     _text[TEXT::water] = _driver->getTexture("./GFX/water.jpg");
+    _text[TEXT::ninja1] = _driver->getTexture("./GFX/nskinbl.jpg");
+    _text[TEXT::ninja2] = _driver->getTexture("./GFX/nskinbr.jpg");
+    _text[TEXT::ninja3] = _driver->getTexture("./GFX/nskingr.jpg");
+    _text[TEXT::ninja4] = _driver->getTexture("./GFX/nskinrd.jpg");
+    _text[TEXT::ninja5] = _driver->getTexture("./GFX/nskinwh.jpg");
   }
 
   void GraphicalLib::initDeco()
@@ -102,13 +107,14 @@ namespace 	Client
     return _id - 1;
   }
 
-  int GraphicalLib::addCharacterNode(const irr::core::vector3df &pos, GraphicalLib::TEXT text,
+  int GraphicalLib::addCharacterNode(const irr::core::vector3df &pos, int team,
 				     irr::f32 Scale, int dir)
   {
     _node[_id] = _smgr->addAnimatedMeshSceneNode(_mesh[MESH::character]);
     _node[_id]->setPosition(pos);
-    if (text != TEXT::none)
-      _node[_id]->setMaterialTexture(0, _text[text]);
+//    if (text != TEXT::none)
+    std::cerr << "team : " << team << std::endl;
+    _node[_id]->setMaterialTexture(0, _text[(GraphicalLib::TEXT)((int)GraphicalLib::TEXT::ninja1 + team % 5)]);
     _node[_id]->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     _node[_id]->setScale({Scale, Scale, Scale});
     _node[_id]->setFrameLoop(205, 249);
@@ -136,7 +142,6 @@ namespace 	Client
     if (_node[id] == nullptr)
       return ;
     _node[id]->remove();
-//    _smgr->addToDeletionQueue(_node[id]);
     _node[_id] = nullptr;
   }
 
@@ -254,4 +259,10 @@ namespace 	Client
     _node[id]->setAnimationSpeed(5);
   }
 
+  void GraphicalLib::pushing(int id)
+  {
+    _node[id]->setLoopMode(false);
+    _node[id]->setFrameLoop(72, 82);
+    _node[id]->setAnimationSpeed(10);
+  }
 }

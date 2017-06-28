@@ -14,3 +14,5 @@ template<class T>
 zappy::Request<T>::~Request() {
 
 }
+
+template class zappy::Request<std::vector<int>>;

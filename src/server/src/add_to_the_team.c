@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:55:57 2017 Gregoire Renard
-** Last update Wed Jun 28 19:01:36 2017 Gregoire Renard
+** Last update Wed Jun 28 19:09:25 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -55,27 +55,23 @@ static void	send_info(t_env *env, t_client *client, int cpt)
 static void	init_pos_client(t_env *env, t_client *client, int cpt,
 				t_pos new_pos)
 {
-  t_pos		pos;
-
-  pos.x = new_pos.x;
-  pos.y = new_pos.y;
+  client->pos.x = new_pos.x;
+  client->pos.y = new_pos.y;
   if (new_pos.x == -1 && new_pos.y == -1)
     {
-      pos.x = rand() % env->arg.width;
-      pos.y = rand() % env->arg.height;    
-      while (env->map[pos.y][pos.x].name_team != NULL ||
-	     (env->map[pos.y][pos.x].name_team != NULL &&
-	      (strcmp(env->map[pos.y][pos.x].name_team,
+      client->pos.x = rand() % env->arg.width;
+      client->pos.y = rand() % env->arg.height;    
+      while (env->map[client->pos.y][client->pos.x].name_team != NULL ||
+	     (env->map[client->pos.y][client->pos.x].name_team != NULL &&
+	      (strcmp(env->map[client->pos.y][client->pos.x].name_team,
 		      client->name_team)) != 0))
 	{
-	  pos.x = rand() % env->arg.width;
-	  pos.y = rand() % env->arg.height;
+	  client->pos.x = rand() % env->arg.width;
+	  client->pos.y = rand() % env->arg.height;
 	}
     }
-  if (env->map[pos.y][pos.x].name_team == NULL)
-    env->map[pos.y][pos.x].name_team = client->name_team;
-  client->pos.x = pos.x;
-  client->pos.y = pos.y;
+  if (env->map[client->pos.y][client->pos.x].name_team == NULL)
+    env->map[client->pos.y][client->pos.x].name_team = client->name_team;
   add_in_map(env, client);
   send_info(env, client, cpt);
 }

@@ -16,7 +16,7 @@
 
 namespace zappy
 {
-    
+
   class Proxy;
   class AIClient
   {
@@ -60,6 +60,5 @@ namespace zappy
     Proxy                           				*_prox;
   };
 }
-
 
 #endif //CLIENT_D_AICLIENT_HPP

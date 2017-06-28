@@ -21,6 +21,10 @@ zappy::Proxy::Proxy(zappy::AIClient &ia, zappy::Zappy &zap): _ia(ia), _ready(fal
                               srv_write("RIGHT\n");
                                 return 0;
                           }},
+                          {zappy::LOOK, [] () -> int {
+                              srv_write("LOOK\n");
+                              return 0;
+                          }},
                           {zappy::NOOP, [] () -> int {
                               return 0;
                           }}
@@ -73,8 +77,3 @@ void zappy::Proxy::update(zappy::RequestType order) {
     }
 }
 
-template<typename T>
-const zappy::Request<T> &zappy::Proxy::getRequest() const
-{
-  return zappy::Request<T>(NOOP);
-}

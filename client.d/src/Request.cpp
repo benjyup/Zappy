@@ -1,15 +1,15 @@
 //
-// Created by alice on 27/06/17.
+// Created by Jean-Adrien on 27/06/17.
 //
 
 #include "Request.hpp"
 
-template<typename T>
-zappy::Request<T>::Request(zappy::RequestType type): _type(type) {
+template<class T>
+zappy::Request<T>::Request() {
 
 }
 
-template<typename T>
+template<class T>
 zappy::Request<T>::~Request() {
 
 }

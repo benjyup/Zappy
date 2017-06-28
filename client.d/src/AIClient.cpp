@@ -216,7 +216,7 @@ bool zappy::AIClient::_isNeeded(t_resource resource)
 }
 
 zappy::RequestType zappy::AIClient::updade() {
-  if (_prox == NULL)
-    return zappy::NOOP;
-  return zappy::FORWARD;
+    if (_prox == NULL)
+      return zappy::NOOP;
+    return zappy::FORWARD;
 }

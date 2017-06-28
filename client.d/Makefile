@@ -177,6 +177,33 @@ src/AIClient.cpp.s:
 	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/AIClient.cpp.s
 .PHONY : src/AIClient.cpp.s
 
+src/Request.o: src/Request.cpp.o
+
+.PHONY : src/Request.o
+
+# target to build an object file
+src/Request.cpp.o:
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/Request.cpp.o
+.PHONY : src/Request.cpp.o
+
+src/Request.i: src/Request.cpp.i
+
+.PHONY : src/Request.i
+
+# target to preprocess a source file
+src/Request.cpp.i:
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/Request.cpp.i
+.PHONY : src/Request.cpp.i
+
+src/Request.s: src/Request.cpp.s
+
+.PHONY : src/Request.s
+
+# target to generate assembly for a file
+src/Request.cpp.s:
+	$(MAKE) -f CMakeFiles/zappy_ai.dir/build.make CMakeFiles/zappy_ai.dir/src/Request.cpp.s
+.PHONY : src/Request.cpp.s
+
 src/ZappyException.o: src/ZappyException.cpp.o
 
 .PHONY : src/ZappyException.o
@@ -489,6 +516,9 @@ help:
 	@echo "... src/AIClient.o"
 	@echo "... src/AIClient.i"
 	@echo "... src/AIClient.s"
+	@echo "... src/Request.o"
+	@echo "... src/Request.i"
+	@echo "... src/Request.s"
 	@echo "... src/ZappyException.o"
 	@echo "... src/ZappyException.i"
 	@echo "... src/ZappyException.s"

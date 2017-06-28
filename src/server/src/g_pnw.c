@@ -5,7 +5,7 @@
 ** Login   <rene_r@epitech.net>
 ** 
 ** Started on  Tue Jun 27 17:21:28 2017 rodrigue rene
-** Last update Tue Jun 27 17:21:30 2017 rodrigue rene
+** Last update Tue Jun 27 19:28:58 2017 Gregoire Renard
 */
 
 #include <stdio.h>
@@ -15,7 +15,7 @@ int             g_pnw(t_env *env, t_client *client, t_list **current)
 {
   char          *str;
   char          buff[13];
-  int           size; 
+  int           size;
 
   size = sprintf(buff, " %d", client->socket);
   size += sprintf(buff, " %d", client->pos.x);

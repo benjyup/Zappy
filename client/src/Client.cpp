@@ -31,14 +31,16 @@ namespace 		Client
     getTab(s, tab);
     _sgt(tab);
     this->_running = true;
+    if (_size.getX() <= 3 || _size.getX() > 40 || _size.getY() <= 3 || _size.getY() > 40)
+      throw std::exception();
     for (int x = 0; x < _size.getX(); x++)
       {
 	for (int y = 0; y < _size.getY(); y++)
 	  {
 	    Vector3d v(x, y);
 	    _map[y * _size.getX() + x] = Block(_lib.addNode(v, GraphicalLib::MESH::block, GraphicalLib::TEXT::grass, Client::SCALE, 0), v);
-	    std::cerr << v << std::endl;
-	    std::cerr << _map[v.getY() * _size.getX() + v.getX()].get_pos() << std::endl;
+//	    std::cerr << v << std::endl;
+//	    std::cerr << _map[v.getY() * _size.getX() + v.getX()].get_pos() << std::endl;
 	  }
       }
   }
@@ -165,10 +167,17 @@ namespace 		Client
   {
     if (t.size() != 7)
       return ;
+    int 	j = 0;
     Vector3d v(~t[2], ~t[3]);
     std::cerr << "Pnw Function" << std::endl;
+    for (auto &i : _team)
+      {
+	if (!i.compare(t[6]))
+	  break ;
+	j++;
+      }
     _player.emplace_back(Character(~t[1], v,  (Character::DIR)~t[4], ~t[5], t[6],
-				   _lib.addCharacterNode(_map[v.getX() + v.getY() * _size.getX()].getSpacePos(), GraphicalLib::TEXT::none, 0.7f, ~t[4])));
+				   _lib.addCharacterNode(_map[v.getX() + v.getY() * _size.getX()].getSpacePos(), j, 0.7f, ~t[4])));
     _map[v.getX() + v.getY() * _size.getX()].add_player(~t[1]);
     _lib.set_text2("\nUn nouveau joueur : ", true);
     _lib.set_text2(t[1].c_str(), false);
@@ -214,10 +223,14 @@ namespace 		Client
   {
     if (t.size() != 2)
       return ;
-    _player[~t[1] - 1].die();
+    int num = ~t[1] - 1;
+
+    _player[num].set_idAnimation(-1);
+    _lib.pushing(_player[num].get_id());
     _lib.set_text2("\nLe joueur : ", true);
     _lib.set_text2(t[1].c_str(), false);
-    _lib.set_text2(" s\'en va", false);
+    _lib.set_text2(" les joueurs de la case : ", false);
+
   }
 
   void Client::_pbc(std::vector<std::string> const &t)

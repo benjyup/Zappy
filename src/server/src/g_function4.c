@@ -5,7 +5,7 @@
 ** Login   <rene_r@epitech.net>
 ** 
 ** Started on  Tue Jun 27 17:17:32 2017 rodrigue rene
-** Last update Tue Jun 27 17:20:44 2017 rodrigue rene
+** Last update Tue Jun 27 19:28:30 2017 Gregoire Renard
 */
 
 #include <stdio.h>
@@ -77,7 +77,7 @@ int		g_plv(t_env *env, t_client *client, t_list **current)
   my_send(client, str);
   free(str);
   return (1);
-} 
+}
 
 int		g_pin(t_env *env, t_client *client, t_list **current)
 {

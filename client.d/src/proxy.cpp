@@ -24,7 +24,6 @@ zappy::Proxy::Proxy(zappy::AIClient &ia, zappy::Zappy &zap): _ia(ia), _ready(fal
                           {zappy::NOOP, [] () -> int {
                               return 0;
                           }}
-
                   })
 { }
 
@@ -68,20 +67,14 @@ void zappy::Proxy::update(zappy::RequestType order) {
         }
     }
 
-    if (step == 4)
+    if (step == 3)
     {
         _function_ptr[order]();
     }
 }
 
-
-
 template<typename T>
-zappy::Request<T>::Request(RequestType type): _type(type) {
-
-}
-
-template<typename T>
-zappy::Request<T>::~Request() {
-
+const zappy::Request<T> &zappy::Proxy::getRequest() const
+{
+  return zappy::Request<T>(NOOP);
 }

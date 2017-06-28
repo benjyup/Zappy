@@ -10,13 +10,14 @@
 #include <unordered_map>
 #include <mendatory/client.h>
 #include <vector>
+#include <list>
 #include "proxy.hpp"
 #include "commun.h"
+#include "Request.hpp"
 
 namespace zappy
 {
-
-    class Proxy;
+  class Proxy;
 
   class AIClient
   {
@@ -33,29 +34,31 @@ namespace zappy
     AIClient(const t_arg &args);
     ~AIClient();
 
-      void  ProxyRegister(Proxy *prox, int x, int y);
-        zappy::RequestType updade();
+    void  ProxyRegister(Proxy *prox, int x, int y);
+    zappy::RequestType 						updade();
+    void 							setInventory(const std::unordered_map<t_resource, size_t, std::hash<int>> &);
+    void 							setLook(const std::vector<std::unordered_map<t_resource, size_t, std::hash<int>>> &);
+
    private:
 
     static const 	std::vector<SIncantation>		INCANTATIONS;
 
     unsigned int						_level;
     std::pair<size_t, size_t >					_worldDimension;
-    size_t 							_clietnNum;
     t_arg							_args;
     size_t 							_incantationLevel;
-    std::unordered_map<t_resource, size_t, std::hash<int>>	_inventory;
+    std::unordered_map<t_resource, size_t, std::hash<int>>	_currentInventory;
     std::vector<std::unordered_map<t_resource, size_t,
 	    std::hash<int>>>					_currentLook;
 
-    void 							_getWorldInformation(const std::string &informations);
     void							_play();
-    void							_eat();
     void 							_look();
     void							_getInventory();
-    void 							_makeInventory(const std::string &resources);
     bool 							_isNeeded(t_resource);
-    Proxy                           *_prox;
+    void 							_go(unsigned int tile_number);
+    std::list<RequestType>					_todo;
+
+    Proxy                           				*_prox;
   };
 }
 

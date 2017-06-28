@@ -6,48 +6,32 @@
 #define CLIENT_D_PROXY_HPP
 
 #include "zappy.hpp"
+#include "mendatory/AIClient.hpp"
+#include "Request.hpp"
 
 namespace zappy
 {
-    class AIClient;
+  class AIClient;
 
-    typedef enum  {
-        FORWARD,
-        RIGHT,
-        LEFT,
-        LOOK,
-        BROADCAST,
-        NOOP
-    } RequestType;
+  class Proxy
+  {
+   public:
+    Proxy(zappy::AIClient &, zappy::Zappy &);
+    ~Proxy();
 
+    void update(zappy::RequestType order);
     template <typename T>
-    class Request
-    {
-    public:
-        Request(RequestType);
-        ~Request();
+    const Request<T> &getRequest() const;
 
-    protected:
-        RequestType _type;
-        T           _data;
-    };
-
-    class Proxy
-    {
-    public:
-        Proxy(zappy::AIClient &, zappy::Zappy &);
-        ~Proxy();
-
-        void update(zappy::RequestType order);
-    private:
-        std::map<zappy::RequestType, std::function<int()>> _function_ptr;
-        bool            _ready;
-        AIClient        &_ia;
-        zappy::Zappy    &_zap;
-        int             _x;
-        int             _y;
-        int             _team;
-    };
+   private:
+    std::map<zappy::RequestType, std::function<int()>> _function_ptr;
+    bool            _ready;
+    zappy::AIClient &_ia;
+    zappy::Zappy    &_zap;
+    int             _x;
+    int             _y;
+    int             _team;
+  };
 }
 
 #endif //CLIENT_D_PROXY_HPP

@@ -13,7 +13,8 @@
 int     fork_func(t_env *env, t_client *client, t_list **current)
 {
   (void)env;
-  (void)client;
   (void)current;
+  //ajouter un egg
+    my_send(client, OK);
   return (SUCCESS);
 }

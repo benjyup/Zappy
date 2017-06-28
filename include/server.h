@@ -62,7 +62,7 @@ typedef struct		s_list
 typedef	struct		s_eggs
 {
   t_pos			pos;
-  time_t		time;
+  int			time;
 }			t_eggs;
 
 typedef	struct		s_team

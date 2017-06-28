@@ -191,33 +191,6 @@ bool			zappy::AIClient::_isNeeded(t_resource resource)
   return  nbr_of_resources > 0 && _currentInventory.find(resource)->second < resource;
 }
 
-zappy::RequestType 	zappy::AIClient::update(std::string input) {
-  RequestType		request = NOOP;
-
-  if (_prox == NULL)
-    return request;
-
-  if (_mode)
-    {
-      if (!(_todo.empty()))
-	{
-	  std::cout << "Je pop" << std::endl;
-	  request = _todo.front();
-	  _todo.pop_front();
-	}
-      _mode = !_mode;
-    }
-  else
-    {
-      if (!input.empty())
-	{
-	  std::cout << "J'ai recu :" << input << std::endl;
-	  _mode = !_mode;
-	}
-    }
-  return request;
-}
-
 std::vector<std::unordered_map<t_resource, size_t,
 	std::hash<int>>> 						zappy::AIClient::_lookParse(const std::string &str)
 {
@@ -264,4 +237,31 @@ void                                           zappy::AIClient::_initInventory(s
   inventory[MENDIANE] = 0;
   inventory[PHIRAS] = 0;
   inventory[THYSTAME] = 0;
+}
+
+zappy::RequestType 	zappy::AIClient::update(std::string input) {
+  RequestType		request = NOOP;
+
+  if (_prox == NULL)
+    return request;
+
+  if (_mode)
+    {
+      if (!(_todo.empty()))
+	{
+	  std::cout << "Je pop" << std::endl;
+	  request = _todo.front();
+	  _todo.pop_front();
+	}
+      _mode = !_mode;
+    }
+  else
+    {
+      if (!input.empty())
+	{
+	  std::cout << "J'ai recu :" << input << std::endl;
+	  _mode = !_mode;
+	}
+    }
+  return request;
 }

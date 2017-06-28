@@ -34,7 +34,7 @@ namespace zappy
     ~AIClient();
 
     void  ProxyRegister(Proxy *prox, int x, int y);
-    zappy::RequestType updade();
+    zappy::RequestType update(std::string input);
    private:
 
     static const 	std::vector<SIncantation>		INCANTATIONS;

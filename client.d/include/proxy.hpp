@@ -20,10 +20,9 @@ namespace zappy
     Proxy(zappy::AIClient &, zappy::Zappy &);
     ~Proxy();
 
-        void update(zappy::RequestType order);
+        std::string update(zappy::RequestType order);
     private:
         std::map<zappy::RequestType, std::function<int()>> _function_ptr;
-        Request<std::vector<int>>   request_queu;
         bool            _ready;
         zappy::AIClient &_ia;
         zappy::Zappy    &_zap;

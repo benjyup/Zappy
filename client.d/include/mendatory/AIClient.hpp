@@ -35,7 +35,7 @@ namespace zappy
     ~AIClient();
 
     void  ProxyRegister(Proxy *prox, int x, int y);
-    zappy::RequestType 						updade();
+    zappy::RequestType 						update(std::string input);
     void 							setInventory(const std::unordered_map<t_resource, size_t, std::hash<int>> &);
     void 							setLook(const std::vector<std::unordered_map<t_resource, size_t, std::hash<int>>> &);
 

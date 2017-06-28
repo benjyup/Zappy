@@ -5,26 +5,31 @@
 #ifndef CLIENT_D_REQUEST_HPP
 #define CLIENT_D_REQUEST_HPP
 
+#include <functional>
+#include <map>
+
 namespace zappy {
-    typedef enum {
-        FORWARD = 0,
-        RIGHT,
-        LEFT,
-        LOOK,
-        BROADCAST,
-        NOOP
-    } RequestType;
+  typedef enum {
+    FORWARD = 0,
+    RIGHT,
+    LEFT,
+    LOOK,
+    BROADCAST,
+    NOOP
+  } RequestType;
 
-    template<class T>
-    class Request {
-    public:
-        Request();
+  class Request {
+   public:
+    Request(RequestType);
+    ~Request();
 
-        ~Request();
+      int execute(std::string &str);
 
-    protected:
-        RequestType _type;
-    };
+   protected:
+    std::map<zappy::RequestType, std::function<int(std::string&)>> _function_ptr;
+    RequestType _type;
+    void        *data;
+  };
 }
 
 #endif //CLIENT_D_REQUEST_HPP

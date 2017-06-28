@@ -48,7 +48,8 @@ typedef enum		e_bool
 typedef enum		e_client_type
   {
     player = 0,
-    monitor
+    monitor,
+    egg
   }			t_client_type;
 
 typedef struct		s_list
@@ -58,9 +59,16 @@ typedef struct		s_list
   struct s_list	*next;
 }			t_list;
 
+typedef	struct		s_eggs
+{
+  t_pos			pos;
+  time_t		time;
+}			t_eggs;
+
 typedef	struct		s_team
 {
   char			*team_name;
+  t_list		*eggs;
   int			nb_player;
 }			t_team;
 

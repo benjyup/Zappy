@@ -1,5 +1,5 @@
 //
-// Created by alice on 27/06/17.
+// Created by Jean-Adrien on 27/06/17.
 //
 
 #ifndef CLIENT_D_REQUEST_HPP
@@ -15,16 +15,15 @@ namespace zappy {
         NOOP
     } RequestType;
 
-    template<typename T>
+    template<class T>
     class Request {
     public:
-        Request(RequestType);
+        Request();
 
         ~Request();
 
     protected:
         RequestType _type;
-        T _data;
     };
 }
 

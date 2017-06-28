@@ -188,7 +188,7 @@ bool			zappy::AIClient::_isNeeded(t_resource resource)
   return  nbr_of_resources > 0 && _currentInventory.find(resource)->second < resource;
 }
 
-zappy::RequestType 	zappy::AIClient::updade() {
+zappy::RequestType 	zappy::AIClient::update(std::string input) {
   RequestType		request = NOOP;
 
   if (_prox == NULL)

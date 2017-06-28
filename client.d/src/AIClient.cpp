@@ -51,7 +51,20 @@ zappy::AIClient::AIClient(const t_arg &args) :
 	_incantationLevel(0),
 	_prox(NULL)
 {
-  _todo.push_back(LOOK);
+  //_todo.push_back(LOOK);
+  _todo.push_back(FORWARD);
+  _todo.push_back(FORWARD);
+  _todo.push_back(FORWARD);
+}
+
+void zappy::AIClient::setInventory(const std::unordered_map<t_resource, size_t, std::hash<int>> &newInventory)
+{
+  _currentInventory = newInventory;
+}
+
+void zappy::AIClient::setLook(const std::vector<std::unordered_map<t_resource, size_t, std::hash<int>>> &currentLook)
+{
+  _currentLook = currentLook;
 }
 
 zappy::AIClient::~AIClient()
@@ -109,14 +122,14 @@ void 			zappy::AIClient::_getInventory()
   for (int i = 0 ; i  < NBR_OF_RESOURCES ; ++i)
     {
       ss >> tmp;
-      ss >> _inventory[STR_TO_RESOURCES.at(tmp)];
+      ss >> _currentInventory[STR_TO_RESOURCES.at(tmp)];
     }
 
   std::cout << str << std::endl;
   std::cout << t << std::endl;
   std::cout << tmp << std::endl;
   std::cout << "Inventaire: " << std::endl;
-  for (const auto &it : _inventory)
+  for (const auto &it : _currentInventory)
     {
       std::cout << "- "<< it.first << " " << RESOURCES_TO_STR.at(it.first) << ": " << it.second << std::endl;
     }
@@ -172,7 +185,7 @@ bool			zappy::AIClient::_isNeeded(t_resource resource)
 {
   size_t 		nbr_of_resources = INCANTATIONS[_level].resources.find(resource)->second;
 
-  return  nbr_of_resources > 0 && _inventory.find(resource)->second < resource;
+  return  nbr_of_resources > 0 && _currentInventory.find(resource)->second < resource;
 }
 
 zappy::RequestType 	zappy::AIClient::updade() {
@@ -182,6 +195,7 @@ zappy::RequestType 	zappy::AIClient::updade() {
     return request;
   if (!(_todo.empty()))
     {
+      std::cout << "Je pop" << std::endl;
       request = _todo.front();
       _todo.pop_front();
     }

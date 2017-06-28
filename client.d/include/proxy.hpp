@@ -11,24 +11,27 @@
 
 namespace zappy
 {
-class AIClient;
+  class AIClient;
 
-    class Proxy
-    {
-    public:
-        Proxy(zappy::AIClient &, zappy::Zappy &);
-        ~Proxy();
+  class Proxy
+  {
+   public:
+    Proxy(zappy::AIClient &, zappy::Zappy &);
+    ~Proxy();
 
-        void update(zappy::RequestType order);
-    private:
-        std::map<zappy::RequestType, std::function<int()>> _function_ptr;
-        bool            _ready;
-        zappy::AIClient &_ia;
-        zappy::Zappy    &_zap;
-        int             _x;
-        int             _y;
-        int             _team;
-    };
+    void update(zappy::RequestType order);
+    template <typename T>
+    const Request<T> &getRequest() const;
+
+   private:
+    std::map<zappy::RequestType, std::function<int()>> _function_ptr;
+    bool            _ready;
+    zappy::AIClient &_ia;
+    zappy::Zappy    &_zap;
+    int             _x;
+    int             _y;
+    int             _team;
+  };
 }
 
 #endif //CLIENT_D_PROXY_HPP

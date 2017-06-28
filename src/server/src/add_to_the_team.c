@@ -5,26 +5,27 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:55:57 2017 Gregoire Renard
-** Last update Tue Jun 27 18:53:56 2017 Gregoire Renard
+** Last update Wed Jun 28 18:26:06 2017 Gregoire Renard
 */
 
 #include "server.h"
 
-static void	send_pos(t_env *env, t_client *client)
+static void	send_pos(t_env *env, t_client *client,
+			 char *tmp)
 {
   char		*x;
   char		*y;
-  char		*tmp;
 
   (void)env;
   x = to_string(env->arg.width);
   y = to_string(env->arg.height);
-  if ((tmp = malloc(strlen(x) + strlen(y) + 3)) == NULL)
+  if ((tmp = realloc(tmp, strlen(tmp) + strlen(x)
+		     + strlen(y) + 3)) == NULL)
     {
       perror(MALLOC);
       exit(ERROR);
     }
-  strcpy(tmp, x);
+  strcat(tmp, x);
   strcat(tmp, " ");
   strcat(tmp, y);
   strcat(tmp, "\n\0");
@@ -47,8 +48,7 @@ static void	send_info(t_env *env, t_client *client, int cpt)
     }
   ret[len] = '\n';
   ret[len + 1] = 0;
-  my_send(client, ret);
-  send_pos(env, client);
+  send_pos(env, client, ret);
   free(ret);
 }
 

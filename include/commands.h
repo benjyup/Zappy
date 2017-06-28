@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Fri Jun  2 17:01:05 2017 vincent.mesquita@epitech.eu
-** Last update Mon Jun 26 20:25:08 2017 Gregoire Renard
+** Last update Wed Jun 28 15:04:34 2017 Gregoire Renard
 */
 
 #ifndef COMMANDS_H_
@@ -67,7 +67,6 @@ static t_cmd		exec_array[NBR_OF_COMMANDS] = {
   {TAKE, take_func, player},
   {SET, set_func, player},
   {EJECT, eject_func, player}
-  {FORK, fork_func, player}
 };
 
 #endif /* !COMMANDS_H_ */

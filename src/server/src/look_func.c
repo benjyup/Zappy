@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Fri Jun 23 13:26:16 2017 Gregoire Renard
-** Last update Tue Jun 27 18:51:21 2017 Gregoire Renard
+** Last update Wed Jun 28 23:17:48 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -34,7 +34,8 @@ static void	init_variable(t_env *env,
   look->tmp.y += client->dir.y;
 }
 
-static void	end_look(t_client *client, t_look *look)
+static void	end_look(t_client *client, t_look *look,
+			 t_env *env)
 {
   look->message[strlen(look->message) - 1] = 0;
   if ((look->message = realloc(look->message,
@@ -44,7 +45,7 @@ static void	end_look(t_client *client, t_look *look)
       exit(ERROR);
     }
   strcat(look->message, "]\n\0");
-  my_send(client, look->message);
+  my_send(client, look->message, 7 / env->arg.freq);
   free(look->message);
 }
 
@@ -86,6 +87,6 @@ int		look_func(t_env *env, t_client *client,
   	}
       look.cpt++;
     }
-  end_look(client, &look);
+  end_look(client, &look, env);
   return (SUCCESS);
 }

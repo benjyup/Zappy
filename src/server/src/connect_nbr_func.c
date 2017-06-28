@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Thu Jun 22 16:36:12 2017 Gregoire Renard
-** Last update Thu Jun 22 16:59:55 2017 Gregoire Renard
+** Last update Wed Jun 28 23:05:36 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -28,7 +28,7 @@ static void	send_nbr(t_env *env,
     }
   tmp[len] = '\n';
   tmp[len + 1] = 0;
-  my_send(client, tmp);
+  my_send(client, tmp, 0);
   free(tmp);
 }
 

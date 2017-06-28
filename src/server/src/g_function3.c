@@ -5,7 +5,7 @@
 ** Login   <rene_r@epitech.net>
 ** 
 ** Started on  Tue Jun 27 17:16:59 2017 rodrigue rene
-** Last update Tue Jun 27 17:17:25 2017 rodrigue rene
+** Last update Wed Jun 28 23:23:19 2017 Gregoire Renard
 */
 
 #include <stdio.h>
@@ -29,7 +29,7 @@ int		g_sbp(t_client *client)
   char		buff[5];
 
   sprintf(buff, "sbp\n");
-  my_send(client, buff);
+  my_send(client, buff, 0);
   return (1);
 }
 
@@ -38,7 +38,7 @@ int		g_suc(t_client *client)
   char		buff[5];
 
   sprintf(buff, "suc\n");
-  my_send(client, buff);
+  my_send(client, buff, 0);
   return (1);
 }
 

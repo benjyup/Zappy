@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 26 15:54:45 2017 Gregoire Renard
-** Last update Mon Jun 26 16:03:53 2017 Gregoire Renard
+** Last update Wed Jun 28 23:06:53 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -17,10 +17,10 @@ static void	grep_object(t_env *env, t_client *client,
     {
       env->map[client->pos.y][client->pos.x].resource[cpt]--;
       client->inventory[cpt]++;
-      my_send(client, OK);
+      my_send(client, OK, 7 / env->arg.freq);
     }
   else
-    my_send(client, KO);
+    my_send(client, KO, 7 / env->arg.freq);
 }
 
 int		take_func(t_env *env, t_client *client,
@@ -39,9 +39,9 @@ int		take_func(t_env *env, t_client *client,
       if (env->resources[cpt] != NULL)
 	grep_object(env, client, cpt);
       else
-	my_send(client, KO);
+	my_send(client, KO, 7 / env->arg.freq);
     }
   else
-    my_send(client, KO);
+    my_send(client, KO, 7 / env->arg.freq);
   return (SUCCESS);
 }

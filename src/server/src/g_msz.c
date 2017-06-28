@@ -5,7 +5,7 @@
 ** Login   <rene_r@epitech.net>
 ** 
 ** Started on  Tue Jun 27 17:20:57 2017 rodrigue rene
-** Last update Tue Jun 27 19:28:44 2017 Gregoire Renard
+** Last update Wed Jun 28 23:21:04 2017 Gregoire Renard
 */
 
 #include <stdio.h>
@@ -27,7 +27,7 @@ int	g_msz(t_env *env, t_client *client, t_list **current)
       exit(-1);
     }
   sprintf(str, "%s %d %d\n", "msz ", env->arg.width, env->arg.height);
-  my_send(client, str);
+  my_send(client, str, 0);
   free(str);
   return (1);
 }
@@ -54,7 +54,7 @@ int	bct_f(int x, int y, t_env *env, t_client *client)
 	  env->map[y][x].resource[MENDIANE],
 	  env->map[y][x].resource[PHIRAS],
 	  env->map[y][x].resource[THYSTAME]);
-  my_send(client, str);
+  my_send(client, str, 0);
   free(str);
   return (1);
 }
@@ -115,7 +115,7 @@ int	g_tna(t_env *env, t_client *client, t_list **current)
 	  exit(-1);
 	}
       sprintf(str, "%s %s\n", "tna ", env->arg.team[i].team_name);
-      my_send(client, str);
+      my_send(client, str, 0);
       free(str);
       i++;
     }

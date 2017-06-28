@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Thu Jun 22 12:14:34 2017 Gregoire Renard
-** Last update Tue Jun 27 18:55:17 2017 Gregoire Renard
+** Last update Wed Jun 28 23:17:22 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -56,10 +56,10 @@ int		forward_func(t_env *env, t_client *client,
       client->pos.y = new_pos.y;
       client->pos.x = new_pos.x;
       add_in_map(env, client);
-      my_send(client, OK);
+      my_send(client, OK, 7 / env->arg.freq);
     }
   else
-    my_send(client, KO);
+    my_send(client, KO, 7 / env->arg.freq);
   return (SUCCESS);
 }
 

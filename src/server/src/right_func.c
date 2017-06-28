@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Thu Jun 22 16:15:49 2017 Gregoire Renard
-** Last update Thu Jun 22 16:17:29 2017 Gregoire Renard
+** Last update Wed Jun 28 23:12:27 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -35,6 +35,6 @@ int		right_func(t_env *env, t_client *client,
       client->dir.x = -1;
       client->dir.y = 0;
     }
-  my_send(client, OK);
+  my_send(client, OK, 7 / env->arg.freq);
   return (SUCCESS);
 }

@@ -62,6 +62,7 @@ SRCS	=	src/main.c \
 		src/send_to_all_user.c \
 		src/write_component.c \
 		src/set_pos_start.c \
+		src/fork_func.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

@@ -8,7 +8,12 @@
 ** Last update Tue Jun 27 17:14:51 2017 rodrigue rene
 */
 
+#include "server.h"
+
 int     fork_func(t_env *env, t_client *client, t_list **current)
 {
-
+  (void)env;
+  (void)client;
+  (void)current;
+  return (SUCCESS);
 }

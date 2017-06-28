@@ -66,7 +66,7 @@ static t_cmd		exec_array[NBR_OF_COMMANDS] = {
   {BROADCAST, broadcast_func, player},
   {TAKE, take_func, player},
   {SET, set_func, player},
-  {EJECT, eject_func, player}
+  {EJECT, eject_func, player},
   {FORK, fork_func, player}
 };
 

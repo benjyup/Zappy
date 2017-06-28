@@ -35,7 +35,10 @@ namespace zappy
     ~AIClient();
 
     void  ProxyRegister(Proxy *prox, int x, int y);
-    zappy::RequestType updade();
+    zappy::RequestType 						updade();
+    void 							setInventory(const std::unordered_map<t_resource, size_t, std::hash<int>> &);
+    void 							setLook(const std::vector<std::unordered_map<t_resource, size_t, std::hash<int>>> &);
+
    private:
 
     static const 	std::vector<SIncantation>		INCANTATIONS;
@@ -45,7 +48,7 @@ namespace zappy
     size_t 							_clietnNum;
     t_arg							_args;
     size_t 							_incantationLevel;
-    std::unordered_map<t_resource, size_t, std::hash<int>>	_inventory;
+    std::unordered_map<t_resource, size_t, std::hash<int>>	_currentInventory;
     std::vector<std::unordered_map<t_resource, size_t,
 	    std::hash<int>>>					_currentLook;
 

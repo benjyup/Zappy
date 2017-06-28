@@ -49,7 +49,8 @@ zappy::AIClient::AIClient(const t_arg &args) :
 	_level(0),
 	_args(args),
 	_incantationLevel(0),
-	_prox(NULL)
+	_prox(NULL),
+	_mode(true)
 {
   //_todo.push_back(LOOK);
   _todo.push_back(FORWARD);
@@ -188,23 +189,28 @@ bool			zappy::AIClient::_isNeeded(t_resource resource)
   return  nbr_of_resources > 0 && _currentInventory.find(resource)->second < resource;
 }
 
-zappy::RequestType 	zappy::AIClient::updade() {
+zappy::RequestType 	zappy::AIClient::update(std::string input) {
   RequestType		request = NOOP;
 
-<<<<<<< HEAD
-zappy::RequestType zappy::AIClient::updade() {
-    if (_prox == NULL)
-      return zappy::NOOP;
-    return zappy::FORWARD;
-=======
   if (_prox == NULL)
     return request;
-  if (!(_todo.empty()))
+
+  if (_mode)
     {
-      std::cout << "Je pop" << std::endl;
-      request = _todo.front();
-      _todo.pop_front();
+      std::cout << "MODE ECRITURE" << std::endl;
+      if (!(_todo.empty()))
+	{
+	  std::cout << "Je pop" << std::endl;
+	  request = _todo.front();
+	  _todo.pop_front();
+	}
     }
+  else
+    {
+      std::cout << "MODE LECTURE" << std::endl;
+      if (!input.empty())
+      	std::cout << "J'ai recu :" << input << std::endl;
+    }
+  _mode = !_mode;
   return request;
->>>>>>> c3b9a2d2dae7d58d97f708bcdb508bd90d11fbd7
 }

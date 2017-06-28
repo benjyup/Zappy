@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Tue Jun 27 19:00:31 2017 Gregoire Renard
+** Last update Wed Jun 28 17:05:22 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -150,6 +150,11 @@ typedef struct		s_msg
   ssize_t		current_index;
 }			t_msg;
 
+typedef	struct		s_broad
+{
+  t_pos			dir;
+  t_pos			tmp;
+}			t_broad;
 
 typedef void(free_callback)(void *data);
 

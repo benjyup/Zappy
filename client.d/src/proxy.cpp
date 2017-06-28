@@ -33,7 +33,7 @@ zappy::Proxy::Proxy(zappy::AIClient &ia, zappy::Zappy &zap): _ia(ia), _ready(fal
 
 zappy::Proxy::~Proxy() {}
 
-void zappy::Proxy::update(zappy::RequestType order) {
+std::string zappy::Proxy::update(zappy::RequestType order) {
     static int step = 0;
     char *s =   srv_read();
     std::string     input;
@@ -46,14 +46,14 @@ void zappy::Proxy::update(zappy::RequestType order) {
         {
             std::cout << "welcome OK" << std::endl;
             step += 1;
-            return;
+            return input;
         }
     }
     if (step == 1) {
         srv_write(_zap.getTeam());
         std::cout << "team name OK" << std::endl;
         step += 1;
-        return;
+        return input;
     }
     if (step == 2)
     {
@@ -67,13 +67,13 @@ void zappy::Proxy::update(zappy::RequestType order) {
             std::cout << "x : " << _x << std::endl << "y : " << _y << std::endl;
             step += 1;
             _ia.ProxyRegister(this, _x, _y);
-            return;
+            return input;
         }
     }
-
     if (step == 3)
     {
         _function_ptr[order]();
     }
+    return input;
 }
 

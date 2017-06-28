@@ -16,8 +16,8 @@ int main(int ac, char **av) {
         int err = 0;
         while (err != 1) {
             err = project.update();
-            prx.update(rqst);
-            rqst = ia.updade();
+            std::string input = prx.update(rqst);
+            rqst = ia.update(input);
             //srv_write("coucou\r\n");
             //project.console();
         }

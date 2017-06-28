@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:43:04 2017 vincent.mesquita@epitech.eu
-** Last update Tue Jun 27 19:02:20 2017 Gregoire Renard
+** Last update Wed Jun 28 23:41:06 2017 Gregoire Renard
 */
 
 #include <unistd.h>
@@ -14,7 +14,8 @@
 #include "server.h"
 
 void		my_send(t_client *client,
-			char *message)
+			char *message,
+			double time_action)
 {
   t_msg		*msg;
 
@@ -28,6 +29,7 @@ void		my_send(t_client *client,
     }
   msg->current_index = 0;
   msg->length = strlen(message);
+  msg->time_action = time_action;
   my_add_to_end(client->to_write, msg);
 }
 
@@ -39,13 +41,18 @@ void		my_send_to_client(t_client *client)
   if ((current = client->to_write->next) == client->to_write)
     return ;
   msg = current->data;
-  if ((msg->current_index =
-       write(client->socket,
-	     &msg->msg[msg->current_index], msg->length))
-      == (ssize_t)msg->length)
+  if (client->time_start != -1 &&
+      time(NULL) - client->time_start >= msg->time_action)
     {
-      free(msg->msg);
-      free(current->data);
-      my_del_elem(client->to_write, current, NULL);
+      client->action = 0;
+      if ((msg->current_index =
+	   write(client->socket,
+		 &msg->msg[msg->current_index], msg->length))
+	  == (ssize_t)msg->length)
+	{
+	  free(msg->msg);
+	  free(current->data);
+	  my_del_elem(client->to_write, current, NULL);
+	}
     }
 }

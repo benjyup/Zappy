@@ -49,7 +49,8 @@ zappy::AIClient::AIClient(const t_arg &args) :
 	_level(0),
 	_args(args),
 	_incantationLevel(0),
-	_prox(NULL)
+	_prox(NULL),
+	_mode(true)
 {
   //_todo.push_back(LOOK);
   _todo.push_back(FORWARD);
@@ -193,11 +194,23 @@ zappy::RequestType 	zappy::AIClient::update(std::string input) {
 
   if (_prox == NULL)
     return request;
-  if (!(_todo.empty()))
+
+  if (_mode)
     {
-      std::cout << "Je pop" << std::endl;
-      request = _todo.front();
-      _todo.pop_front();
+      std::cout << "MODE ECRITURE" << std::endl;
+      if (!(_todo.empty()))
+	{
+	  std::cout << "Je pop" << std::endl;
+	  request = _todo.front();
+	  _todo.pop_front();
+	}
     }
+  else
+    {
+      std::cout << "MODE LECTURE" << std::endl;
+      if (!input.empty())
+      	std::cout << "J'ai recu :" << input << std::endl;
+    }
+  _mode = !_mode;
   return request;
 }

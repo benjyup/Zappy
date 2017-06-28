@@ -59,6 +59,7 @@ namespace zappy
     std::list<RequestType>					_todo;
 
     Proxy                           				*_prox;
+    bool 							_mode;
   };
 }
 

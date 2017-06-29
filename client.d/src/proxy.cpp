@@ -5,24 +5,22 @@
 #include "server.hpp"
 #include "proxy.hpp"
 
-
-
 zappy::Proxy::Proxy(zappy::AIClient &ia, zappy::Zappy &zap): _ia(ia), _ready(false), _zap(zap),
     _function_ptr({
                           {zappy::FORWARD, [] () -> int {
-                            srv_write("forward\n");
+                            srv_write("FORWARD");
                               return 0;
                           }},
                           {zappy::LEFT, [] () -> int {
-                              srv_write("LEFT\n");
+                              srv_write("LEFT");
                                 return 0;
                           }},
                           {zappy::RIGHT, [] () -> int {
-                              srv_write("RIGHT\n");
+                              srv_write("RIGHT");
                                 return 0;
                           }},
                           {zappy::LOOK, [] () -> int {
-                              srv_write("LOOK\n");
+                              srv_write("LOOK");
                               return 0;
                           }},
                           {zappy::NOOP, [] () -> int {
@@ -85,4 +83,3 @@ std::string zappy::Proxy::update(zappy::RequestType order) {
     }
     return input;
 }
-

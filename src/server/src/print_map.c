@@ -5,31 +5,31 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 19:11:36 2017 Gregoire Renard
-** Last update Mon Jun 26 15:04:10 2017 vincent.mesquita@epitech.eu
+** Last update Thu Jun 29 15:05:39 2017 vincent.mesquita@epitech.eu
 */
 
 #include "server.h"
 
-static void		print_resource(t_env *env, t_pos pos)
-{
-  printf("food = %i ", env->map[pos.y][pos.x].resource[0]);
-  printf("linemate = %i, ", env->map[pos.y][pos.x].resource[1]);
-  printf("deraumere = %i, ", env->map[pos.y][pos.x].resource[2]);
-  printf("sibur = %i, ", env->map[pos.y][pos.x].resource[3]);
-  printf("mendiane = %i, ", env->map[pos.y][pos.x].resource[4]);
-  printf("phiras = %i, ", env->map[pos.y][pos.x].resource[5]);
-  printf("thystame = %i} ; ", env->map[pos.y][pos.x].resource[6]);
-}
+/* static void		print_resource(t_env *env, t_pos pos) */
+/* { */
+/*   printf("food = %i ", env->map[pos.y][pos.x].resource[0]); */
+/*   printf("linemate = %i, ", env->map[pos.y][pos.x].resource[1]); */
+/*   printf("deraumere = %i, ", env->map[pos.y][pos.x].resource[2]); */
+/*   printf("sibur = %i, ", env->map[pos.y][pos.x].resource[3]); */
+/*   printf("mendiane = %i, ", env->map[pos.y][pos.x].resource[4]); */
+/*   printf("phiras = %i, ", env->map[pos.y][pos.x].resource[5]); */
+/*   printf("thystame = %i} ; ", env->map[pos.y][pos.x].resource[6]); */
+/* } */
 
-static void		print_fd(t_env *env, t_pos pos)
-{
-  int			cpt;
+/* static void		print_fd(t_env *env, t_pos pos) */
+/* { */
+/*   int			cpt; */
 
-  cpt = 0;
-  while (env->map[pos.y][pos.x].clients[cpt] != NULL)
-    cpt++;
-  printf("clients = %i, ", cpt);
-}
+/*   cpt = 0; */
+/*   while (env->map[pos.y][pos.x].clients[cpt] != NULL) */
+/*     cpt++; */
+/*   printf("clients = %i, ", cpt); */
+/* } */
 
 static void		choose_print(t_env *env, t_pos pos)
 {
@@ -71,24 +71,24 @@ static void		print_simple_map(t_env *env)
 
 void			print_map(t_env *env)
 {
-  t_pos			pos;
+  /* t_pos			pos; */
 
-  pos.y = 0;
-  while (env->map[pos.y] != NULL)
-    {
-      pos.x = 0;
-      printf("----->MAP[%i] ==\n", pos.y);
-      while (env->map[pos.y][pos.x].border != 1)
-  	{
-  	  printf("--->X = %i{%s, ", pos.x, env->map[pos.y][pos.x].name_team);
-  	  print_fd(env, pos);
-  	  print_resource(env, pos);
-  	  pos.x++;
-  	  printf("\n");
-  	}
-      printf("\n");
-      pos.y++;
-    }
-  printf("\n");
+  /* pos.y = 0; */
+  /* while (env->map[pos.y] != NULL) */
+  /*   { */
+  /*     pos.x = 0; */
+  /*     printf("----->MAP[%i] ==\n", pos.y); */
+  /*     while (env->map[pos.y][pos.x].border != 1) */
+  /* 	{ */
+  /* 	  printf("--->X = %i{%s, ", pos.x, env->map[pos.y][pos.x].name_team); */
+  /* 	  print_fd(env, pos); */
+  /* 	  print_resource(env, pos); */
+  /* 	  pos.x++; */
+  /* 	  printf("\n"); */
+  /* 	} */
+  /*     printf("\n"); */
+  /*     pos.y++; */
+  /*   } */
+  /* printf("\n"); */
   print_simple_map(env);
 }

@@ -25,8 +25,9 @@ namespace zappy
   {
    public:
 
-    static const 	std::unordered_map<t_resource, std::string, std::hash<int>>	RESOURCES_TO_STR;
-    static const 	std::unordered_map<std::string, t_resource>			STR_TO_RESOURCES;
+    static const std::unordered_map<t_resource, std::string, std::hash<int>>	RESOURCES_TO_STR;
+    static const std::unordered_map<std::string, t_resource>			STR_TO_RESOURCES;
+    static const std::unordered_map<t_resource, RequestType, std::hash<int>>	RESOURCE_TO_REQUEST;
 
     struct SIncantation {
       size_t 							nbOfPlayers;
@@ -43,7 +44,7 @@ namespace zappy
 
    private:
 
-    static const 	std::vector<SIncantation>		INCANTATIONS;
+    static const std::vector<SIncantation>			INCANTATIONS;
 
     unsigned int						_level;
     std::pair<size_t, size_t >					_worldDimension;
@@ -59,13 +60,19 @@ namespace zappy
     bool 							_isNeeded(t_resource);
     void 							_go(const unsigned int tile_number, const t_resource);
     std::list<RequestType>					_todo;
+    std::list<RequestType>					_OutputType;
     std::vector<t_inventory>					_lookParse(const std::string &look);
     void                                            		_extractResources(const std::string &str,
 										  t_inventory &inventory);
     void                                            		_initInventory(std::unordered_map<t_resource, size_t,
 	    std::hash<int>> &inventory);
+    void 							_addTodo(const RequestType);
+    void 							_lookAction(const std::string &);
+    void 							_inventoryAction(const std::string &);
+
     Proxy                           				*_prox;
     bool 							_mode;
+    std::map<zappy::RequestType, std::function<void(const std::string &)>>	_actions;
   };
 }
 

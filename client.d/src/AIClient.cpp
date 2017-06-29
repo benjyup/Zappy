@@ -54,7 +54,7 @@ zappy::AIClient::AIClient(const t_arg &args) :
 
   _initInventory(_currentInventory);
 
-  //_todo.push_back(LOOK);
+  _todo.push_back(LOOK);
   //_todo.push_back(FORWARD);
   //_todo.push_back(FORWARD);
   //_todo.push_back(FORWARD);
@@ -142,12 +142,14 @@ void 		zappy::AIClient::_look()
 {
   int 		i = 0;
 
+  std::cout << "LOOK" << std::endl;
   while (i < _currentLook.size())
     {
       for (const auto &resource : _currentLook[i])
 	{
 	  if (resource.second > 0 && _isNeeded(resource.first))
 	    {
+	      std::cout << "GO" << std::endl;
 	      _go(i);
 	      return ;
 	    }
@@ -176,16 +178,25 @@ void 			zappy::AIClient::_go(unsigned int tile_number)
   while (i-- > 0)
     _todo.push_back(FORWARD);
   move = middle - tile_number;
+  std::cout << "move = " << move << std::endl;
   if (move > 0)
     _todo.push_back(LEFT);
   else if (move < 0)
-      _todo.push_back(RIGHT);
+      {
+	move = move * -1;
+	_todo.push_back(RIGHT);
+      }
   while (move-- > 0)
     _todo.push_back(FORWARD);
+  std::cout << "go " << _todo.size() << std::endl;
 }
 
 bool			zappy::AIClient::_isNeeded(t_resource resource)
 {
+  auto res = INCANTATIONS[_level].resources.find(resource);
+  if (res == INCANTATIONS[_level].resources.end())
+    return false;
+
   size_t 		nbr_of_resources = INCANTATIONS[_level].resources.find(resource)->second;
 
   return  nbr_of_resources > 0 && _currentInventory.find(resource)->second < resource;
@@ -239,7 +250,7 @@ void                                           zappy::AIClient::_initInventory(s
   inventory[THYSTAME] = 0;
 }
 
-zappy::RequestType 	zappy::AIClient::update(std::string input) {
+zappy::RequestType 	zappy::AIClient::update(std::string output) {
   RequestType		request = NOOP;
 
   if (_prox == NULL)
@@ -257,9 +268,12 @@ zappy::RequestType 	zappy::AIClient::update(std::string input) {
     }
   else
     {
-      if (!input.empty())
+      if (!output.empty())
 	{
-	  std::cout << "J'ai recu :" << input << std::endl;
+	  _currentLook = _lookParse(output);
+	  _look();
+	  std::cout << "_todo.size = " << _todo.size() << std::endl;
+	  std::cout << "J'ai recu :" << output << std::endl;
 	  _mode = !_mode;
 	}
     }

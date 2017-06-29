@@ -15,6 +15,13 @@ namespace zappy {
     LEFT,
     LOOK,
     BROADCAST,
+    TAKE_FOOD,
+    TAKE_LINEMATE,
+    TAKE_DERAUMERE,
+    TAKE_SIBUR,
+    TAKE_MENDIANE,
+    TAKE_PHIRAS,
+    TAKE_THYSTAME,
     NOOP
   } RequestType;
 

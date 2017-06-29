@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:55:57 2017 Gregoire Renard
-** Last update Wed Jun 28 23:39:29 2017 Gregoire Renard
+** Last update Thu Jun 29 16:30:44 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -80,7 +80,8 @@ static void	init_variable(t_client *client)
 {
   int		cpt;
 
-  cpt = 0;
+  cpt = 1;
+  client->inventory[0] = 10;
   while (cpt != MAX_RESOURCE)
     {
       client->inventory[cpt] = 0;

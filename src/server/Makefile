@@ -5,7 +5,7 @@
 ## Login   <renard_e@epitech.net>
 ## 
 ## Started on  Tue Jun 20 10:56:10 2017 Gregoire Renard
-## Last update Tue Jun 27 17:32:03 2017 Gregoire Renard
+## Last update Thu Jun 29 17:11:48 2017 Gregoire Renard
 ##
 
 CC	=	gcc -I../../include -g3
@@ -63,6 +63,7 @@ SRCS	=	src/main.c \
 		src/write_component.c \
 		src/set_pos_start.c \
 		src/fork_func.c \
+		src/pop_food.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

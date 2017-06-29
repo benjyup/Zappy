@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 26 14:57:15 2017 vincent.mesquita@epitech.eu
-** Last update Thu Jun 29 14:07:03 2017 Gregoire Renard
+** Last update Thu Jun 29 16:49:07 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -72,6 +72,7 @@ static void             my_check_each_client(t_env *env)
   while (current != env->clients)
     {
       client = current->data;
+      pop_food(env);
       if (FD_ISSET(client->socket, &(env->readf)))
 	{
 	  client = current->data;

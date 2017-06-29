@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Wed Jun 28 23:16:25 2017 Gregoire Renard
+** Last update Thu Jun 29 16:59:58 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -96,6 +96,7 @@ typedef struct		s_env
 {
   t_arg			arg;
   int			time;
+  int			time_food;
   int			socket;
   int                   highest_fd;
   unsigned long		current_client_id;
@@ -286,4 +287,6 @@ int			write_component(t_look *look, t_env *env);
 void			set_pos_start(t_env *env, t_client *client,
 				      t_look *look);
 int		        fork_func(t_env *env, t_client *client, t_list **current);
+void			pop_food(t_env *env);
+
 #endif /* !SERVER_H_ */

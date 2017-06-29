@@ -43,6 +43,7 @@ namespace 		Client
 	  Vector3d v(x, y);
 	  _map[y * _size.getX() + x] = Block(_lib.addNode(v, GraphicalLib::MESH::block, GraphicalLib::TEXT::grass, Client::SCALE, 0), v);
 	}
+    _sound.setGameMusic();
   }
 
   Client::~Client()
@@ -208,6 +209,7 @@ namespace 		Client
     _lib.set_text2(t[1].c_str(), false);
     _lib.set_text2(" est niveau ", false);
     _lib.set_text2(t[2].c_str(), false);
+    _sound.lvlUpSound();
   }
 
   void Client::_pin(std::vector<std::string> const &t)
@@ -236,7 +238,7 @@ namespace 		Client
     _lib.set_text2("\nLe joueur : ", true);
     _lib.set_text2(t[1].c_str(), false);
     _lib.set_text2(" les joueurs de la case : ", false);
-
+    _sound.ejectSound();
   }
 
   void Client::_pbc(std::vector<std::string> const &t)
@@ -269,6 +271,7 @@ namespace 		Client
     _lib.set_text2("\nLe joueur : ", true);
     _lib.set_text2(t[4].c_str(), false);
     _lib.set_text2(" lance une incantation ", false);
+    _sound.ritualSound();
   }
 
   void Client::_pie(std::vector<std::string> const &t)
@@ -313,6 +316,7 @@ namespace 		Client
     _lib.set_text2(t[1].c_str(), false);
     _lib.set_text2(" jette une ressource ", false);
     _lib.set_text2(t[2].c_str(), false);
+    _sound.eatSound();
   }
 
   void Client::_pgt(std::vector<std::string> const &t)

@@ -18,6 +18,7 @@
 #include "Block.hpp"
 #include "Eggs.hpp"
 #include "zappy.hpp"
+#include "Sound.hpp"
 
 namespace 		Client
 {
@@ -48,6 +49,7 @@ namespace 		Client
     std::string										_winner;
     GraphicalLib									_lib;
     zappy::Zappy									_z;
+    Sound										_sound;
 
     void _msz(std::vector<std::string> const &t);
     void _bct(std::vector<std::string> const &t);

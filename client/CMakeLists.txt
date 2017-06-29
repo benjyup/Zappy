@@ -20,7 +20,6 @@ set(SOURCE_FILES
         src/mendatory/argument.c
         src/mendatory/connection_manager.c
         src/mendatory/cookie.c
-        src/mendatory/function_parser.cpp
         src/mendatory/functionParse.c
         src/mendatory/my_stack.c
         src/mendatory/srv_read.c
@@ -35,12 +34,17 @@ set(SOURCE_FILES
         include/Ressource.hpp
         include/Vector3d.hpp
         include/Eggs.hpp
-        include/Drone.hpp src/GraphicalLib.cpp src/GraphicalLib.hpp)
+        include/Drone.hpp
+        src/GraphicalLib.cpp
+        src/GraphicalLib.hpp
+        src/Sound.cpp
+        include/Sound.hpp)
 
-include_directories(irrlicht-1.8.4/include src/ include/ include/mendatory)
+include_directories(irrlicht-1.8.4/include src/ include/ include/mendatory ./irrKlang-64bit-1.5.0/include)
 
-link_directories(./irrlicht-1.8.4/lib/Linux ./irrlicht-1.8.4/lib/Linux/deepinx86_64 ./irrlicht-1.8.4/lib/Linux/useful)
+link_directories(./irrlicht-1.8.4/lib/Linux ./irrlicht-1.8.4/lib/Linux/deepinx86_64
+        ./irrlicht-1.8.4/lib/Linux/useful ./irrKlang-64bit-1.5.0/bin/linux-gcc-64/)
 
 add_executable(client_graph ${SOURCE_FILES})
 
-target_link_libraries(client_graph Irrlicht.a GL.so libXxf86vm.so libXext.so libX11.so libXcursor.so -lpthread)
+target_link_libraries(client_graph Irrlicht.a GL.so libXxf86vm.so libIrrKlang.so libXext.so libX11.so libXcursor.so -lpthread)

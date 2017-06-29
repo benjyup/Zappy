@@ -32,6 +32,7 @@ namespace 		Client
     };
 
     Character(int num, Vector3d const &pos, DIR, int level, std::string const &team, int id);
+    Character();
     virtual ~Character();
 
     int get_num() const;

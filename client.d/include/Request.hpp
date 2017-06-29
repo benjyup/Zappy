@@ -22,6 +22,7 @@ namespace zappy {
     TAKE_MENDIANE,
     TAKE_PHIRAS,
     TAKE_THYSTAME,
+    INVENTORY,
     NOOP
   } RequestType;
 

@@ -53,6 +53,10 @@ zappy::Proxy::Proxy(zappy::AIClient &ia, zappy::Zappy &zap): _ia(ia), _ready(fal
 			    srv_write("Take thystame");
 			    return 0;
 			  }},
+			  {zappy::INVENTORY, [] () -> int {
+			    srv_write("Inventory");
+			    return 0;
+			  }},
 			  {zappy::NOOP, [] () -> int {
                               return 0;
                           }}

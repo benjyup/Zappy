@@ -51,10 +51,11 @@ namespace zappy
     size_t 							_incantationLevel;
     t_inventory							_currentInventory;
     std::vector<t_inventory>					_currentLook;
+    bool 							_isInventoryData;
 
     void							_play();
     void 							_look();
-    void							_getInventory();
+    void							_getInventory(const std::string &data);
     bool 							_isNeeded(t_resource);
     void 							_go(const unsigned int tile_number, const t_resource);
     std::list<RequestType>					_todo;

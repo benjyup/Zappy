@@ -49,12 +49,13 @@ zappy::AIClient::AIClient(const t_arg &args) :
 	_args(args),
 	_incantationLevel(0),
 	_prox(NULL),
-	_mode(true)
+	_mode(true),
+	_isInventoryData(true)
 {
 
   _initInventory(_currentInventory);
 
-  _todo.push_back(LOOK);
+  _todo.push_back(INVENTORY);
   //_todo.push_back(FORWARD);
   //_todo.push_back(FORWARD);
   //_todo.push_back(FORWARD);
@@ -81,7 +82,6 @@ void 			zappy::AIClient::_play()
   char			*str;
 
   std::cout << "_play" << std::endl;
-  _getInventory();
   _look();
   std::cout << "_play" << std::endl;
   while (response != "dead\n")
@@ -95,18 +95,9 @@ void 			zappy::AIClient::_play()
   std::cout << "fin" << std::endl;
 }
 
-void 			zappy::AIClient::_getInventory()
+void 			zappy::AIClient::_getInventory(const std::string &data)
 {
-  char			*str;
-
-  srv_write("Inventory");
-  if (!(str = srv_read()))
-    {
-      std::cout << "JE QUITTE" << std::endl;
-      return ;
-    }
-
-  std::string tmp(str);
+  std::string tmp(data);
 
   tmp.erase(std::remove_if(tmp.begin(),
 			   tmp.end(),
@@ -128,9 +119,6 @@ void 			zappy::AIClient::_getInventory()
       ss >> _currentInventory[STR_TO_RESOURCES.at(tmp)];
     }
 
-  std::cout << str << std::endl;
-  std::cout << t << std::endl;
-  std::cout << tmp << std::endl;
   std::cout << "Inventaire: " << std::endl;
   for (const auto &it : _currentInventory)
     {
@@ -263,6 +251,7 @@ zappy::RequestType 	zappy::AIClient::update(std::string output) {
       if (!(_todo.empty()))
 	{
 	  std::cout << "Je pop" << std::endl;
+	  std::cout << "requete = " << request << std::endl;
 	  request = _todo.front();
 	  _todo.pop_front();
 	}
@@ -272,14 +261,23 @@ zappy::RequestType 	zappy::AIClient::update(std::string output) {
     {
       if (!output.empty())
 	{
-	  if (output[0] == '[')
+	  std::cout << "J'ai recu :" << output << std::endl;
+	  if (output[0] == '[' && !_isInventoryData)
 	    {
+	      std::cout << "GET LOOK :" << output << std::endl;
 	      _currentLook = _lookParse(output);
-	      std::cout << "J'ai recu :" << output << std::endl;
 	      _look();
 	      std::cout << "_todo.size = " << _todo.size() << std::endl;
-	      _todo.push_back(LOOK);
+	      _isInventoryData = true;
+	      _todo.push_back(INVENTORY);
 	    }
+	  else if (output[0] == '[' && _isInventoryData)
+	      {
+		std::cout << "GET INVENTORY" << std::endl;
+		_getInventory(output);
+		_isInventoryData = false;
+		_todo.push_back(LOOK);
+	      }
 	  _mode = !_mode;
 	}
     }

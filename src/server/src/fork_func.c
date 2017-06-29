@@ -5,7 +5,7 @@
 ** Login   <rene_r@epitech.net>
 ** 
 ** Started on  Tue Jun 27 17:14:47 2017 rodrigue rene
-** Last update Tue Jun 27 17:14:51 2017 rodrigue rene
+** Last update Wed Jun 28 23:53:39 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -36,7 +36,8 @@ static void	put_egg(t_env *env, t_client *client)
 int		fork_func(t_env *env, t_client *client, t_list **current)
 {
   (void)current;
+  //ajouter un egg
   put_egg(env, client);
-  my_send(client, OK);
+  my_send(client, OK, 42 / env->arg.freq);
   return (SUCCESS);
 }

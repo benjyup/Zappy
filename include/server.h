@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Wed Jun 28 19:01:30 2017 Gregoire Renard
+** Last update Thu Jun 29 16:59:58 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -15,6 +15,7 @@
 # include <sys/socket.h>
 # include <netinet/in.h>
 # include <stdarg.h>
+# include <time.h>
 # include "commun.h"
 
 # define VALUE		i + h + 1
@@ -95,6 +96,7 @@ typedef struct		s_env
 {
   t_arg			arg;
   int			time;
+  int			time_food;
   int			socket;
   int                   highest_fd;
   unsigned long		current_client_id;
@@ -132,6 +134,8 @@ typedef struct		s_client
   t_list		*to_write;
   int			level;
   t_client_type		type;
+  int			time_start;
+  int			action;
 }			t_client;
 
 typedef	struct		s_look
@@ -148,6 +152,7 @@ typedef struct		s_msg
   char			*msg;
   unsigned int		length;
   ssize_t		current_index;
+  double		time_action;
 }			t_msg;
 
 typedef	struct		s_broad
@@ -219,7 +224,8 @@ void			add_to_the_team(t_env *env, t_client *client,
 					t_pos new_pos);
 void			my_send_to_client(t_client *client);
 void			my_send(t_client *client,
-				char *message);
+				char *message,
+				double time_action);
 char			*to_string(int nb);
 
 t_client		*search_client(t_list **current, int n, t_env *env);
@@ -281,4 +287,6 @@ int			write_component(t_look *look, t_env *env);
 void			set_pos_start(t_env *env, t_client *client,
 				      t_look *look);
 int		        fork_func(t_env *env, t_client *client, t_list **current);
+void			pop_food(t_env *env);
+
 #endif /* !SERVER_H_ */

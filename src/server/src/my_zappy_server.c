@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 26 14:57:15 2017 vincent.mesquita@epitech.eu
-** Last update Tue Jun 27 18:58:39 2017 Gregoire Renard
+** Last update Thu Jun 29 16:49:07 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -33,8 +33,9 @@ static t_bool           my_new_client(int client_socket,
   client->name_team = NULL;
   client->dir.x = 1;
   client->dir.y = 0;
+  client->action = 0;
   my_add_to_end(env->clients, client);
-  my_send(client, WELCOME);
+  my_send(client, WELCOME, 0);
   env->nb_player++;
   return (true);
 }
@@ -71,6 +72,7 @@ static void             my_check_each_client(t_env *env)
   while (current != env->clients)
     {
       client = current->data;
+      pop_food(env);
       if (FD_ISSET(client->socket, &(env->readf)))
 	{
 	  client = current->data;

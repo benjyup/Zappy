@@ -6,8 +6,7 @@
 #include <iostream>
 #include <sstream>
 #include <algorithm>
-#include "mendatory/AIClient.hpp"
-
+#include "AIClient.hpp"
 
 const std::vector<zappy::AIClient::SIncantation>	zappy::AIClient::INCANTATIONS = {
 	{1, { {LINEMATE, 1}, {DERAUMERE, 0}, {SIBUR, 0}, {MENDIANE, 0}, {PHIRAS, 0}, {THYSTAME, 0} } },
@@ -50,12 +49,16 @@ zappy::AIClient::AIClient(const t_arg &args) :
 	_args(args),
 	_incantationLevel(0),
 	_prox(NULL),
-	_mode(true)
+	_mode(true),
+	_isInventoryData(true)
 {
-  //_todo.push_back(LOOK);
-  _todo.push_back(FORWARD);
-  _todo.push_back(FORWARD);
-  _todo.push_back(FORWARD);
+
+  _initInventory(_currentInventory);
+
+  _todo.push_back(INVENTORY);
+  //_todo.push_back(FORWARD);
+  //_todo.push_back(FORWARD);
+  //_todo.push_back(FORWARD);
 }
 
 void zappy::AIClient::setInventory(const std::unordered_map<t_resource, size_t, std::hash<int>> &newInventory)
@@ -79,7 +82,6 @@ void 			zappy::AIClient::_play()
   char			*str;
 
   std::cout << "_play" << std::endl;
-  _getInventory();
   _look();
   std::cout << "_play" << std::endl;
   while (response != "dead\n")
@@ -93,18 +95,9 @@ void 			zappy::AIClient::_play()
   std::cout << "fin" << std::endl;
 }
 
-void 			zappy::AIClient::_getInventory()
+void 			zappy::AIClient::_getInventory(const std::string &data)
 {
-  char			*str;
-
-  srv_write("Inventory");
-  if (!(str = srv_read()))
-    {
-      std::cout << "JE QUITTE" << std::endl;
-      return ;
-    }
-
-  std::string tmp(str);
+  std::string tmp(data);
 
   tmp.erase(std::remove_if(tmp.begin(),
 			   tmp.end(),
@@ -126,9 +119,6 @@ void 			zappy::AIClient::_getInventory()
       ss >> _currentInventory[STR_TO_RESOURCES.at(tmp)];
     }
 
-  std::cout << str << std::endl;
-  std::cout << t << std::endl;
-  std::cout << tmp << std::endl;
   std::cout << "Inventaire: " << std::endl;
   for (const auto &it : _currentInventory)
     {
@@ -140,21 +130,24 @@ void 		zappy::AIClient::_look()
 {
   int 		i = 0;
 
+  std::cout << "LOOK" << std::endl;
   while (i < _currentLook.size())
     {
       for (const auto &resource : _currentLook[i])
 	{
 	  if (resource.second > 0 && _isNeeded(resource.first))
 	    {
-	      _go(i);
+	      std::cout << "GO" << std::endl;
+	      _go(i, resource.first);
 	      return ;
 	    }
 	}
       i += 1;
     }
+  _todo.push_back(FORWARD);
 }
 
-void 			zappy::AIClient::_go(unsigned int tile_number)
+void 			zappy::AIClient::_go(const unsigned int tile_number, const t_resource resource)
 {
   int           	i = 0;
   int           	first = 0;
@@ -174,43 +167,119 @@ void 			zappy::AIClient::_go(unsigned int tile_number)
   while (i-- > 0)
     _todo.push_back(FORWARD);
   move = middle - tile_number;
+  std::cout << "move = " << move << std::endl;
   if (move > 0)
     _todo.push_back(LEFT);
   else if (move < 0)
-      _todo.push_back(RIGHT);
+      {
+	move = move * -1;
+	_todo.push_back(RIGHT);
+      }
   while (move-- > 0)
     _todo.push_back(FORWARD);
+  _todo.push_back(TAKE_LINEMATE);
+  std::cout << "go " << _todo.size() << std::endl;
 }
 
 bool			zappy::AIClient::_isNeeded(t_resource resource)
 {
+  auto res = INCANTATIONS[_level].resources.find(resource);
+  if (res == INCANTATIONS[_level].resources.end())
+    return false;
+
   size_t 		nbr_of_resources = INCANTATIONS[_level].resources.find(resource)->second;
 
   return  nbr_of_resources > 0 && _currentInventory.find(resource)->second < resource;
 }
 
-zappy::RequestType 	zappy::AIClient::update(std::string input) {
+std::vector<std::unordered_map<t_resource, size_t,
+	std::hash<int>>> 						zappy::AIClient::_lookParse(const std::string &str)
+{
+  std::vector<std::unordered_map<t_resource, size_t, std::hash<int>>>   look;
+  std::size_t                                                           pos = 0, begin = 0;
+  std::unordered_map<t_resource, size_t,
+	  std::hash<int>>                                    		inventory;
+  std::string 								tmp(str.substr(begin, pos - begin));
+
+
+  while ((pos = str.find_first_of(",", pos + 1)) != std::string::npos)
+    {
+      tmp = str.substr(begin, pos - begin);
+      std::stringstream ss(tmp);
+
+      _extractResources(tmp, inventory);
+      look.push_back(inventory);
+      begin = pos + 1;
+    }
+  tmp = str.substr(begin, pos);
+  _extractResources(tmp, inventory);
+  look.push_back(inventory);
+  return look;
+}
+
+void                                            zappy::AIClient::_extractResources(const std::string &str,
+										   t_inventory &inventory)
+{
+  std::string                                   tmp(str);
+  std::stringstream                             ss(tmp);
+
+  _initInventory(inventory);
+  while (ss >> tmp)
+    try { inventory[STR_TO_RESOURCES.at(tmp)] +=  1; } catch (...) {	}
+}
+
+void                                           zappy::AIClient::_initInventory(std::unordered_map<t_resource, size_t,
+	std::hash<int>> &inventory)
+{
+  inventory[FOOD] = 0;
+  inventory[LINEMATE] = 0;
+  inventory[DERAUMERE] = 0;
+  inventory[SIBUR] = 0;
+  inventory[MENDIANE] = 0;
+  inventory[PHIRAS] = 0;
+  inventory[THYSTAME] = 0;
+}
+
+zappy::RequestType 	zappy::AIClient::update(std::string output) {
   RequestType		request = NOOP;
 
   if (_prox == NULL)
     return request;
 
-    if (!input.empty())
-        std::cout << "J'ai recu :" << input << std::endl;
   if (_mode)
     {
-    //  std::cout << "MODE ECRITURE" << std::endl;
       if (!(_todo.empty()))
 	{
 	  std::cout << "Je pop" << std::endl;
+	  std::cout << "requete = " << request << std::endl;
 	  request = _todo.front();
 	  _todo.pop_front();
 	}
+      _mode = !_mode;
     }
   else
     {
-    //  std::cout << "MODE LECTURE" << std::endl;
+      if (!output.empty())
+	{
+	  std::cout << "J'ai recu :" << output << std::endl;
+	  if (output[0] == '[' && !_isInventoryData)
+	    {
+	      std::cout << "GET LOOK :" << output << std::endl;
+	      _currentLook = _lookParse(output);
+	      _look();
+	      std::cout << "_todo.size = " << _todo.size() << std::endl;
+	      _isInventoryData = true;
+	      _todo.push_back(INVENTORY);
+	    }
+	  else if (output[0] == '[' && _isInventoryData)
+	      {
+		std::cout << "GET INVENTORY" << std::endl;
+		_getInventory(output);
+		_isInventoryData = false;
+		_todo.push_back(LOOK);
+	      }
+	  _mode = !_mode;
+	}
     }
-  _mode = !_mode;
   return request;
 }

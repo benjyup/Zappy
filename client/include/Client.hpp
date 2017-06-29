@@ -17,6 +17,8 @@
 #include "Vector3d.hpp"
 #include "Block.hpp"
 #include "Eggs.hpp"
+#include "zappy.hpp"
+#include "Sound.hpp"
 
 namespace 		Client
 {
@@ -25,7 +27,7 @@ namespace 		Client
   {
    public:
     static const int SCALE = 15;
-    Client();
+    Client(zappy::Zappy const &);
     virtual ~Client();
 
     void initTab();
@@ -39,13 +41,15 @@ namespace 		Client
     Vector3d 										_size;
     std::map<std::string, std::function<void(std::vector<std::string> const &)>>	_tab;
     std::map<int, Block> 								_map;
-    std::vector<Character> 								_player;
+    std::map<int, Character> 								_player;
     std::vector<std::string>								_team;
     std::vector<Eggs>									_Eggs;
     bool 										_running;
     int 										_sgtt;
     std::string										_winner;
     GraphicalLib									_lib;
+    zappy::Zappy									_z;
+    Sound										_sound;
 
     void _msz(std::vector<std::string> const &t);
     void _bct(std::vector<std::string> const &t);

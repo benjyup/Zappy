@@ -48,10 +48,10 @@ RM = /home/kyxo/clion-2017.1.1/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/alice/rendu/PSU_2016_zappy/client
+CMAKE_SOURCE_DIR = /home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/alice/rendu/PSU_2016_zappy/client
+CMAKE_BINARY_DIR = /home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alice/rendu/PSU_2016_zappy/client/CMakeFiles /home/alice/rendu/PSU_2016_zappy/client/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/CMakeFiles /home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/alice/rendu/PSU_2016_zappy/client/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -312,6 +312,33 @@ src/Ressource.cpp.s:
 	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/Ressource.cpp.s
 .PHONY : src/Ressource.cpp.s
 
+src/Sound.o: src/Sound.cpp.o
+
+.PHONY : src/Sound.o
+
+# target to build an object file
+src/Sound.cpp.o:
+	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/Sound.cpp.o
+.PHONY : src/Sound.cpp.o
+
+src/Sound.i: src/Sound.cpp.i
+
+.PHONY : src/Sound.i
+
+# target to preprocess a source file
+src/Sound.cpp.i:
+	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/Sound.cpp.i
+.PHONY : src/Sound.cpp.i
+
+src/Sound.s: src/Sound.cpp.s
+
+.PHONY : src/Sound.s
+
+# target to generate assembly for a file
+src/Sound.cpp.s:
+	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/Sound.cpp.s
+.PHONY : src/Sound.cpp.s
+
 src/Vector3d.o: src/Vector3d.cpp.o
 
 .PHONY : src/Vector3d.o
@@ -501,33 +528,6 @@ src/mendatory/functionParse.c.s:
 	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/mendatory/functionParse.c.s
 .PHONY : src/mendatory/functionParse.c.s
 
-src/mendatory/function_parser.o: src/mendatory/function_parser.cpp.o
-
-.PHONY : src/mendatory/function_parser.o
-
-# target to build an object file
-src/mendatory/function_parser.cpp.o:
-	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/mendatory/function_parser.cpp.o
-.PHONY : src/mendatory/function_parser.cpp.o
-
-src/mendatory/function_parser.i: src/mendatory/function_parser.cpp.i
-
-.PHONY : src/mendatory/function_parser.i
-
-# target to preprocess a source file
-src/mendatory/function_parser.cpp.i:
-	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/mendatory/function_parser.cpp.i
-.PHONY : src/mendatory/function_parser.cpp.i
-
-src/mendatory/function_parser.s: src/mendatory/function_parser.cpp.s
-
-.PHONY : src/mendatory/function_parser.s
-
-# target to generate assembly for a file
-src/mendatory/function_parser.cpp.s:
-	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/mendatory/function_parser.cpp.s
-.PHONY : src/mendatory/function_parser.cpp.s
-
 src/mendatory/my_stack.o: src/mendatory/my_stack.c.o
 
 .PHONY : src/mendatory/my_stack.o
@@ -693,6 +693,9 @@ help:
 	@echo "... src/Ressource.o"
 	@echo "... src/Ressource.i"
 	@echo "... src/Ressource.s"
+	@echo "... src/Sound.o"
+	@echo "... src/Sound.i"
+	@echo "... src/Sound.s"
 	@echo "... src/Vector3d.o"
 	@echo "... src/Vector3d.i"
 	@echo "... src/Vector3d.s"
@@ -714,9 +717,6 @@ help:
 	@echo "... src/mendatory/functionParse.o"
 	@echo "... src/mendatory/functionParse.i"
 	@echo "... src/mendatory/functionParse.s"
-	@echo "... src/mendatory/function_parser.o"
-	@echo "... src/mendatory/function_parser.i"
-	@echo "... src/mendatory/function_parser.s"
 	@echo "... src/mendatory/my_stack.o"
 	@echo "... src/mendatory/my_stack.i"
 	@echo "... src/mendatory/my_stack.s"

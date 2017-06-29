@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:55:57 2017 Gregoire Renard
-** Last update Wed Jun 28 19:09:25 2017 Gregoire Renard
+** Last update Thu Jun 29 16:30:44 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -28,7 +28,7 @@ static void	send_pos(t_env *env, t_client *client)
   strcat(tmp, " ");
   strcat(tmp, y);
   strcat(tmp, "\n\0");
-  my_send(client, tmp);
+  my_send(client, tmp, 0);
   g_pnw(env, client, &env->clients->next);
   free(tmp);
 }
@@ -47,7 +47,7 @@ static void	send_info(t_env *env, t_client *client, int cpt)
     }
   ret[len] = '\n';
   ret[len + 1] = 0;
-  my_send(client, ret);
+  my_send(client, ret, 0);
   send_pos(env, client);
   free(ret);
 }
@@ -80,7 +80,8 @@ static void	init_variable(t_client *client)
 {
   int		cpt;
 
-  cpt = 0;
+  cpt = 1;
+  client->inventory[0] = 10;
   while (cpt != MAX_RESOURCE)
     {
       client->inventory[cpt] = 0;
@@ -109,12 +110,12 @@ void		add_to_the_team(t_env *env, t_client *client,
 	    }
 	  else
 	    {
-	      my_send(client, KO);
+	      my_send(client, KO, 0);
 	      cpt = -2;
 	    }
 	}
       cpt++;
     }
   if (client->name_team == NULL && cpt != -1)
-    my_send(client, KO);
+    my_send(client, KO, 0);
 }

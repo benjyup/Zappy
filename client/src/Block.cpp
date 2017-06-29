@@ -37,10 +37,10 @@ namespace 		Client
 
   }
 
-  const std::array<int, 7> &Block::getRes() const
-  {
-    return _res;
-  }
+//  const std::array<int, 7> &Block::getRes() const
+//  {
+//    return _res;
+//  }
 
   int Block::set_res(const std::vector<std::string> &res)
   {
@@ -151,5 +151,15 @@ namespace 		Client
 	    break ;
 	  }
       }
+  }
+
+  int Block::get_idRock() const
+  {
+    return _idRock;
+  }
+
+  void Block::set_idRock(int _idRock)
+  {
+    Block::_idRock = _idRock;
   }
 }

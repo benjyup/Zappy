@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon May 29 17:40:11 2017 vincent.mesquita@epitech.eu
-** Last update Tue Jun 20 14:34:47 2017 Gregoire Renard
+** Last update Thu Jun 29 17:06:17 2017 Gregoire Renard
 */
 
 #include <netdb.h>
@@ -18,6 +18,7 @@ static t_bool		my_init_server2(t_env *env)
   env->info.sin_addr.s_addr = INADDR_ANY;
   env->info.sin_port = htons(env->arg.port);
   env->current_client_id = 0;
+  env->time_food = time(NULL);
   if (!(env->clients = my_init_list()))
     return (false);
   return (true);

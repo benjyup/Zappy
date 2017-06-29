@@ -2,39 +2,6 @@
 // Created by kyxo on 6/19/17.
 //
 
-//void is::GameEngine::Init(const char* title, int width, int height,
-//			  int bpp, bool fullscreen)
-//{
-//  this->_device = irr::createDevice(irr::video::EDT_OPENGL, irr::core::dimension2d<irr::u32>(width, height), bpp,
-//				    fullscreen, false, false, 0);
-//  this->_driver = this->_device->getVideoDriver();
-//  this->_smgr = this->_device->getSceneManager();
-//  this->_guienv = this->_device->getGUIEnvironment();
-//  irr::core::stringw wStr(title);
-//  this->_device->setWindowCaption(wStr.c_str());
-//
-//  this->_fullscreen = fullscreen;
-//  this->_running = true;
-//}
-
-//  try {
-//      std::shared_ptr<is::GameEngine> engine = std::make_shared<is::GameEngine>("Indie Studio",
-//										1900, 1000, 0, true);
-//      engine->PushState(new is::IntroState);
-//
-//      irr::core::array<irr::SJoystickInfo> joystickInfo;
-//      engine->getDevice()->activateJoysticks(joystickInfo);
-//      while (engine->Running())
-//	{
-//	  engine->HandleEvents();
-//	  engine->Update();
-//	  engine->Draw();
-//	}
-//    } catch (const std::exception &e) {
-//      if (!std::string(e.what()).empty())
-//	std::cerr << "Error: " << e.what() << std::endl;
-//    }
-
 #include <vector>
 #include <string>
 #include <sstream>
@@ -51,12 +18,12 @@ int             main(int ac, char **av)
       std::string s;
       std::vector<std::string>	tab;
 
-      project.run();
-      Client::Client c;
+      Client::Client c(project);
       c.initTab();
 
       while (c.is_running())
 	{
+	  c.update();
 	buf = srv_read();
 	if (buf)
 	  {
@@ -65,9 +32,7 @@ int             main(int ac, char **av)
 	    c.call(tab);
 	    s.clear();
 	  }
-	  c.update();
 	}
-      project.stop();
     }
   catch (std::exception &e)
     {

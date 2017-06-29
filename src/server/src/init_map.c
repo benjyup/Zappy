@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 18:25:45 2017 Gregoire Renard
-** Last update Tue Jun 27 18:57:30 2017 Gregoire Renard
+** Last update Wed Jun 28 23:49:31 2017 Gregoire Renard
 */
 
 #include <sys/types.h>
@@ -30,7 +30,7 @@ static void	init_resource(t_env *env, t_pos pos)
 static int	init_fd(t_env *env, t_pos pos)
 {
   if ((env->map[pos.y][pos.x].clients =
-       malloc(sizeof(t_client *) * env->arg.clients_lim)) == NULL)
+       malloc(sizeof(t_client *) * env->arg.clients_lim + 2)) == NULL)
     {
       printf_error("Error : allocation in init_fd");
       exit(ERROR);

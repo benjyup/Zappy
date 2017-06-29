@@ -8,22 +8,54 @@
 zappy::Proxy::Proxy(zappy::AIClient &ia, zappy::Zappy &zap): _ia(ia), _ready(false), _zap(zap),
     _function_ptr({
                           {zappy::FORWARD, [] () -> int {
-                            srv_write("FORWARD");
+                            srv_write("Forward");
                               return 0;
                           }},
                           {zappy::LEFT, [] () -> int {
-                              srv_write("LEFT");
+                              srv_write("Left");
                                 return 0;
                           }},
                           {zappy::RIGHT, [] () -> int {
-                              srv_write("RIGHT");
+                              srv_write("Right");
                                 return 0;
                           }},
                           {zappy::LOOK, [] () -> int {
-                              srv_write("LOOK");
+                              srv_write("Look");
                               return 0;
                           }},
-                          {zappy::NOOP, [] () -> int {
+			  {zappy::TAKE_FOOD, [] () -> int {
+			    srv_write("Take food");
+			    return 0;
+			  }},
+			  {zappy::TAKE_LINEMATE, [] () -> int {
+			    srv_write("Take linemate");
+			    return 0;
+			  }},
+			  {zappy::TAKE_DERAUMERE, [] () -> int {
+			    srv_write("Take deraumere");
+			    return 0;
+			  }},
+			  {zappy::TAKE_SIBUR, [] () -> int {
+			    srv_write("Take sibur");
+			    return 0;
+			  }},
+			  {zappy::TAKE_MENDIANE, [] () -> int {
+			    srv_write("Take mendiane");
+			    return 0;
+			  }},
+			  {zappy::TAKE_PHIRAS, [] () -> int {
+			    srv_write("Take phiras");
+			    return 0;
+			  }},
+			  {zappy::TAKE_THYSTAME, [] () -> int {
+			    srv_write("Take thystame");
+			    return 0;
+			  }},
+			  {zappy::INVENTORY, [] () -> int {
+			    srv_write("Inventory");
+			    return 0;
+			  }},
+			  {zappy::NOOP, [] () -> int {
                               return 0;
                           }}
                   })

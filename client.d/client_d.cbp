@@ -88,13 +88,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/AIClient.hpp">
+			<Option target="zappy_ai"/>
+		</Unit>
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/Request.hpp">
 			<Option target="zappy_ai"/>
 		</Unit>
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/ZappyException.hpp">
-			<Option target="zappy_ai"/>
-		</Unit>
-		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/mendatory/AIClient.hpp">
 			<Option target="zappy_ai"/>
 		</Unit>
 		<Unit filename="/home/alice/rendu/PSU_2016_zappy/client.d/include/mendatory/argument.h">

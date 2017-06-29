@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Thu Jun 22 17:22:44 2017 Gregoire Renard
-** Last update Tue Jun 27 18:58:04 2017 Gregoire Renard
+** Last update Wed Jun 28 23:03:22 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -63,7 +63,7 @@ int		inventory_func(t_env *env, t_client *client,
 	}
       cpt++;
     }
-  my_send(client, tmp);
+  my_send(client, tmp, 1 / env->arg.freq);
   free(tmp);
   return (SUCCESS);
 }

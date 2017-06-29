@@ -6,43 +6,44 @@
 #include <irrlicht.h>
 #include <Character.hpp>
 #include <random>
+#include <ZappyException.hpp>
 #include "Client.hpp"
 #include "server.hpp"
 
 namespace 		Client
 {
-  Client::Client() : _size(0, 0), _running(false)
+  Client::Client(zappy::Zappy const &z) : _size(0, 0), _running(false), _z(z)
   {
     std::vector<std::string> tab;
     char 			*str;
-    srv_write("GRAPHIC");
-    std::cerr << "Client created" << std::endl;
     std::string			s;
 
-    while ((str = srv_read()) == NULL);
+    _z.update();
+    while ((str = srv_read()) == NULL)
+      _z.update();
+    srv_write("GRAPHIC");
+    _z.update();
+    while ((str = srv_read()) == NULL)
+      _z.update();
     s.assign(str);
     getTab(s, tab);
     _msz(tab);
-    std::cerr << s;
     s.clear();
-    while ((str = srv_read()) == NULL);
-    s.assign(str);
-    std::cerr << s;
-    getTab(s, tab);
-    _sgt(tab);
+//    while ((str = srv_read()) == NULL);
+//    s.assign(str);
+//    std::cerr << s << std::endl;
+//    getTab(s, tab);
+//    _sgt(tab);
     this->_running = true;
     if (_size.getX() <= 3 || _size.getX() > 40 || _size.getY() <= 3 || _size.getY() > 40)
-      throw std::exception();
+      throw zappy::Exception("Bad size map\n");
     for (int x = 0; x < _size.getX(); x++)
-      {
-	for (int y = 0; y < _size.getY(); y++)
-	  {
-	    Vector3d v(x, y);
-	    _map[y * _size.getX() + x] = Block(_lib.addNode(v, GraphicalLib::MESH::block, GraphicalLib::TEXT::grass, Client::SCALE, 0), v);
-//	    std::cerr << v << std::endl;
-//	    std::cerr << _map[v.getY() * _size.getX() + v.getX()].get_pos() << std::endl;
-	  }
-      }
+      for (int y = 0; y < _size.getY(); y++)
+	{
+	  Vector3d v(x, y);
+	  _map[y * _size.getX() + x] = Block(_lib.addNode(v, GraphicalLib::MESH::block, GraphicalLib::TEXT::grass, Client::SCALE, 0), v);
+	}
+    _sound.setGameMusic();
   }
 
   Client::~Client()
@@ -96,9 +97,11 @@ namespace 		Client
     if (t.size() != 5)
       return;
     Vector3d v = {~t[2], ~t[3]};
-    int num = ~t[1] - 1;
+    int num = ~t[1];
     Vector3d playerPos = _player[num].get_pos();
 
+    if (_player[num].is_alive() != Character::STATE::ALIVE)
+      return ;
     if (v != playerPos)
       {
 	_map[playerPos.getX() + playerPos.getY() * _size.getX()].resetSpacePos(_lib.getPos(_player[num].get_id()));
@@ -136,20 +139,26 @@ namespace 		Client
     Block &b = _map.at(~t[1] + _size.getX() * ~t[2]);
     resLvl = b.set_res(t);
     Vector3d v(~t[1], ~t[2]);
-
     GraphicalLib::TEXT i = genRandType(GraphicalLib::TEXT::minerals1, GraphicalLib::TEXT::minerals3);
-    _lib.addNode(v, GraphicalLib::MESH::rock, GraphicalLib::TEXT::rock, (irr::f32)resLvl, 1);
+
     if (b.get_idRes() == 0 && resLvl > 0)
-      b.set_idRes(_lib.addNode(v, GraphicalLib::MESH::minerals,
-			       i,
-			       (irr::f32)resLvl, 1));
+      {
+	b.set_idRock(_lib.addNode(v, GraphicalLib::MESH::rock, GraphicalLib::TEXT::rock, (irr::f32)resLvl, 1));
+	b.set_idRes(_lib.addNode(v, GraphicalLib::MESH::minerals,
+				 i,
+				 (irr::f32)resLvl, 1));
+      }
     else if (resLvl == 0 && b.get_idRes() != 0)
 	{
 	  _lib.delNode(b.get_idRes());
+	  _lib.delNode(b.get_idRock());
 	  b.set_idRes(0);
 	}
-      else if (_lib.getScale(b.get_idRes()).X != resLvl)
-	  _lib.set_scale((irr::f32)resLvl, b.get_idRes());
+      else if (_lib.getScale(b.get_idRes()).X != resLvl && b.get_idRes() != 0)
+	  {
+	    _lib.set_scale((irr::f32)resLvl, b.get_idRes());
+	    _lib.set_scale((irr::f32)resLvl, b.get_idRock());
+	  }
     _lib.set_text2("\nUn Minerai vient d\'apparaitre en : ", true);
     _lib.set_text2(t[1].c_str(), false);
     _lib.set_text2(" ", false);
@@ -176,8 +185,10 @@ namespace 		Client
 	  break ;
 	j++;
       }
-    _player.emplace_back(Character(~t[1], v,  (Character::DIR)~t[4], ~t[5], t[6],
+    _player[~t[1]] = (Character(~t[1], v,  (Character::DIR)~t[4], ~t[5], t[6],
 				   _lib.addCharacterNode(_map[v.getX() + v.getY() * _size.getX()].getSpacePos(), j, 0.7f, ~t[4])));
+//    _player.emplace(std::pair<int, Character>(~t[1], (Character(~t[1], v,  (Character::DIR)~t[4], ~t[5], t[6],
+//								_lib.addCharacterNode(_map[v.getX() + v.getY() * _size.getX()].getSpacePos(), j, 0.7f, ~t[4])))));
     _map[v.getX() + v.getY() * _size.getX()].add_player(~t[1]);
     _lib.set_text2("\nUn nouveau joueur : ", true);
     _lib.set_text2(t[1].c_str(), false);
@@ -191,9 +202,11 @@ namespace 		Client
   {
     if (t.size() != 3)
       return ;
-    int 	num = ~t[1] - 1;
+    int 	num = ~t[1];
     int 	id = _player[num].get_id();
 
+    if (_player[num].is_alive() != Character::STATE::ALIVE)
+      return ;
     _player[num].set_level(~t[2]);
     _lib.set_scale(0.7f + (irr::f32)_player[num].get_level() / 20, id);
     _player[num].set_idAnimation(-1);
@@ -202,19 +215,22 @@ namespace 		Client
     _lib.set_text2(t[1].c_str(), false);
     _lib.set_text2(" est niveau ", false);
     _lib.set_text2(t[2].c_str(), false);
+    _sound.lvlUpSound();
   }
 
   void Client::_pin(std::vector<std::string> const &t)
   {
     if (t.size() != 11)
       return ;
-    int 	num = ~t[1] - 1;
+    int 	num = ~t[1];
     Vector3d v(_player[num].get_pos());
     Vector3d v2(~t[2], ~t[3]);
 
+    if (_player[num].is_alive() != Character::STATE::ALIVE)
+      return ;
     std::cerr << "Pin Function" << std::endl;
-    _map[v.getX() + v.getY() * _size.getX()].del_player(num + 1);
-    _map[v2.getX() + v2.getY() * _size.getX()].add_player(num + 1);
+    _map[v.getX() + v.getY() * _size.getX()].del_player(num);
+    _map[v2.getX() + v2.getY() * _size.getX()].add_player(num);
     _player[num].set_pos(v2);
     _player[num].set_res(t);
   }
@@ -223,14 +239,16 @@ namespace 		Client
   {
     if (t.size() != 2)
       return ;
-    int num = ~t[1] - 1;
+    int num = ~t[1];
 
+    if (_player[num].is_alive() != Character::STATE::ALIVE)
+      return ;
     _player[num].set_idAnimation(-1);
     _lib.pushing(_player[num].get_id());
     _lib.set_text2("\nLe joueur : ", true);
     _lib.set_text2(t[1].c_str(), false);
     _lib.set_text2(" les joueurs de la case : ", false);
-
+    _sound.ejectSound();
   }
 
   void Client::_pbc(std::vector<std::string> const &t)
@@ -263,6 +281,7 @@ namespace 		Client
     _lib.set_text2("\nLe joueur : ", true);
     _lib.set_text2(t[4].c_str(), false);
     _lib.set_text2(" lance une incantation ", false);
+    _sound.ritualSound();
   }
 
   void Client::_pie(std::vector<std::string> const &t)
@@ -285,7 +304,10 @@ namespace 		Client
   {
     if (t.size() != 2)
       return ;
-    int num = ~t[1] - 1;
+    int num = ~t[1];
+
+    if (_player[num].is_alive() != Character::STATE::ALIVE)
+      return ;
     _player[num].set_lay(true);
     _lib.laying(_player[num].get_id());
     _lib.set_text2("\nLe joueur : ", true);
@@ -299,7 +321,9 @@ namespace 		Client
       return ;
     int 	num;
 
-    num = ~t[1] - 1;
+    num = ~t[1];
+    if (_player[num].is_alive() != Character::STATE::ALIVE)
+      return ;
     Vector3d v(_player[num].get_pos());
     _player[num].set_idAnimation(-1);
     _lib.taking(_player[num].get_id());
@@ -307,6 +331,7 @@ namespace 		Client
     _lib.set_text2(t[1].c_str(), false);
     _lib.set_text2(" jette une ressource ", false);
     _lib.set_text2(t[2].c_str(), false);
+    _sound.eatSound();
   }
 
   void Client::_pgt(std::vector<std::string> const &t)
@@ -315,7 +340,9 @@ namespace 		Client
       return ;
     int 	num;
 
-    num = ~t[1] - 1;
+    num = ~t[1];
+    if (_player[num].is_alive() != Character::STATE::ALIVE)
+      return ;
     Vector3d v(_player[num].get_pos());
     _player[num].set_idAnimation(-1);
     _lib.taking(_player[num].get_id());
@@ -331,10 +358,12 @@ namespace 		Client
       return ;
     int 	num;
 
-    num = ~t[1] - 1;
+    num = ~t[1];
+    if (_player[num].is_alive() != Character::STATE::ALIVE)
+      return ;
     Vector3d v(_player[num].get_pos());
     _player[num].die();
-    _map[v.getX() + v.getY() * _size.getX()].del_player(num + 1);
+    _map[v.getX() + v.getY() * _size.getX()].del_player(num);
     _lib.dying(_player[num].get_id());
     _lib.set_text2("\nLe joueur : ", true);
     _lib.set_text2(t[1].c_str(), false);
@@ -345,9 +374,11 @@ namespace 		Client
   {
     if (t.size() != 5)
       return ;
-    int num = ~t[2] - 1;
+    int num = ~t[2];
     int id = _player[num].get_id();
 
+    if (_player[num].is_alive() != Character::STATE::ALIVE)
+      return ;
     _lib.idle(id);
     _player[num].set_lay(false);
     int idEggs = _lib.addEggsNode(_lib.getPos(id));
@@ -364,7 +395,7 @@ namespace 		Client
   {
     if (t.size() != 2)
       return ;
-    int 	num = ~t[1] - 1;
+    int 	num = ~t[1];
 
     _Eggs[num].eclosion();
     _lib.addRotateAnimation(_Eggs[num].get_id());
@@ -377,7 +408,7 @@ namespace 		Client
   {
     if (t.size() != 2)
       return ;
-    int 	num = ~t[1] - 1;
+    int 	num = ~t[1];
 
     _lib.delNode(_Eggs[num].get_id());
     _Eggs[num].set_id(0);
@@ -391,7 +422,7 @@ namespace 		Client
   {
     if (t.size() != 2)
       return ;
-    int 	num = ~t[1] - 1;
+    int 	num = ~t[1];
 
     _lib.delNode(_Eggs[num].get_id());
     _Eggs[num].set_id(0);
@@ -444,19 +475,20 @@ namespace 		Client
   {
     int j;
 
+    _z.update();
     for (auto &i : _player)
       {
-	if (i.is_alive() == Character::STATE::DEAD && i.get_id() != 0)
+	if (i.second.is_alive() == Character::STATE::DEAD && i.second.get_id() != 0)
 	  {
-	    _lib.delNode(i.get_id());
-	    i.set_id(0);
+	    _lib.delNode(i.second.get_id());
+	    i.second.set_id(0);
 	  }
-	if (i.is_alive() == Character::STATE::DYING && _lib.isAnimationEnd2(i.get_id()))
-	  i.set_alive(Character::STATE::DEAD);
-	if ((j = i.get_idAnimation()) > 0 && _lib.isAnimationEnd(j) || (j == -1 && _lib.isAnimationEnd2(i.get_id())))
+	if (i.second.is_alive() == Character::STATE::DYING && _lib.isAnimationEnd2(i.second.get_id()))
+	  i.second.set_alive(Character::STATE::DEAD);
+	if ((j = i.second.get_idAnimation()) > 0 && _lib.isAnimationEnd(j) || (j == -1 && _lib.isAnimationEnd2(i.second.get_id())))
 	  {
-	    _lib.idle(i.get_id());
-	    i.set_idAnimation(0);
+	    _lib.idle(i.second.get_id());
+	    i.second.set_idAnimation(0);
 	  }
       }
     _lib.update();

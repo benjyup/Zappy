@@ -22,7 +22,6 @@ namespace 	Client
     Block();
     virtual ~Block();
 
-    const std::array<int, NBR_OF_RES> &getRes() const;
     int set_res(const std::vector<std::string> &_res);
     void set_idRes(int _idRes);
     void inc_res(int res);
@@ -30,7 +29,9 @@ namespace 	Client
     void add_player(int);
     void del_player(int);
     void resetSpacePos(irr::core::vector3df const &);
+    void set_idRock(int _idRock);
 
+    int get_idRock() const;
     irr::core::vector3df const &getSpacePos();
     const std::forward_list<int> &get_play() const;
     int get_idRes() const;
@@ -46,6 +47,7 @@ namespace 	Client
     Vector3d				_pos;
     int 				_id;
     int 				_idRes;
+    int 				_idRock;
     char 				_resLevel;
     std::array<std::pair<irr::core::vector3df, bool>, 9>	_posAvailable;
   };

@@ -6,6 +6,7 @@
 #include <irrlicht.h>
 #include <Character.hpp>
 #include <random>
+#include <ZappyException.hpp>
 #include "Client.hpp"
 #include "server.hpp"
 
@@ -15,22 +16,18 @@ namespace 		Client
   {
     std::vector<std::string> tab;
     char 			*str;
+    std::string			s;
 
     _z.update();
     while ((str = srv_read()) == NULL)
       _z.update();
-    std::cerr << str << std::endl;
     srv_write("GRAPHIC");
-    std::cerr << "Client created" << std::endl;
-
-    std::string			s;
     _z.update();
     while ((str = srv_read()) == NULL)
       _z.update();
     s.assign(str);
     getTab(s, tab);
     _msz(tab);
-    std::cerr << s << std::endl;
     s.clear();
 //    while ((str = srv_read()) == NULL);
 //    s.assign(str);
@@ -39,7 +36,7 @@ namespace 		Client
 //    _sgt(tab);
     this->_running = true;
     if (_size.getX() <= 3 || _size.getX() > 40 || _size.getY() <= 3 || _size.getY() > 40)
-      throw std::exception();
+      throw zappy::Exception("Bad size map\n");
     for (int x = 0; x < _size.getX(); x++)
       for (int y = 0; y < _size.getY(); y++)
 	{
@@ -139,11 +136,11 @@ namespace 		Client
     Block &b = _map.at(~t[1] + _size.getX() * ~t[2]);
     resLvl = b.set_res(t);
     Vector3d v(~t[1], ~t[2]);
-
     GraphicalLib::TEXT i = genRandType(GraphicalLib::TEXT::minerals1, GraphicalLib::TEXT::minerals3);
+
     if (b.get_idRes() == 0 && resLvl > 0)
       {
-	_lib.addNode(v, GraphicalLib::MESH::rock, GraphicalLib::TEXT::rock, (irr::f32)resLvl, 1);
+	b.set_idRock(_lib.addNode(v, GraphicalLib::MESH::rock, GraphicalLib::TEXT::rock, (irr::f32)resLvl, 1));
 	b.set_idRes(_lib.addNode(v, GraphicalLib::MESH::minerals,
 				 i,
 				 (irr::f32)resLvl, 1));
@@ -151,10 +148,14 @@ namespace 		Client
     else if (resLvl == 0 && b.get_idRes() != 0)
 	{
 	  _lib.delNode(b.get_idRes());
+	  _lib.delNode(b.get_idRock());
 	  b.set_idRes(0);
 	}
       else if (_lib.getScale(b.get_idRes()).X != resLvl && b.get_idRes() != 0)
-	  _lib.set_scale((irr::f32)resLvl, b.get_idRes());
+	  {
+	    _lib.set_scale((irr::f32)resLvl, b.get_idRes());
+	    _lib.set_scale((irr::f32)resLvl, b.get_idRock());
+	  }
     _lib.set_text2("\nUn Minerai vient d\'apparaitre en : ", true);
     _lib.set_text2(t[1].c_str(), false);
     _lib.set_text2(" ", false);

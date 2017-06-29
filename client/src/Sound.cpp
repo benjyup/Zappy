@@ -13,7 +13,7 @@
 Sound::Sound()
 {
   _soundEngine = irrklang::createIrrKlangDevice();
-  _soundEngine->setSoundVolume(0.1);
+  _soundEngine->setSoundVolume(0.5);
 }
 
 Sound::~Sound()
@@ -29,8 +29,7 @@ irrklang::ISoundEngine *Sound::get_soundEngine() const
 void			Sound::setGameMusic()
 {
   _soundEngine->stopAllSounds();
-  //_soundEngine->play2D("./GFX/march.flac", true);
-  _soundEngine->play2D("./GFX/wave.flac", true);
+  _soundEngine->play2D("./GFX/wave.ogg", true);
 }
 
 void			Sound::setVolume(irrklang::ik_f32 volume)

@@ -17,6 +17,7 @@
 #include "Vector3d.hpp"
 #include "Block.hpp"
 #include "Eggs.hpp"
+#include "zappy.hpp"
 
 namespace 		Client
 {
@@ -25,7 +26,7 @@ namespace 		Client
   {
    public:
     static const int SCALE = 15;
-    Client();
+    Client(zappy::Zappy const &);
     virtual ~Client();
 
     void initTab();
@@ -46,6 +47,7 @@ namespace 		Client
     int 										_sgtt;
     std::string										_winner;
     GraphicalLib									_lib;
+    zappy::Zappy									_z;
 
     void _msz(std::vector<std::string> const &t);
     void _bct(std::vector<std::string> const &t);

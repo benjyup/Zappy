@@ -6,43 +6,43 @@
 #include <irrlicht.h>
 #include <Character.hpp>
 #include <random>
+#include <ZappyException.hpp>
 #include "Client.hpp"
 #include "server.hpp"
 
 namespace 		Client
 {
-  Client::Client() : _size(0, 0), _running(false)
+  Client::Client(zappy::Zappy const &z) : _size(0, 0), _running(false), _z(z)
   {
     std::vector<std::string> tab;
     char 			*str;
-    srv_write("GRAPHIC");
-    std::cerr << "Client created" << std::endl;
     std::string			s;
 
-    while ((str = srv_read()) == NULL);
+    _z.update();
+    while ((str = srv_read()) == NULL)
+      _z.update();
+    srv_write("GRAPHIC");
+    _z.update();
+    while ((str = srv_read()) == NULL)
+      _z.update();
     s.assign(str);
     getTab(s, tab);
     _msz(tab);
-    std::cerr << s;
     s.clear();
-    while ((str = srv_read()) == NULL);
-    s.assign(str);
-    std::cerr << s;
-    getTab(s, tab);
-    _sgt(tab);
+//    while ((str = srv_read()) == NULL);
+//    s.assign(str);
+//    std::cerr << s << std::endl;
+//    getTab(s, tab);
+//    _sgt(tab);
     this->_running = true;
     if (_size.getX() <= 3 || _size.getX() > 40 || _size.getY() <= 3 || _size.getY() > 40)
-      throw std::exception();
+      throw zappy::Exception("Bad size map\n");
     for (int x = 0; x < _size.getX(); x++)
-      {
-	for (int y = 0; y < _size.getY(); y++)
-	  {
-	    Vector3d v(x, y);
-	    _map[y * _size.getX() + x] = Block(_lib.addNode(v, GraphicalLib::MESH::block, GraphicalLib::TEXT::grass, Client::SCALE, 0), v);
-//	    std::cerr << v << std::endl;
-//	    std::cerr << _map[v.getY() * _size.getX() + v.getX()].get_pos() << std::endl;
-	  }
-      }
+      for (int y = 0; y < _size.getY(); y++)
+	{
+	  Vector3d v(x, y);
+	  _map[y * _size.getX() + x] = Block(_lib.addNode(v, GraphicalLib::MESH::block, GraphicalLib::TEXT::grass, Client::SCALE, 0), v);
+	}
   }
 
   Client::~Client()
@@ -136,20 +136,26 @@ namespace 		Client
     Block &b = _map.at(~t[1] + _size.getX() * ~t[2]);
     resLvl = b.set_res(t);
     Vector3d v(~t[1], ~t[2]);
-
     GraphicalLib::TEXT i = genRandType(GraphicalLib::TEXT::minerals1, GraphicalLib::TEXT::minerals3);
-    _lib.addNode(v, GraphicalLib::MESH::rock, GraphicalLib::TEXT::rock, (irr::f32)resLvl, 1);
+
     if (b.get_idRes() == 0 && resLvl > 0)
-      b.set_idRes(_lib.addNode(v, GraphicalLib::MESH::minerals,
-			       i,
-			       (irr::f32)resLvl, 1));
+      {
+	b.set_idRock(_lib.addNode(v, GraphicalLib::MESH::rock, GraphicalLib::TEXT::rock, (irr::f32)resLvl, 1));
+	b.set_idRes(_lib.addNode(v, GraphicalLib::MESH::minerals,
+				 i,
+				 (irr::f32)resLvl, 1));
+      }
     else if (resLvl == 0 && b.get_idRes() != 0)
 	{
 	  _lib.delNode(b.get_idRes());
+	  _lib.delNode(b.get_idRock());
 	  b.set_idRes(0);
 	}
-      else if (_lib.getScale(b.get_idRes()).X != resLvl)
-	  _lib.set_scale((irr::f32)resLvl, b.get_idRes());
+      else if (_lib.getScale(b.get_idRes()).X != resLvl && b.get_idRes() != 0)
+	  {
+	    _lib.set_scale((irr::f32)resLvl, b.get_idRes());
+	    _lib.set_scale((irr::f32)resLvl, b.get_idRock());
+	  }
     _lib.set_text2("\nUn Minerai vient d\'apparaitre en : ", true);
     _lib.set_text2(t[1].c_str(), false);
     _lib.set_text2(" ", false);
@@ -444,6 +450,7 @@ namespace 		Client
   {
     int j;
 
+    _z.update();
     for (auto &i : _player)
       {
 	if (i.is_alive() == Character::STATE::DEAD && i.get_id() != 0)

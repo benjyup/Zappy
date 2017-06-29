@@ -99,6 +99,8 @@ namespace 		Client
     int num = ~t[1];
     Vector3d playerPos = _player[num].get_pos();
 
+    if (_player[num].is_alive() != Character::STATE::ALIVE)
+      return ;
     if (v != playerPos)
       {
 	_map[playerPos.getX() + playerPos.getY() * _size.getX()].resetSpacePos(_lib.getPos(_player[num].get_id()));
@@ -202,6 +204,8 @@ namespace 		Client
     int 	num = ~t[1];
     int 	id = _player[num].get_id();
 
+    if (_player[num].is_alive() != Character::STATE::ALIVE)
+      return ;
     _player[num].set_level(~t[2]);
     _lib.set_scale(0.7f + (irr::f32)_player[num].get_level() / 20, id);
     _player[num].set_idAnimation(-1);
@@ -220,6 +224,8 @@ namespace 		Client
     Vector3d v(_player[num].get_pos());
     Vector3d v2(~t[2], ~t[3]);
 
+    if (_player[num].is_alive() != Character::STATE::ALIVE)
+      return ;
     std::cerr << "Pin Function" << std::endl;
     _map[v.getX() + v.getY() * _size.getX()].del_player(num);
     _map[v2.getX() + v2.getY() * _size.getX()].add_player(num);
@@ -233,6 +239,8 @@ namespace 		Client
       return ;
     int num = ~t[1];
 
+    if (_player[num].is_alive() != Character::STATE::ALIVE)
+      return ;
     _player[num].set_idAnimation(-1);
     _lib.pushing(_player[num].get_id());
     _lib.set_text2("\nLe joueur : ", true);
@@ -294,6 +302,9 @@ namespace 		Client
     if (t.size() != 2)
       return ;
     int num = ~t[1];
+
+    if (_player[num].is_alive() != Character::STATE::ALIVE)
+      return ;
     _player[num].set_lay(true);
     _lib.laying(_player[num].get_id());
     _lib.set_text2("\nLe joueur : ", true);
@@ -308,6 +319,8 @@ namespace 		Client
     int 	num;
 
     num = ~t[1];
+    if (_player[num].is_alive() != Character::STATE::ALIVE)
+      return ;
     Vector3d v(_player[num].get_pos());
     _player[num].set_idAnimation(-1);
     _lib.taking(_player[num].get_id());
@@ -324,6 +337,8 @@ namespace 		Client
     int 	num;
 
     num = ~t[1];
+    if (_player[num].is_alive() != Character::STATE::ALIVE)
+      return ;
     Vector3d v(_player[num].get_pos());
     _player[num].set_idAnimation(-1);
     _lib.taking(_player[num].get_id());
@@ -340,9 +355,11 @@ namespace 		Client
     int 	num;
 
     num = ~t[1];
+    if (_player[num].is_alive() != Character::STATE::ALIVE)
+      return ;
     Vector3d v(_player[num].get_pos());
     _player[num].die();
-    _map[v.getX() + v.getY() * _size.getX()].del_player(num + 1);
+    _map[v.getX() + v.getY() * _size.getX()].del_player(num);
     _lib.dying(_player[num].get_id());
     _lib.set_text2("\nLe joueur : ", true);
     _lib.set_text2(t[1].c_str(), false);
@@ -353,9 +370,11 @@ namespace 		Client
   {
     if (t.size() != 5)
       return ;
-    int num = ~t[2] - 1;
+    int num = ~t[2];
     int id = _player[num].get_id();
 
+    if (_player[num].is_alive() != Character::STATE::ALIVE)
+      return ;
     _lib.idle(id);
     _player[num].set_lay(false);
     int idEggs = _lib.addEggsNode(_lib.getPos(id));

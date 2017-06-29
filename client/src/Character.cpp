@@ -11,7 +11,7 @@ namespace 		Client
   Character::Character(int num, Vector3d const &pos,
 		       Character::DIR dir, int level,
 		       std::string const &team, int id) : _num(num), _pos(pos), _dir(dir), _level(level), _team(team), _alive(STATE::ALIVE),
-						  _inc(false), _lay(false), _id(id), _idAnimation(0)
+							  _inc(false), _lay(false), _id(id), _idAnimation(0)
   {
     std::cerr << "character created, x = " << _pos.getX() << "  y = " << _pos.getY() << std::endl;
   }
@@ -75,7 +75,7 @@ namespace 		Client
 
   void Character::die()
   {
-  	_alive = STATE::DYING;
+    _alive = STATE::DYING;
   }
 
   bool Character::is_inc() const

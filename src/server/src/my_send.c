@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:43:04 2017 vincent.mesquita@epitech.eu
-** Last update Wed Jun 28 23:41:06 2017 Gregoire Renard
+** Last update Thu Jun 29 14:08:51 2017 Gregoire Renard
 */
 
 #include <unistd.h>
@@ -41,8 +41,8 @@ void		my_send_to_client(t_client *client)
   if ((current = client->to_write->next) == client->to_write)
     return ;
   msg = current->data;
-  if (client->time_start != -1 &&
-      time(NULL) - client->time_start >= msg->time_action)
+  if (msg->time_action == 0 ||
+      (time(NULL) - client->time_start) >= msg->time_action)
     {
       client->action = 0;
       if ((msg->current_index =

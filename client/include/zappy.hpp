@@ -5,6 +5,8 @@
 #ifndef CLIENT_D_ZAPPY_HPP
 #define CLIENT_D_ZAPPY_HPP
 
+#include "parser.hpp"
+
 extern "C"
 {
 # include "mendatory/client.h"
@@ -12,20 +14,21 @@ extern "C"
 };
 
 namespace zappy {
-    class Zappy {
-    public:
-        Zappy(int, char **);
-        ~Zappy();
+  class Zappy {
+   public:
+    Zappy(int, char **);
+    ~Zappy();
 
-        void run();
-        void stop();
-        void console();
-    private:
-        t_arg           _arg;
-        t_cookie        _cook;
-        t_fd_manager    _fd_manager;
-        t_thread_data   _relay_manager;
-    };
+    int update();
+    void console();
+      char *getTeam(void) const;
+      const t_arg &getArg(void) const;
+   private:
+    parser		        _parser;
+    t_arg           	_arg;
+    t_cookie        	_cook;
+    t_fd_manager    	_fd_manager;
+  };
 }
 
 #endif //CLIENT_D_ZAPPY_HPP

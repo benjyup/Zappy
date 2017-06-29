@@ -34,7 +34,9 @@ int cookie_connect(t_cookie *cook, t_arg *arg)
     if (hostinfo == NULL)
         return (perror("gethostbyname()"), 1);
     print_ip(hostinfo, arg->host);
-    cook->addr.sin_addr.s_addr = inet_addr(inet_ntoa(*(struct in_addr*)hostinfo->h_addr));
+//    cook->addr.sin_addr.s_addr = inet_addr(inet_ntoa(*(struct in_addr*)hostinfo->h_addr));
+  	cook->addr.sin_addr.s_addr = inet_addr(arg->host);
+
     cook->addr.sin_port = htons(arg->port);
     cook->addr.sin_family = AF_INET;
     if (connect(cook->fd,

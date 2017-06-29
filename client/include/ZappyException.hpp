@@ -1,5 +1,5 @@
 //
-// Created by alice on 20/06/17.
+// Created by Jean-Adrien on 20/06/17.
 //
 
 #ifndef CLIENT_D_ZAPPYEXCEPTION_HPP

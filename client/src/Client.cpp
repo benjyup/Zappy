@@ -14,6 +14,13 @@ namespace 		Client
 {
 
   const 	std::map<Ressource::TYPE , std::string>	Client::RESOURCES_TO_STR = {
+	  {Ressource::TYPE::FOOD, "food"},
+	  {Ressource::TYPE::LINEMATE, "linemate"},
+	  {Ressource::TYPE::DERAUMERE, "deraumere"},
+	  {Ressource::TYPE::SIBUR, "sibur"},
+	  {Ressource::TYPE::MENDIANE, "mendiane"},
+	  {Ressource::TYPE::PHIRAS, "phiras"},
+	  {Ressource::TYPE::THYSTAME, "thystame"}
   };
 
   Client::Client(zappy::Zappy const &z) : _size(0, 0), _running(false), _z(z), _sgtt(100)

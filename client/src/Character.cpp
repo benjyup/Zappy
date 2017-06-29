@@ -16,6 +16,11 @@ namespace 		Client
     std::cerr << "character created, x = " << _pos.getX() << "  y = " << _pos.getY() << std::endl;
   }
 
+  Character::Character() : _pos({0, 0})
+  {
+
+  }
+
   Character::~Character()
   {
   }

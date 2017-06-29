@@ -12,7 +12,11 @@
 
 namespace 		Client
 {
-  Client::Client(zappy::Zappy const &z) : _size(0, 0), _running(false), _z(z)
+
+  const 	std::map<Ressource::TYPE , std::string>	Client::RESOURCES_TO_STR = {
+  };
+
+  Client::Client(zappy::Zappy const &z) : _size(0, 0), _running(false), _z(z), _sgtt(100)
   {
     std::vector<std::string> tab;
     char 			*str;
@@ -29,11 +33,6 @@ namespace 		Client
     getTab(s, tab);
     _msz(tab);
     s.clear();
-//    while ((str = srv_read()) == NULL);
-//    s.assign(str);
-//    std::cerr << s << std::endl;
-//    getTab(s, tab);
-//    _sgt(tab);
     this->_running = true;
     if (_size.getX() <= 3 || _size.getX() > 40 || _size.getY() <= 3 || _size.getY() > 40)
       throw zappy::Exception("Bad size map\n");
@@ -106,7 +105,7 @@ namespace 		Client
       {
 	_map[playerPos.getX() + playerPos.getY() * _size.getX()].resetSpacePos(_lib.getPos(_player[num].get_id()));
 	_player[num].set_idAnimation(_lib.addFlyStraightAnimator(_player[num].get_id(),
-								 _lib.getPos(_player[num].get_id()), _map[v.getX() + v.getY() * _size.getX()].getSpacePos(), 1000, ~t[4]));
+								 _lib.getPos(_player[num].get_id()), _map[v.getX() + v.getY() * _size.getX()].getSpacePos(), 100 * _sgtt, ~t[4]));
 	_player[num].set_pos(v);
 	_player[num].set_dir((Character::DIR) ~t[4]);
       }
@@ -186,9 +185,7 @@ namespace 		Client
 	j++;
       }
     _player[~t[1]] = (Character(~t[1], v,  (Character::DIR)~t[4], ~t[5], t[6],
-				   _lib.addCharacterNode(_map[v.getX() + v.getY() * _size.getX()].getSpacePos(), j, 0.7f, ~t[4])));
-//    _player.emplace(std::pair<int, Character>(~t[1], (Character(~t[1], v,  (Character::DIR)~t[4], ~t[5], t[6],
-//								_lib.addCharacterNode(_map[v.getX() + v.getY() * _size.getX()].getSpacePos(), j, 0.7f, ~t[4])))));
+				_lib.addCharacterNode(_map[v.getX() + v.getY() * _size.getX()].getSpacePos(), j, 0.7f, ~t[4])));
     _map[v.getX() + v.getY() * _size.getX()].add_player(~t[1]);
     _lib.set_text2("\nUn nouveau joueur : ", true);
     _lib.set_text2(t[1].c_str(), false);
@@ -228,7 +225,6 @@ namespace 		Client
 
     if (_player[num].is_alive() != Character::STATE::ALIVE)
       return ;
-    std::cerr << "Pin Function" << std::endl;
     _map[v.getX() + v.getY() * _size.getX()].del_player(num);
     _map[v2.getX() + v2.getY() * _size.getX()].add_player(num);
     _player[num].set_pos(v2);
@@ -271,10 +267,10 @@ namespace 		Client
 
     while (j < t.size())
       {
-	if (_player[~t[j] - 1].get_level() == ~t[3])
+	if (_player[~t[j]].get_level() == ~t[3])
 	  {
 	    _lib.incantating(_player[~t[j] - 1].get_id());
-	    _player[~t[j] - 1].set_inc(true);
+	    _player[~t[j]].set_inc(true);
 	  }
 	j++;
       }
@@ -349,7 +345,7 @@ namespace 		Client
     _lib.set_text2("\nLe joueur : ", true);
     _lib.set_text2(t[1].c_str(), false);
     _lib.set_text2(" ramasse une ressource ", false);
-    _lib.set_text2(t[2].c_str(), false);
+    _lib.set_text2(RESOURCES_TO_STR.at((Ressource::TYPE )~t[2]).c_str(), false);
   }
 
   void Client::_pdi(std::vector<std::string> const &t)
@@ -436,6 +432,7 @@ namespace 		Client
   {
     if (t.size() != 2)
       return ;
+    std::cerr << "Sgt" << std::endl;
     _sgtt = ~t[1];
     _lib.set_text2("\nL\'unite de temps est de ", true);
     _lib.set_text2(t[1].c_str(), false);

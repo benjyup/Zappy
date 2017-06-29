@@ -22,27 +22,32 @@ class Ressource
   };
 
   Ressource(Vector3d const &pos, TYPE type, int nbrRessource);
+
   Ressource(Vector3d const &pos);
+
   virtual ~Ressource();
 
-  const Vector3d 	&get_pos() const;
-  TYPE 			get_type() const;
+  const Vector3d &get_pos() const;
 
-  void 			set_pos(const Vector3d &_pos);
-  void 			set_type(TYPE _type);
+  TYPE get_type() const;
 
-  TYPE 			genRandType(TYPE min, TYPE max);
+  void set_pos(const Vector3d &_pos);
+
+  void set_type(TYPE _type);
+
+  TYPE genRandType(TYPE min, TYPE max);
 
   int get_nbrRessource() const;
 
   void set_nbrRessource(int nbrRessource);
-  void	gatherRessource(int nbrRessource);
+
+  void gatherRessource(int nbrRessource);
 
 
  private:
-  Vector3d		_pos;
-  TYPE 			_type;
-  int 			_nbrRessource;
+  Vector3d _pos;
+  TYPE _type;
+  int _nbrRessource;
 };
 
 #endif //PSU_2016_ZAPPY_RESSOURCE_HPP

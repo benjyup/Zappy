@@ -19,13 +19,16 @@
 #include "Eggs.hpp"
 #include "zappy.hpp"
 #include "Sound.hpp"
+#include "Ressource.hpp"
 
 namespace 		Client
 {
   int operator~(const std::string &t);
+
   class Client
   {
    public:
+    static const 	std::map<Ressource::TYPE , std::string>	RESOURCES_TO_STR;
     static const int SCALE = 15;
     Client(zappy::Zappy const &);
     virtual ~Client();

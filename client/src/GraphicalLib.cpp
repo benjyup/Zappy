@@ -103,7 +103,6 @@ namespace 	Client
     _node[_id]->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     _node[_id]->setScale({Scale, Scale, Scale});
     _id++;
-    std::cerr << "adding Node" << std::endl;
     return _id - 1;
   }
 
@@ -112,8 +111,6 @@ namespace 	Client
   {
     _node[_id] = _smgr->addAnimatedMeshSceneNode(_mesh[MESH::character]);
     _node[_id]->setPosition(pos);
-//    if (text != TEXT::none)
-    std::cerr << "team : " << team << std::endl;
     _node[_id]->setMaterialTexture(0, _text[(GraphicalLib::TEXT)((int)GraphicalLib::TEXT::ninja1 + team % 5)]);
     _node[_id]->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     _node[_id]->setScale({Scale, Scale, Scale});
@@ -121,7 +118,6 @@ namespace 	Client
     _node[_id]->setAnimationSpeed(10);
     _node[_id]->setRotation({0, dir * 90 - 90, 0});
     _id++;
-    std::cerr << "adding Character Node" << std::endl;
     return _id - 1;
   }
 
@@ -150,8 +146,8 @@ namespace 	Client
     this->_driver->beginScene();
     _smgr->drawAll();
     _driver->draw2DImage(_images, irr::core::position2d<irr::s32>(5, 0),
-			irr::core::rect<irr::s32>(0,0,342,215), 0,
-			irr::video::SColor(100,255,255,255), false);
+			 irr::core::rect<irr::s32>(0,0,342,215), 0,
+			 irr::video::SColor(100,255,255,255), false);
     _font->draw(_text2, irr::core::rect<irr::s32>(20, _y, (20 + _size.Width),(668 + _size.Height)),
 		irr::video::SColor(255,255,255,255));
 
@@ -179,7 +175,7 @@ namespace 	Client
   }
 
   int	GraphicalLib::addFlyStraightAnimator(int id, irr::core::vector3df const &from,
-				       	irr::core::vector3df const &to, int speed, int dir)
+						  irr::core::vector3df const &to, int speed, int dir)
   {
     _anims[_idAnims] = _smgr->createFlyStraightAnimator(from, to, (irr::u32)speed, false);
     _node[id]->addAnimator(_anims[_idAnims]);
@@ -205,7 +201,6 @@ namespace 	Client
   {
     if (_anims[id]->hasFinished())
       {
-	std::cerr << "Animation End" << std::endl;
 	_anims[id]->drop();
 	return true;
       }

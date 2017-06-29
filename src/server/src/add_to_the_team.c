@@ -60,7 +60,7 @@ static void	init_pos_client(t_env *env, t_client *client, int cpt,
   if (new_pos.x == -1 && new_pos.y == -1)
     {
       client->pos.x = rand() % env->arg.width;
-      client->pos.y = rand() % env->arg.height;    
+      client->pos.y = rand() % env->arg.height;
       while (env->map[client->pos.y][client->pos.x].name_team != NULL ||
 	     (env->map[client->pos.y][client->pos.x].name_team != NULL &&
 	      (strcmp(env->map[client->pos.y][client->pos.x].name_team,

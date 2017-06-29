@@ -281,4 +281,6 @@ int			write_component(t_look *look, t_env *env);
 void			set_pos_start(t_env *env, t_client *client,
 				      t_look *look);
 int		        fork_func(t_env *env, t_client *client, t_list **current);
+int			g_sst(t_env *env, t_client *client, t_list **current);
+int			g_sgt(t_env *env, t_client *client, t_list **current);
 #endif /* !SERVER_H_ */

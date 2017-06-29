@@ -13,7 +13,7 @@
 
 # include "server.h"
 
-# define NBR_OF_COMMANDS 18
+# define NBR_OF_COMMANDS 20
 
 # define FORWARD	"Forward"
 # define RIGHT		"Right"
@@ -55,8 +55,8 @@ static t_cmd		exec_array[NBR_OF_COMMANDS] = {
   {"ppo", g_ppo, monitor},
   {"plv", g_plv, monitor},
   {"pin", g_pin, monitor},
-  //sgt
-  //sst
+  {"sgt", g_sgt, monitor},
+  {"sst", g_sst, monitor},
   {FORWARD, &forward_func, player},
   {RIGHT, &right_func, player},
   {LEFT, &left_func, player},

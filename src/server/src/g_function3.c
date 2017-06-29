@@ -15,9 +15,9 @@ int		def_dir(t_client *client)
 {
   if (client->dir.x == 1)
     return (2);
-  if (client->dir.x == 0)
+  if (client->dir.x == -1)
     return (4);
-  if (client->dir.y == 0)
+  if (client->dir.y == -1)
     return (1);
   if (client->dir.y == 1)
     return (3);

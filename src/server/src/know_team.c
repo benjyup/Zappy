@@ -52,7 +52,7 @@ static void     connection_gr(t_env *env, t_client *client)
 void		know_team(t_env *env, t_client *client)
 {
   t_pos		pos_egg;
-  
+
   if ((strcmp("GRAPHIC", client->cmd)) == 0)
     {
       client->type = monitor;

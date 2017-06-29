@@ -27,9 +27,9 @@ static int	invert_dir(int dir)
 static void	eject_a_client(t_client *client, t_pos *dir_p,
 			       t_env *env, int dir)
 {
-  char	buff[10];
+  char	buff[11];
 
-  sprintf(buff, "eject: %d", invert_dir(dir));
+  sprintf(buff, "eject: %d\n", invert_dir(dir));
   forward_eject(env, client, dir_p);
   my_send(client, buff);
 }
@@ -62,12 +62,16 @@ int	eject_func(t_env *env, t_client *client, t_list **current)
     pos.x++;
   else if (def_dir(client) == 4)
     pos.x--;
+  else if (def_dir(client) == 3)
+    pos.y++;
   if (pos.y < 0)
     pos.y = env->arg.height - 1;
-  if (pos.x < 0)
+  else if (pos.x < 0)
     pos.x = env->arg.width - 1;
-  if (pos.x == env->arg.width)
+  else if (pos.x == env->arg.width)
     pos.x = 0;
+  else if (pos.y == env->arg.height)
+    pos.y = 0;
   eject_each_client(env, def_dir(client), &pos, &client->dir);
   my_send(client, OK);
   return (SUCCESS);

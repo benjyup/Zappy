@@ -39,7 +39,6 @@ int	bct_f(int x, int y, t_env *env, t_client *client)
 
   size = get_size_map(x, y, env);
   size += 1;
-  printf("bct_f %d\n", size);
   size += strlen("bct ");
   if ((str = malloc(size + 1)) == NULL)
     {

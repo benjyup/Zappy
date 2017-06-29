@@ -56,7 +56,7 @@ namespace zappy
     void 							_look();
     void							_getInventory();
     bool 							_isNeeded(t_resource);
-    void 							_go(unsigned int tile_number);
+    void 							_go(const unsigned int tile_number, const t_resource);
     std::list<RequestType>					_todo;
     std::vector<t_inventory>					_lookParse(const std::string &look);
     void                                            		_extractResources(const std::string &str,

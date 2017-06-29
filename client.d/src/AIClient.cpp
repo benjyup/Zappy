@@ -150,15 +150,16 @@ void 		zappy::AIClient::_look()
 	  if (resource.second > 0 && _isNeeded(resource.first))
 	    {
 	      std::cout << "GO" << std::endl;
-	      _go(i);
+	      _go(i, resource.first);
 	      return ;
 	    }
 	}
       i += 1;
     }
+  _todo.push_back(FORWARD);
 }
 
-void 			zappy::AIClient::_go(unsigned int tile_number)
+void 			zappy::AIClient::_go(const unsigned int tile_number, const t_resource resource)
 {
   int           	i = 0;
   int           	first = 0;
@@ -188,6 +189,7 @@ void 			zappy::AIClient::_go(unsigned int tile_number)
       }
   while (move-- > 0)
     _todo.push_back(FORWARD);
+  _todo.push_back(TAKE_LINEMATE);
   std::cout << "go " << _todo.size() << std::endl;
 }
 
@@ -270,10 +272,14 @@ zappy::RequestType 	zappy::AIClient::update(std::string output) {
     {
       if (!output.empty())
 	{
-	  _currentLook = _lookParse(output);
-	  _look();
-	  std::cout << "_todo.size = " << _todo.size() << std::endl;
-	  std::cout << "J'ai recu :" << output << std::endl;
+	  if (output[0] == '[')
+	    {
+	      _currentLook = _lookParse(output);
+	      std::cout << "J'ai recu :" << output << std::endl;
+	      _look();
+	      std::cout << "_todo.size = " << _todo.size() << std::endl;
+	      _todo.push_back(LOOK);
+	    }
 	  _mode = !_mode;
 	}
     }

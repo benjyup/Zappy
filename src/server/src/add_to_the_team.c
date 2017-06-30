@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:55:57 2017 Gregoire Renard
-** Last update Fri Jun 30 13:29:48 2017 Gregoire Renard
+** Last update Fri Jun 30 14:38:04 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -76,7 +76,7 @@ static void	init_pos_client(t_env *env, t_client *client, int cpt,
   send_info(env, client, cpt);
 }
 
-static void	init_variable(t_client *client)
+static void	init_variable(t_client *client, t_env *env)
 {
   int		cpt;
 
@@ -90,6 +90,7 @@ static void	init_variable(t_client *client)
   client->type = player;
   client->level = 1;
   client->time_unit = time(NULL);
+  client->rst_time_unit = env->time_one_unit;
 }
 
 void		add_to_the_team(t_env *env, t_client *client,
@@ -106,7 +107,7 @@ void		add_to_the_team(t_env *env, t_client *client,
 	    {
 	      env->arg.team[cpt].nb_player++;
 	      client->name_team = env->arg.team[cpt].team_name;
-	      init_variable(client);
+	      init_variable(client, env);
 	      init_pos_client(env, client, cpt, new_pos);
 	    }
 	  else

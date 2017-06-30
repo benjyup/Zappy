@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Fri Jun 30 13:36:34 2017 Gregoire Renard
+** Last update Fri Jun 30 14:39:14 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -96,7 +96,7 @@ typedef	struct		s_map
 typedef struct		s_env
 {
   t_arg			arg;
-  int			time_one_unit;
+  float			time_one_unit;
   int			time_food;
   int			socket;
   int                   highest_fd;
@@ -138,6 +138,7 @@ typedef struct		s_client
   int			time_start;
   int			action;
   int			time_unit;
+  float			rst_time_unit;
 }			t_client;
 
 typedef	struct		s_look
@@ -224,7 +225,7 @@ int			init_map(t_env *env);
 void			print_map(t_env *env);
 void			add_to_the_team(t_env *env, t_client *client,
 					t_pos new_pos);
-void			my_send_to_client(t_client *client);
+void			my_send_to_client(t_client *client, t_env *env);
 void			my_send(t_client *client,
 				char *message,
 				double time_action);

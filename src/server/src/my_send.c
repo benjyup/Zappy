@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:43:04 2017 vincent.mesquita@epitech.eu
-** Last update Thu Jun 29 14:08:51 2017 Gregoire Renard
+** Last update Fri Jun 30 14:42:57 2017 Gregoire Renard
 */
 
 #include <unistd.h>
@@ -33,7 +33,31 @@ void		my_send(t_client *client,
   my_add_to_end(client->to_write, msg);
 }
 
-void		my_send_to_client(t_client *client)
+static void	time_calculation(t_client *client,
+				 t_msg *msg,
+				 t_list *current,
+				 t_env *env)
+{
+  client->rst_time_unit -= msg->time_action;
+  if (client->name_team != NULL && client->rst_time_unit <= 0)
+    {
+      client->rst_time_unit = env->time_one_unit;
+      client->inventory[FOOD]--;
+    }
+  client->action = 0;
+  if ((msg->current_index =
+       write(client->socket,
+	     &msg->msg[msg->current_index], msg->length))
+      == (ssize_t)msg->length)
+    {
+      free(msg->msg);
+      free(current->data);
+      my_del_elem(client->to_write, current, NULL);
+    }
+}
+
+void		my_send_to_client(t_client *client,
+				  t_env *env)
 {
   t_list	*current;
   t_msg		*msg;
@@ -43,16 +67,5 @@ void		my_send_to_client(t_client *client)
   msg = current->data;
   if (msg->time_action == 0 ||
       (time(NULL) - client->time_start) >= msg->time_action)
-    {
-      client->action = 0;
-      if ((msg->current_index =
-	   write(client->socket,
-		 &msg->msg[msg->current_index], msg->length))
-	  == (ssize_t)msg->length)
-	{
-	  free(msg->msg);
-	  free(current->data);
-	  my_del_elem(client->to_write, current, NULL);
-	}
-    }
+    time_calculation(client, msg, current, env);
 }

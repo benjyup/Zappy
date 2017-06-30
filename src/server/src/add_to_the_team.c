@@ -29,7 +29,6 @@ static void	send_pos(t_env *env, t_client *client)
   strcat(tmp, y);
   strcat(tmp, "\n\0");
   my_send(client, tmp, 0);
-  g_pnw(env, client, &env->clients->next);
   free(tmp);
 }
 

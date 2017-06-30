@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Thu Jun 29 18:28:55 2017 Gregoire Renard
-** Last update Fri Jun 30 18:05:00 2017 Gregoire Renard
+** Last update Fri Jun 30 18:14:45 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -13,7 +13,7 @@
 void		check_timer_client(t_env *env, t_client *client,
 				   t_list **current)
 {
-  if (client->type != monitor)
+  if (client->type != monitor && client->type != none)
     {
       if (client->time_unit != -1 &&
 	  client->inventory[FOOD] <= 0)

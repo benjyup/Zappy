@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 26 14:57:15 2017 vincent.mesquita@epitech.eu
-** Last update Fri Jun 30 14:39:27 2017 Gregoire Renard
+** Last update Fri Jun 30 18:15:29 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -35,6 +35,7 @@ static t_bool           my_new_client(int client_socket,
   client->dir.y = 0;
   client->action = 0;
   client->time_unit = -1;
+  client->type = none;
   my_add_to_end(env->clients, client);
   my_send(client, WELCOME, 0);
   env->nb_player++;
@@ -84,7 +85,7 @@ static void             my_check_each_client(t_env *env)
 	    know_team(env, client);
 	  else
 	    my_exec(env, client, &current);
-	  print_map(env);
+	  //	  print_map(env);
 	}
       if (FD_ISSET(client->socket, &(env->writef)))
 	my_send_to_client(client, env);

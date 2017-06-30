@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Fri Jun 30 17:43:31 2017 Gregoire Renard
+** Last update Fri Jun 30 18:14:59 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -59,7 +59,8 @@ typedef enum		e_client_type
   {
     player = 0,
     monitor,
-    egg
+    egg,
+    none
   }			t_client_type;
 
 typedef struct		s_list

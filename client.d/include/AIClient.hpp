@@ -45,6 +45,7 @@ namespace zappy
    private:
 
     static const std::vector<SIncantation>			INCANTATIONS;
+    unsigned int						FOOD_MIN;
 
     unsigned int						_level;
     std::pair<size_t, size_t >					_worldDimension;
@@ -69,6 +70,9 @@ namespace zappy
     void 							_addTodo(const RequestType);
     void 							_lookAction(const std::string &);
     void 							_inventoryAction(const std::string &);
+    void 							_randomDirection();
+    std::size_t 						_howManyResourses(const t_resource resource, const int tile_number) const;
+    int 							_moveCalculate(const int middle, const int tile_number);
 
     Proxy                           				*_prox;
     bool 							_mode;

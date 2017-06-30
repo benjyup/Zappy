@@ -116,12 +116,6 @@ namespace 		Client
 	_player[num].set_pos(v);
 	_player[num].set_dir((Character::DIR) ~t[4]);
       }
-    _lib.set_text2("\nLe joueur : ", true);
-    _lib.set_text2(t[1].c_str(), false);
-    _lib.set_text2(" est a la position : ", false);
-    _lib.set_text2(t[2].c_str(), false);
-    _lib.set_text2(" ", false);
-    _lib.set_text2(t[3].c_str(), false);
   }
 
   GraphicalLib::TEXT	Client::genRandType(GraphicalLib::TEXT min, GraphicalLib::TEXT max)
@@ -153,6 +147,10 @@ namespace 		Client
 	b.set_idRes(_lib.addNode(v, GraphicalLib::MESH::minerals,
 				 i,
 				 (irr::f32)resLvl, 1));
+	_lib.set_text2("\nUn Minerai vient d\'apparaitre en : ", true);
+	_lib.set_text2(t[1].c_str(), false);
+	_lib.set_text2(" ", false);
+	_lib.set_text2(t[2].c_str(), false);
       }
     else if (resLvl == 0 && b.get_idRes() != 0)
 	{
@@ -165,10 +163,6 @@ namespace 		Client
 	    _lib.set_scale((irr::f32)resLvl, b.get_idRes());
 	    _lib.set_scale((irr::f32)resLvl, b.get_idRock());
 	  }
-    _lib.set_text2("\nUn Minerai vient d\'apparaitre en : ", true);
-    _lib.set_text2(t[1].c_str(), false);
-    _lib.set_text2(" ", false);
-    _lib.set_text2(t[2].c_str(), false);
   }
 
   void Client::_tna(const std::vector<std::string> &t)
@@ -184,7 +178,7 @@ namespace 		Client
       return ;
     int 	j = 0;
     Vector3d v(~t[2], ~t[3]);
-    std::cerr << "Pnw Function" << std::endl;
+
     for (auto &i : _team)
       {
 	if (!i.compare(t[6]))
@@ -270,17 +264,9 @@ namespace 		Client
     if (t.size() < 5)
       return ;
     Vector3d v(~t[1], ~t[2]);
-    int j = 4;
 
-    while (j < t.size())
-      {
-	if (_player[~t[j]].get_level() == ~t[3])
-	  {
-	    _lib.incantating(_player[~t[j] - 1].get_id());
-	    _player[~t[j]].set_inc(true);
-	  }
-	j++;
-      }
+    _player[~t[4]].set_inc(true);
+    _lib.incantating(_player[~t[4]].get_id());
     _lib.set_text2("\nLe joueur : ", true);
     _lib.set_text2(t[4].c_str(), false);
     _lib.set_text2(" lance une incantation ", false);
@@ -295,10 +281,10 @@ namespace 		Client
     int j =  v.getX() + v.getY() * _size.getX();
     for (auto const &i : _map[j].get_play())
       {
-	if (_player[i - 1].is_inc())
+	if (_player[i].is_inc())
 	  {
-	    _player[i - 1].set_inc(false);
-	    _lib.idle(_player[i - 1].get_id());
+	    _player[i].set_inc(false);
+	    _lib.idle(_player[i].get_id());
 	  }
       }
   }
@@ -385,7 +371,7 @@ namespace 		Client
     _lib.idle(id);
     _player[num].set_lay(false);
     int idEggs = _lib.addEggsNode(_lib.getPos(id));
-    _Eggs.emplace_back(Eggs({~t[3], ~t[4]}, ~t[2], ~t[1], idEggs));
+    _Eggs[~t[1]] = Eggs({~t[3], ~t[4]}, ~t[2], ~t[1], idEggs);
     _lib.set_text2("\nL\'oeuf ", true);
     _lib.set_text2(t[1].c_str(), false);
     _lib.set_text2(" est pondu en position ", false);
@@ -439,7 +425,6 @@ namespace 		Client
   {
     if (t.size() != 2)
       return ;
-    std::cerr << "Sgt" << std::endl;
     _sgtt = ~t[1];
     _lib.set_text2("\nL\'unite de temps est de ", true);
     _lib.set_text2(t[1].c_str(), false);

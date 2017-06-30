@@ -43,3 +43,6 @@ void Eggs::set_id(int _id)
 {
   Eggs::_id = _id;
 }
+
+Eggs::Eggs() : _pos({0, 0})
+{}

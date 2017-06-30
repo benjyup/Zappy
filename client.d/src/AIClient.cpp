@@ -68,16 +68,8 @@ zappy::AIClient::AIClient(const t_arg &args) :
 		}
 	)
 {
-
   _initInventory(_currentInventory);
-
-  //_addTodo(INVENTORY);
-
   _todo.push_back(INVENTORY);
-
-  //_todo.push_back(FORWARD);
-  //_todo.push_back(FORWARD);
-  //_todo.push_back(FORWARD);
 }
 
 void zappy::AIClient::setInventory(const std::unordered_map<t_resource, size_t, std::hash<int>> &newInventory)
@@ -185,30 +177,10 @@ void 			zappy::AIClient::_go(const unsigned int tile_number, const t_resource re
     }
   while (i-- > 0)
     _todo.push_back(FORWARD);
-  move = middle - tile_number;
-  std::cout << "move = " << move;
-  std::cout << " midlle = " << middle;
-  std::cout << " tile_number = " << tile_number << std::endl;
-  if (move > 0)
-    _todo.push_back(LEFT);
-  else if (move < 0)
-      {
-	move = move * -1;
-	_todo.push_back(RIGHT);
-      }
-  if (move != 0)
-    while (move-- > 0)
-      _todo.push_back(FORWARD);
-
-  std::size_t how_many_resources;
-  if (resource != FOOD)
-    how_many_resources = (INCANTATIONS.at(_level).resources.at(resource) <= _currentLook[tile_number][resource]) ? (INCANTATIONS.at(_level).resources.at(resource)) : (_currentLook[tile_number][resource]);
-  else
-    how_many_resources = _currentLook[tile_number][FOOD];
-
-  int max = how_many_resources;
-  std::cout << "JE PREND " << how_many_resources << " " << RESOURCES_TO_STR.at(resource) << std::endl;
-  for (int i = 0 ;  i < max ; ++i)
+  move = _moveCalculate(middle, tile_number);
+  std::size_t howManyResources = _howManyResourses(resource, tile_number);
+  std::cout << "JE PREND " << howManyResources << " " << RESOURCES_TO_STR.at(resource) << std::endl;
+  for (int i = 0 ;  i < howManyResources ; ++i)
     _todo.push_back(RESOURCE_TO_REQUEST.at(resource));
   std::cout << "go to tile[" << tile_number << "] with " << _todo.size() << " move(s)" << std::endl;
 }
@@ -354,4 +326,33 @@ void zappy::AIClient::_randomDirection()
   int max = rand() % 3 + 1;
   for (int i = 0 ; i < max ; ++i)
     _todo.push_back(FORWARD);
+}
+
+std::size_t 	zappy::AIClient::_howManyResourses(const t_resource resource, const int tile_number) const
+{
+  if (resource != FOOD)
+    return (INCANTATIONS.at(_level).resources.at(resource) <= _currentLook.at(tile_number).at(resource)) ? (INCANTATIONS.at(_level).resources.at(resource)) : (_currentLook.at(tile_number).at(resource));
+  else
+    return _currentLook.at(tile_number).at(FOOD);
+
+}
+
+int zappy::AIClient::_moveCalculate(const int middle, const int tile_number)
+{
+  int move = middle - tile_number;
+
+  std::cout << "move = " << move;
+  std::cout << " midlle = " << middle;
+  std::cout << " tile_number = " << tile_number << std::endl;
+  if (move > 0)
+    _todo.push_back(LEFT);
+  else if (move < 0)
+      {
+	move = move * -1;
+	_todo.push_back(RIGHT);
+      }
+  if (move != 0)
+    while (move-- > 0)
+      _todo.push_back(FORWARD);
+  return 0;
 }

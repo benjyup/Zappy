@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:55:57 2017 Gregoire Renard
-** Last update Thu Jun 29 16:30:44 2017 Gregoire Renard
+** Last update Fri Jun 30 13:29:48 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -89,6 +89,7 @@ static void	init_variable(t_client *client)
     }
   client->type = player;
   client->level = 1;
+  client->time_unit = time(NULL);
 }
 
 void		add_to_the_team(t_env *env, t_client *client,

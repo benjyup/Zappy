@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Thu Jun 29 16:59:58 2017 Gregoire Renard
+** Last update Fri Jun 30 13:36:34 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -32,6 +32,7 @@
 # define WELCOME	"welcome\n"
 # define OK		"ok\n"
 # define SUC		"suc\n"
+# define DEAD		"dead\n"
 
 typedef	struct		s_client t_client;
 typedef struct		s_pos
@@ -95,7 +96,7 @@ typedef	struct		s_map
 typedef struct		s_env
 {
   t_arg			arg;
-  int			time;
+  int			time_one_unit;
   int			time_food;
   int			socket;
   int                   highest_fd;
@@ -136,6 +137,7 @@ typedef struct		s_client
   t_client_type		type;
   int			time_start;
   int			action;
+  int			time_unit;
 }			t_client;
 
 typedef	struct		s_look
@@ -288,5 +290,9 @@ void			set_pos_start(t_env *env, t_client *client,
 				      t_look *look);
 int		        fork_func(t_env *env, t_client *client, t_list **current);
 void			pop_food(t_env *env);
+void			check_func(t_env *env, t_client *client,
+				   t_list **current);
+void			check_timer_client(t_env *env, t_client *client,
+					   t_list **current);
 
 #endif /* !SERVER_H_ */

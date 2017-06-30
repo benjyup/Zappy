@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 14:31:23 2017 Gregoire Renard
-** Last update Wed Jun 28 23:50:10 2017 Gregoire Renard
+** Last update Fri Jun 30 17:04:46 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -63,7 +63,8 @@ int		opt_n(t_env *env,
   cpt_name = 0;
   len = count_len(argv, *cpt);
   env->arg.nb_team = len;
-  if ((env->arg.team = malloc(sizeof(t_team) * (len))) == NULL)
+  if (len <= 1 ||
+      (env->arg.team = malloc(sizeof(t_team) * (len + 1))) == NULL)
     return (ERROR);
   while (cpt_name != len)
     {

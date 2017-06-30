@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 19:11:36 2017 Gregoire Renard
-** Last update Mon Jun 26 15:04:10 2017 vincent.mesquita@epitech.eu
+** Last update Fri Jun 30 13:56:12 2017 Gregoire Renard
 */
 
 #include "server.h"

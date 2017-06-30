@@ -5,8 +5,6 @@
 #include "server.hpp"
 #include "proxy.hpp"
 
-
-
 zappy::Proxy::Proxy(zappy::AIClient &ia, zappy::Zappy &zap): _ia(ia), _ready(false), _zap(zap),
     _function_ptr({
                           {zappy::FORWARD, [] () -> int {
@@ -117,4 +115,3 @@ std::string zappy::Proxy::update(zappy::RequestType order) {
     }
     return input;
 }
-

@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 26 13:06:07 2017 Gregoire Renard
-** Last update Mon Jun 26 14:42:00 2017 Gregoire Renard
+** Last update Fri Jun 30 18:23:25 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -63,7 +63,7 @@ void		know_team(t_env *env, t_client *client)
   else
     {
       find_egg(&pos_egg, client->cmd, env);
-      add_to_the_team(env, client, pos_egg);
-      g_pnw(env, client, &env->clients->next);
+      if ((add_to_the_team(env, client, pos_egg)) != ERROR)
+	g_pnw(env, client, &env->clients->next);
     }
 }

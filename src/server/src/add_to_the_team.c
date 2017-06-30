@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:55:57 2017 Gregoire Renard
-** Last update Wed Jun 28 23:39:29 2017 Gregoire Renard
+** Last update Fri Jun 30 18:24:54 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -76,11 +76,12 @@ static void	init_pos_client(t_env *env, t_client *client, int cpt,
   send_info(env, client, cpt);
 }
 
-static void	init_variable(t_client *client)
+static void	init_variable(t_client *client, t_env *env)
 {
   int		cpt;
 
-  cpt = 0;
+  cpt = 1;
+  client->inventory[0] = 10;
   while (cpt != MAX_RESOURCE)
     {
       client->inventory[cpt] = 0;
@@ -88,9 +89,11 @@ static void	init_variable(t_client *client)
     }
   client->type = player;
   client->level = 1;
+  client->time_unit = time(NULL);
+  client->rst_time_unit = env->time_one_unit;
 }
 
-void		add_to_the_team(t_env *env, t_client *client,
+int		add_to_the_team(t_env *env, t_client *client,
 				t_pos new_pos)
 {
   int		cpt;
@@ -104,17 +107,18 @@ void		add_to_the_team(t_env *env, t_client *client,
 	    {
 	      env->arg.team[cpt].nb_player++;
 	      client->name_team = env->arg.team[cpt].team_name;
-	      init_variable(client);
+	      init_variable(client, env);
 	      init_pos_client(env, client, cpt, new_pos);
+	      return (SUCCESS);
 	    }
 	  else
 	    {
 	      my_send(client, KO, 0);
-	      cpt = -2;
+	      return (ERROR);
 	    }
 	}
       cpt++;
     }
-  if (client->name_team == NULL && cpt != -1)
-    my_send(client, KO, 0);
+  my_send(client, KO, 0);
+  return (ERROR);
 }

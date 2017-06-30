@@ -28,7 +28,7 @@ const 	std::unordered_map<t_resource, std::string, std::hash<int>>	zappy::AIClie
 	{THYSTAME, "thystame"}
 };
 
-const 	std::unordered_map<std::string, t_resource>	zappy::AIClient::STR_TO_RESOURCES = {
+const 	std::unordered_map<std::string, t_resource>			zappy::AIClient::STR_TO_RESOURCES = {
 	{"food", FOOD},
 	{"linemate", LINEMATE},
 	{"deraumere", DERAUMERE},
@@ -36,6 +36,16 @@ const 	std::unordered_map<std::string, t_resource>	zappy::AIClient::STR_TO_RESOU
 	{"mendiane", MENDIANE},
 	{"phiras", PHIRAS},
 	{"thystame", THYSTAME}
+};
+
+const std::unordered_map<t_resource, zappy::RequestType, std::hash<int>>		zappy::AIClient::RESOURCE_TO_REQUEST = {
+	{FOOD, TAKE_FOOD},
+	{LINEMATE, TAKE_LINEMATE},
+	{DERAUMERE, TAKE_DERAUMERE},
+	{SIBUR, TAKE_SIBUR},
+	{MENDIANE, TAKE_MENDIANE},
+	{PHIRAS, TAKE_PHIRAS},
+	{THYSTAME, TAKE_THYSTAME}
 };
 
 void zappy::AIClient::ProxyRegister(Proxy *prox, int x, int y) {
@@ -50,26 +60,19 @@ zappy::AIClient::AIClient(const t_arg &args) :
 	_incantationLevel(0),
 	_prox(NULL),
 	_mode(true),
-	_isInventoryData(true)
+	_isInventoryData(true),
+	_actions(
+		{
+			{zappy::RequestType::LOOK, [&] (const std::string &str){_lookAction(str);}},
+			{zappy::RequestType::INVENTORY, [&] (const std::string &str){_inventoryAction(str);}}
+		}
+	),
+	_outputSave("")
 {
-
   _initInventory(_currentInventory);
-
   _todo.push_back(INVENTORY);
-  //_todo.push_back(FORWARD);
-  //_todo.push_back(FORWARD);
-  //_todo.push_back(FORWARD);
 }
 
-void zappy::AIClient::setInventory(const std::unordered_map<t_resource, size_t, std::hash<int>> &newInventory)
-{
-  _currentInventory = newInventory;
-}
-
-void zappy::AIClient::setLook(const std::vector<std::unordered_map<t_resource, size_t, std::hash<int>>> &currentLook)
-{
-  _currentLook = currentLook;
-}
 
 zappy::AIClient::~AIClient()
 {
@@ -99,26 +102,32 @@ void 			zappy::AIClient::_getInventory(const std::string &data)
 {
   std::string tmp(data);
 
+  std::cout << "ici" << std::endl;
   tmp.erase(std::remove_if(tmp.begin(),
 			   tmp.end(),
 			   [](auto c) {
 			     return (c == '[' || c == ']' || c == ',');
 			   }),
 	    tmp.end());
+  std::cout << "ici" << std::endl;
 
 
 
   std::string t(tmp);
+  std::cout << "ici" << std::endl;
   std::transform(tmp.begin(), tmp.end(), tmp.begin(),
 		 [](auto c) { return std::tolower(c);});
+  std::cout << "ici" << std::endl;
 
   std::stringstream	ss(tmp);
-  for (int i = 0 ; i  < NBR_OF_RESOURCES ; ++i)
+  int i = 0;
+  while (i < NBR_OF_RESOURCES && !tmp.empty())
     {
+      std::cout << "TMP = " << tmp << std::endl;
       ss >> tmp;
       ss >> _currentInventory[STR_TO_RESOURCES.at(tmp)];
+      i += 1;
     }
-
   std::cout << "Inventaire: " << std::endl;
   for (const auto &it : _currentInventory)
     {
@@ -144,7 +153,7 @@ void 		zappy::AIClient::_look()
 	}
       i += 1;
     }
-  _todo.push_back(FORWARD);
+  _randomDirection();
 }
 
 void 			zappy::AIClient::_go(const unsigned int tile_number, const t_resource resource)
@@ -166,23 +175,23 @@ void 			zappy::AIClient::_go(const unsigned int tile_number, const t_resource re
     }
   while (i-- > 0)
     _todo.push_back(FORWARD);
-  move = middle - tile_number;
-  std::cout << "move = " << move << std::endl;
-  if (move > 0)
-    _todo.push_back(LEFT);
-  else if (move < 0)
-      {
-	move = move * -1;
-	_todo.push_back(RIGHT);
-      }
-  while (move-- > 0)
-    _todo.push_back(FORWARD);
-  _todo.push_back(TAKE_LINEMATE);
-  std::cout << "go " << _todo.size() << std::endl;
+  move = _moveCalculate(middle, tile_number);
+  std::size_t howManyResources = _howManyResourses(resource, tile_number);
+  std::cout << "JE PREND " << howManyResources << " " << RESOURCES_TO_STR.at(resource) << std::endl;
+  for (int i = 0 ;  i < howManyResources ; ++i)
+    _todo.push_back(RESOURCE_TO_REQUEST.at(resource));
+  std::cout << "go to tile[" << tile_number << "] with " << _todo.size() << " move(s)" << std::endl;
 }
 
-bool			zappy::AIClient::_isNeeded(t_resource resource)
+bool			zappy::AIClient::_isNeeded(const t_resource resource) const
 {
+  if (resource == FOOD)
+    {
+      std::cout << "FOOD = " << _currentInventory.at(FOOD) << std::endl;
+      if (_currentInventory.at(FOOD) <= 5)
+	std::cout << "JAI BESOIN DE MANGER" << std::endl;
+      return  _currentInventory.at(FOOD) <= 5;
+    }
   auto res = INCANTATIONS[_level].resources.find(resource);
   if (res == INCANTATIONS[_level].resources.end())
     return false;
@@ -192,13 +201,11 @@ bool			zappy::AIClient::_isNeeded(t_resource resource)
   return  nbr_of_resources > 0 && _currentInventory.find(resource)->second < resource;
 }
 
-std::vector<std::unordered_map<t_resource, size_t,
-	std::hash<int>>> 						zappy::AIClient::_lookParse(const std::string &str)
+std::vector<t_inventory> 						zappy::AIClient::_lookParse(const std::string &str)
 {
-  std::vector<std::unordered_map<t_resource, size_t, std::hash<int>>>   look;
+  std::vector<t_inventory >   look;
   std::size_t                                                           pos = 0, begin = 0;
-  std::unordered_map<t_resource, size_t,
-	  std::hash<int>>                                    		inventory;
+  t_inventory                                    			inventory;
   std::string 								tmp(str.substr(begin, pos - begin));
 
 
@@ -228,8 +235,7 @@ void                                            zappy::AIClient::_extractResourc
     try { inventory[STR_TO_RESOURCES.at(tmp)] +=  1; } catch (...) {	}
 }
 
-void                                           zappy::AIClient::_initInventory(std::unordered_map<t_resource, size_t,
-	std::hash<int>> &inventory)
+void                                           zappy::AIClient::_initInventory(t_inventory &inventory)
 {
   inventory[FOOD] = 0;
   inventory[LINEMATE] = 0;
@@ -253,6 +259,7 @@ zappy::RequestType 	zappy::AIClient::update(std::string output) {
 	  std::cout << "Je pop" << std::endl;
 	  std::cout << "requete = " << request << std::endl;
 	  request = _todo.front();
+	  _OutputType.push_back(request);
 	  _todo.pop_front();
 	}
       _mode = !_mode;
@@ -262,24 +269,122 @@ zappy::RequestType 	zappy::AIClient::update(std::string output) {
       if (!output.empty())
 	{
 	  std::cout << "J'ai recu :" << output << std::endl;
-	  if (output[0] == '[' && !_isInventoryData)
+	  if (!_OutputType.empty())
 	    {
-	      std::cout << "GET LOOK :" << output << std::endl;
-	      _currentLook = _lookParse(output);
-	      _look();
-	      std::cout << "_todo.size = " << _todo.size() << std::endl;
-	      _isInventoryData = true;
-	      _todo.push_back(INVENTORY);
+	      try { _actions[_OutputType.front()](output); } catch (...) { }
+	      _OutputType.pop_front();
 	    }
-	  else if (output[0] == '[' && _isInventoryData)
-	      {
-		std::cout << "GET INVENTORY" << std::endl;
-		_getInventory(output);
-		_isInventoryData = false;
-		_todo.push_back(LOOK);
-	      }
 	  _mode = !_mode;
 	}
     }
   return request;
+}
+
+void zappy::AIClient::_addTodo(const zappy::RequestType requestType)
+{
+  this->_todo.push_back(requestType);
+  this->_OutputType.push_back(requestType);
+}
+
+
+void zappy::AIClient::_lookAction(const std::string &output)
+{
+  std::string str = output;
+
+  if (str.back() != ']')
+    {
+      this->_outputSave += str;
+      this->_OutputType.push_front(LOOK);
+      _mode = !_mode;
+      return ;
+    }
+  if (!_outputSave.empty())
+    str = _outputSave;
+  if (str[0] == '[')
+    {
+      std::cout << "GET LOOK :" << str << std::endl;
+      _currentLook = _lookParse(str);
+      _look();
+      std::cout << "_todo.size = " << _todo.size() << std::endl;
+      //_isInventoryData = true;
+      //_addTodo(INVENTORY);
+      _todo.push_back(INVENTORY);
+      _outputSave.clear();
+    }
+}
+
+void zappy::AIClient::_inventoryAction(const std::string &output)
+{
+  std::string str(output);
+
+  if (str.back() != ']')
+    {
+      this->_outputSave += str;
+      this->_OutputType.push_front(INVENTORY);
+      _mode = !_mode;
+      return ;
+    }
+  if (!_outputSave.empty())
+    str = _outputSave;
+  if (str[0] == '[')
+    {
+      std::cout << "GET INVENTORY" << std::endl;
+      _getInventory(str);
+      //_isInventoryData = false;
+      //_addTodo(LOOK);
+      _todo.push_back(LOOK);
+      _outputSave.clear();
+    }
+}
+
+void zappy::AIClient::_randomDirection()
+{
+  std::array<RequestType, 2> 	directions = {RIGHT, LEFT};
+  int 				random = rand() % 2;
+
+  _todo.push_back(directions[random]);
+  int max = rand() % 5 + 1;
+  for (int i = 0 ; i < max ; ++i)
+    _todo.push_back(FORWARD);
+}
+
+std::size_t 	zappy::AIClient::_howManyResourses(const t_resource resource, const int tile_number) const
+{
+  if (resource != FOOD)
+    return (INCANTATIONS.at(_level).resources.at(resource) <= _currentLook.at(tile_number).at(resource)) ? (INCANTATIONS.at(_level).resources.at(resource)) : (_currentLook.at(tile_number).at(resource));
+  else
+    return _currentLook.at(tile_number).at(FOOD);
+
+}
+
+int zappy::AIClient::_moveCalculate(const int middle, const int tile_number)
+{
+  int move = middle - tile_number;
+
+  std::cout << "move = " << move;
+  std::cout << " midlle = " << middle;
+  std::cout << " tile_number = " << tile_number << std::endl;
+  if (move > 0)
+    _todo.push_back(LEFT);
+  else if (move < 0)
+      {
+	move = move * -1;
+	_todo.push_back(RIGHT);
+      }
+  if (move != 0)
+    while (move-- > 0)
+      _todo.push_back(FORWARD);
+  return 0;
+}
+
+bool 				zappy::AIClient::_readyFoIncantation() const
+{
+  const SIncantation		&incantation = INCANTATIONS[_level];
+
+  for (auto &resource : incantation.resources)
+    {
+      if(_isNeeded(resource.first))
+	return false;
+    }
+  return true;
 }

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="client_graph"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="client_graph">
+				<Option output="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/client_graph" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/irrlicht-1.8.4/include"/>
+					<Add directory="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src"/>
+					<Add directory="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/include"/>
+					<Add directory="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/include/mendatory"/>
+					<Add directory="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/./irrKlang-64bit-1.5.0/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 client_graph"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="client_graph/fast">
+				<Option output="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/client_graph" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/irrlicht-1.8.4/include"/>
+					<Add directory="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src"/>
+					<Add directory="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/include"/>
+					<Add directory="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/include/mendatory"/>
+					<Add directory="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/./irrKlang-64bit-1.5.0/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 client_graph/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/include/Block.hpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/include/Character.hpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/include/Client.hpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/include/Drone.hpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/include/Eggs.hpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/include/Ressource.hpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/include/Sound.hpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/include/Vector3d.hpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/include/ZappyException.hpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/include/parser.hpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/include/server.hpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/include/zappy.hpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/Block.cpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/Character.cpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/Client.cpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/Drone.cpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/Eggs.cpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/GraphicalLib.cpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/GraphicalLib.hpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/Ressource.cpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/Sound.cpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/Vector3d.cpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/ZappyException.cpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/main.cpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/mendatory/argument.c">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/mendatory/connection_manager.c">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/mendatory/cookie.c">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/mendatory/functionParse.c">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/mendatory/my_stack.c">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/mendatory/srv_read.c">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/mendatory/srv_write.c">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/parser.cpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/src/zappy.cpp">
+			<Option target="client_graph"/>
+		</Unit>
+		<Unit filename="/home/kyxo/rendu/Reseau/zappy/PSU_2016_zappy/client/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

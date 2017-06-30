@@ -8,6 +8,7 @@
 #include <utility>
 #include <string>
 #include <unordered_map>
+#include <map>
 #include <mendatory/client.h>
 #include <vector>
 #include <list>
@@ -39,8 +40,6 @@ namespace zappy
 
     void  ProxyRegister(Proxy *prox, int x, int y);
     zappy::RequestType 						update(std::string input);
-    void 							setInventory(const t_inventory &);
-    void 							setLook(const std::vector<t_inventory> &);
 
    private:
 
@@ -54,25 +53,27 @@ namespace zappy
     t_inventory							_currentInventory;
     std::vector<t_inventory>					_currentLook;
     bool 							_isInventoryData;
+    std::string							_outputSave;
 
     void							_play();
     void 							_look();
     void							_getInventory(const std::string &data);
-    bool 							_isNeeded(t_resource);
+    bool 							_isNeeded(const t_resource) const;
     void 							_go(const unsigned int tile_number, const t_resource);
     std::list<RequestType>					_todo;
     std::list<RequestType>					_OutputType;
     std::vector<t_inventory>					_lookParse(const std::string &look);
     void                                            		_extractResources(const std::string &str,
 										  t_inventory &inventory);
-    void                                            		_initInventory(std::unordered_map<t_resource, size_t,
-	    std::hash<int>> &inventory);
+    void                                            		_initInventory(t_inventory &inventory);
     void 							_addTodo(const RequestType);
     void 							_lookAction(const std::string &);
     void 							_inventoryAction(const std::string &);
     void 							_randomDirection();
     std::size_t 						_howManyResourses(const t_resource resource, const int tile_number) const;
     int 							_moveCalculate(const int middle, const int tile_number);
+    bool 							_readyFoIncantation() const;
+    void 							_saveOutput(const std::string &str);
 
     Proxy                           				*_prox;
     bool 							_mode;

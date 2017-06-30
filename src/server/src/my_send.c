@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:43:04 2017 vincent.mesquita@epitech.eu
-** Last update Fri Jun 30 18:07:07 2017 Gregoire Renard
+** Last update Fri Jun 30 18:55:17 2017 Gregoire Renard
 */
 
 #include <unistd.h>
@@ -43,6 +43,8 @@ static void	time_calculation(t_client *client,
       client->name_team != NULL && client->rst_time_unit <= 0)
     {
       client->rst_time_unit = env->time_one_unit;
+      if (msg->time_action == 300 / env->arg.freq)
+	client->inventory[FOOD]--;
       client->inventory[FOOD]--;
     }
   client->action = 0;

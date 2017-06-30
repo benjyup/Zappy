@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 26 14:57:15 2017 vincent.mesquita@epitech.eu
-** Last update Fri Jun 30 18:15:29 2017 Gregoire Renard
+** Last update Fri Jun 30 18:18:15 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -28,14 +28,7 @@ static t_bool           my_new_client(int client_socket,
     env->highest_fd = client_socket;
   client->socket = client_socket;
   memset(client->cmd, 0, BUFFLENGTH);
-  client->split_cmd = NULL;
-  client->id = env->current_client_id++;
-  client->name_team = NULL;
-  client->dir.x = 1;
-  client->dir.y = 0;
-  client->action = 0;
-  client->time_unit = -1;
-  client->type = none;
+  init_new_client(&client, env);
   my_add_to_end(env->clients, client);
   my_send(client, WELCOME, 0);
   env->nb_player++;

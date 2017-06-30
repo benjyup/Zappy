@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Fri Jun 30 18:14:59 2017 Gregoire Renard
+** Last update Fri Jun 30 18:17:11 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -317,5 +317,6 @@ void			init_level5(t_env *env);
 void			init_level6(t_env *env);
 void			init_level7(t_env *env);
 void			check_end_game(t_env *env);
+void			init_new_client(t_client **client, t_env *env);
 
 #endif /* !SERVER_H_ */

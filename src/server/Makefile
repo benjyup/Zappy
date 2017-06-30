@@ -5,7 +5,7 @@
 ## Login   <renard_e@epitech.net>
 ## 
 ## Started on  Tue Jun 20 10:56:10 2017 Gregoire Renard
-## Last update Fri Jun 30 17:19:46 2017 Gregoire Renard
+## Last update Fri Jun 30 18:17:26 2017 Gregoire Renard
 ##
 
 CC	=	gcc -I../../include -g3
@@ -76,6 +76,7 @@ SRCS	=	src/main.c \
 		src/init_level6.c \
 		src/init_level7.c \
 		src/check_end_game.c \
+		src/init_new_client.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

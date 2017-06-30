@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Thu Jun 29 18:28:55 2017 Gregoire Renard
-** Last update Fri Jun 30 14:40:19 2017 Gregoire Renard
+** Last update Fri Jun 30 18:05:00 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -13,23 +13,26 @@
 void		check_timer_client(t_env *env, t_client *client,
 				   t_list **current)
 {
-  if (client->time_unit != -1 &&
-      client->inventory[FOOD] <= 0)
+  if (client->type != monitor)
     {
-      my_send(client, DEAD, 0);
-      my_send_to_client(client, env);
-      my_quit(env, client, current);
-    }
-  else if (client->time_unit != -1
-	   && time(NULL) - client->time_unit >= env->time_one_unit)
-    {
-      client->time_unit = time(NULL);
-      client->inventory[FOOD]--;
-      if (client->inventory[FOOD] <= 0)
+      if (client->time_unit != -1 &&
+	  client->inventory[FOOD] <= 0)
 	{
 	  my_send(client, DEAD, 0);
 	  my_send_to_client(client, env);
 	  my_quit(env, client, current);
+	}
+      else if (client->time_unit != -1
+	       && time(NULL) - client->time_unit >= env->time_one_unit)
+	{
+	  client->time_unit = time(NULL);
+	  client->inventory[FOOD]--;
+	  if (client->inventory[FOOD] <= 0)
+	    {
+	      my_send(client, DEAD, 0);
+	      my_send_to_client(client, env);
+	      my_quit(env, client, current);
+	    }
 	}
     }
 }

@@ -5,7 +5,7 @@
 ## Login   <renard_e@epitech.net>
 ## 
 ## Started on  Tue Jun 20 10:56:10 2017 Gregoire Renard
-## Last update Thu Jun 29 18:28:27 2017 Gregoire Renard
+## Last update Fri Jun 30 17:19:46 2017 Gregoire Renard
 ##
 
 CC	=	gcc -I../../include -g3
@@ -66,6 +66,16 @@ SRCS	=	src/main.c \
 		src/pop_food.c \
 		src/check_func.c \
 		src/check_timer_client.c \
+		src/incantation_func.c \
+		src/init_elevation.c \
+		src/init_level1.c \
+		src/init_level2.c \
+		src/init_level3.c \
+		src/init_level4.c \
+		src/init_level5.c \
+		src/init_level6.c \
+		src/init_level7.c \
+		src/check_end_game.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

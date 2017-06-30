@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:43:04 2017 vincent.mesquita@epitech.eu
-** Last update Fri Jun 30 14:42:57 2017 Gregoire Renard
+** Last update Fri Jun 30 18:07:07 2017 Gregoire Renard
 */
 
 #include <unistd.h>
@@ -39,7 +39,8 @@ static void	time_calculation(t_client *client,
 				 t_env *env)
 {
   client->rst_time_unit -= msg->time_action;
-  if (client->name_team != NULL && client->rst_time_unit <= 0)
+  if (client->type != monitor &&
+      client->name_team != NULL && client->rst_time_unit <= 0)
     {
       client->rst_time_unit = env->time_one_unit;
       client->inventory[FOOD]--;

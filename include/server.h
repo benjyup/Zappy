@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Fri Jun 30 14:39:14 2017 Gregoire Renard
+** Last update Fri Jun 30 17:43:31 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -27,6 +27,7 @@
 # define MAX_CMD	6
 # define MAX_RESOURCE	7
 # define MAX_PLAYER	10
+# define MAX_LEVEL	7
 
 # define KO		"ko\n"
 # define WELCOME	"welcome\n"
@@ -35,6 +36,13 @@
 # define DEAD		"dead\n"
 
 typedef	struct		s_client t_client;
+
+typedef struct		s_elevation
+{
+  int			nb_player;
+  int			needed_res[MAX_RESOURCE];
+}			t_elevation;
+  
 typedef struct		s_pos
 {
   int			x;
@@ -110,7 +118,8 @@ typedef struct		s_env
   t_map			**map;
   char			**resources;
   int			nb_player;
-  
+  t_elevation		elevation[MAX_LEVEL];
+  int			real_start;
 }			t_env;
 
 typedef	struct		s_pointer
@@ -295,5 +304,17 @@ void			check_func(t_env *env, t_client *client,
 				   t_list **current);
 void			check_timer_client(t_env *env, t_client *client,
 					   t_list **current);
+void			init_elevation(t_env *env);
+int			incantation_func(t_env *env,
+					 t_client *client,
+					 t_list **current);
+void			init_level1(t_env *env);
+void			init_level2(t_env *env);
+void			init_level3(t_env *env);
+void			init_level4(t_env *env);
+void			init_level5(t_env *env);
+void			init_level6(t_env *env);
+void			init_level7(t_env *env);
+void			check_end_game(t_env *env);
 
 #endif /* !SERVER_H_ */

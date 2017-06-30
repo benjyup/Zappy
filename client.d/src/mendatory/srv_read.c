@@ -17,7 +17,7 @@ char    *srv_read(void)
     if (rs == NULL)
         return (NULL);
     if (!(s = strdup(rs->data)))
-        return (NULL);
+        return (perror("strdup()"), NULL);
     rs = stack_delete(rs);
     return (s);
 }
@@ -25,10 +25,16 @@ char    *srv_read(void)
 int server_download_data(int fd)
 {
     char data[512];
+    char *s;
 
     memset(data, 0, 512);
     if (read(fd, &data, 512) <= 0)
         return (1);
-    rs = stack_new(rs, data);
+    s = strtok(data, "\n");
+    while (s)
+    {
+        rs = stack_new(rs, s);
+        s = strtok(NULL, "\n");
+    }
     return (0);
 }

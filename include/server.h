@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Wed Jun 28 19:01:30 2017 Gregoire Renard
+** Last update Wed Jun 28 23:16:25 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -15,6 +15,7 @@
 # include <sys/socket.h>
 # include <netinet/in.h>
 # include <stdarg.h>
+# include <time.h>
 # include "commun.h"
 
 # define VALUE		i + h + 1
@@ -63,6 +64,7 @@ typedef	struct		s_eggs
 {
   t_pos			pos;
   int			time;
+  int			id;
 }			t_eggs;
 
 typedef	struct		s_team
@@ -107,6 +109,7 @@ typedef struct		s_env
   t_map			**map;
   char			**resources;
   int			nb_player;
+  int			nb_eggs;
   
 }			t_env;
 
@@ -132,6 +135,8 @@ typedef struct		s_client
   t_list		*to_write;
   int			level;
   t_client_type		type;
+  int			time_start;
+  int			action;
 }			t_client;
 
 typedef	struct		s_look
@@ -148,6 +153,7 @@ typedef struct		s_msg
   char			*msg;
   unsigned int		length;
   ssize_t		current_index;
+  double		time_action;
 }			t_msg;
 
 typedef	struct		s_broad
@@ -219,7 +225,8 @@ void			add_to_the_team(t_env *env, t_client *client,
 					t_pos new_pos);
 void			my_send_to_client(t_client *client);
 void			my_send(t_client *client,
-				char *message);
+				char *message,
+				double time_action);
 char			*to_string(int nb);
 
 t_client		*search_client(t_list **current, int n, t_env *env);
@@ -256,7 +263,7 @@ int			g_pin(t_env *env, t_client *client, t_list **current);
 int			get_size_map(int x, int y, t_env *env);
 int			get_size(t_client *cli_temp, int n);
 int			g_sbp(t_client *client);
-void			send_graphical(t_list **current, t_env *env, char *str);
+void			send_graphical(t_list **current, t_env *env, char *str, int time);
 void			know_team(t_env *env, t_client *client);
 int			g_pnw(t_env *env, t_client *client, t_list **current);
 int			set_func(t_env *env, t_client *client, t_list **current);
@@ -283,4 +290,11 @@ void			set_pos_start(t_env *env, t_client *client,
 int		        fork_func(t_env *env, t_client *client, t_list **current);
 int			g_sst(t_env *env, t_client *client, t_list **current);
 int			g_sgt(t_env *env, t_client *client, t_list **current);
+int			g_pbc(t_client *client, t_env *env, char *str);
+int			g_pex(t_client *client, t_env *env);
+int			g_pfk(t_client *client, t_env *env);
+int			g_enw(t_client *client, t_env *env, int num_egg);
+int			g_eht(t_client *client, t_env *env, int num_egg);
+void			g_ebo(t_env *env, int id_egg);
+  
 #endif /* !SERVER_H_ */

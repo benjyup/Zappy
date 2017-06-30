@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Fri Jun 23 14:39:30 2017 Gregoire Renard
-** Last update Wed Jun 28 15:30:41 2017 Gregoire Renard
+** Last update Wed Jun 28 23:04:15 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -49,6 +49,7 @@ int		broadcast_func(t_env *env, t_client *client,
     {
       decale = 0;
       init_message(&message, client, &pos);
+      g_pbc(client, env, client->split_cmd[1]);
       send_to_all_user(env, pos, client, message);
       while (decale < 8)
 	{
@@ -57,9 +58,9 @@ int		broadcast_func(t_env *env, t_client *client,
 	  set_broadcast_pos(env, client, &pos, message);
 	}
       free(message);
-      my_send(client, OK);
+      my_send(client, OK, 7 / env->arg.freq);
     }
   else
-    my_send(client, KO);
+    my_send(client, KO, 7 / env->arg.freq);
   return (SUCCESS);
 }

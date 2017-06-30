@@ -64,6 +64,8 @@ SRCS	=	src/main.c \
 		src/set_pos_start.c \
 		src/fork_func.c \
 		src/g_sgt.c \
+		src/g_pex.c \
+		src/g_ebo.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

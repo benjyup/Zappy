@@ -4,6 +4,7 @@ int	g_sgt(t_env *env, t_client *client, t_list **current)
 {
   char	buff[18];
 
+  (void)current;
   sprintf(buff, "sgt %d\n", env->arg.freq);
   my_send(client, buff, 0);
   return (SUCCESS);
@@ -12,7 +13,8 @@ int	g_sgt(t_env *env, t_client *client, t_list **current)
 int	g_sst(t_env *env, t_client *client, t_list **current)
 {
   char	buff[18];
-  
+
+  (void)current;
   if (client->split_cmd[1] == NULL)
     {
       g_sbp(client);

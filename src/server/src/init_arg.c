@@ -42,6 +42,7 @@ static void		set_arg(t_env *env)
   env->arg.clients_lim = -1;
   env->arg.freq = 100;
   env->nb_player = 0;
+  env->nb_eggs = 0;
   init_env_resources(env);
 }
 

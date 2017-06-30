@@ -5,7 +5,7 @@
 ** Login   <rene_r@epitech.net>
 ** 
 ** Started on  Tue Jun 27 17:17:32 2017 rodrigue rene
-** Last update Tue Jun 27 19:28:30 2017 Gregoire Renard
+** Last update Wed Jun 28 23:24:51 2017 Gregoire Renard
 */
 
 #include <stdio.h>
@@ -51,7 +51,7 @@ int		g_ppo(t_env *env, t_client *client, t_list **current)
   str = malloc(size + 1);
   sprintf(str, "%s %d %d %d %d\n", "ppo ", n,
 	  cli_temp->pos.x, cli_temp->pos.y, dir);
-  my_send(client, str);
+  my_send(client, str, 0);
   free(str);
   return (1);
 }
@@ -79,7 +79,7 @@ int		g_plv(t_env *env, t_client *client, t_list **current)
       exit(-1);
     }
   sprintf(str, "%s %d %d\n", "plv ", n, cli_temp->level);
-  my_send(client, str);
+  my_send(client, str, 0);
   free(str);
   return (1);
 }
@@ -108,7 +108,7 @@ int		g_pin(t_env *env, t_client *client, t_list **current)
 	  cli_temp->inventory[LINEMATE], cli_temp->inventory[DERAUMERE],
 	  cli_temp->inventory[SIBUR], cli_temp->inventory[MENDIANE],
 	  cli_temp->inventory[PHIRAS], cli_temp->inventory[THYSTAME]);
-  my_send(client, str);
+  my_send(client, str, 0);
   free(str);
   return (1);
 }

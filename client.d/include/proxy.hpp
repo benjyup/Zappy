@@ -7,7 +7,7 @@
 
 #include <list>
 #include "zappy.hpp"
-#include "mendatory/AIClient.hpp"
+#include "AIClient.hpp"
 #include "Request.hpp"
 
 namespace zappy

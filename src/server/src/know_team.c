@@ -19,6 +19,7 @@ static void	change_egg(int i, t_env *env, t_pos *pos_egg)
     {
       pos_egg->x = eggs->pos.x;
       pos_egg->y = eggs->pos.y;
+      g_ebo(env, eggs->id);
       my_del_elem(env->arg.team[i].eggs, env->arg.team[i].eggs->next, NULL);
     }
 }
@@ -44,7 +45,7 @@ static void	find_egg(t_pos *pos_egg, char *str, t_env *env)
 static void     connection_gr(t_env *env, t_client *client)
 {
   g_msz(env, client, &env->clients->next);
-  //sgt
+  g_sgt(env, client, &env->clients->next);
   g_mct(env, client, &env->clients->next);
   g_tna(env, client, &env->clients->next);
 }

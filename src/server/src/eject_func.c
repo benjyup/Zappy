@@ -5,7 +5,7 @@
 ** Login   <rene_r@epitech.net>
 ** 
 ** Started on  Tue Jun 27 17:15:03 2017 rodrigue rene
-** Last update Tue Jun 27 19:28:08 2017 Gregoire Renard
+** Last update Wed Jun 28 23:26:16 2017 Gregoire Renard
 */
 
 #include <stdio.h>
@@ -31,7 +31,8 @@ static void	eject_a_client(t_client *client, t_pos *dir_p,
 
   sprintf(buff, "eject: %d\n", invert_dir(dir));
   forward_eject(env, client, dir_p);
-  my_send(client, buff);
+  my_send(client, buff, 7 / env->arg.freq);
+  g_pex(client, env);
 }
 
 static int	eject_each_client(t_env *env, int dir,
@@ -73,6 +74,6 @@ int	eject_func(t_env *env, t_client *client, t_list **current)
   else if (pos.y == env->arg.height)
     pos.y = 0;
   eject_each_client(env, def_dir(client), &pos, &client->dir);
-  my_send(client, OK);
+  my_send(client, OK, 7 / env->arg.freq);
   return (SUCCESS);
 }

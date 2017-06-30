@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Tue May 30 16:56:52 2017 vincent.mesquita@epitech.eu
-** Last update Wed Jun 21 17:23:57 2017 Gregoire Renard
+** Last update Thu Jun 29 14:07:18 2017 Gregoire Renard
 */
 
 #include <sys/select.h>
@@ -43,7 +43,8 @@ void		my_init_select(t_env *env)
       client = current->data;
       if (client->socket > env->highest_fd)
 	env->highest_fd = client->socket;
-      FD_SET(client->socket, &(env->readf));
+      if (client->action != 1)
+	FD_SET(client->socket, &(env->readf));
       FD_SET(client->socket, &(env->writef));
       current = current->next;
     }

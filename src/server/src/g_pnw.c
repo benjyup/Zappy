@@ -31,7 +31,7 @@ int             g_pnw(t_env *env, t_client *client, t_list **current)
 	  client->pos.x,
 	  client->pos.y,
 	  def_dir(client), client->name_team);
-  send_graphical(current, env, str);
+  send_graphical(current, env, str, 0);
   free(str);
   return (1);
 }
@@ -50,7 +50,7 @@ int             g_pdr(t_env *env, t_client *client, t_list **current, int ress)
       exit(-1);
     }
   sprintf(str, "%s %d %d\n", "pdr ", client->socket, ress);
-  send_graphical(current, env, str);
+  send_graphical(current, env, str, 0);
   free(str);
   return (1);
 }
@@ -69,7 +69,7 @@ int             g_pgt(t_env *env, t_client *client, t_list **current, int ress)
       exit(-1);
     }
   sprintf(str, "%s %d %d\n", "pgt ", client->socket, ress);
-  send_graphical(current, env, str);
+  send_graphical(current, env, str, 0);
   free(str);
   return (1);
 }

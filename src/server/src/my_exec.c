@@ -5,12 +5,21 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 19 22:55:30 2017 vincent.mesquita@epitech.eu
-** Last update Wed Jun 28 15:04:30 2017 Gregoire Renard
+** Last update Wed Jun 28 22:57:47 2017 Gregoire Renard
 */
 
 #include <string.h>
 #include "server.h"
 #include "commands.h"
+
+static void	send_error(t_client *client)
+{
+  if (client->type == monitor)
+    my_send(client, SUC, 0);
+  else
+    my_send(client, KO, 0);
+  my_free_wordtab(client->split_cmd);
+}
 
 int             my_exec(t_env *env,
 			t_client *client,
@@ -27,6 +36,8 @@ int             my_exec(t_env *env,
 	{
 	  if (exec_array[i].client_type == client->type)
 	    {
+	      client->action = 1;
+	      client->time_start = time(NULL);
 	      exec_array[i].exec(env, client, current);
 	      return (SUCCESS);
 	    }
@@ -34,10 +45,6 @@ int             my_exec(t_env *env,
 	}
       i += 1;
     }
-  if (client->type == monitor)
-    my_send(client, SUC);
-  else
-    my_send(client, KO);
-  my_free_wordtab(client->split_cmd);
+  send_error(client);
   return (ERROR);
 }

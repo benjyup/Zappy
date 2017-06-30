@@ -20,7 +20,6 @@ set(SOURCE_FILES
         src/mendatory/argument.c
         src/mendatory/connection_manager.c
         src/mendatory/cookie.c
-        src/mendatory/function_parser.cpp
         src/mendatory/functionParse.c
         src/mendatory/my_stack.c
         src/mendatory/srv_read.c

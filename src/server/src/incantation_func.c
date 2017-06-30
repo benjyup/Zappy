@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Fri Jun 30 14:59:18 2017 Gregoire Renard
-** Last update Fri Jun 30 19:14:16 2017 Gregoire Renard
+** Last update Fri Jun 30 19:35:22 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -35,7 +35,7 @@ static void	send_message_elevation(t_client *client, t_env *env)
   strcat(message, level);
   strcat(message, "\n\0");
   my_send(client, message, 0);
-  my_send(client, "", 300 / client->arg.freq);
+  my_send(client, "", 300 / env->arg.freq);
   free(message);
   free(level);
 }
@@ -48,7 +48,7 @@ static void	check_conditions(t_env *env, t_client *client)
   
   cpt = 1;
   stop = 0;
-  nb_player = strlen_client(env->map[client->pos.y][client->pos.x].clients);
+  nb_player = strlen_clients(env->map[client->pos.y][client->pos.x].clients);
   if (nb_player < env->elevation[client->level - 1].nb_player)
     my_send(client, KO, 0);
   while (cpt != MAX_RESOURCE && stop != 1)
@@ -62,7 +62,7 @@ static void	check_conditions(t_env *env, t_client *client)
     my_send(client, KO, 0);
   else
     {
-      send_mesage_elevation(client, env);
+      send_message_elevation(client, env);
       client->level++;
     }
 }

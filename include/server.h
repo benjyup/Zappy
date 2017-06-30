@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Fri Jun 30 19:31:35 2017 Gregoire Renard
+** Last update Fri Jun 30 19:34:36 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -34,6 +34,7 @@
 # define OK		"ok\n"
 # define SUC		"suc\n"
 # define DEAD		"dead\n"
+# define INCAN_UNDER	"Elevation underway\nCurrent level: "
 
 typedef	struct		s_client t_client;
 

@@ -69,6 +69,7 @@ namespace zappy
     void 							_addTodo(const RequestType);
     void 							_lookAction(const std::string &);
     void 							_inventoryAction(const std::string &);
+    void 							_randomDirection();
 
     Proxy                           				*_prox;
     bool 							_mode;

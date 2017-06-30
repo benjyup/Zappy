@@ -163,7 +163,7 @@ void 		zappy::AIClient::_look()
 	}
       i += 1;
     }
-  _todo.push_back(FORWARD);
+  _randomDirection();
 }
 
 void 			zappy::AIClient::_go(const unsigned int tile_number, const t_resource resource)
@@ -186,7 +186,9 @@ void 			zappy::AIClient::_go(const unsigned int tile_number, const t_resource re
   while (i-- > 0)
     _todo.push_back(FORWARD);
   move = middle - tile_number;
-  std::cout << "move = " << move << std::endl;
+  std::cout << "move = " << move;
+  std::cout << " midlle = " << middle;
+  std::cout << " tile_number = " << tile_number << std::endl;
   if (move > 0)
     _todo.push_back(LEFT);
   else if (move < 0)
@@ -194,11 +196,18 @@ void 			zappy::AIClient::_go(const unsigned int tile_number, const t_resource re
 	move = move * -1;
 	_todo.push_back(RIGHT);
       }
-  while (move-- > 0)
-    _todo.push_back(FORWARD);
+  if (move != 0)
+    while (move-- > 0)
+      _todo.push_back(FORWARD);
 
-  std::size_t how_many_resource = (_currentInventory[resource] <= INCANTATIONS.at(_level).resources.at(resource)) ? (_currentInventory[resource]) : (INCANTATIONS.at(_level).resources.at(resource));
-  int max = ((resource == FOOD) ? (_currentInventory[FOOD]) : ( 2 ));
+  std::size_t how_many_resources;
+  if (resource != FOOD)
+    how_many_resources = (INCANTATIONS.at(_level).resources.at(resource) <= _currentLook[tile_number][resource]) ? (INCANTATIONS.at(_level).resources.at(resource)) : (_currentLook[tile_number][resource]);
+  else
+    how_many_resources = _currentLook[tile_number][FOOD];
+
+  int max = how_many_resources;
+  std::cout << "JE PREND " << how_many_resources << " " << RESOURCES_TO_STR.at(resource) << std::endl;
   for (int i = 0 ;  i < max ; ++i)
     _todo.push_back(RESOURCE_TO_REQUEST.at(resource));
   std::cout << "go to tile[" << tile_number << "] with " << _todo.size() << " move(s)" << std::endl;
@@ -207,7 +216,11 @@ void 			zappy::AIClient::_go(const unsigned int tile_number, const t_resource re
 bool			zappy::AIClient::_isNeeded(t_resource resource)
 {
   if (resource == FOOD)
-    return  _currentInventory[FOOD] <= 3;
+    {
+      if (_currentInventory[FOOD] <= 5)
+	std::cout << "JAI BESOIN DE MANGER" << std::endl;
+      return  _currentInventory[FOOD] <= 5;
+    }
   auto res = INCANTATIONS[_level].resources.find(resource);
   if (res == INCANTATIONS[_level].resources.end())
     return false;
@@ -330,4 +343,15 @@ void zappy::AIClient::_inventoryAction(const std::string &output)
       //_addTodo(LOOK);
       _todo.push_back(LOOK);
     }
+}
+
+void zappy::AIClient::_randomDirection()
+{
+  std::array<RequestType, 2> 	directions = {RIGHT, LEFT};
+  int 				random = rand() % 2;
+
+  _todo.push_back(directions[random]);
+  int max = rand() % 3 + 1;
+  for (int i = 0 ; i < max ; ++i)
+    _todo.push_back(FORWARD);
 }

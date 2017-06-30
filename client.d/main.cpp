@@ -9,6 +9,7 @@
 
 int main(int ac, char **av) {
     try {
+	srand(getpid() * time(NULL));
         zappy::Zappy project(ac, av);
         zappy::AIClient ia(project.getArg());
         zappy::Proxy    prx(ia, project);

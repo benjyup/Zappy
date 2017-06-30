@@ -5,12 +5,12 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Fri Jun  2 17:01:05 2017 vincent.mesquita@epitech.eu
-** Last update Fri Jun 30 15:56:21 2017 Gregoire Renard
+** Last update Fri Jun 30 17:32:15 2017 rodrigue rene
 */
 
 #ifndef COMMANDS_H_
 # define COMMANDS_H_
-
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXx
 # include "server.h"
 
 # define NBR_OF_COMMANDS 21

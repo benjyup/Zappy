@@ -68,12 +68,13 @@ namespace zappy
     void                                            		_initInventory(t_inventory &inventory);
     void 							_addTodo(const RequestType);
     void 							_lookAction(const std::string &);
+    void 							_incantationAction(const std::string &);
     void 							_inventoryAction(const std::string &);
     void 							_randomDirection();
     std::size_t 						_howManyResourses(const t_resource resource, const int tile_number) const;
     int 							_moveCalculate(const int middle, const int tile_number);
     bool 							_readyFoIncantation() const;
-    void 							_saveOutput(const std::string &str);
+    void 							_setObjectDown();
 
     Proxy                           				*_prox;
     bool 							_mode;

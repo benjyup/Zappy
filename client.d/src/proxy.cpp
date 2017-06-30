@@ -51,8 +51,43 @@ zappy::Proxy::Proxy(zappy::AIClient &ia, zappy::Zappy &zap): _ia(ia), _ready(fal
 			    srv_write("Take thystame");
 			    return 0;
 			  }},
+			  {zappy::SET_FOOD, [] () -> int {
+			    srv_write("Set food");
+			    return 0;
+			  }},
+			  {zappy::SET_LINEMATE, [] () -> int {
+			    srv_write("Set linemate");
+			    return 0;
+			  }},
+			  {zappy::SET_DERAUMERE, [] () -> int {
+			    srv_write("Set deraumere");
+			    return 0;
+			  }},
+			  {zappy::SET_SIBUR, [] () -> int {
+			    srv_write("Set sibur");
+			    return 0;
+			  }},
+			  {zappy::SET_MENDIANE, [] () -> int {
+			    srv_write("Set mendiane");
+			    return 0;
+			  }},
+			  {zappy::SET_PHIRAS, [] () -> int {
+			    srv_write("Set phiras");
+			    return 0;
+			  }},
+			  {zappy::SET_THYSTAME, [] () -> int {
+			    srv_write("Set thystame");
+			    return 0;
+			  }},
 			  {zappy::INVENTORY, [] () -> int {
 			    srv_write("Inventory");
+			    return 0;
+			  }},
+			  {zappy::INCANTATION, [] () -> int {
+			    srv_write("Incantation");
+			    return 0;
+			  }},
+			  {zappy::INCANTATION_VOID, [] () -> int {
 			    return 0;
 			  }},
 			  {zappy::NOOP, [] () -> int {

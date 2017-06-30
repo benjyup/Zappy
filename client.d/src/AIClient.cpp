@@ -64,7 +64,9 @@ zappy::AIClient::AIClient(const t_arg &args) :
 	_actions(
 		{
 			{zappy::RequestType::LOOK, [&] (const std::string &str){_lookAction(str);}},
-			{zappy::RequestType::INVENTORY, [&] (const std::string &str){_inventoryAction(str);}}
+			{zappy::RequestType::INVENTORY, [&] (const std::string &str){_inventoryAction(str);}},
+			{zappy::RequestType::INCANTATION, [&] (const std::string &str){_incantationAction(str);}},
+			{zappy::RequestType::INCANTATION_VOID, [&] (const std::string &){}}
 		}
 	),
 	_outputSave("")
@@ -256,9 +258,9 @@ zappy::RequestType 	zappy::AIClient::update(std::string output) {
     {
       if (!(_todo.empty()))
 	{
+	  request = _todo.front();
 	  std::cout << "Je pop" << std::endl;
 	  std::cout << "requete = " << request << std::endl;
-	  request = _todo.front();
 	  _OutputType.push_back(request);
 	  _todo.pop_front();
 	}
@@ -266,9 +268,9 @@ zappy::RequestType 	zappy::AIClient::update(std::string output) {
     }
   else
     {
-      if (!output.empty())
+      if (!output.empty() && _OutputType.size() != 0)
 	{
-	  std::cout << "J'ai recu :" << output << std::endl;
+	  std::cout << _OutputType.front() << " J'ai recu :" << output << std::endl;
 	  if (!_OutputType.empty())
 	    {
 	      try { _actions[_OutputType.front()](output); } catch (...) { }
@@ -291,6 +293,7 @@ void zappy::AIClient::_lookAction(const std::string &output)
 {
   std::string str = output;
 
+/*
   if (str.back() != ']')
     {
       this->_outputSave += str;
@@ -300,6 +303,7 @@ void zappy::AIClient::_lookAction(const std::string &output)
     }
   if (!_outputSave.empty())
     str = _outputSave;
+*/
   if (str[0] == '[')
     {
       std::cout << "GET LOOK :" << str << std::endl;
@@ -317,6 +321,7 @@ void zappy::AIClient::_inventoryAction(const std::string &output)
 {
   std::string str(output);
 
+/*
   if (str.back() != ']')
     {
       this->_outputSave += str;
@@ -326,13 +331,20 @@ void zappy::AIClient::_inventoryAction(const std::string &output)
     }
   if (!_outputSave.empty())
     str = _outputSave;
+*/
   if (str[0] == '[')
     {
       std::cout << "GET INVENTORY" << std::endl;
       _getInventory(str);
-      //_isInventoryData = false;
-      //_addTodo(LOOK);
-      _todo.push_back(LOOK);
+      if (_readyFoIncantation())
+	{
+	  std::cout << "PRET POUR LINCANTATION" << std::endl;
+	  _setObjectDown();
+	  _todo.push_back(RequestType::INCANTATION);
+	  _todo.push_back(INCANTATION_VOID);
+	}
+      else
+	_todo.push_back(LOOK);
       _outputSave.clear();
     }
 }
@@ -386,5 +398,53 @@ bool 				zappy::AIClient::_readyFoIncantation() const
       if(_isNeeded(resource.first))
 	return false;
     }
-  return true;
+  return _currentInventory.at(FOOD) > 300 / 126;
+}
+
+void zappy::AIClient::_incantationAction(const std::string &output)
+{
+  std::cout << "_incantationAction" << std::endl;
+  if (output != "ko")
+    {
+      std::cout << "INCANTATION REUSSIE" << std::endl;
+      this->_level += 1;
+    }
+  else
+    std::cout << "INCANTATION RATEE" << std::endl;
+  _todo.push_back(INVENTORY);
+}
+
+void zappy::AIClient::_setObjectDown()
+{
+  RequestType requestType;
+
+  for (auto &it : AIClient::INCANTATIONS.at(_level).resources)
+    {
+      switch(it.first)
+	{
+	  case LINEMATE:
+	    {
+	      std::cout << "JE SET LINEMATE" << std::endl;
+	      requestType = SET_LINEMATE;
+	    }
+	  break;
+	  case DERAUMERE:
+	    requestType = SET_DERAUMERE;
+	  break;
+	  case SIBUR:
+	    requestType = SET_SIBUR;
+	  break;
+	  case MENDIANE:
+	    requestType = SET_MENDIANE;
+	  break;
+	  case PHIRAS:
+	    requestType = SET_PHIRAS;
+	  break;
+	  case THYSTAME:
+	    requestType = SET_THYSTAME;
+	  break;
+	}
+      for (int i = 0 ; i < it.second ; ++i)
+	_todo.push_back(requestType);
+    }
 }

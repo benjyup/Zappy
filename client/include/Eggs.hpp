@@ -19,6 +19,8 @@ class Eggs
 
   Eggs(Vector3d const &pos, int father, int num, int id);
 
+  Eggs();
+
   virtual ~Eggs();
 
   const Vector3d &get_pos() const;

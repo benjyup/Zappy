@@ -29,18 +29,13 @@ namespace 		Client
 
   Block::Block() : _pos({0, 0})
   {
-    std::cerr << "gros fdp" << std::endl;
+
   }
 
   Block::~Block()
   {
 
   }
-
-//  const std::array<int, 7> &Block::getRes() const
-//  {
-//    return _res;
-//  }
 
   int Block::set_res(const std::vector<std::string> &res)
   {
@@ -59,9 +54,9 @@ namespace 		Client
       }
     if ((j = get_sum()) == 0)
       _resLevel = 0;
-    else if (j < 3)
+    else if (j < 4)
 	_resLevel = 1;
-      else if (j < 6)
+      else if (j < 8)
 	  _resLevel = 2;
 	else
 	  _resLevel = 3;
@@ -83,16 +78,6 @@ namespace 		Client
   const std::forward_list<int> &Block::get_play() const
   {
     return _play;
-  }
-
-  void Block::inc_res(int res)
-  {
-    _res[res]++;
-  }
-
-  void Block::dec_res(int res)
-  {
-    _res[res]--;
   }
 
   void Block::init_res()

@@ -93,11 +93,11 @@ namespace 	Client
   {
     _node[_id] = _smgr->addAnimatedMeshSceneNode(_mesh[mesh]);
     if (mesh == MESH::minerals || mesh == MESH::rock)
-      _node[_id]->setPosition({pos.getX() * Client::SCALE - Client::SCALE / 2,
-			       alt * Client::SCALE, pos.getY() * Client::SCALE + Client::SCALE / 2});
+      _node[_id]->setPosition({(float)(pos.getX() * Client::SCALE - Client::SCALE / 2),
+			       (float)(alt * Client::SCALE), (float)(pos.getY() * Client::SCALE + Client::SCALE / 2)});
     else
-      _node[_id]->setPosition({pos.getX() * Client::SCALE, alt * Client::SCALE,
-			       pos.getY() * Client::SCALE});
+      _node[_id]->setPosition({(float)(pos.getX() * Client::SCALE), (float)(alt * Client::SCALE),
+			       (float)(pos.getY() * Client::SCALE)});
     if (text != TEXT::none)
       _node[_id]->setMaterialTexture(0, _text[text]);
     _node[_id]->setMaterialFlag(irr::video::EMF_LIGHTING, false);
@@ -116,7 +116,7 @@ namespace 	Client
     _node[_id]->setScale({Scale, Scale, Scale});
     _node[_id]->setFrameLoop(205, 249);
     _node[_id]->setAnimationSpeed(10);
-    _node[_id]->setRotation({0, dir * 90 - 90, 0});
+    _node[_id]->setRotation({0, (float)(dir * 90 - 90), 0});
     _id++;
     return _id - 1;
   }
@@ -179,7 +179,7 @@ namespace 	Client
   {
     _anims[_idAnims] = _smgr->createFlyStraightAnimator(from, to, (irr::u32)speed, false);
     _node[id]->addAnimator(_anims[_idAnims]);
-    _node[id]->setRotation({0, dir * 90 - 90, 0});
+    _node[id]->setRotation({0, (float)(dir * 90 - 90), 0});
     _idAnims++;
     _node[id]->setAnimationSpeed(18);
     _node[id]->setFrameLoop(15, 30);

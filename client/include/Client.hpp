@@ -28,8 +28,8 @@ namespace 		Client
   class Client
   {
    public:
-    static const 	std::map<Ressource::TYPE , std::string>	RESOURCES_TO_STR;
-    static const int SCALE = 15;
+    static const std::map<Ressource::TYPE , std::string>					RESOURCES_TO_STR;
+    static const int 										SCALE = 15;
     Client(zappy::Zappy const &);
     virtual ~Client();
 
@@ -41,18 +41,18 @@ namespace 		Client
     GraphicalLib::TEXT	genRandType(GraphicalLib::TEXT min, GraphicalLib::TEXT max);
 
    private:
-    Vector3d 										_size;
-    std::map<std::string, std::function<void(std::vector<std::string> const &)>>	_tab;
-    std::map<int, Block> 								_map;
-    std::map<int, Character> 								_player;
-    std::vector<std::string>								_team;
-    std::vector<Eggs>									_Eggs;
-    bool 										_running;
-    int 										_sgtt;
-    std::string										_winner;
-    GraphicalLib									_lib;
-    zappy::Zappy									_z;
-    Sound										_sound;
+    Vector3d 											_size;
+    std::unordered_map<std::string, std::function<void(std::vector<std::string> const &)>>	_tab;
+    std::unordered_map<int, Block> 								_map;
+    std::unordered_map<int, Character> 								_player;
+    std::vector<std::string>									_team;
+    std::unordered_map<int, Eggs>								_Eggs;
+    bool 											_running;
+    int 											_sgtt;
+    std::string											_winner;
+    GraphicalLib										_lib;
+    zappy::Zappy										_z;
+    Sound											_sound;
 
     void _msz(std::vector<std::string> const &t);
     void _bct(std::vector<std::string> const &t);

@@ -24,8 +24,6 @@ namespace 	Client
 
     int set_res(const std::vector<std::string> &_res);
     void set_idRes(int _idRes);
-    void inc_res(int res);
-    void dec_res(int res);
     void add_player(int);
     void del_player(int);
     void resetSpacePos(irr::core::vector3df const &);

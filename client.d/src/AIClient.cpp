@@ -64,7 +64,8 @@ zappy::AIClient::AIClient(const t_arg &args) :
 	_actions(
 		{
 			{zappy::RequestType::LOOK, [&] (const std::string &str){_lookAction(str);}},
-			{zappy::RequestType::INVENTORY, [&] (const std::string &str){_inventoryAction(str);}}
+            {zappy::RequestType::INVENTORY, [&] (const std::string &str){_inventoryAction(str);}},
+            {zappy::RequestType::BROADCAST, [&] (const std::string &str){_broadcastAction(str);}},
 		}
 	)
 {
@@ -92,7 +93,7 @@ void zappy::AIClient::setLook(const std::vector<std::unordered_map<t_resource, s
 
 zappy::AIClient::~AIClient()
 {
-  std::cerr << "~AIClient" << std::endl;
+  //std::cerr << "~AIClient" << std::endl;
 }
 
 void 			zappy::AIClient::_play()
@@ -100,18 +101,18 @@ void 			zappy::AIClient::_play()
   std::string		response;
   char			*str;
 
-  std::cout << "_play" << std::endl;
+  //std::cout << "_play" << std::endl;
   _look();
-  std::cout << "_play" << std::endl;
+  //std::cout << "_play" << std::endl;
   while (response != "dead\n")
     {
       if ((str = srv_read()) != nullptr)
 	{
-	  std::cout << "response = " << str << std::endl;
+	  //std::cout << "response = " << str << std::endl;
 	  response = str;
 	}
     }
-  std::cout << "fin" << std::endl;
+  //std::cout << "fin" << std::endl;
 }
 
 void 			zappy::AIClient::_getInventory(const std::string &data)
@@ -138,10 +139,10 @@ void 			zappy::AIClient::_getInventory(const std::string &data)
       ss >> _currentInventory[STR_TO_RESOURCES.at(tmp)];
     }
 
-  std::cout << "Inventaire: " << std::endl;
+  //std::cout << "Inventaire: " << std::endl;
   for (const auto &it : _currentInventory)
     {
-      std::cout << "- "<< it.first << " " << RESOURCES_TO_STR.at(it.first) << ": " << it.second << std::endl;
+      //std::cout << "- "<< it.first << " " << RESOURCES_TO_STR.at(it.first) << ": " << it.second << std::endl;
     }
 }
 
@@ -149,14 +150,14 @@ void 		zappy::AIClient::_look()
 {
   int 		i = 0;
 
-  std::cout << "LOOK" << std::endl;
+  //std::cout << "LOOK" << std::endl;
   while (i < _currentLook.size())
     {
       for (const auto &resource : _currentLook[i])
 	{
 	  if (resource.second > 0 && _isNeeded(resource.first))
 	    {
-	      std::cout << "GO" << std::endl;
+	      //std::cout << "GO" << std::endl;
 	      _go(i, resource.first);
 	      return ;
 	    }
@@ -186,7 +187,7 @@ void 			zappy::AIClient::_go(const unsigned int tile_number, const t_resource re
   while (i-- > 0)
     _todo.push_back(FORWARD);
   move = middle - tile_number;
-  std::cout << "move = " << move << std::endl;
+  //std::cout << "move = " << move << std::endl;
   if (move > 0)
     _todo.push_back(LEFT);
   else if (move < 0)
@@ -201,7 +202,7 @@ void 			zappy::AIClient::_go(const unsigned int tile_number, const t_resource re
   int max = ((resource == FOOD) ? (_currentInventory[FOOD]) : ( 2 ));
   for (int i = 0 ;  i < max ; ++i)
     _todo.push_back(RESOURCE_TO_REQUEST.at(resource));
-  std::cout << "go to tile[" << tile_number << "] with " << _todo.size() << " move(s)" << std::endl;
+  //std::cout << "go to tile[" << tile_number << "] with " << _todo.size() << " move(s)" << std::endl;
 }
 
 bool			zappy::AIClient::_isNeeded(t_resource resource)
@@ -271,16 +272,23 @@ zappy::RequestType 	zappy::AIClient::update(std::string output) {
   if (_prox == NULL)
     return request;
 
+    static int a = 0;
+    if (a == 0)
+    {
+        _broadcast("test");
+        a += 1;
+    }
+
   if (_mode)
     {
       if (!(_todo.empty()))
-	{
-	  std::cout << "Je pop" << std::endl;
-	  std::cout << "requete = " << request << std::endl;
-	  request = _todo.front();
-	  _OutputType.push_back(request);
-	  _todo.pop_front();
-	}
+      {
+          std::cout << "Je pop" << std::endl;
+	      std::cout << "requete = " << request << std::endl;
+	      request = _todo.front();
+	     _OutputType.push_back(request);
+	     _todo.pop_front();
+	    }
       _mode = !_mode;
     }
   else
@@ -288,11 +296,15 @@ zappy::RequestType 	zappy::AIClient::update(std::string output) {
       if (!output.empty())
 	{
 	  std::cout << "J'ai recu :" << output << std::endl;
-	  if (!_OutputType.empty())
-	    {
-	      try { _actions[_OutputType.front()](output); } catch (...) { }
+	  if (output.find("message") != std::string::npos)
+      {
+        _messageAction(output);
+      }
+      else if (!_OutputType.empty())
+      {
+          try { _actions[_OutputType.front()](output); } catch (...) { }
 	      _OutputType.pop_front();
-	    }
+      }
 	  _mode = !_mode;
 	}
     }
@@ -313,7 +325,7 @@ void zappy::AIClient::_lookAction(const std::string &output)
       std::cout << "GET LOOK :" << output << std::endl;
       _currentLook = _lookParse(output);
       _look();
-      std::cout << "_todo.size = " << _todo.size() << std::endl;
+        std::cout << "_todo.size = " << _todo.size() << std::endl;
       //_isInventoryData = true;
       //_addTodo(INVENTORY);
       _todo.push_back(INVENTORY);
@@ -330,4 +342,35 @@ void zappy::AIClient::_inventoryAction(const std::string &output)
       //_addTodo(LOOK);
       _todo.push_back(LOOK);
     }
+}
+
+void zappy::AIClient::_broadcast(const std::string &data) {
+    std::cout << "pass in broadcast" << std::endl;
+    _todo.push_back(BROADCAST);
+}
+
+void zappy::AIClient::_broadcastAction(const std::string &str) {
+    std::cout << "Broadcast : " << str << std::endl;
+}
+
+void zappy::AIClient::_messageAction(const std::string &str) {
+    std::string extract = str;
+    extract.erase(extract.begin(), extract.begin()+extract.find("!"));
+    extract = _my_decrypt(extract);
+    if (extract.find(_args.team) == std::string::npos)
+        std::cout << "message receive : note my team message" << std::endl;
+    else
+        std::cout << "message receive : " << extract << std::endl;
+}
+
+std::string zappy::AIClient::_my_decrypt(const std::string &str) {
+    std::string data = str;
+
+    int i = 1;
+    while (data[i])
+    {
+        data[i] -= 12;
+        i += 1;
+    }
+    return data;
 }

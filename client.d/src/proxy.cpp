@@ -55,10 +55,20 @@ zappy::Proxy::Proxy(zappy::AIClient &ia, zappy::Zappy &zap): _ia(ia), _ready(fal
 			    srv_write("Inventory");
 			    return 0;
 			  }},
+               {zappy::BROADCAST, [this] () -> int {
+                   std::string send = "Broadcast !";
+                   std::string msg = _teamName;
+                   msg.append(" INCANTATION, NEED: FOOD");
+                   std::cout << "send Broadcast" << std::endl;
+                    send.append(_my_encrypt(msg));
+                   srv_write(send.c_str());
+                return 0;
+                }},
 			  {zappy::NOOP, [] () -> int {
                               return 0;
                           }}
-                  })
+                  }),
+                                                             _teamName(zap.getArg().team)
 { }
 
 zappy::Proxy::~Proxy() {}
@@ -114,4 +124,17 @@ std::string zappy::Proxy::update(zappy::RequestType order) {
         _function_ptr[order]();
     }
     return input;
+}
+
+std::string zappy::Proxy::_my_encrypt(const std::string str)
+{
+    std::string data = str;
+    std::cout << "ecrypting :" << str << std::endl;
+    int i = 0;
+    while(data[i])
+    {
+        data[i] += 12;
+        i += 1;
+    }
+    return (data);
 }

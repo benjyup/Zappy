@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Thu Jun 29 16:59:58 2017 Gregoire Renard
+** Last update Fri Jun 30 19:34:36 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -27,13 +27,23 @@
 # define MAX_CMD	6
 # define MAX_RESOURCE	7
 # define MAX_PLAYER	10
+# define MAX_LEVEL	7
 
 # define KO		"ko\n"
 # define WELCOME	"welcome\n"
 # define OK		"ok\n"
 # define SUC		"suc\n"
+# define DEAD		"dead\n"
+# define INCAN_UNDER	"Elevation underway\nCurrent level: "
 
 typedef	struct		s_client t_client;
+
+typedef struct		s_elevation
+{
+  int			nb_player;
+  int			needed_res[MAX_RESOURCE];
+}			t_elevation;
+  
 typedef struct		s_pos
 {
   int			x;
@@ -50,7 +60,8 @@ typedef enum		e_client_type
   {
     player = 0,
     monitor,
-    egg
+    egg,
+    none
   }			t_client_type;
 
 typedef struct		s_list
@@ -64,6 +75,7 @@ typedef	struct		s_eggs
 {
   t_pos			pos;
   int			time;
+  int			id;
 }			t_eggs;
 
 typedef	struct		s_team
@@ -95,7 +107,7 @@ typedef	struct		s_map
 typedef struct		s_env
 {
   t_arg			arg;
-  int			time;
+  float			time_one_unit;
   int			time_food;
   int			socket;
   int                   highest_fd;
@@ -109,7 +121,9 @@ typedef struct		s_env
   t_map			**map;
   char			**resources;
   int			nb_player;
-  
+  int			nb_eggs;
+  t_elevation		elevation[MAX_LEVEL];
+  int			real_start;
 }			t_env;
 
 typedef	struct		s_pointer
@@ -136,6 +150,8 @@ typedef struct		s_client
   t_client_type		type;
   int			time_start;
   int			action;
+  int			time_unit;
+  float			rst_time_unit;
 }			t_client;
 
 typedef	struct		s_look
@@ -220,9 +236,9 @@ int			opt_f(t_env *env,
 int			check_alpha(char *str);
 int			init_map(t_env *env);
 void			print_map(t_env *env);
-void			add_to_the_team(t_env *env, t_client *client,
+int			add_to_the_team(t_env *env, t_client *client,
 					t_pos new_pos);
-void			my_send_to_client(t_client *client);
+void			my_send_to_client(t_client *client, t_env *env);
 void			my_send(t_client *client,
 				char *message,
 				double time_action);
@@ -262,7 +278,7 @@ int			g_pin(t_env *env, t_client *client, t_list **current);
 int			get_size_map(int x, int y, t_env *env);
 int			get_size(t_client *cli_temp, int n);
 int			g_sbp(t_client *client);
-void			send_graphical(t_list **current, t_env *env, char *str);
+void			send_graphical(t_list **current, t_env *env, char *str, int time);
 void			know_team(t_env *env, t_client *client);
 int			g_pnw(t_env *env, t_client *client, t_list **current);
 int			set_func(t_env *env, t_client *client, t_list **current);
@@ -287,6 +303,31 @@ int			write_component(t_look *look, t_env *env);
 void			set_pos_start(t_env *env, t_client *client,
 				      t_look *look);
 int		        fork_func(t_env *env, t_client *client, t_list **current);
+int			g_sst(t_env *env, t_client *client, t_list **current);
+int			g_sgt(t_env *env, t_client *client, t_list **current);
+int			g_pbc(t_client *client, t_env *env, char *str);
+int			g_pex(t_client *client, t_env *env);
+int			g_pfk(t_client *client, t_env *env);
+int			g_enw(t_client *client, t_env *env, int num_egg);
+int			g_eht(t_client *client, t_env *env, int num_egg);
+void			g_ebo(t_env *env, int id_egg);
 void			pop_food(t_env *env);
+void			check_func(t_env *env, t_client *client,
+				   t_list **current);
+void			check_timer_client(t_env *env, t_client *client,
+					   t_list **current);
+void			init_elevation(t_env *env);
+int			incantation_func(t_env *env,
+					 t_client *client,
+					 t_list **current);
+void			init_level1(t_env *env);
+void			init_level2(t_env *env);
+void			init_level3(t_env *env);
+void			init_level4(t_env *env);
+void			init_level5(t_env *env);
+void			init_level6(t_env *env);
+void			init_level7(t_env *env);
+void			check_end_game(t_env *env);
+void			init_new_client(t_client **client, t_env *env);
 
 #endif /* !SERVER_H_ */

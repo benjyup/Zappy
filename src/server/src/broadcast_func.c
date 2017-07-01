@@ -49,6 +49,7 @@ int		broadcast_func(t_env *env, t_client *client,
     {
       decale = 0;
       init_message(&message, client, &pos);
+      g_pbc(client, env, client->split_cmd[1]);
       send_to_all_user(env, pos, client, message);
       while (decale < 8)
 	{

@@ -65,6 +65,11 @@ int		g_plv(t_env *env, t_client *client, t_list **current)
   int		n;
 
   (void)env;
+  if (client->split_cmd[1] == NULL)
+    {
+      g_sbp(client);
+      return (1);
+    }
   n = atoi(client->split_cmd[1]);
   cli_temp = search_client(current, n, env);
   size = sprintf(buff, "%d\n", n);
@@ -84,25 +89,25 @@ int		g_pin(t_env *env, t_client *client, t_list **current)
   t_client	*cli_temp;
   char		*str;
   int		size;
-  int		n;
 
-  n = atoi(client->split_cmd[1]);
-  cli_temp = search_client(current, n, env);
-  size = get_size(cli_temp, n);
+  if (client->split_cmd[1] == NULL)
+    {
+      g_sbp(client);
+      return (1);
+    }
+  cli_temp = search_client(current, atoi(client->split_cmd[1]), env);
+  size = get_size(cli_temp, atoi(client->split_cmd[1]));
   if ((str = malloc(size + 4)) == NULL)
     {
       perror(MALLOC);
       exit(-1);
     }
-  sprintf(str, "%s %d %d %d %d %d %d %d %d %d %d\n", "pin ", n,
-	  cli_temp->pos.x, cli_temp->pos.y,
-	  cli_temp->inventory[FOOD],
-	  cli_temp->inventory[LINEMATE],
-	  cli_temp->inventory[DERAUMERE],
-	  cli_temp->inventory[SIBUR],
-	  cli_temp->inventory[MENDIANE],
-	  cli_temp->inventory[PHIRAS],
-	  cli_temp->inventory[THYSTAME]);
+  sprintf(str, "%s %d %d %d %d %d %d %d %d %d %d\n", "pin ",
+	  atoi(client->split_cmd[1]),
+	  cli_temp->pos.x, cli_temp->pos.y, cli_temp->inventory[FOOD],
+	  cli_temp->inventory[LINEMATE], cli_temp->inventory[DERAUMERE],
+	  cli_temp->inventory[SIBUR], cli_temp->inventory[MENDIANE],
+	  cli_temp->inventory[PHIRAS], cli_temp->inventory[THYSTAME]);
   my_send(client, str, 0);
   free(str);
   return (1);

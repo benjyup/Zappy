@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Fri Jun  2 17:01:05 2017 vincent.mesquita@epitech.eu
-** Last update Wed Jun 28 23:16:16 2017 Gregoire Renard
+** Last update Fri Jun 30 19:33:15 2017 Gregoire Renard
 */
 
 #ifndef COMMANDS_H_
@@ -13,7 +13,7 @@
 
 # include "server.h"
 
-# define NBR_OF_COMMANDS 18
+# define NBR_OF_COMMANDS 21
 
 # define FORWARD	"Forward"
 # define RIGHT		"Right"
@@ -55,8 +55,8 @@ static t_cmd		exec_array[NBR_OF_COMMANDS] = {
   {"ppo", g_ppo, monitor},
   {"plv", g_plv, monitor},
   {"pin", g_pin, monitor},
-  //sgt
-  //sst
+  {"sgt", g_sgt, monitor},
+  {"sst", g_sst, monitor},
   {FORWARD, &forward_func, player},
   {RIGHT, &right_func, player},
   {LEFT, &left_func, player},
@@ -67,7 +67,8 @@ static t_cmd		exec_array[NBR_OF_COMMANDS] = {
   {TAKE, &take_func, player},
   {SET, &set_func, player},
   {EJECT, &eject_func, player},
-  {FORK, &fork_func, player}
+  {FORK, &fork_func, player},
+  {INCANTATION, &incantation_func, player}
 };
 
 #endif /* !COMMANDS_H_ */

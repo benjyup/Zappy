@@ -28,6 +28,9 @@ static void	put_egg(t_env *env, t_client *client)
 	  egg->pos.x = client->pos.x;
 	  egg->pos.y = client->pos.y;
 	  my_add_to_end(env->arg.team[i].eggs, egg);
+	  env->nb_eggs++;
+	  egg->id = env->nb_eggs;
+	  i = env->arg.nb_team;
 	}
       i++;
     }
@@ -36,8 +39,11 @@ static void	put_egg(t_env *env, t_client *client)
 int		fork_func(t_env *env, t_client *client, t_list **current)
 {
   (void)current;
-  //ajouter un egg
   put_egg(env, client);
+  env->nb_eggs++;
+  g_pfk(client, env);
+  g_enw(client, env, env->nb_eggs);
+  g_eht(client, env, env->nb_eggs);
   my_send(client, OK, 42 / env->arg.freq);
   return (SUCCESS);
 }

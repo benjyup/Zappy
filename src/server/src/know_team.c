@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 26 13:06:07 2017 Gregoire Renard
-** Last update Mon Jun 26 14:42:00 2017 Gregoire Renard
+** Last update Fri Jun 30 18:23:25 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -19,6 +19,7 @@ static void	change_egg(int i, t_env *env, t_pos *pos_egg)
     {
       pos_egg->x = eggs->pos.x;
       pos_egg->y = eggs->pos.y;
+      g_ebo(env, eggs->id);
       my_del_elem(env->arg.team[i].eggs, env->arg.team[i].eggs->next, NULL);
     }
 }
@@ -44,7 +45,7 @@ static void	find_egg(t_pos *pos_egg, char *str, t_env *env)
 static void     connection_gr(t_env *env, t_client *client)
 {
   g_msz(env, client, &env->clients->next);
-  //sgt
+  g_sgt(env, client, &env->clients->next);
   g_mct(env, client, &env->clients->next);
   g_tna(env, client, &env->clients->next);
 }
@@ -52,7 +53,7 @@ static void     connection_gr(t_env *env, t_client *client)
 void		know_team(t_env *env, t_client *client)
 {
   t_pos		pos_egg;
-  
+
   if ((strcmp("GRAPHIC", client->cmd)) == 0)
     {
       client->type = monitor;
@@ -62,7 +63,7 @@ void		know_team(t_env *env, t_client *client)
   else
     {
       find_egg(&pos_egg, client->cmd, env);
-      add_to_the_team(env, client, pos_egg);
-      g_pnw(env, client, &env->clients->next);
+      if ((add_to_the_team(env, client, pos_egg)) != ERROR)
+	g_pnw(env, client, &env->clients->next);
     }
 }

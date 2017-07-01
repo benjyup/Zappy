@@ -18,7 +18,7 @@ int	g_msz(t_env *env, t_client *client, t_list **current)
   int	size;
 
   (void)current;
-  size = sprintf(buff, "%d%d", env->arg.width, env->arg.height);
+  size = sprintf(buff, "%d %d", env->arg.width, env->arg.height);
   size += strlen("msz ");
   size += 3;
   if ((str = malloc(size)) == NULL)
@@ -39,7 +39,6 @@ int	bct_f(int x, int y, t_env *env, t_client *client)
 
   size = get_size_map(x, y, env);
   size += 1;
-  printf("bct_f %d\n", size);
   size += strlen("bct ");
   if ((str = malloc(size + 1)) == NULL)
     {
@@ -71,7 +70,7 @@ int	g_bct(t_env *env, t_client *client, t_list **current)
     {
       x = atoi(client->split_cmd[1]);
       y = atoi(client->split_cmd[2]);
-      if (x < 0 || y < 0)
+      if (x < 0 || y < 0 || y > env->arg.height || x > env->arg.width)
 	g_sbp(client);
       else
 	bct_f(x, y, env, client);
@@ -109,7 +108,7 @@ int	g_tna(t_env *env, t_client *client, t_list **current)
   (void)current;
   while (i < env->arg.nb_team)
     {
-      if ((str = malloc(strlen(env->arg.team[i].team_name) + 6)) == NULL)
+      if ((str = malloc(strlen(env->arg.team[i].team_name) + 7)) == NULL)
 	{
 	  perror(MALLOC);
 	  exit(-1);

@@ -15,6 +15,8 @@ namespace zappy {
     LEFT,
     LOOK,
     BROADCAST,
+    INCANTATION,
+    INCANTATION_VOID,
     TAKE_FOOD,
     TAKE_LINEMATE,
     TAKE_DERAUMERE,
@@ -22,6 +24,13 @@ namespace zappy {
     TAKE_MENDIANE,
     TAKE_PHIRAS,
     TAKE_THYSTAME,
+    SET_FOOD,
+    SET_LINEMATE,
+    SET_DERAUMERE,
+    SET_SIBUR,
+    SET_MENDIANE,
+    SET_PHIRAS,
+    SET_THYSTAME,
     INVENTORY,
     NOOP
   } RequestType;

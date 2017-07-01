@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 11:45:20 2017 Gregoire Renard
-** Last update Fri Jun 23 12:48:55 2017 Gregoire Renard
+** Last update Fri Jun 30 17:06:37 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -42,6 +42,7 @@ static void		set_arg(t_env *env)
   env->arg.clients_lim = -1;
   env->arg.freq = 100;
   env->nb_player = 0;
+  env->nb_eggs = 0;
   init_env_resources(env);
 }
 
@@ -79,6 +80,7 @@ int			init_arg(t_env *env, char **argv)
       || env->arg.height == -1 || env->arg.team == NULL
       || env->arg.clients_lim == -1 || env->arg.freq == -1)
     return (ERROR);
-  env->time = 1260 / env->arg.freq;
+  env->time_one_unit = (1260 / env->arg.freq) / 10;
+  env->real_start = 0;
   return (SUCCESS);
 }

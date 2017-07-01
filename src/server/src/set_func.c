@@ -47,7 +47,7 @@ int		set_func(t_env *env, t_client *client,
   return (SUCCESS);
 }
 
-void		send_graphical(t_list **current, t_env *env, char *str)
+void		send_graphical(t_list **current, t_env *env, char *str, int time)
 {
   t_list	*tmp;
   t_client	*client_temp;
@@ -59,7 +59,7 @@ void		send_graphical(t_list **current, t_env *env, char *str)
     {
       client_temp = tmp->data;
       if (client_temp->type == monitor)
-	my_send(client_temp, str, 0);
+	my_send(client_temp, str, time);
       tmp = tmp->next;
       i++;
     }

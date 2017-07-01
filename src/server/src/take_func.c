@@ -17,6 +17,7 @@ static void	grep_object(t_env *env, t_client *client,
     {
       env->map[client->pos.y][client->pos.x].resource[cpt]--;
       client->inventory[cpt]++;
+      g_pgt(env, client, &env->clients->next, cpt);
       my_send(client, OK, 7 / env->arg.freq);
     }
   else

@@ -49,21 +49,3 @@ int		g_edi(t_client *client, int egg)
   my_send(client, buff, 0);
   return (1);
 }
-
-int		g_ebo(t_client *client, int egg)
-{
-  char		buff[32];
-
-  sprintf(buff, "ebo %d\n", egg);
-  my_send(client, buff, 0);
-  return (1);
-}
-
-int		g_eht(t_client *client, int egg)
-{
-  char		buff[32];
-
-  sprintf(buff, "eht %d\n", egg);
-  my_send(client, buff, 0);
-  return (1);
-}

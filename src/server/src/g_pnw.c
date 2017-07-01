@@ -20,6 +20,7 @@ int             g_pnw(t_env *env, t_client *client, t_list **current)
   size = sprintf(buff, " %d", client->socket);
   size += sprintf(buff, " %d", client->pos.x);
   size += sprintf(buff, " %d", client->pos.y);
+  size += sprintf(buff, " %d", client->level);
   size += 11;
   size += strlen(client->name_team);
   if ((str = malloc(size + 1)) == NULL)
@@ -27,10 +28,10 @@ int             g_pnw(t_env *env, t_client *client, t_list **current)
       perror(MALLOC);
       exit(-1);
     }
-  sprintf(str, "%s %d %d %d %d %s\n", "pnw ", client->socket,
+  sprintf(str, "%s %d %d %d %d %d %s\n", "pnw ", client->socket,
 	  client->pos.x,
 	  client->pos.y,
-	  def_dir(client), client->name_team);
+	  def_dir(client), client->level, client->name_team);
   send_graphical(current, env, str, 0);
   free(str);
   return (1);

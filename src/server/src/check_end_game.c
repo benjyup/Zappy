@@ -44,6 +44,20 @@ static int	check_team_alive(t_env *env)
   return (alive);
 }
 
+static char	*who_is_winner(t_env *env)
+{
+  int		cpt;
+  
+  cpt = 0;
+  while (cpt != env->arg.nb_team)
+    {
+      if (env->arg.team[cpt].nb_player != 0)
+	return (env->arg.team[cpt].team_name);
+      cpt++;
+    }
+  return (NULL);
+}
+
 void		check_end_game(t_env *env)
 {
   if (env->real_start == 0)
@@ -54,8 +68,6 @@ void		check_end_game(t_env *env)
   else
     {
       if ((check_team_alive(env)) == 1)
-	{
-	  //rene tu transmet
-	}
+	g_seg(env, who_is_winner(env));
     }
 }

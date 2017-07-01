@@ -26,7 +26,7 @@ int		g_smg(t_client *client, char *str)
   return (1);
 }
 
-int		g_seg(t_client *client, char *str)
+void		g_seg(t_env *env, char *str)
 {
   char		*buff;
 
@@ -36,9 +36,8 @@ int		g_seg(t_client *client, char *str)
       exit(-1);
     }
   sprintf(buff, "smg %s\n", str);
-  my_send(client, buff, 0);
+  send_graphical(&env->clients->next, env, buff, 0);
   free(buff);
-  return (1);
 }
 
 int		g_edi(t_client *client, int egg)

@@ -340,6 +340,7 @@ void zappy::AIClient::_inventoryAction(const std::string &output)
 	{
 	  std::cout << "PRET POUR LINCANTATION" << std::endl;
 	  _setObjectDown();
+	  _takeUselessObject();
 	  _todo.push_back(RequestType::INCANTATION);
 	  _todo.push_back(INCANTATION_VOID);
 	}
@@ -395,8 +396,11 @@ bool 				zappy::AIClient::_readyFoIncantation() const
 
   for (auto &resource : incantation.resources)
     {
-      if(_isNeeded(resource.first))
-	return false;
+      if(resource.second != 0 && resource.second != _currentInventory.at(resource.first))
+	{
+	  std::cout << "RETURN FALSE" << std::endl;
+	  return false;
+	}
     }
   return _currentInventory.at(FOOD) > 300 / 126;
 }
@@ -446,5 +450,28 @@ void zappy::AIClient::_setObjectDown()
 	}
       for (int i = 0 ; i < it.second ; ++i)
 	_todo.push_back(requestType);
+    }
+}
+
+void 			zappy::AIClient::_takeUselessObject()
+{
+  const SIncantation	&incantation = INCANTATIONS.at(_level);
+
+  std::cout << "ici" << std::endl;
+  for (auto &it : incantation.resources)
+    {
+      std::cout << "ici" << std::endl;
+      if (it.second == 0 )
+	{
+	  std::cout << "ici" << std::endl;
+	  int i = 0;
+	  std::cout << "avant while" << std::endl;
+	  while (i < _currentLook[0][it.first])
+	    {
+	      std::cout << "i = " << i << std::endl;
+	      _todo.push_back(RESOURCE_TO_REQUEST.at(it.first));
+	      i += 1;
+	    }
+	}
     }
 }

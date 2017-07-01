@@ -75,6 +75,7 @@ namespace zappy
     int 							_moveCalculate(const int middle, const int tile_number);
     bool 							_readyFoIncantation() const;
     void 							_setObjectDown();
+    void 							_takeUselessObject();
 
     Proxy                           				*_prox;
     bool 							_mode;

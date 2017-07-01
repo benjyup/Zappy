@@ -64,6 +64,7 @@ zappy::AIClient::AIClient(const t_arg &args) :
 	_actions(
 		{
 			{zappy::RequestType::LOOK, [&] (const std::string &str){_lookAction(str);}},
+			{zappy::RequestType::BROADCAST, [&] (const std::string &str){_broadcastAction(str);}},
 			{zappy::RequestType::INVENTORY, [&] (const std::string &str){_inventoryAction(str);}},
 			{zappy::RequestType::INCANTATION, [&] (const std::string &str){_incantationAction(str);}},
 			{zappy::RequestType::INCANTATION_VOID, [&] (const std::string &){}}
@@ -78,7 +79,7 @@ zappy::AIClient::AIClient(const t_arg &args) :
 
 zappy::AIClient::~AIClient()
 {
-  std::cerr << "~AIClient" << std::endl;
+  //std::cerr << "~AIClient" << std::endl;
 }
 
 void 			zappy::AIClient::_play()
@@ -86,18 +87,18 @@ void 			zappy::AIClient::_play()
   std::string		response;
   char			*str;
 
-  std::cout << "_play" << std::endl;
+  //std::cout << "_play" << std::endl;
   _look();
-  std::cout << "_play" << std::endl;
+  //std::cout << "_play" << std::endl;
   while (response != "dead\n")
     {
       if ((str = srv_read()) != nullptr)
 	{
-	  std::cout << "response = " << str << std::endl;
+	  //std::cout << "response = " << str << std::endl;
 	  response = str;
 	}
     }
-  std::cout << "fin" << std::endl;
+  //std::cout << "fin" << std::endl;
 }
 
 void 			zappy::AIClient::_getInventory(const std::string &data)
@@ -133,7 +134,7 @@ void 			zappy::AIClient::_getInventory(const std::string &data)
   std::cout << "Inventaire: " << std::endl;
   for (const auto &it : _currentInventory)
     {
-      std::cout << "- "<< it.first << " " << RESOURCES_TO_STR.at(it.first) << ": " << it.second << std::endl;
+      //std::cout << "- "<< it.first << " " << RESOURCES_TO_STR.at(it.first) << ": " << it.second << std::endl;
     }
 }
 
@@ -141,14 +142,14 @@ void 		zappy::AIClient::_look()
 {
   int 		i = 0;
 
-  std::cout << "LOOK" << std::endl;
+  //std::cout << "LOOK" << std::endl;
   while (i < _currentLook.size())
     {
       for (const auto &resource : _currentLook[i])
 	{
 	  if (resource.second > 0 && _isNeeded(resource.first))
 	    {
-	      std::cout << "GO" << std::endl;
+	      //std::cout << "GO" << std::endl;
 	      _go(i, resource.first);
 	      return ;
 	    }
@@ -182,7 +183,7 @@ void 			zappy::AIClient::_go(const unsigned int tile_number, const t_resource re
   std::cout << "JE PREND " << howManyResources << " " << RESOURCES_TO_STR.at(resource) << std::endl;
   for (int i = 0 ;  i < howManyResources ; ++i)
     _todo.push_back(RESOURCE_TO_REQUEST.at(resource));
-  std::cout << "go to tile[" << tile_number << "] with " << _todo.size() << " move(s)" << std::endl;
+  //std::cout << "go to tile[" << tile_number << "] with " << _todo.size() << " move(s)" << std::endl;
 }
 
 bool			zappy::AIClient::_isNeeded(const t_resource resource) const
@@ -254,6 +255,13 @@ zappy::RequestType 	zappy::AIClient::update(std::string output) {
   if (_prox == NULL)
     return request;
 
+  static int a = 0;
+  if (a == 0)
+    {
+      _broadcast("test");
+      a += 1;
+    }
+
   if (_mode)
     {
       if (!(_todo.empty()))
@@ -270,12 +278,17 @@ zappy::RequestType 	zappy::AIClient::update(std::string output) {
     {
       if (!output.empty() && _OutputType.size() != 0)
 	{
-	  std::cout << _OutputType.front() << " J'ai recu :" << output << std::endl;
-	  if (!_OutputType.empty())
+
+	  std::cout << "J'ai recu :" << output << std::endl;
+	  if (output.find("message") != std::string::npos)
 	    {
-	      try { _actions[_OutputType.front()](output); } catch (...) { }
-	      _OutputType.pop_front();
+	      _messageAction(output);
 	    }
+	  else if (!_OutputType.empty())
+	      {
+		try { _actions[_OutputType.front()](output); } catch (...) { }
+		_OutputType.pop_front();
+	      }
 	  _mode = !_mode;
 	}
     }
@@ -455,13 +468,13 @@ void zappy::AIClient::_setObjectDown()
 
 void 			zappy::AIClient::_takeUselessObject()
 {
-  const SIncantation	&incantation = INCANTATIONS.at(_level);
+  const SIncantation &incantation = INCANTATIONS.at(_level);
 
   std::cout << "ici" << std::endl;
   for (auto &it : incantation.resources)
     {
       std::cout << "ici" << std::endl;
-      if (it.second == 0 )
+      if (it.second == 0)
 	{
 	  std::cout << "ici" << std::endl;
 	  int i = 0;
@@ -474,4 +487,34 @@ void 			zappy::AIClient::_takeUselessObject()
 	    }
 	}
     }
+}
+void zappy::AIClient::_broadcast(const std::string &data) {
+  std::cout << "pass in broadcast" << std::endl;
+  _todo.push_back(BROADCAST);
+}
+
+void zappy::AIClient::_broadcastAction(const std::string &str) {
+  std::cout << "Broadcast : " << str << std::endl;
+}
+
+void zappy::AIClient::_messageAction(const std::string &str) {
+  std::string extract = str;
+  extract.erase(extract.begin(), extract.begin()+extract.find("!"));
+  extract = _my_decrypt(extract);
+  if (extract.find(_args.team) == std::string::npos)
+    std::cout << "message receive : note my team message" << std::endl;
+  else
+    std::cout << "message receive : " << extract << std::endl;
+}
+
+std::string zappy::AIClient::_my_decrypt(const std::string &str) {
+  std::string data = str;
+
+  int i = 1;
+  while (data[i])
+    {
+      data[i] -= 12;
+      i += 1;
+    }
+  return data;
 }

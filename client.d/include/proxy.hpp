@@ -22,6 +22,7 @@ namespace zappy
 
         std::string update(zappy::RequestType order);
     private:
+      std::string _my_encrypt(const std::string str);
         std::map<zappy::RequestType, std::function<int()>> _function_ptr;
         bool            _ready;
         zappy::AIClient &_ia;
@@ -29,6 +30,7 @@ namespace zappy
         int             _x;
         int             _y;
         int             _team;
+      std::string       _teamName;
     };
 }
 

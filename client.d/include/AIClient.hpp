@@ -57,6 +57,10 @@ namespace zappy
 
     void							_play();
     void 							_look();
+    void                            				_broadcast(const std::string &data);
+    void                          				_broadcastAction(const std::string &str);
+    void                          				_messageAction(const std::string &str);
+    std::string                   				_my_decrypt(const std::string &str);
     void							_getInventory(const std::string &data);
     bool 							_isNeeded(const t_resource) const;
     void 							_go(const unsigned int tile_number, const t_resource);

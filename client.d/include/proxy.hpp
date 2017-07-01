@@ -30,6 +30,7 @@ namespace zappy
         int             _x;
         int             _y;
         int             _team;
+      bool              _ping_status;
       std::string       _teamName;
     };
 }

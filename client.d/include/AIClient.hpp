@@ -57,7 +57,7 @@ namespace zappy
 
     void							_play();
     void 							_look();
-    void                            _broadcast(const std::string &data);
+    void                            _broadcast_ping();
       void                          _broadcastAction(const std::string &str);
       void                          _messageAction(const std::string &str);
       std::string                   _my_decrypt(const std::string &str);

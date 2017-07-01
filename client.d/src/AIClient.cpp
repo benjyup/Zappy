@@ -64,7 +64,7 @@ zappy::AIClient::AIClient(const t_arg &args) :
 	_actions(
 		{
 			{zappy::RequestType::LOOK, [&] (const std::string &str){_lookAction(str);}},
-            {zappy::RequestType::BROADCAST, [&] (const std::string &str){_broadcastAction(str);}},
+            {zappy::RequestType::BROADCAST_PING, [&] (const std::string &str){_broadcastAction(str);}},
 			{zappy::RequestType::INVENTORY, [&] (const std::string &str){_inventoryAction(str);}},
 			{zappy::RequestType::INCANTATION, [&] (const std::string &str){_incantationAction(str);}},
 			{zappy::RequestType::INCANTATION_VOID, [&] (const std::string &){}}
@@ -258,7 +258,7 @@ zappy::RequestType 	zappy::AIClient::update(std::string output) {
     static int a = 0;
     if (a == 0)
     {
-        _broadcast("test");
+        _broadcast_ping();
         a += 1;
     }
 
@@ -278,11 +278,10 @@ zappy::RequestType 	zappy::AIClient::update(std::string output) {
     {
       if (!output.empty() && _OutputType.size() != 0)
 	{
-
 	  std::cout << "J'ai recu :" << output << std::endl;
 	  if (output.find("message") != std::string::npos)
       {
-        _messageAction(output);
+            _messageAction(output);
       }
       else if (!_OutputType.empty())
       {
@@ -462,9 +461,9 @@ void zappy::AIClient::_setObjectDown()
     }
 }
 
-void zappy::AIClient::_broadcast(const std::string &data) {
+void zappy::AIClient::_broadcast_ping() {
     std::cout << "pass in broadcast" << std::endl;
-    _todo.push_back(BROADCAST);
+    _todo.push_back(BROADCAST_PING);
 }
 
 void zappy::AIClient::_broadcastAction(const std::string &str) {
@@ -479,6 +478,10 @@ void zappy::AIClient::_messageAction(const std::string &str) {
         std::cout << "message receive : note my team message" << std::endl;
     else
         std::cout << "message receive : " << extract << std::endl;
+    if (extract.find("PING") != std::string::npos)
+    {
+        _todo.push_front(BROADCAST_PONG);
+    }
 }
 
 std::string zappy::AIClient::_my_decrypt(const std::string &str) {
@@ -492,3 +495,5 @@ std::string zappy::AIClient::_my_decrypt(const std::string &str) {
     }
     return data;
 }
+
+

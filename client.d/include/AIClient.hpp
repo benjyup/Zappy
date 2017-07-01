@@ -57,7 +57,7 @@ namespace zappy
 
     void							_play();
     void 							_look();
-    void                            _broadcast_ping();
+    void                            _broadcast();
       void                          _broadcastAction(const std::string &str);
       void                          _messageAction(const std::string &str);
       std::string                   _my_decrypt(const std::string &str);
@@ -79,6 +79,7 @@ namespace zappy
     int 							_moveCalculate(const int middle, const int tile_number);
     bool 							_readyFoIncantation() const;
     void 							_setObjectDown();
+    void 							_takeUselessObject();
 
     Proxy                           				*_prox;
     bool 							_mode;

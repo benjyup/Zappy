@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:43:04 2017 vincent.mesquita@epitech.eu
-** Last update Sun Jul  2 18:04:20 2017 Gregoire Renard
+** Last update Sun Jul  2 19:23:02 2017 Gregoire Renard
 */
 
 #include <unistd.h>
@@ -33,6 +33,17 @@ void		my_send(t_client *client,
   my_add_to_end(client->to_write, msg);
 }
 
+static void	check_end_incant(t_env *env, t_client *client)
+{
+  if ((check_end_incante(env, client)) == ERROR)
+    {
+      client->level--;
+      my_send(client, KO, 0);
+    }
+  else
+    up_all_player(env, client);
+}
+
 static void	time_calculation(t_client *client,
 				 t_msg *msg,
 				 t_list *current,
@@ -48,7 +59,7 @@ static void	time_calculation(t_client *client,
       client->inventory[FOOD]--;
     }
   if (client->incantation == 1)
-    g_pie(env, client, &env->clients->next, 1);
+    check_end_incant(env, client);
   client->incantation = 0;
   client->action = 0;
   if ((msg->current_index =

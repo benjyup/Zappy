@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Sun Jul  2 19:11:39 2017 Gregoire Renard
-** Last update Sun Jul  2 19:23:49 2017 Gregoire Renard
+** Last update Sun Jul  2 19:30:35 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -49,13 +49,13 @@ void		up_all_player(t_env *env, t_client *client)
   int		cpt;
 
   cpt = 0;
+  g_pie(env, client, &env->clients->next, 1);
   while (env->map[client->pos.y][client->pos.x].clients[cpt] != NULL)
     {
       if (env->map[client->pos.y][client->pos.x].clients[cpt]->level
 	  == client->level - 1)
 	{
-	  g_pie(env, env->map[client->pos.y][client->pos.x].clients[cpt],
-		&env->clients->next, 1);
+	  g_plv(env, client, &env->clients->next);
 	  env->map[client->pos.y][client->pos.x].clients[cpt]->level++;
 	}
       cpt++;

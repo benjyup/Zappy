@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Sun Jul  2 18:03:46 2017 Gregoire Renard
+** Last update Sun Jul  2 18:27:34 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -336,6 +336,6 @@ int			border_port(t_client *sender,
 int			g_pic(t_env *env, t_client *client, t_list **current);
 int			g_pie(t_env *env, t_client *client, t_list **current, int res);
 int			g_pdi(t_client *client, t_env *env);
-t_bool			winner_function(t_env *env, int socket_client);
+t_bool			winner_function(t_env *env, char *team);
 
 #endif /* !SERVER_H_ */

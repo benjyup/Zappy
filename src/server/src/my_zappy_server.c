@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 26 14:57:15 2017 vincent.mesquita@epitech.eu
-** Last update Sun Jul  2 18:06:59 2017 Gregoire Renard
+** Last update Sun Jul  2 18:26:33 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -70,7 +70,7 @@ static int		check_client_read(t_env *env, t_client *client,
   return (-1);
 }
 
-static int		my_check_each_client(t_env *env)
+static char		*my_check_each_client(t_env *env)
 {
   t_list                *current;
   t_client              *client;
@@ -88,14 +88,14 @@ static int		my_check_each_client(t_env *env)
 	  if (!my_get_client_cmd(env, &current, client))
 	    continue ;
 	  if ((ret = check_client_read(env, client, current)) != -1)
-	    return (ret);
+	    return (client->name_team);
 	  print_map(env);
 	}
       if (FD_ISSET(client->socket, &(env->writef)))
 	my_send_to_client(client, env);
       current = current->next;
     }
-  return (-1);
+  return (NULL);
 }
 
 t_bool			my_zappy_server(t_env *env)
@@ -103,7 +103,7 @@ t_bool			my_zappy_server(t_env *env)
   struct sockaddr_in    client_sin;
   unsigned int          client_sin_len;
   int                   client_socket;
-  int			ret;
+  char			*ret;
   
   client_sin_len = sizeof(client_sin);
   while (42)
@@ -120,7 +120,7 @@ t_bool			my_zappy_server(t_env *env)
 	    return (false);
 	  my_new_client(client_socket, env);
 	}
-      if ((ret = my_check_each_client(env)) != -1)
+      if ((ret = my_check_each_client(env)) != NULL)
 	return (winner_function(env, ret));
     }
   return (true);

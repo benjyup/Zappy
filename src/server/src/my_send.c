@@ -48,8 +48,8 @@ static void	time_calculation(t_client *client,
       client->inventory[FOOD]--;
     }
   if (client->incantation == 1)
-    //rene ici
-    client->incantation = 0;
+    g_pie(env, client, &env->clients->next, 1);
+  client->incantation = 0;
   client->action = 0;
   if ((msg->current_index =
        write(client->socket,

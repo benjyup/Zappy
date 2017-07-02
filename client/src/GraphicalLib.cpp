@@ -250,7 +250,7 @@ namespace 	Client
   {
     _node[id]->setLoopMode(false);
     _node[id]->setFrameLoop(145, 157);
-    _node[id]->setAnimationSpeed(5);
+    _node[id]->setAnimationSpeed(20);
   }
 
   void GraphicalLib::pushing(int id)

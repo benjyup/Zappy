@@ -1,6 +1,12 @@
-//
-// Created by Jean-Adrien on 19/06/17.
-//
+/*
+** cookie.h for  in /home/vincent/rendu/Zappy/PSU_2016_zappy/src/ai/include/mendatory
+** 
+** Made by vincent.mesquita@epitech.eu
+** Login   <vincent@epitech.net>
+** 
+** Started on  Sun Jul  2 21:09:51 2017 vincent.mesquita@epitech.eu
+** Last update Sun Jul  2 21:09:51 2017 vincent.mesquita@epitech.eu
+*/
 
 #ifndef COOKIE_H_
 # define COOKIE_H_

@@ -1,6 +1,12 @@
-//
-// Created by Jean-Adrien on 19/06/17.
-//
+/*
+** srv_write.c for  in /home/vincent/rendu/Zappy/PSU_2016_zappy/src/ai/src/mendatory
+** 
+** Made by vincent.mesquita@epitech.eu
+** Login   <vincent@epitech.net>
+** 
+** Started on  Sun Jul  2 20:50:20 2017 vincent.mesquita@epitech.eu
+** Last update Sun Jul  2 21:08:05 2017 vincent.mesquita@epitech.eu
+*/
 
 #include <zconf.h>
 #include <pthread.h>
@@ -9,15 +15,14 @@
 #include <stdlib.h>
 #include "mendatory/my_stack.h"
 
-static t_stack *ws = NULL;
-
+static t_stack	*ws = NULL;
 
 int 		srv_write(const char *s)
 {
   char 		*str;
 
   if (!(str = malloc(strlen(s) + 2)) ||
-	  !strcpy(str, s) || !strcat(str, "\n"))
+      !strcpy(str, s) || !strcat(str, "\n"))
     return (-1);
 
   if (!(ws = stack_new(ws, str)))
@@ -28,11 +33,10 @@ int 		srv_write(const char *s)
   return (0);
 }
 
-int server_upload_data(int fd)
+int		server_upload_data(int fd)
 {
-  int ret;
-  int size;
-
+  int		ret;
+  int		size;
 
   if (ws != NULL && ws->data != NULL)
     {

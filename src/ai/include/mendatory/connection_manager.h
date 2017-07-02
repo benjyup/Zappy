@@ -1,6 +1,12 @@
-//
-// Created by Jean-Adrien on 19/06/17.
-//
+/*
+** connection_manager.h for  in /home/vincent/rendu/Zappy/PSU_2016_zappy/src/ai/include/mendatory
+** 
+** Made by vincent.mesquita@epitech.eu
+** Login   <vincent@epitech.net>
+** 
+** Started on  Sun Jul  2 21:10:06 2017 vincent.mesquita@epitech.eu
+** Last update Sun Jul  2 21:10:07 2017 vincent.mesquita@epitech.eu
+*/
 
 #ifndef CONNECTION_MANAGER_H
 # define CONNECTION_MANAGER_H

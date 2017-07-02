@@ -434,8 +434,13 @@ bool 				zappy::AIClient::_readyFoIncantation()
     std::cout << "YA PAS DE PLAYER" << std::endl;
   if (_currentLook.at(0).at(PLAYER) != incantation.nbOfPlayers)
     {
-      _broadcastCyle += 1;
       std::cout << "PAS ASSEZ DE PLAYER" << std::endl;
+      if (_broadcastCyle++ >= (_worldDimension.first + _worldDimension.second) / 1.5)
+	{
+	  std::cout << "JE FORK" << std::endl;
+	  _todo.push_back(FORK);
+	  _broadcastCyle = 0;
+	}
       return false;
     }
   return _currentInventory.at(FOOD) > 300 / 126;
@@ -528,12 +533,12 @@ void zappy::AIClient::_messageAction(const std::string &str) {
     std::cout << "message receive : note my team message" << std::endl;
   else
     std::cout << "message receive : " << extract << std::endl;
-    if (extract.find("INCANTATION") != std::string::npos)
+  if (extract.find("INCANTATION") != std::string::npos)
     {
-        std::string direction = str;
-        direction.erase(direction.begin(), direction.begin() + direction.find(" "));
-        int dir = std::atoi(direction.c_str());
-        std::cout << dir << std::endl;
+      std::string direction = str;
+      direction.erase(direction.begin(), direction.begin() + direction.find(" "));
+      int dir = std::atoi(direction.c_str());
+      std::cout << dir << std::endl;
     }
 }
 

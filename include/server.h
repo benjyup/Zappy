@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Sun Jul  2 10:54:25 2017 Gregoire Renard
+** Last update Sun Jul  2 17:24:56 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -43,7 +43,7 @@ typedef struct		s_elevation
   int			nb_player;
   int			needed_res[MAX_RESOURCE];
 }			t_elevation;
-  
+
 typedef struct		s_pos
 {
   int			x;
@@ -162,7 +162,7 @@ typedef	struct		s_look
   t_pos			tmp;
   t_pos			target;
 }			t_look;
-  
+
 typedef struct		s_msg
 {
   char			*msg;
@@ -182,7 +182,7 @@ typedef void(free_callback)(void *data);
 int			xdprintf(int fd,
 				 t_msg *msg,
 				 va_list *ap);
-t_bool			my_init_server(t_env *env);
+t_bool			init_server(t_env *env);
 t_bool			my_zappy_server(t_env *env);
 t_list			*my_init_list(void);
 t_bool			my_add_to_end(t_list *root,
@@ -264,10 +264,6 @@ int			look_func(t_env *env, t_client *client,
 				  t_list **current);
 int			broadcast_func(t_env *env, t_client *client,
 				       t_list **current);
-void			set_broadcast_pos(t_env *env,
-					  t_client *client,
-					  t_pos *pos,
-					  char *message);
 int			g_msz(t_env *env, t_client *client, t_list **current);
 int			g_bct(t_env *env, t_client *client, t_list **current);
 int			g_mct(t_env *env, t_client *client, t_list **current);
@@ -278,13 +274,16 @@ int			g_pin(t_env *env, t_client *client, t_list **current);
 int			get_size_map(int x, int y, t_env *env);
 int			get_size(t_client *cli_temp, int n);
 int			g_sbp(t_client *client);
-void			send_graphical(t_list **current, t_env *env, char *str, int time);
+void			send_graphical(t_list **current,
+				       t_env *env, char *str, int time);
 void			know_team(t_env *env, t_client *client);
 int			g_pnw(t_env *env, t_client *client, t_list **current);
 int			set_func(t_env *env, t_client *client, t_list **current);
 int			take_func(t_env *env, t_client *client, t_list **current);
-int			g_pdr(t_env *env, t_client *client, t_list **current, int ress);
-int			g_pgt(t_env *env, t_client *client, t_list **current, int ress);
+int			g_pdr(t_env *env, t_client *client,
+			      t_list **current, int ress);
+int			g_pgt(t_env *env, t_client *client,
+			      t_list **current, int ress);
 void			set_new_pos_f(t_env *env, t_client *client,
 				      t_pos *new_pos);
 void			set_new_pos_l(t_env *env, t_client *client,
@@ -293,10 +292,6 @@ void			set_new_pos_r(t_env *env, t_client *client,
 				      t_pos *new_pos);
 int			eject_func(t_env *env, t_client *client, t_list **current);
 int			forward_eject(t_env *env, t_client *client, t_pos *dir);
-void			line_detection(t_env *env, t_client *client,
-				       t_pos *pos, char *message);
-void			square_detection(t_env *env, t_client *client,
-					 t_pos *pos, char *message);
 void			send_to_all_user(t_env *env, t_pos pos,
 					 t_client *client, char *message);
 int			write_component(t_look *look, t_env *env);
@@ -330,5 +325,13 @@ void			init_level7(t_env *env);
 void			check_end_game(t_env *env);
 void			init_new_client(t_client **client, t_env *env);
 void			g_seg(t_env *env, char *winner);
-
+int			grep_number(char **message);
+void			check_all_map(t_env *env, t_client *client,
+				      char **message);
+int			horizontal_port(t_client *sender,
+					t_client *receiver);
+int			vertical_port(t_client *sender,
+				      t_client *receiver);
+int			border_port(t_client *sender,
+				    t_client *receiver);
 #endif /* !SERVER_H_ */

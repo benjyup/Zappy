@@ -5,7 +5,7 @@
 ## Login   <renard_e@epitech.net>
 ## 
 ## Started on  Tue Jun 20 10:56:10 2017 Gregoire Renard
-## Last update Fri Jun 30 18:17:26 2017 Gregoire Renard
+## Last update Sun Jul  2 17:12:36 2017 Gregoire Renard
 ##
 
 CC	=	gcc -I../../include -g3
@@ -22,7 +22,7 @@ SRCS	=	src/main.c \
 		src/my_strcat_char.c \
 		src/my_str_to_wordtab.c \
 		src/my_zappy_server.c \
-		src/server.c \
+		src/init_server.c \
 		src/xfprintf.c \
 		src/print_help.c \
 		src/init_arg.c \
@@ -46,7 +46,6 @@ SRCS	=	src/main.c \
 		src/init_env_resources.c \
 		src/look_func.c \
 		src/broadcast_func.c \
-		src/set_broadcast_pos.c \
 		src/g_msz.c \
 		src/g_function1.c \
 		src/g_function2.c \
@@ -57,8 +56,6 @@ SRCS	=	src/main.c \
 		src/set_func.c \
 		src/take_func.c \
 		src/eject_func.c \
-		src/line_detection.c \
-		src/square_detection.c \
 		src/send_to_all_user.c \
 		src/write_component.c \
 		src/set_pos_start.c \
@@ -80,6 +77,11 @@ SRCS	=	src/main.c \
 		src/init_level7.c \
 		src/check_end_game.c \
 		src/init_new_client.c \
+		src/grep_number.c \
+		src/check_all_map.c \
+		src/horizontal_port.c \
+		src/vertical_port.c \
+		src/border_port.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

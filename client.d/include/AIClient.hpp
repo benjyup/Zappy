@@ -54,6 +54,7 @@ namespace zappy
     std::vector<t_inventory>					_currentLook;
     bool 							_isInventoryData;
     std::string							_outputSave;
+    size_t 							_broadcastCyle;
 
     void							_play();
     void 							_look();
@@ -77,7 +78,7 @@ namespace zappy
     void 							_randomDirection();
     std::size_t 						_howManyResourses(const t_resource resource, const int tile_number) const;
     int 							_moveCalculate(const int middle, const int tile_number);
-    bool 							_readyFoIncantation() const;
+    bool 							_readyFoIncantation();
     void 							_setObjectDown();
     void 							_takeUselessObject();
 

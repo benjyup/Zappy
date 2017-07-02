@@ -99,6 +99,10 @@ zappy::Proxy::Proxy(zappy::AIClient &ia, zappy::Zappy &zap): _ia(ia), _ready(fal
 			  {zappy::INCANTATION_VOID, [] () -> int {
 			    return 0;
 			  }},
+              {zappy::FORK, [] () -> int {
+                  srv_write("Fork");
+                  return 0;
+              }},
 			  {zappy::NOOP, [] () -> int {
                               return 0;
                           }}

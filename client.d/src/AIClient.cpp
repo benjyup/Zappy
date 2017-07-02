@@ -20,6 +20,7 @@ const std::vector<zappy::AIClient::SIncantation>	zappy::AIClient::INCANTATIONS =
 
 const 	std::unordered_map<t_resource, std::string, std::hash<int>>	zappy::AIClient::RESOURCES_TO_STR = {
 	{FOOD, "food"},
+	{PLAYER, "player"},
 	{LINEMATE, "linemate"},
 	{DERAUMERE, "deraumere"},
 	{SIBUR, "sibur"},
@@ -30,6 +31,7 @@ const 	std::unordered_map<t_resource, std::string, std::hash<int>>	zappy::AIClie
 
 const 	std::unordered_map<std::string, t_resource>			zappy::AIClient::STR_TO_RESOURCES = {
 	{"food", FOOD},
+	{"player", PLAYER},
 	{"linemate", LINEMATE},
 	{"deraumere", DERAUMERE},
 	{"sibur", SIBUR},
@@ -64,13 +66,14 @@ zappy::AIClient::AIClient(const t_arg &args) :
 	_actions(
 		{
 			{zappy::RequestType::LOOK, [&] (const std::string &str){_lookAction(str);}},
-            {zappy::RequestType::BROADCAST, [&] (const std::string &str){_broadcastAction(str);}},
+			{zappy::RequestType::BROADCAST, [&] (const std::string &str){_broadcastAction(str);}},
 			{zappy::RequestType::INVENTORY, [&] (const std::string &str){_inventoryAction(str);}},
 			{zappy::RequestType::INCANTATION, [&] (const std::string &str){_incantationAction(str);}},
 			{zappy::RequestType::INCANTATION_VOID, [&] (const std::string &){}}
 		}
 	),
-	_outputSave("")
+	_outputSave(""),
+	_broadcastCyle(0)
 {
   _initInventory(_currentInventory);
   _todo.push_back(INVENTORY);
@@ -134,8 +137,9 @@ void 			zappy::AIClient::_getInventory(const std::string &data)
   std::cout << "Inventaire: " << std::endl;
   for (const auto &it : _currentInventory)
     {
-      //std::cout << "- "<< it.first << " " << RESOURCES_TO_STR.at(it.first) << ": " << it.second << std::endl;
+      std::cout << "- "<< it.first << " " << RESOURCES_TO_STR.at(it.first) << ": " << it.second << std::endl;
     }
+  std::cout << " ---------------- " << std::endl;
 }
 
 void 		zappy::AIClient::_look()
@@ -247,6 +251,7 @@ void                                           zappy::AIClient::_initInventory(t
   inventory[MENDIANE] = 0;
   inventory[PHIRAS] = 0;
   inventory[THYSTAME] = 0;
+  inventory[PLAYER] = 0;
 }
 
 zappy::RequestType 	zappy::AIClient::update(std::string output) {
@@ -258,8 +263,8 @@ zappy::RequestType 	zappy::AIClient::update(std::string output) {
   static int a = 0;
   if (a == 0)
     {
-        _broadcast();
-        a += 1;
+      _broadcast();
+      a += 1;
     }
 
   if (_mode)
@@ -272,6 +277,13 @@ zappy::RequestType 	zappy::AIClient::update(std::string output) {
 	  _OutputType.push_back(request);
 	  _todo.pop_front();
 	}
+      else
+	{
+/*
+	  _mode = !_mode;
+	  _todo.push_back(INVENTORY);
+*/
+	}
       _mode = !_mode;
     }
   else
@@ -280,14 +292,14 @@ zappy::RequestType 	zappy::AIClient::update(std::string output) {
 	{
 	  std::cout << "J'ai recu :" << output << std::endl;
 	  if (output.find("message") != std::string::npos)
-      {
-            _messageAction(output);
-      }
-      else if (!_OutputType.empty())
-      {
-          try { _actions[_OutputType.front()](output); } catch (...) { }
-	      _OutputType.pop_front();
-      }
+	    {
+	      _messageAction(output);
+	    }
+	  else if (!_OutputType.empty())
+	      {
+		try { _actions[_OutputType.front()](output); } catch (...) { }
+		_OutputType.pop_front();
+	      }
 	  _mode = !_mode;
 	}
     }
@@ -348,16 +360,20 @@ void zappy::AIClient::_inventoryAction(const std::string &output)
     {
       std::cout << "GET INVENTORY" << std::endl;
       _getInventory(str);
+      std::cout << "_ready = " << std::boolalpha << _readyFoIncantation() << std::endl;
       if (_readyFoIncantation())
 	{
 	  std::cout << "PRET POUR LINCANTATION" << std::endl;
-	  _setObjectDown();
 	  _takeUselessObject();
+	  _setObjectDown();
 	  _todo.push_back(RequestType::INCANTATION);
 	  _todo.push_back(INCANTATION_VOID);
 	}
       else
-	_todo.push_back(LOOK);
+	{
+	  std::cout << "PAS PRET POUR LINCANTATION" << std::endl;
+	  _todo.push_back(LOOK);
+	}
       _outputSave.clear();
     }
 }
@@ -402,17 +418,25 @@ int zappy::AIClient::_moveCalculate(const int middle, const int tile_number)
   return 0;
 }
 
-bool 				zappy::AIClient::_readyFoIncantation() const
+bool 				zappy::AIClient::_readyFoIncantation()
 {
   const SIncantation		&incantation = INCANTATIONS[_level];
 
   for (auto &resource : incantation.resources)
     {
-      if(resource.second != 0 && resource.second != _currentInventory.at(resource.first))
+      if(resource.second != 0 && _currentInventory.at(resource.first) < resource.second)
 	{
 	  std::cout << "RETURN FALSE" << std::endl;
 	  return false;
 	}
+    }
+  if (_currentLook.at(0).find(PLAYER) == _currentLook.at(0).end())
+    std::cout << "YA PAS DE PLAYER" << std::endl;
+  if (_currentLook.at(0).at(PLAYER) != incantation.nbOfPlayers)
+    {
+      _broadcastCyle += 1;
+      std::cout << "PAS ASSEZ DE PLAYER" << std::endl;
+      return false;
     }
   return _currentInventory.at(FOOD) > 300 / 126;
 }
@@ -424,6 +448,7 @@ void zappy::AIClient::_incantationAction(const std::string &output)
     {
       std::cout << "INCANTATION REUSSIE" << std::endl;
       this->_level += 1;
+      _broadcastCyle = 0;
     }
   else
     std::cout << "INCANTATION RATEE" << std::endl;
@@ -467,23 +492,19 @@ void zappy::AIClient::_setObjectDown()
 
 
 void zappy::AIClient::_broadcast() {
-    std::cout << "pass in broadcast" << std::endl;
-    _todo.push_back(BROADCAST);
+  std::cout << "pass in broadcast" << std::endl;
+  _todo.push_back(BROADCAST);
 }
 
 void 			zappy::AIClient::_takeUselessObject()
 {
   const SIncantation &incantation = INCANTATIONS.at(_level);
 
-  std::cout << "ici" << std::endl;
   for (auto &it : incantation.resources)
     {
-      std::cout << "ici" << std::endl;
-      if (it.second == 0)
+      if (it.second == 0 || it.second != _currentLook[0][it.first])
 	{
-	  std::cout << "ici" << std::endl;
 	  int i = 0;
-	  std::cout << "avant while" << std::endl;
 	  while (i < _currentLook[0][it.first])
 	    {
 	      std::cout << "i = " << i << std::endl;
@@ -527,5 +548,3 @@ std::string zappy::AIClient::_my_decrypt(const std::string &str) {
     }
   return data;
 }
-
-

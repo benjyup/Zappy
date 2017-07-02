@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:20:07 2017 Gregoire Renard
-** Last update Sat Jun 24 21:14:59 2017 vincent.mesquita@epitech.eu
+** Last update Sat Jul  1 16:57:13 2017 vincent.mesquita@epitech.eu
 */
 
 #ifndef COMMUN_H_
@@ -21,6 +21,7 @@
 typedef enum		e_resource
   {
     FOOD = 0,
+    PLAYER,
     LINEMATE,
     DERAUMERE,
     SIBUR,

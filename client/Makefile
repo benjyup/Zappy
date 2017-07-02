@@ -48,10 +48,17 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
+<<<<<<< HEAD
 CMAKE_SOURCE_DIR = /home/alice/rendu/PSU_2016_zappy/client
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/alice/rendu/PSU_2016_zappy/client
+=======
+CMAKE_SOURCE_DIR = /run/media/rene_r/d6bfe0cc-2835-4c20-9e0e-5e997d6c59f7/home/rene_r/Desktop/PSU_2016_zappy/client
+
+# The top-level build directory on which CMake was run.
+CMAKE_BINARY_DIR = /run/media/rene_r/d6bfe0cc-2835-4c20-9e0e-5e997d6c59f7/home/rene_r/Desktop/PSU_2016_zappy/client
+>>>>>>> 3f338a439572c3e1fa629d0a5ea95230f04414d7
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +87,15 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
+<<<<<<< HEAD
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/alice/rendu/PSU_2016_zappy/client/CMakeFiles /home/alice/rendu/PSU_2016_zappy/client/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/alice/rendu/PSU_2016_zappy/client/CMakeFiles 0
+=======
+	$(CMAKE_COMMAND) -E cmake_progress_start /run/media/rene_r/d6bfe0cc-2835-4c20-9e0e-5e997d6c59f7/home/rene_r/Desktop/PSU_2016_zappy/client/CMakeFiles /run/media/rene_r/d6bfe0cc-2835-4c20-9e0e-5e997d6c59f7/home/rene_r/Desktop/PSU_2016_zappy/client/CMakeFiles/progress.marks
+	$(MAKE) -f CMakeFiles/Makefile2 all
+	$(CMAKE_COMMAND) -E cmake_progress_start /run/media/rene_r/d6bfe0cc-2835-4c20-9e0e-5e997d6c59f7/home/rene_r/Desktop/PSU_2016_zappy/client/CMakeFiles 0
+>>>>>>> 3f338a439572c3e1fa629d0a5ea95230f04414d7
 .PHONY : all
 
 # The main clean target

@@ -7,9 +7,20 @@
 #include "server.hpp"
 #include "AIClient.hpp"
 
-int main(int ac, char **av) {
+int fork_process()
+{
+    int pid;
+    if ((pid = fork()) == -1)
+        return (perror("fork()"), -1);
+    if (pid == 0)
+        return (0);
+    return (1);
+}
+
+int loop_controller(int ac, char **av)
+{
     try {
-	srand(getpid() * time(NULL));
+        srand(getpid() * time(NULL));
         zappy::Zappy project(ac, av);
         zappy::AIClient ia(project.getArg());
         zappy::Proxy    prx(ia, project);
@@ -19,6 +30,9 @@ int main(int ac, char **av) {
             err = project.update();
             std::string input = prx.update(rqst);
             rqst = ia.update(input);
+            if (rqst == zappy::FORK)
+                if (fork_process() == 0)
+                    return 2;
             //srv_write("coucou\r\n");
             //project.console();
         }
@@ -30,4 +44,10 @@ int main(int ac, char **av) {
         return 1;
     }
     return 0;
+}
+
+int main(int ac, char **av) {
+    int ret;
+    while ((ret = loop_controller(ac, av)) == 2);
+    return ret;
 }

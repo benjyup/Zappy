@@ -80,31 +80,35 @@ zappy::AIClient::AIClient(const t_arg &args) :
 			       _todo.push_front(FORWARD);
 			     }},
 			     {3, [&] (){
-			       _todo.push_front(LEFT);
 			       _todo.push_front(FORWARD);
+                     _todo.push_front(LEFT);
 			     }},
 			     {4, [&] (){
+                     _todo.push_front(FORWARD);
 			       _todo.push_front(LEFT);
 			       _todo.push_front(FORWARD);
 			       _todo.push_front(LEFT);
-			       _todo.push_front(FORWARD);
 			     }},
 			     {5, [&] (){
+                     _todo.push_front(FORWARD);
 			       _todo.push_front(LEFT);
 			       _todo.push_front(LEFT);
-			       _todo.push_front(FORWARD);
 			     }},
 			     {6, [&] (){
+                     _todo.push_front(FORWARD);
 			       _todo.push_front(RIGHT);
 			       _todo.push_front(FORWARD);
 			       _todo.push_front(RIGHT);
-			       _todo.push_front(FORWARD);
 			     }},
-			     {7, [&] (){
+                 {7, [&] (){
+                     _todo.push_front(FORWARD);
+                     _todo.push_front(RIGHT);
+                 }},
+			     {8, [&] (){
 			       _todo.push_front(FORWARD);
 			       _todo.push_front(RIGHT);
 			       _todo.push_front(FORWARD);
-			     }},
+			     }}
 		     }
 	),
 	_outputSave(""),
@@ -227,6 +231,7 @@ void 			zappy::AIClient::_go(const unsigned int tile_number, const t_resource re
 
 void 			zappy::AIClient::_go(const unsigned int pos)
 {
+    _todo.clear();
   _deplacement[pos]();
 }
 
@@ -477,8 +482,12 @@ bool 				zappy::AIClient::_readyFoIncantation()
       std::cout << "PAS ASSEZ DE PLAYER" << std::endl;
       if (_broadcastCyle++ >= (_worldDimension.first + _worldDimension.second) / 1.5)
 	{
+/*
 	  std::cout << "JE FORK" << std::endl;
 	  _todo.push_back(FORK);
+	  _todo.push_back(INCANTATION);
+	  _todo.push_back(INCANTATION_VOID);
+*/
 	  _broadcastCyle = 0;
 	}
       return false;

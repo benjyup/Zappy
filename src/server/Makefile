@@ -5,7 +5,7 @@
 ## Login   <renard_e@epitech.net>
 ## 
 ## Started on  Tue Jun 20 10:56:10 2017 Gregoire Renard
-## Last update Sun Jul  2 17:46:40 2017 Gregoire Renard
+## Last update Sun Jul  2 19:22:10 2017 Gregoire Renard
 ##
 
 CC	=	gcc -I../../include -g3
@@ -84,6 +84,7 @@ SRCS	=	src/main.c \
 		src/g_pic.c \
 		src/winner_function.c \
 		src/f_function.c \
+		src/check_end_incant.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

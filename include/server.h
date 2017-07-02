@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Sun Jul  2 18:27:34 2017 Gregoire Renard
+** Last update Sun Jul  2 19:22:20 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -340,4 +340,7 @@ int			g_pdi(t_client *client, t_env *env);
 t_bool			winner_function(t_env *env, char *team);
 int			f_pnw(t_env *env, t_client *client, t_list **current);
 int			f_enw(t_env *env, t_client *client, t_list **current);
+int			check_end_incante(t_env *env, t_client *client);
+void			up_all_player(t_env *env, t_client *client);
+
 #endif /* !SERVER_H_ */

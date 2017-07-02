@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Tue Jun 20 18:25:45 2017 Gregoire Renard
-** Last update Fri Jun 30 18:12:26 2017 Gregoire Renard
+** Last update Sun Jul  2 18:55:18 2017 Gregoire Renard
 */
 
 #include <sys/types.h>
@@ -23,7 +23,7 @@ static void	init_resource(t_env *env, t_pos pos)
     {
       nb = rand() % 2;
       if (cpt == FOOD)
-	nb += 5;
+	nb += rand() % 50;
       env->map[pos.y][pos.x].resource[cpt] = nb;
       cpt++;
     }

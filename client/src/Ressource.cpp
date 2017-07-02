@@ -7,23 +7,19 @@
 #include <iostream>
 #include "Ressource.hpp"
 
-Ressource::Ressource(Vector3d const &pos, TYPE type, int nbrRessource) : _pos(pos), _type(type), _nbrRessource(nbrRessource)
+Ressource::Ressource(Vector3d const &pos, TYPE type, int nbrRessource)
+	: _pos(pos), _type(type), _nbrRessource(nbrRessource)
 {
-  //Create node
-  //Assign his texture
 }
 
-Ressource::Ressource(Vector3d const &pos) : _pos(pos) // Without type which will generate it's own type
+Ressource::Ressource(Vector3d const &pos) : _pos(pos)
 {
   srand(static_cast <unsigned> (time(0)));
   _type = genRandType(Ressource::TYPE::FOOD, Ressource::TYPE::THYSTAME);
-  //Create node
-  //Assign his texture
 }
 
 Ressource::~Ressource()
 {
-  //Delete all the graphical ressources
 }
 
 const Vector3d	&Ressource::get_pos() const

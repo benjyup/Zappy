@@ -5,18 +5,14 @@
 ## Login   <renard_e@epitech.net>
 ## 
 ## Started on  Mon May 22 08:49:41 2017 Gregoire Renard
-## Last update Tue Jun 20 10:41:37 2017 Gregoire Renard
+## Last update Sun Jul  2 21:26:32 2017 vincent.mesquita@epitech.eu
 ##
 
 CC		=	gcc -Iinclude/ -g3
 
 RM		=	rm -fr
 
-SRCS_AI		=	src/ai/main.c
-
-OBJS_AI		=	$(SRCS_AI:.c=.o)
-
-AI_NAME		=	zappy_ai
+AI_PATH		=	./src/ai/
 
 SERVER_PATH	=	./src/server/
 
@@ -29,15 +25,15 @@ re		:	fclean all
 zappy_server	:
 			make -C $(SERVER_PATH)
 
-zappy_ai	:	$(OBJS_AI)
-			$(CC) -o $(AI_NAME) $(SRCS_AI)
+zappy_ai	:
+			make -C $(AI_PATH)
 
 clean		:
-			$(RM) $(OBJS_AI)
 			make  clean -C $(SERVER_PATH)
+			make  clean -C $(AI_PATH)
 
-fclean		:	clean
+fclean		:
 			make  fclean -C $(SERVER_PATH)
-			$(RM) $(AI_NAME)
+			make  fclean -C $(AI_PATH)
 
 .PHONY		: all re clean fclean

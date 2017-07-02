@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Fri Jun 30 14:59:18 2017 Gregoire Renard
-** Last update Sun Jul  2 18:00:35 2017 Gregoire Renard
+** Last update Sun Jul  2 19:23:26 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -50,7 +50,7 @@ static void	check_conditions(t_env *env, t_client *client)
   cpt = 1;
   stop = 0;
   nb_player = strlen_clients(env->map[client->pos.y][client->pos.x].clients);
-  if (nb_player < env->elevation[client->level - 1].nb_player)
+  if (nb_player != env->elevation[client->level - 1].nb_player)
     my_send(client, KO, 0);
   while (cpt != MAX_RESOURCE && stop != 1)
     {

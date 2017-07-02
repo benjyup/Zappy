@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Fri Jun 30 17:21:31 2017 Gregoire Renard
-** Last update Fri Jun 30 18:05:35 2017 Gregoire Renard
+** Last update Sun Jul  2 11:39:50 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -14,7 +14,7 @@ static int	lets_start_game(t_env *env)
 {
   int		cpt;
   int		dif;
-  
+
   cpt = 0;
   dif = 0;
   while (cpt != env->arg.nb_team)
@@ -32,7 +32,7 @@ static int	check_team_alive(t_env *env)
 {
   int		cpt;
   int		alive;
-  
+
   cpt = 0;
   alive = 0;
   while (cpt != env->arg.nb_team)
@@ -47,7 +47,7 @@ static int	check_team_alive(t_env *env)
 static char	*who_is_winner(t_env *env)
 {
   int		cpt;
-  
+
   cpt = 0;
   while (cpt != env->arg.nb_team)
     {
@@ -66,8 +66,6 @@ void		check_end_game(t_env *env)
 	env->real_start = 1;
     }
   else
-    {
-      if ((check_team_alive(env)) == 1)
-	g_seg(env, who_is_winner(env));
-    }
+    if ((check_team_alive(env)) == 1)
+      g_seg(env, who_is_winner(env));
 }

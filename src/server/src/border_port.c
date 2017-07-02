@@ -86,6 +86,6 @@ int		border_port(t_client *sender,
     dir = border_hightr(receiver);
   if (sender->pos.x < receiver->pos.x
       && sender->pos.y < receiver->pos.y)
-    dir = border_downr(receiver);  
+    dir = border_downr(receiver);
   return (dir);
 }

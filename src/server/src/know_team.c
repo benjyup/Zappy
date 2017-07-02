@@ -48,6 +48,8 @@ static void     connection_gr(t_env *env, t_client *client)
   g_sgt(env, client, &env->clients->next);
   g_mct(env, client, &env->clients->next);
   g_tna(env, client, &env->clients->next);
+  f_pnw(env, client, &env->clients->next);
+  f_enw(env, client, &env->clients->next);
 }
 
 void		know_team(t_env *env, t_client *client)

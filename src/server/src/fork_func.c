@@ -30,6 +30,7 @@ static void	put_egg(t_env *env, t_client *client)
 	  my_add_to_end(env->arg.team[i].eggs, egg);
 	  env->nb_eggs++;
 	  egg->id = env->nb_eggs;
+	  egg->id_client = client->socket;
 	  i = env->arg.nb_team;
 	}
       i++;

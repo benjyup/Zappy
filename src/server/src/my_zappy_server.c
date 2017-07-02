@@ -75,7 +75,7 @@ static char		*my_check_each_client(t_env *env)
   t_list                *current;
   t_client              *client;
   int			ret;
-  
+
   current = env->clients->next;
   while (current != env->clients)
     {
@@ -104,7 +104,7 @@ t_bool			my_zappy_server(t_env *env)
   unsigned int          client_sin_len;
   int                   client_socket;
   char			*ret;
-  
+
   client_sin_len = sizeof(client_sin);
   while (42)
     {

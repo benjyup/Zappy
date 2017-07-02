@@ -38,7 +38,7 @@ static void	find_all_clients(t_client *client,
 {
   int		cpt;
   int		border;
-  
+
   cpt = 0;
   if (clients[0] != NULL &&
       clients[0] != client)

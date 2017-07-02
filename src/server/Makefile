@@ -83,6 +83,7 @@ SRCS	=	src/main.c \
 		src/border_port.c \
 		src/g_pic.c \
 		src/winner_function.c \
+		src/f_function.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

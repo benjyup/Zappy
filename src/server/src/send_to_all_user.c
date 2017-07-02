@@ -14,7 +14,7 @@ void		send_to_all_user(t_env *env, t_pos pos,
 				 t_client *client, char *message)
 {
   int		cpt;
-  
+
   cpt = 0;
   if (env->map[pos.y][pos.x].clients[0] != NULL &&
       env->map[pos.y][pos.x].clients[0] != client)

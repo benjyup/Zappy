@@ -75,6 +75,7 @@ typedef	struct		s_eggs
 {
   t_pos			pos;
   int			time;
+  int			id_client;
   int			id;
 }			t_eggs;
 
@@ -337,5 +338,6 @@ int			g_pic(t_env *env, t_client *client, t_list **current);
 int			g_pie(t_env *env, t_client *client, t_list **current, int res);
 int			g_pdi(t_client *client, t_env *env);
 t_bool			winner_function(t_env *env, char *team);
-
+int			f_pnw(t_env *env, t_client *client, t_list **current);
+int			f_enw(t_env *env, t_client *client, t_list **current);
 #endif /* !SERVER_H_ */

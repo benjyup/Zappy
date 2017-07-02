@@ -16,7 +16,8 @@ static int	reset_fdset(t_cookie *cook,
 			    t_fd_manager *fd_manager)
 {
   if (cook->fd == -1)
-    return (printf("Could not init relay_connector, bad FileDescriptor."), 1);
+    return (printf("Could not init relay_connector, bad FileDescriptor."),
+	    1);
   FD_ZERO(&fd_manager->read_fd);
   FD_ZERO(&fd_manager->write_fd);
   FD_SET(cook->fd, &fd_manager->read_fd);

@@ -11,11 +11,11 @@
 #include <stdio.h>
 #include "server.h"
 
-int		g_pdi(t_client *client)
+int		g_pdi(t_client *client, t_env *env)
 {
   char		buff[32];
 
   sprintf(buff, "pdi %d\n", client->socket);
-  my_send(client, buff, 0);
-  return (1);
+  send_graphical(&env->clients->next, env, buff, 0);
+  return (SUCCESS);
 }

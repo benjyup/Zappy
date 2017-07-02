@@ -20,9 +20,6 @@ namespace zappy {
     ~Zappy();
 
     int update();
-    void console();
-      char *getTeam(void) const;
-      const t_arg &getArg(void) const;
    private:
     parser		        _parser;
     t_arg           	_arg;

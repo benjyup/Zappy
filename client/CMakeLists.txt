@@ -36,7 +36,7 @@ set(SOURCE_FILES
         include/Eggs.hpp
         include/Drone.hpp
         src/GraphicalLib.cpp
-        src/GraphicalLib.hpp
+        include/GraphicalLib.hpp
         src/Sound.cpp
         include/Sound.hpp)
 

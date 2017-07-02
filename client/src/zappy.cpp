@@ -30,41 +30,5 @@ zappy::Zappy::~Zappy() {
 int zappy::Zappy::update() {
     if (connection_handler(&_cook, &_fd_manager) == 1)
         return 1;
-//  char *str;
-//while (!(str = srv_read()));
-//  std::cout << "J'ai reçu " << str << std::endl;
-//  srv_write(this->_arg.team);
-//  while (!(str = srv_read()));
- // std::cout << "J'ai reçu " << str << std::endl;
     return 0;
-}
-
-void zappy::Zappy::console() {
-
- // std::cout << std::endl << "Wellcome to Zappy - console v0.1" << std::endl;
- // std::cout << "Type help for more information" << std::endl;
-  std::string input;
-  input.clear();
-      std::cout << _arg.team << " &>";
-      if (!std::getline(std::cin, input))
-	{
-	  std::cout << std::endl;
-	  return ;
-	}
-      try {
-	  if (!input.empty())
-	    _parser.lexer(input);
-	} catch (...) {
-	  std::cerr << "Unknown command" << std::endl;
-	}
-      input.clear();
-
-}
-
-char *zappy::Zappy::getTeam() const {
-    return _arg.team;
-}
-const t_arg &zappy::Zappy::getArg(void) const
-{
-    return _arg;
 }

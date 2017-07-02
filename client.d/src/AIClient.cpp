@@ -75,35 +75,35 @@ zappy::AIClient::AIClient(const t_arg &args) :
 	_deplacement({
 			     {1, [&] (){_todo.push_front(FORWARD);}},
 			     {2, [&] (){
-			       _todo.push_back(FORWARD);
-			       _todo.push_back(LEFT);
-			       _todo.push_back(FORWARD);
+			       _todo.push_front(FORWARD);
+			       _todo.push_front(LEFT);
+			       _todo.push_front(FORWARD);
 			     }},
 			     {3, [&] (){
-			       _todo.push_back(LEFT);
-			       _todo.push_back(FORWARD);
+			       _todo.push_front(LEFT);
+			       _todo.push_front(FORWARD);
 			     }},
 			     {4, [&] (){
-			       _todo.push_back(LEFT);
-			       _todo.push_back(FORWARD);
-			       _todo.push_back(LEFT);
-			       _todo.push_back(FORWARD);
+			       _todo.push_front(LEFT);
+			       _todo.push_front(FORWARD);
+			       _todo.push_front(LEFT);
+			       _todo.push_front(FORWARD);
 			     }},
 			     {5, [&] (){
-			       _todo.push_back(LEFT);
-			       _todo.push_back(LEFT);
-			       _todo.push_back(FORWARD);
+			       _todo.push_front(LEFT);
+			       _todo.push_front(LEFT);
+			       _todo.push_front(FORWARD);
 			     }},
 			     {6, [&] (){
-			       _todo.push_back(RIGHT);
-			       _todo.push_back(FORWARD);
-			       _todo.push_back(RIGHT);
-			       _todo.push_back(FORWARD);
+			       _todo.push_front(RIGHT);
+			       _todo.push_front(FORWARD);
+			       _todo.push_front(RIGHT);
+			       _todo.push_front(FORWARD);
 			     }},
 			     {7, [&] (){
-			       _todo.push_back(FORWARD);
-			       _todo.push_back(RIGHT);
-			       _todo.push_back(FORWARD);
+			       _todo.push_front(FORWARD);
+			       _todo.push_front(RIGHT);
+			       _todo.push_front(FORWARD);
 			     }},
 		     }
 	),

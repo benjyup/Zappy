@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Sun Jul  2 16:32:45 2017 Gregoire Renard
-** Last update Sun Jul  2 16:59:47 2017 Gregoire Renard
+** Last update Sun Jul  2 22:03:51 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -86,6 +86,6 @@ int		border_port(t_client *sender,
     dir = border_hightr(receiver);
   if (sender->pos.x < receiver->pos.x
       && sender->pos.y < receiver->pos.y)
-    dir = border_downr(receiver);  
+    dir = border_downr(receiver);
   return (dir);
 }

@@ -65,6 +65,7 @@ namespace zappy
     void							_getInventory(const std::string &data);
     bool 							_isNeeded(const t_resource) const;
     void 							_go(const unsigned int tile_number, const t_resource);
+    void                          _go(const unsigned int pos);
     std::list<RequestType>					_todo;
     std::list<RequestType>					_OutputType;
     std::vector<t_inventory>					_lookParse(const std::string &look);
@@ -85,6 +86,7 @@ namespace zappy
     Proxy                           				*_prox;
     bool 							_mode;
     std::map<zappy::RequestType, std::function<void(const std::string &)>>	_actions;
+    std::map<int, std::function<void(void)>> _deplacement;
   };
 }
 

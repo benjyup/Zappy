@@ -10,7 +10,11 @@
 
 NAME		=	zappy_ai
 
-CC		=	g++
+CXX		=	g++
+
+CC		=	gcc -Iinclude
+
+CFLAGS		+=	-w -Wextra -Wall -Werror
 
 CPPFLAGS	+=	-Iinclude -Iinclude/mendatory -I../../include -std=c++14
 
@@ -36,7 +40,7 @@ OBJS_C		=	$(SRCS_C:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS_CPP) $(OBJS_C)
-	$(CC) -o $ $(NAME) $(OBJS_CPP) $(OBJS_C)
+	$(CXX) -o $ $(NAME) $(OBJS_CPP) $(OBJS_C)
 
 clean:
 	$(RM) $(OBJS_CPP) $(OBJS_C)
@@ -45,5 +49,11 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+.cpp.o:
+	$(CXX) $(CPPFLAGS) -c $< -o $@
+
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: all clean fclean re

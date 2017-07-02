@@ -72,6 +72,41 @@ zappy::AIClient::AIClient(const t_arg &args) :
 			{zappy::RequestType::INCANTATION_VOID, [&] (const std::string &){}}
 		}
 	),
+	_deplacement({
+			     {1, [&] (){_todo.push_front(FORWARD);}},
+			     {2, [&] (){
+			       _todo.push_front(FORWARD);
+			       _todo.push_front(LEFT);
+			       _todo.push_front(FORWARD);
+			     }},
+			     {3, [&] (){
+			       _todo.push_front(LEFT);
+			       _todo.push_front(FORWARD);
+			     }},
+			     {4, [&] (){
+			       _todo.push_front(LEFT);
+			       _todo.push_front(FORWARD);
+			       _todo.push_front(LEFT);
+			       _todo.push_front(FORWARD);
+			     }},
+			     {5, [&] (){
+			       _todo.push_front(LEFT);
+			       _todo.push_front(LEFT);
+			       _todo.push_front(FORWARD);
+			     }},
+			     {6, [&] (){
+			       _todo.push_front(RIGHT);
+			       _todo.push_front(FORWARD);
+			       _todo.push_front(RIGHT);
+			       _todo.push_front(FORWARD);
+			     }},
+			     {7, [&] (){
+			       _todo.push_front(FORWARD);
+			       _todo.push_front(RIGHT);
+			       _todo.push_front(FORWARD);
+			     }},
+		     }
+	),
 	_outputSave(""),
 	_broadcastCyle(0)
 {
@@ -188,6 +223,11 @@ void 			zappy::AIClient::_go(const unsigned int tile_number, const t_resource re
   for (int i = 0 ;  i < howManyResources ; ++i)
     _todo.push_back(RESOURCE_TO_REQUEST.at(resource));
   //std::cout << "go to tile[" << tile_number << "] with " << _todo.size() << " move(s)" << std::endl;
+}
+
+void 			zappy::AIClient::_go(const unsigned int pos)
+{
+  _deplacement[pos]();
 }
 
 bool			zappy::AIClient::_isNeeded(const t_resource resource) const
@@ -539,6 +579,7 @@ void zappy::AIClient::_messageAction(const std::string &str) {
       direction.erase(direction.begin(), direction.begin() + direction.find(" "));
       int dir = std::atoi(direction.c_str());
       std::cout << dir << std::endl;
+      _go(dir);
     }
 }
 

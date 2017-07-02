@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:23:46 2017 Gregoire Renard
-** Last update Fri Jun 30 15:23:22 2017 Gregoire Renard
+** Last update Sun Jul  2 17:12:05 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -70,7 +70,7 @@ int		main(int argc, char **argv)
       return (print_help(ERROR));
     }
   init_elevation(&env);
-  if (!my_init_server(&env) ||
+  if (!init_server(&env) ||
       my_zappy_server(&env))
     {
       free_env(&env);

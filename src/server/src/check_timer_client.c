@@ -31,6 +31,7 @@ void		check_timer_client(t_env *env, t_client *client,
 	    {
 	      my_send(client, DEAD, 0);
 	      my_send_to_client(client, env);
+	      g_pdi(client, env);
 	      my_quit(env, client, current);
 	    }
 	}

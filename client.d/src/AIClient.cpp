@@ -227,6 +227,7 @@ void 			zappy::AIClient::_go(const unsigned int tile_number, const t_resource re
 
 void 			zappy::AIClient::_go(const unsigned int pos)
 {
+    _todo.clear();
   _deplacement[pos]();
 }
 

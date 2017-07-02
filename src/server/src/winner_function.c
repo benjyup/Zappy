@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Sun Jul  2 17:47:10 2017 Gregoire Renard
-** Last update Sun Jul  2 17:53:18 2017 Gregoire Renard
+** Last update Sun Jul  2 18:04:08 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -24,7 +24,8 @@ static char	*who_is_winner(t_env *env)
   return (NULL);
 }
 
-t_bool			winner_function(int client_socket)
+t_bool			winner_function(t_env *env,
+					int client_socket)
 {
   (void)client_socket;
   g_seg(env, who_is_winner(env));

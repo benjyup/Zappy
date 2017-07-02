@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 26 14:57:15 2017 vincent.mesquita@epitech.eu
-** Last update Sun Jul  2 17:56:04 2017 Gregoire Renard
+** Last update Sun Jul  2 18:03:30 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -120,7 +120,7 @@ t_bool			my_zappy_server(t_env *env)
 	  my_new_client(client_socket, env);
 	}
       if ((ret = my_check_each_client(env)) != -1)
-	return (winner_function(ret));
+	return (winner_function(env, ret));
     }
   return (true);
 }

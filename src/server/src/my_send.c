@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Wed Jun 21 14:43:04 2017 vincent.mesquita@epitech.eu
-** Last update Fri Jun 30 18:55:17 2017 Gregoire Renard
+** Last update Sun Jul  2 18:04:20 2017 Gregoire Renard
 */
 
 #include <unistd.h>
@@ -47,6 +47,9 @@ static void	time_calculation(t_client *client,
 	client->inventory[FOOD]--;
       client->inventory[FOOD]--;
     }
+  if (client->incantation == 1)
+    g_pie(env, client, &env->clients->next, 1);
+  client->incantation = 0;
   client->action = 0;
   if ((msg->current_index =
        write(client->socket,

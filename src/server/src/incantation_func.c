@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Fri Jun 30 14:59:18 2017 Gregoire Renard
-** Last update Sun Jul  2 11:40:50 2017 Gregoire Renard
+** Last update Sun Jul  2 18:00:35 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -38,6 +38,7 @@ static void	send_message_elevation(t_client *client, t_env *env)
   my_send(client, "", 300 / env->arg.freq);
   free(message);
   free(level);
+  client->incantation = 1;
 }
 
 static void	check_conditions(t_env *env, t_client *client)

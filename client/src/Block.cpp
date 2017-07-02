@@ -94,7 +94,7 @@ namespace 		Client
   int Block::get_sum() const
   {
     int sum = 0;
-    int j = 0;
+    int j = 1;
     while (j < NBR_OF_RES)
       sum += _res[j++];
     return sum;

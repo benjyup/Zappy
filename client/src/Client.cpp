@@ -112,7 +112,7 @@ namespace 		Client
       {
 	_map[playerPos.getX() + playerPos.getY() * _size.getX()].resetSpacePos(_lib.getPos(_player[num].get_id()));
 	_player[num].set_idAnimation(_lib.addFlyStraightAnimator(_player[num].get_id(),
-								 _lib.getPos(_player[num].get_id()), _map[v.getX() + v.getY() * _size.getX()].getSpacePos(), 100 * _sgtt, ~t[4]));
+								 _lib.getPos(_player[num].get_id()), _map[v.getX() + v.getY() * _size.getX()].getSpacePos(), 6000 / _sgtt, ~t[4]));
 	_player[num].set_pos(v);
 	_player[num].set_dir((Character::DIR) ~t[4]);
       }
@@ -126,7 +126,6 @@ namespace 		Client
 
     GraphicalLib::TEXT randType = static_cast<GraphicalLib::TEXT>(dist6(gen));
 
-    std::cout << (int)randType << std::endl;
     return (randType);
   }
 
@@ -157,6 +156,7 @@ namespace 		Client
 	  _lib.delNode(b.get_idRes());
 	  _lib.delNode(b.get_idRock());
 	  b.set_idRes(0);
+	  b.set_idRock(0);
 	}
       else if (_lib.getScale(b.get_idRes()).X != resLvl && b.get_idRes() != 0)
 	  {

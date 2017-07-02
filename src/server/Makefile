@@ -5,7 +5,7 @@
 ## Login   <renard_e@epitech.net>
 ## 
 ## Started on  Tue Jun 20 10:56:10 2017 Gregoire Renard
-## Last update Sun Jul  2 17:34:24 2017 Gregoire Renard
+## Last update Sun Jul  2 17:46:40 2017 Gregoire Renard
 ##
 
 CC	=	gcc -I../../include -g3
@@ -75,7 +75,6 @@ SRCS	=	src/main.c \
 		src/init_level5.c \
 		src/init_level6.c \
 		src/init_level7.c \
-		src/check_end_game.c \
 		src/init_new_client.c \
 		src/grep_number.c \
 		src/check_all_map.c \
@@ -83,6 +82,7 @@ SRCS	=	src/main.c \
 		src/vertical_port.c \
 		src/border_port.c \
 		src/g_pic.c \
+		src/winner_function.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

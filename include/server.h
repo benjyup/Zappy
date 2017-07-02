@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Sun Jul  2 17:34:00 2017 Gregoire Renard
+** Last update Sun Jul  2 17:45:23 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -322,7 +322,6 @@ void			init_level4(t_env *env);
 void			init_level5(t_env *env);
 void			init_level6(t_env *env);
 void			init_level7(t_env *env);
-void			check_end_game(t_env *env);
 void			init_new_client(t_client **client, t_env *env);
 void			g_seg(t_env *env, char *winner);
 int			grep_number(char **message);
@@ -337,5 +336,6 @@ int			border_port(t_client *sender,
 int			g_pic(t_env *env, t_client *client, t_list **current);
 int			g_pie(t_env *env, t_client *client, t_list **current, int res);
 int			g_pdi(t_client *client, t_env *env);
+t_bool			winner_function(int socket_client);
 
 #endif /* !SERVER_H_ */

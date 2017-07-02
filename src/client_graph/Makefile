@@ -5,7 +5,7 @@
 ## Login   <vincent@epitech.net>
 ## 
 ## Started on  Sun Jul  2 19:21:51 2017 vincent.mesquita@epitech.eu
-## Last update Sun Jul  2 23:07:39 2017 Vincent
+## Last update Sun Jul  2 23:13:26 2017 Vincent
 ##
 
 NAME		=	../../zappy_client
@@ -49,7 +49,7 @@ OBJS_C		=	$(SRCS_C:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS_CPP) $(OBJS_C)
-	$(CXX) -o $ $(NAME) $(OBJS_CPP) $(OBJS_C) -lIrrlicht -lGL -lXxf86vm -lIrrKlang -lXext -lX11 -lXcursor -lpthread
+	$(CXX) -o $ $(NAME) $(OBJS_CPP) $(OBJS_C) $(CPPFLAGS) -lIrrlicht -lGL -lXxf86vm -lIrrKlang -lXext -lX11 -lXcursor -lpthread
 
 clean:
 	$(RM) $(OBJS_CPP) $(OBJS_C)

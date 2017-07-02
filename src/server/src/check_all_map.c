@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Sun Jul  2 15:20:24 2017 Gregoire Renard
-** Last update Sun Jul  2 18:12:01 2017 Gregoire Renard
+** Last update Sun Jul  2 18:14:29 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -51,7 +51,6 @@ static void	find_all_clients(t_client *client,
 	    {
 	      border = know_border(client, clients[cpt]);
 	      set_message(message, border);
-	      printf("message = %s\n", *message);
 	      my_send(clients[cpt], *message, 0);
 	    }
 	  cpt++;

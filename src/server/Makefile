@@ -8,7 +8,7 @@
 ## Last update Sun Jul  2 19:22:10 2017 Gregoire Renard
 ##
 
-CC	=	gcc -I../../include -g3
+CC	=	gcc -I../../include
 
 RM	=	rm -fr
 

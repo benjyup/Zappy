@@ -66,6 +66,6 @@ void		check_end_game(t_env *env)
 	env->real_start = 1;
     }
   else
-    if ((check_team_alive(env)) == 1)
+    if ((check_team_alive(env)) == 1 && env->real_start != 0)
       g_seg(env, who_is_winner(env));
 }

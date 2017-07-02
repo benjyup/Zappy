@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 12 09:19:50 2017 Gregoire Renard
-** Last update Sun Jul  2 17:24:56 2017 Gregoire Renard
+** Last update Sun Jul  2 17:34:00 2017 Gregoire Renard
 */
 
 #ifndef SERVER_H_
@@ -334,4 +334,8 @@ int			vertical_port(t_client *sender,
 				      t_client *receiver);
 int			border_port(t_client *sender,
 				    t_client *receiver);
+int			g_pic(t_env *env, t_client *client, t_list **current);
+int			g_pie(t_env *env, t_client *client, t_list **current, int res);
+int			g_pdi(t_client *client, t_env *env);
+
 #endif /* !SERVER_H_ */

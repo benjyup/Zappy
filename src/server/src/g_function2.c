@@ -35,7 +35,7 @@ void		g_seg(t_env *env, char *str)
       perror(MALLOC);
       exit(-1);
     }
-  sprintf(buff, "smg %s\n", str);
+  sprintf(buff, "seg %s\n", str);
   send_graphical(&env->clients->next, env, buff, 0);
   free(buff);
 }

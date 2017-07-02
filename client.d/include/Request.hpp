@@ -32,6 +32,7 @@ namespace zappy {
     SET_PHIRAS,
     SET_THYSTAME,
     INVENTORY,
+      FORK,
     NOOP
   } RequestType;
 

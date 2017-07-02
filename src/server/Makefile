@@ -5,7 +5,7 @@
 ## Login   <renard_e@epitech.net>
 ## 
 ## Started on  Tue Jun 20 10:56:10 2017 Gregoire Renard
-## Last update Sun Jul  2 17:12:36 2017 Gregoire Renard
+## Last update Sun Jul  2 17:34:24 2017 Gregoire Renard
 ##
 
 CC	=	gcc -I../../include -g3
@@ -82,6 +82,7 @@ SRCS	=	src/main.c \
 		src/horizontal_port.c \
 		src/vertical_port.c \
 		src/border_port.c \
+		src/g_pic.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

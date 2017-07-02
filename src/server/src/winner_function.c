@@ -5,16 +5,14 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Sun Jul  2 17:47:10 2017 Gregoire Renard
-** Last update Sun Jul  2 18:04:08 2017 Gregoire Renard
+** Last update Sun Jul  2 18:25:06 2017 Gregoire Renard
 */
 
 #include "server.h"
 
 t_bool			winner_function(t_env *env,
-					int client_socket)
+					char *team)
 {
-  (void)client_socket;
-  (void)env;
-  //rene ici
+  g_seg(env, team);
   return (true);
 }

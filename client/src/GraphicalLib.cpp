@@ -17,7 +17,7 @@ namespace 	Client
     irr::core::stringw wStr("ZapPyramide");
     this->_device->setWindowCaption(wStr.c_str());
     this->_device->getCursorControl()->setVisible(true);
-    this->_smgr->addCameraSceneNodeFPS();
+    this->_smgr->addCameraSceneNodeFPS()->setPosition({Client::SCALE * 10, 40, 0});
     initDeco();
     initText();
   }
@@ -250,7 +250,7 @@ namespace 	Client
   {
     _node[id]->setLoopMode(false);
     _node[id]->setFrameLoop(145, 157);
-    _node[id]->setAnimationSpeed(5);
+    _node[id]->setAnimationSpeed(20);
   }
 
   void GraphicalLib::pushing(int id)

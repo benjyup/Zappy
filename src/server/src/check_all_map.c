@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Sun Jul  2 15:20:24 2017 Gregoire Renard
-** Last update Sun Jul  2 18:14:29 2017 Gregoire Renard
+** Last update Sun Jul  2 22:04:10 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -38,7 +38,7 @@ static void	find_all_clients(t_client *client,
 {
   int		cpt;
   int		border;
-  
+
   cpt = 0;
   if (clients[0] != NULL &&
       clients[0] != client)

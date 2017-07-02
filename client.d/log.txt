@@ -1,0 +1,418 @@
+Client Zappy v0.1
+PORT    : 4242
+TEAM    : Team1
+HOST    : localhost
+./zappy_ai: settingUp cookie for connection to localhost
+./zappy_ai: localhost IP's is 127.0.0.1
+welcome OK
+team name OK
+team : 2
+x : 10
+y : 10
+pass in broadcast
+Je pop
+requete = 21
+J'ai recu :[ food 9, linemate 0, deraumere 0, sibur 0, mendiane 0, phiras 0, thystame 0 ]
+GET INVENTORY
+ici
+ici
+ici
+ici
+TMP =  food 9 linemate 0 deraumere 0 sibur 0 mendiane 0 phiras 0 thystame 0 
+TMP = food
+TMP = linemate
+TMP = deraumere
+TMP = sibur
+TMP = mendiane
+TMP = phiras
+TMP = thystame
+Inventaire: 
+- 1 player: 0
+- 7 thystame: 0
+- 6 phiras: 0
+- 5 mendiane: 0
+- 0 food: 9
+- 2 linemate: 0
+- 3 deraumere: 0
+- 4 sibur: 0
+ ---------------- 
+RETURN FALSE
+_ready = false
+RETURN FALSE
+PAS PRET POUR LINCANTATION
+Je pop
+requete = 4
+send Broadcast
+ecrypting :Team1 INCANTATION
+J'ai recu :ok
+Broadcast : ok
+Je pop
+requete = 3
+J'ai recu :[ player food, sibur phiras, food, sibur ]
+GET LOOK :[ player food, sibur phiras, food, sibur ]
+FOOD = 9
+FOOD = 9
+_todo.size = 2
+Je pop
+requete = 2
+J'ai recu :ok
+Je pop
+requete = 0
+J'ai recu :ok
+Je pop
+requete = 21
+J'ai recu :[ food 9, linemate 0, deraumere 0, sibur 0, mendiane 0, phiras 0, thystame 0 ]
+GET INVENTORY
+ici
+ici
+ici
+ici
+TMP =  food 9 linemate 0 deraumere 0 sibur 0 mendiane 0 phiras 0 thystame 0 
+TMP = food
+TMP = linemate
+TMP = deraumere
+TMP = sibur
+TMP = mendiane
+TMP = phiras
+TMP = thystame
+Inventaire: 
+- 1 player: 0
+- 7 thystame: 0
+- 6 phiras: 0
+- 5 mendiane: 0
+- 0 food: 9
+- 2 linemate: 0
+- 3 deraumere: 0
+- 4 sibur: 0
+ ---------------- 
+RETURN FALSE
+_ready = false
+RETURN FALSE
+PAS PRET POUR LINCANTATION
+Je pop
+requete = 3
+J'ai recu :[ player linemate linemate deraumere sibur, deraumere phiras, food food, food linemate deraumere ]
+GET LOOK :[ player linemate linemate deraumere sibur, deraumere phiras, food food, food linemate deraumere ]
+move = 0 midlle = 0 tile_number = 0
+JE PREND 1 linemate
+_todo.size = 1
+Je pop
+requete = 8
+J'ai recu :ok
+Je pop
+requete = 21
+J'ai recu :[ food 9, linemate 1, deraumere 0, sibur 0, mendiane 0, phiras 0, thystame 0 ]
+GET INVENTORY
+ici
+ici
+ici
+ici
+TMP =  food 9 linemate 1 deraumere 0 sibur 0 mendiane 0 phiras 0 thystame 0 
+TMP = food
+TMP = linemate
+TMP = deraumere
+TMP = sibur
+TMP = mendiane
+TMP = phiras
+TMP = thystame
+Inventaire: 
+- 1 player: 0
+- 7 thystame: 0
+- 6 phiras: 0
+- 5 mendiane: 0
+- 0 food: 9
+- 2 linemate: 1
+- 3 deraumere: 0
+- 4 sibur: 0
+ ---------------- 
+_ready = true
+PRET POUR LINCANTATION
+i = 0
+i = 0
+i = 0
+i = 1
+JE SET LINEMATE
+Je pop
+requete = 10
+J'ai recu :ok
+Je pop
+requete = 9
+J'ai recu :ok
+Je pop
+requete = 8
+J'ai recu :ok
+Je pop
+requete = 8
+J'ai recu :ko
+Je pop
+requete = 15
+J'ai recu :ok
+Je pop
+requete = 5
+J'ai recu :Elevation underway
+_incantationAction
+INCANTATION REUSSIE
+Je pop
+requete = 6
+Client Zappy v0.1
+PORT    : 4242
+TEAM    : Team1
+HOST    : localhost
+./zappy_ai: settingUp cookie for connection to localhost
+./zappy_ai: localhost IP's is 127.0.0.1
+welcome OK
+team name OK
+team : 2
+x : 10
+y : 10
+pass in broadcast
+Je pop
+requete = 21
+J'ai recu :[ food 9, linemate 0, deraumere 0, sibur 0, mendiane 0, phiras 0, thystame 0 ]
+GET INVENTORY
+ici
+ici
+ici
+ici
+TMP =  food 9 linemate 0 deraumere 0 sibur 0 mendiane 0 phiras 0 thystame 0 
+TMP = food
+TMP = linemate
+TMP = deraumere
+TMP = sibur
+TMP = mendiane
+TMP = phiras
+TMP = thystame
+Inventaire: 
+- 1 player: 0
+- 7 thystame: 0
+- 6 phiras: 0
+- 5 mendiane: 0
+- 0 food: 9
+- 2 linemate: 0
+- 3 deraumere: 0
+- 4 sibur: 0
+ ---------------- 
+RETURN FALSE
+_ready = false
+RETURN FALSE
+PAS PRET POUR LINCANTATION
+Je pop
+requete = 4
+send Broadcast
+ecrypting :Team1 INCANTATION
+J'ai recu :ok
+Broadcast : ok
+Je pop
+requete = 3
+J'ai recu :[ player phiras phiras, food phiras, food mendiane, deraumere deraumere sibur mendiane ]
+GET LOOK :[ player phiras phiras, food phiras, food mendiane, deraumere deraumere sibur mendiane ]
+FOOD = 9
+FOOD = 9
+_todo.size = 2
+Je pop
+requete = 2
+J'ai recu :ok
+Je pop
+requete = 0
+J'ai recu :ok
+Je pop
+requete = 21
+J'ai recu :[ food 9, linemate 0, deraumere 0, sibur 0, mendiane 0, phiras 0, thystame 0 ]
+GET INVENTORY
+ici
+ici
+ici
+ici
+TMP =  food 9 linemate 0 deraumere 0 sibur 0 mendiane 0 phiras 0 thystame 0 
+TMP = food
+TMP = linemate
+TMP = deraumere
+TMP = sibur
+TMP = mendiane
+TMP = phiras
+TMP = thystame
+Inventaire: 
+- 1 player: 0
+- 7 thystame: 0
+- 6 phiras: 0
+- 5 mendiane: 0
+- 0 food: 9
+- 2 linemate: 0
+- 3 deraumere: 0
+- 4 sibur: 0
+ ---------------- 
+RETURN FALSE
+_ready = false
+RETURN FALSE
+PAS PRET POUR LINCANTATION
+Je pop
+requete = 3
+J'ai recu :[ player food food linemate phiras thystame, thystame, food food, mendiane ]
+GET LOOK :[ player food food linemate phiras thystame, thystame, food food, mendiane ]
+FOOD = 9
+move = 0 midlle = 0 tile_number = 0
+JE PREND 1 linemate
+_todo.size = 1
+Je pop
+requete = 8
+J'ai recu :ok
+Je pop
+requete = 21
+J'ai recu :[ food 9, linemate 1, deraumere 0, sibur 0, mendiane 0, phiras 0, thystame 0 ]
+GET INVENTORY
+ici
+ici
+ici
+ici
+TMP =  food 9 linemate 1 deraumere 0 sibur 0 mendiane 0 phiras 0 thystame 0 
+TMP = food
+TMP = linemate
+TMP = deraumere
+TMP = sibur
+TMP = mendiane
+TMP = phiras
+TMP = thystame
+Inventaire: 
+- 1 player: 0
+- 7 thystame: 0
+- 6 phiras: 0
+- 5 mendiane: 0
+- 0 food: 9
+- 2 linemate: 1
+- 3 deraumere: 0
+- 4 sibur: 0
+ ---------------- 
+_ready = true
+PRET POUR LINCANTATION
+i = 0
+i = 0
+JE SET LINEMATE
+Je pop
+requete = 13
+J'ai recu :ok
+Je pop
+requete = 12
+J'ai recu :ok
+Je pop
+requete = 15
+J'ai recu :ok
+Je pop
+requete = 5
+J'ai recu :Elevation underway
+_incantationAction
+INCANTATION REUSSIE
+Je pop
+requete = 6
+Client Zappy v0.1
+PORT    : 4242
+TEAM    : Team1
+HOST    : localhost
+./zappy_ai: settingUp cookie for connection to localhost
+./zappy_ai: localhost IP's is 127.0.0.1
+welcome OK
+team name OK
+team : 2
+x : 10
+y : 10
+pass in broadcast
+Je pop
+requete = 21
+J'ai recu :[ food 9, linemate 0, deraumere 0, sibur 0, mendiane 0, phiras 0, thystame 0 ]
+GET INVENTORY
+ici
+ici
+ici
+ici
+TMP =  food 9 linemate 0 deraumere 0 sibur 0 mendiane 0 phiras 0 thystame 0 
+TMP = food
+TMP = linemate
+TMP = deraumere
+TMP = sibur
+TMP = mendiane
+TMP = phiras
+TMP = thystame
+Inventaire: 
+- 1 player: 0
+- 7 thystame: 0
+- 6 phiras: 0
+- 5 mendiane: 0
+- 0 food: 9
+- 2 linemate: 0
+- 3 deraumere: 0
+- 4 sibur: 0
+ ---------------- 
+RETURN FALSE
+_ready = false
+RETURN FALSE
+PAS PRET POUR LINCANTATION
+Je pop
+requete = 4
+send Broadcast
+ecrypting :Team1 INCANTATION
+J'ai recu :ok
+Broadcast : ok
+Je pop
+requete = 3
+J'ai recu :[ player food food phiras, food food, food phiras, linemate ]
+GET LOOK :[ player food food phiras, food food, food phiras, linemate ]
+FOOD = 9
+FOOD = 9
+FOOD = 9
+move = -1 midlle = 2 tile_number = 3
+JE PREND 1 linemate
+_todo.size = 4
+Je pop
+requete = 0
+J'ai recu :ok
+Je pop
+requete = 1
+J'ai recu :ok
+Je pop
+requete = 0
+J'ai recu :ok
+Je pop
+requete = 8
+J'ai recu :ok
+Je pop
+requete = 21
+J'ai recu :[ food 9, linemate 1, deraumere 0, sibur 0, mendiane 0, phiras 0, thystame 0 ]
+GET INVENTORY
+ici
+ici
+ici
+ici
+TMP =  food 9 linemate 1 deraumere 0 sibur 0 mendiane 0 phiras 0 thystame 0 
+TMP = food
+TMP = linemate
+TMP = deraumere
+TMP = sibur
+TMP = mendiane
+TMP = phiras
+TMP = thystame
+Inventaire: 
+- 1 player: 0
+- 7 thystame: 0
+- 6 phiras: 0
+- 5 mendiane: 0
+- 0 food: 9
+- 2 linemate: 1
+- 3 deraumere: 0
+- 4 sibur: 0
+ ---------------- 
+_ready = true
+PRET POUR LINCANTATION
+i = 0
+JE SET LINEMATE
+Je pop
+requete = 12
+J'ai recu :ko
+Je pop
+requete = 15
+J'ai recu :ok
+Je pop
+requete = 5
+J'ai recu :Elevation underway
+_incantationAction
+INCANTATION REUSSIE
+Je pop
+requete = 6

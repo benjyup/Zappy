@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 26 14:57:15 2017 vincent.mesquita@epitech.eu
-** Last update Sun Jul  2 18:03:30 2017 Gregoire Renard
+** Last update Sun Jul  2 18:06:59 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -89,6 +89,7 @@ static int		my_check_each_client(t_env *env)
 	    continue ;
 	  if ((ret = check_client_read(env, client, current)) != -1)
 	    return (ret);
+	  print_map(env);
 	}
       if (FD_ISSET(client->socket, &(env->writef)))
 	my_send_to_client(client, env);

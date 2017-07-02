@@ -80,31 +80,35 @@ zappy::AIClient::AIClient(const t_arg &args) :
 			       _todo.push_front(FORWARD);
 			     }},
 			     {3, [&] (){
-			       _todo.push_front(LEFT);
 			       _todo.push_front(FORWARD);
+                     _todo.push_front(LEFT);
 			     }},
 			     {4, [&] (){
+                     _todo.push_front(FORWARD);
 			       _todo.push_front(LEFT);
 			       _todo.push_front(FORWARD);
 			       _todo.push_front(LEFT);
-			       _todo.push_front(FORWARD);
 			     }},
 			     {5, [&] (){
+                     _todo.push_front(FORWARD);
 			       _todo.push_front(LEFT);
 			       _todo.push_front(LEFT);
-			       _todo.push_front(FORWARD);
 			     }},
 			     {6, [&] (){
+                     _todo.push_front(FORWARD);
 			       _todo.push_front(RIGHT);
 			       _todo.push_front(FORWARD);
 			       _todo.push_front(RIGHT);
-			       _todo.push_front(FORWARD);
 			     }},
-			     {7, [&] (){
+                 {7, [&] (){
+                     _todo.push_front(FORWARD);
+                     _todo.push_front(RIGHT);
+                 }},
+			     {8, [&] (){
 			       _todo.push_front(FORWARD);
 			       _todo.push_front(RIGHT);
 			       _todo.push_front(FORWARD);
-			     }},
+			     }}
 		     }
 	),
 	_outputSave(""),

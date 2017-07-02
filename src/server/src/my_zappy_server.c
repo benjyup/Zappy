@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon Jun 26 14:57:15 2017 vincent.mesquita@epitech.eu
-** Last update Fri Jun 30 18:19:39 2017 Gregoire Renard
+** Last update Sun Jul  2 17:56:04 2017 Gregoire Renard
 */
 
 #include <stdlib.h>
@@ -58,11 +58,24 @@ static t_bool            my_get_client_cmd(t_env *env,
   return (true);
 }
 
-static void             my_check_each_client(t_env *env)
+static int		check_client_read(t_env *env, t_client *client,
+					  t_list *current)
+{
+  if (client->name_team == NULL)
+    know_team(env, client);
+  else
+    my_exec(env, client, &current);
+  if (client->level == 8)
+    return (client->socket);
+  return (-1);
+}
+
+static int		my_check_each_client(t_env *env)
 {
   t_list                *current;
   t_client              *client;
-
+  int			ret;
+  
   current = env->clients->next;
   while (current != env->clients)
     {
@@ -74,16 +87,14 @@ static void             my_check_each_client(t_env *env)
 	  client->this = current;
 	  if (!my_get_client_cmd(env, &current, client))
 	    continue ;
-	  if (client->name_team == NULL)
-	    know_team(env, client);
-	  else
-	    my_exec(env, client, &current);
-	  print_map(env);
+	  if ((ret = check_client_read(env, client, current)) != -1)
+	    return (ret);
 	}
       if (FD_ISSET(client->socket, &(env->writef)))
 	my_send_to_client(client, env);
       current = current->next;
     }
+  return (-1);
 }
 
 t_bool			my_zappy_server(t_env *env)
@@ -91,7 +102,8 @@ t_bool			my_zappy_server(t_env *env)
   struct sockaddr_in    client_sin;
   unsigned int          client_sin_len;
   int                   client_socket;
-
+  int			ret;
+  
   client_sin_len = sizeof(client_sin);
   while (42)
     {
@@ -107,7 +119,8 @@ t_bool			my_zappy_server(t_env *env)
 	    return (false);
 	  my_new_client(client_socket, env);
 	}
-      my_check_each_client(env);
+      if ((ret = my_check_each_client(env)) != -1)
+	return (winner_function(ret));
     }
   return (true);
 }

@@ -47,18 +47,3 @@ int		fork_func(t_env *env, t_client *client, t_list **current)
   my_send(client, OK, 42 / env->arg.freq);
   return (SUCCESS);
 }
-
-static char	*who_is_winner(t_env *env)
-{
-  int		cpt;
-
-  cpt = 0;
-  while (cpt != env->arg.nb_team)
-    {
-      if (env->arg.team[cpt].nb_player != 0)
-	return (env->arg.team[cpt].team_name);
-      cpt++;
-    }
-  return (NULL);
-}
-      g_seg(env, who_is_winner(env));

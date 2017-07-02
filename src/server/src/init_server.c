@@ -5,7 +5,7 @@
 ** Login   <vincent@epitech.net>
 ** 
 ** Started on  Mon May 29 17:40:11 2017 vincent.mesquita@epitech.eu
-** Last update Thu Jun 29 17:06:17 2017 Gregoire Renard
+** Last update Sun Jul  2 17:12:59 2017 Gregoire Renard
 */
 
 #include <netdb.h>
@@ -24,7 +24,7 @@ static t_bool		my_init_server2(t_env *env)
   return (true);
 }
 
-t_bool			my_init_server(t_env *env)
+t_bool			init_server(t_env *env)
 {
   if (env->arg.port <= 0)
     {

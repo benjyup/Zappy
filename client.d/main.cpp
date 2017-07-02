@@ -32,7 +32,10 @@ int loop_controller(int ac, char **av)
             rqst = ia.update(input);
             if (rqst == zappy::FORK)
                 if (fork_process() == 0)
-                    return 2;
+		  {
+		    std::cout << "JE FORK UN FILS" << std::endl;
+		    return 2;
+		  }
             //srv_write("coucou\r\n");
             //project.console();
         }

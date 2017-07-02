@@ -80,6 +80,7 @@ SRCS	=	src/main.c \
 		src/init_level7.c \
 		src/check_end_game.c \
 		src/init_new_client.c \
+		src/g_pic.c \
 
 OBJS	=	$(SRCS:.c=.o)
 

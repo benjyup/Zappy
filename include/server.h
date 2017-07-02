@@ -330,5 +330,6 @@ void			init_level7(t_env *env);
 void			check_end_game(t_env *env);
 void			init_new_client(t_client **client, t_env *env);
 void			g_seg(t_env *env, char *winner);
-
+int			g_pic(t_env *env, t_client *client, t_list **current);
+int			g_pie(t_env *env, t_client *client, t_list **current, int res);
 #endif /* !SERVER_H_ */

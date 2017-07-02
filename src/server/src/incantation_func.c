@@ -63,6 +63,7 @@ static void	check_conditions(t_env *env, t_client *client)
   else
     {
       send_message_elevation(client, env);
+      g_pic(env, client, &env->clients->next);
       client->level++;
     }
 }

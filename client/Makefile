@@ -171,7 +171,6 @@ src/Character.cpp.i:
 src/Character.s: src/Character.cpp.s
 
 .PHONY : src/Character.s
-
 # target to generate assembly for a file
 src/Character.cpp.s:
 	$(MAKE) -f CMakeFiles/client_graph.dir/build.make CMakeFiles/client_graph.dir/src/Character.cpp.s

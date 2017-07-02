@@ -5,10 +5,10 @@
 ## Login   <vincent@epitech.net>
 ## 
 ## Started on  Sun Jul  2 19:21:51 2017 vincent.mesquita@epitech.eu
-## Last update Sun Jul  2 20:17:33 2017 vincent.mesquita@epitech.eu
+## Last update Sun Jul  2 21:18:37 2017 vincent.mesquita@epitech.eu
 ##
 
-NAME		=	zappy_ai
+NAME		=	../../zappy_ai
 
 CXX		=	g++
 

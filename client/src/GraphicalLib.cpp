@@ -17,7 +17,7 @@ namespace 	Client
     irr::core::stringw wStr("ZapPyramide");
     this->_device->setWindowCaption(wStr.c_str());
     this->_device->getCursorControl()->setVisible(true);
-    this->_smgr->addCameraSceneNodeFPS();
+    this->_smgr->addCameraSceneNodeFPS()->setPosition({Client::SCALE * 10, 40, 0});
     initDeco();
     initText();
   }

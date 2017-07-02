@@ -477,8 +477,12 @@ bool 				zappy::AIClient::_readyFoIncantation()
       std::cout << "PAS ASSEZ DE PLAYER" << std::endl;
       if (_broadcastCyle++ >= (_worldDimension.first + _worldDimension.second) / 1.5)
 	{
+/*
 	  std::cout << "JE FORK" << std::endl;
 	  _todo.push_back(FORK);
+	  _todo.push_back(INCANTATION);
+	  _todo.push_back(INCANTATION_VOID);
+*/
 	  _broadcastCyle = 0;
 	}
       return false;

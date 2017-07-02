@@ -5,7 +5,7 @@
 ** Login   <renard_e@epitech.net>
 ** 
 ** Started on  Mon Jun 26 15:54:45 2017 Gregoire Renard
-** Last update Wed Jun 28 23:06:53 2017 Gregoire Renard
+** Last update Sun Jul  2 18:50:17 2017 Gregoire Renard
 */
 
 #include "server.h"
@@ -19,6 +19,8 @@ static void	grep_object(t_env *env, t_client *client,
       client->inventory[cpt]++;
       g_pgt(env, client, &env->clients->next, cpt);
       my_send(client, OK, 7 / env->arg.freq);
+      if (cpt == FOOD)
+	pop_food(env);
     }
   else
     my_send(client, KO, 7 / env->arg.freq);

@@ -464,7 +464,8 @@ namespace 		Client
   {
     int j;
 
-    _z.update();
+    if (_z.update() == 1)
+      _running = false;
     for (auto &i : _player)
       {
 	if (i.second.is_alive() == Character::STATE::DEAD && i.second.get_id() != 0)

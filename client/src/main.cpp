@@ -23,16 +23,16 @@ int             main(int ac, char **av)
 
       while (c.is_running())
 	{
-	c.update();
-	buf = srv_read();
-	if (buf)
-	  {
-	    std::cerr << buf << std::endl;
-	    s.assign(buf);
-	    c.getTab(s, tab);
-	    c.call(tab);
-	    s.clear();
-	  }
+	  c.update();
+	  buf = srv_read();
+	  if (buf)
+	    {
+	      std::cerr << buf << std::endl;
+	      s.assign(buf);
+	      c.getTab(s, tab);
+	      c.call(tab);
+	      s.clear();
+	    }
 	}
     }
   catch (std::exception &e)

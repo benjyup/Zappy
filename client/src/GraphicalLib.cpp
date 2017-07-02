@@ -128,7 +128,6 @@ namespace 	Client
     _node[_id]->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     _node[_id]->setScale({1, 1, 1});
     _node[_id]->setMaterialTexture(0, _text[TEXT::eggs1]);
-    //charger la texure;
     _id++;
     return _id - 1;
   }

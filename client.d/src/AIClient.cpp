@@ -528,6 +528,13 @@ void zappy::AIClient::_messageAction(const std::string &str) {
     std::cout << "message receive : note my team message" << std::endl;
   else
     std::cout << "message receive : " << extract << std::endl;
+    if (extract.find("INCANTATION") != std::string::npos)
+    {
+        std::string direction = str;
+        direction.erase(direction.begin(), direction.begin() + direction.find(" "));
+        int dir = std::atoi(direction.c_str());
+        std::cout << dir << std::endl;
+    }
 }
 
 std::string zappy::AIClient::_my_decrypt(const std::string &str) {
